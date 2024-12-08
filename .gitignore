@@ -1,0 +1,11 @@
+*.sublime-project
+*.sublime-workspace
+*old
+*~
+.*
+old*
+
+
+dist
+storybook-static
+node_modules
