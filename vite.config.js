@@ -1,3 +1,4 @@
+import { fileURLToPath, URL } from 'node:url';
 import { defineConfig } from 'vite';
 import vue from '@vitejs/plugin-vue';
 
@@ -18,6 +19,13 @@ export default defineConfig({
 					vue: 'Vue',
 				},
 			},
+		},
+	},
+	resolve: {
+		extensions: ['.mjs', '.js', '.mts', '.ts', '.jsx', '.tsx', '.json', '.vue', '.mdx', '.less', '.scss', '.sass' ],
+		alias: {
+			'@': fileURLToPath(new URL('./src', import.meta.url)),
+			'futility-ui': '@',
 		},
 	},
 });

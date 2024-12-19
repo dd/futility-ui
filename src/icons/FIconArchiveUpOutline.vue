@@ -1,0 +1,18 @@
+<!-- eslint-disable max-len -->
+<template>
+	<svg
+		aria-hidden="true"
+		xmlns="http://www.w3.org/2000/svg"
+		fill="none"
+		viewBox="0 0 24 24"
+		class="fui-icon icon-archive_up"
+	>
+		<path
+			stroke="currentColor"
+			stroke-linecap="round"
+			stroke-linejoin="round"
+			stroke-width="2"
+			d="M12 16v-5m0 0-2 2m2-2 2 2M3 6v1c0 .6.4 1 1 1h16c.6 0 1-.4 1-1V6c0-.6-.4-1-1-1H4c-.6 0-1 .4-1 1zm2 2v10c0 .6.4 1 1 1h12c.6 0 1-.4 1-1V8H5z"
+		/>
+	</svg>
+</template>
