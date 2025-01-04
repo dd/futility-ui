@@ -6,7 +6,6 @@ A set of ready-to-use UI components for Vue 3, styled according to the Flowbite 
 ## Roadmap
 
 * [x] Icons
-  *  [ ] Define icons as def in sporite and make component with <use>
 * [ ] Buttons
 * [ ] Checkbox
 * [ ] DatePicker

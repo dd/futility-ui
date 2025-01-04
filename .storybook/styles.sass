@@ -326,7 +326,7 @@
 // 	@apply dark:bg-purple-500
 
 
-// // Schemes
+// Schemes
 
 // \:root
 // 	@apply bg-white
@@ -351,44 +351,47 @@
 // 	&.dark
 // 		@apply bg-gray-900
 
-// body:has(.storybook-scheme_preview)
-// 	height: 100%
+\:root:has(.storybook-scheme_preview)
+	height: 100%
 
-// 	#storybook-root
-// 		height: 100%
+	body
+		height: 100%
 
-// .storybook-scheme_preview
-// 	display: flex
-// 	flex-direction: column
-// 	height: 100%
-// 	flex-wrap: wrap
+		#storybook-root
+			height: 100%
 
-// 	&.columns
-// 		flex-direction: row
-// 		justify-content: space-evenly
+.storybook-scheme_preview
+	display: flex
+	flex-direction: column
+	height: 100%
+	flex-wrap: wrap
 
-// 	.light
-// 		flex-grow: 1
-// 		display: flex
-// 		justify-content: center
-// 		align-items: center
+	&.columns
+		flex-direction: row
+		justify-content: space-evenly
 
-// 		min-height: 150px
-// 		@apply p-6
+	.light
+		flex-grow: 1
+		display: flex
+		justify-content: center
+		align-items: center
 
-// 		color-scheme: only light
-// 		--fui-scheme: only light
-// 		@apply bg-white
+		min-height: 150px
+		padding: 24px
 
-// 	.dark
-// 		flex-grow: 1
-// 		display: flex
-// 		justify-content: center
-// 		align-items: center
+		color-scheme: only light
+		--fui-scheme: only light
+		background-color: #ffffff
 
-// 		min-height: 150px
-// 		@apply p-6
+	.dark
+		flex-grow: 1
+		display: flex
+		justify-content: center
+		align-items: center
 
-// 		color-scheme: only dark
-// 		--fui-scheme: only dark
-// 		@apply bg-gray-900
+		min-height: 150px
+		padding: 24px
+
+		color-scheme: only dark
+		--fui-scheme: only dark
+		background-color: #111827

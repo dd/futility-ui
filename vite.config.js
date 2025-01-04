@@ -3,14 +3,25 @@ import { defineConfig } from 'vite';
 import { fileURLToPath, URL } from 'node:url';
 import { resolve } from 'path';
 import { version } from './package.json';
-
-
-console.log(version);
-
+import VitePluginSvgSpritemap from '@spiriit/vite-plugin-svg-spritemap'
 
 
 export default defineConfig({
-	plugins: [vue()],
+	plugins: [
+		vue(),
+		VitePluginSvgSpritemap(
+			'./src/components/FIcon/icons/*.svg',
+			{
+				output: {
+					name: 'sprite.svg',
+					filename: 'sprite[extname]',
+					use: false,
+					view: false,
+				},
+				prefix: 'ficon-',
+			},
+		),
+	],
 	define: {
 		__VERSION__: JSON.stringify(version),
 	},
@@ -23,12 +34,25 @@ export default defineConfig({
 		},
 		rollupOptions: {
 			external: [ 'vue' ],
+			input: {
+				main: './src/index.js',
+				styles: './src/styles.sass',
+				theme: './src/theme.sass',
+			},
 			output: {
 				globals: {
 					vue: 'Vue',
 				},
+				assetFileNames: (assetInfo) => {
+					if (assetInfo.name.endsWith('.css')) {
+						return 'styles/[name][extname]';
+					}
+
+					return 'assets/[name][extname]';
+				},
 			},
 		},
+		cssCodeSplit: true,
 	},
 	resolve: {
 		extensions: ['.mjs', '.js', '.mts', '.ts', '.jsx', '.tsx', '.json', '.vue', '.mdx', '.less', '.scss', '.sass' ],

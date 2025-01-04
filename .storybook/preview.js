@@ -2,9 +2,10 @@ import { setup } from '@storybook/vue3';
 import Toast, { TYPE } from 'vue-toastification';
 
 import 'vue-toastification/dist/index.css';
+import '../.storybook/styles.sass';
+
 import '@/styles.sass';
 import '@/theme.sass';
-import '../.storybook/styles.sass';
 
 
 setup((app) => {
