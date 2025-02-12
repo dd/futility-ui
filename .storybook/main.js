@@ -9,6 +9,7 @@ const config = {
 		'@storybook/addon-essentials',
 		'@chromatic-com/storybook',
 		'@storybook/addon-interactions',
+		'storybook-preview-scheme-toggler',
 	],
 	framework: {
 		name: '@storybook/vue3-vite',

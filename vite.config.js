@@ -54,6 +54,11 @@ export default defineConfig({
 		},
 		cssCodeSplit: true,
 	},
+	server: {
+		fs: {
+			allow: ['.storybook'],
+		},
+	},
 	resolve: {
 		extensions: ['.mjs', '.js', '.mts', '.ts', '.jsx', '.tsx', '.json', '.vue', '.mdx', '.less', '.scss', '.sass' ],
 		alias: {

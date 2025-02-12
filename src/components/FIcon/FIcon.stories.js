@@ -71,7 +71,6 @@ const ICON_LIST_OTHER = [
 	'minimize',
 	'minus',
 	'plus',
-	'rectangle_list_outline',
 	'refresh',
 ];
 
@@ -102,7 +101,7 @@ export const Default = {};
 
 export const Diversity = {
 	render: (args, { argTypes, updateArgs }) => ({
-		name: 'FIconDefaultStory',
+		name: 'FIconDiversityStory',
 		props: Object.keys(argTypes),
 		components: { FIcon },
 		setup() {
@@ -112,7 +111,6 @@ export const Diversity = {
 				if (isSupported) {
 					copy();
 					toaster.success('Copied', { timeout: 3000 });
-
 				} else {
 					toaster.error('Copying is not supported');
 				}
@@ -128,7 +126,7 @@ export const Diversity = {
 		@click="copyHandler(icon[1])"
 	/>
 </div>
-<div class="icon_preview" style="margin-top:80px" >
+<div class="icon_preview" style="margin-top:40px" >
 	<FIcon
 		v-for="icon in ICON_LIST_OUTLINE"
 		:key="icon[1]"
@@ -136,7 +134,7 @@ export const Diversity = {
 		@click="copyHandler(icon[1])"
 	/>
 </div>
-<div class="icon_preview" style="margin-top:80px" >
+<div class="icon_preview" style="margin-top:40px" >
 	<FIcon
 		v-for="icon in ICON_LIST_OTHER"
 		:key="icon[1]"
@@ -146,6 +144,87 @@ export const Diversity = {
 	/>
 </div>
 `,
+	}),
+	argTypes: {
+		name: { control: { type: null }},
+	},
+};
+
+export const Scheme = {
+	parameters: { layout: 'fullscreen' },
+	render: (args, { argTypes, updateArgs }) => ({
+		name: 'FIconSchemeStory',
+		props: Object.keys(argTypes),
+		components: { FIcon },
+		setup() {
+			const toaster = useToast();
+			const copyHandler = (data) => {
+				const { copy, isSupported } = useClipboard({ source: data });
+				if (isSupported) {
+					copy();
+					toaster.success('Copied', { timeout: 3000 });
+				} else {
+					toaster.error('Copying is not supported');
+				}
+			};
+			return { ...args, copyHandler, ICON_LIST_SOLID, ICON_LIST_OUTLINE, ICON_LIST_OTHER };
+		},
+		template: `<div class="sbpst-scheme_preview sbpst-row" >
+	<div class="sbpst-light icon_preview-wrapper" >
+		<div class="icon_preview" >
+			<FIcon
+				v-for="icon in ICON_LIST_SOLID"
+				:key="icon[1]"
+				:name="icon"
+				@click="copyHandler(icon[1])"
+			/>
+		</div>
+		<div class="icon_preview" style="margin-top:40px" >
+			<FIcon
+				v-for="icon in ICON_LIST_OUTLINE"
+				:key="icon[1]"
+				:name="icon"
+				@click="copyHandler(icon[1])"
+			/>
+		</div>
+		<div class="icon_preview" style="margin-top:40px" >
+			<FIcon
+				v-for="icon in ICON_LIST_OTHER"
+				:key="icon[1]"
+				:name="icon"
+				:title="icon"
+				@click="copyHandler(icon[1])"
+			/>
+		</div>
+	</div>
+	<div class="sbpst-dark icon_preview-wrapper" >
+		<div class="icon_preview" >
+			<FIcon
+				v-for="icon in ICON_LIST_SOLID"
+				:key="icon[1]"
+				:name="icon"
+				@click="copyHandler(icon[1])"
+			/>
+		</div>
+		<div class="icon_preview" style="margin-top:40px" >
+			<FIcon
+				v-for="icon in ICON_LIST_OUTLINE"
+				:key="icon[1]"
+				:name="icon"
+				@click="copyHandler(icon[1])"
+			/>
+		</div>
+		<div class="icon_preview" style="margin-top:40px" >
+			<FIcon
+				v-for="icon in ICON_LIST_OTHER"
+				:key="icon[1]"
+				:name="icon"
+				:title="icon"
+				@click="copyHandler(icon[1])"
+			/>
+		</div>
+	</div>
+</div>`,
 	}),
 	argTypes: {
 		name: { control: { type: null }},

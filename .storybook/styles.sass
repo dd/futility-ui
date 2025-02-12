@@ -4,11 +4,11 @@
 // @use 'fonts/robotomono'
 
 
-// // FIXES /////////////////////////////////
+// FIXES /////////////////////////////////
 
 // #storybook-preview-iframe
-.sb-show-main
-	color: light-dark(var(--fui-color-gray-900), var(--fui-color-white))
+// .sb-show-main
+// 	color: light-dark(red, var(--fui-color-white))
 
 // // fix llinks color
 // .sb-unstyled
@@ -295,6 +295,9 @@
 	gap: var(--fui-spacing-4)
 	// @apply text-gray-900 dark:text-white
 
+.icon_preview-wrapper
+	flex-direction: column
+
 // // Grid
 
 // .grid-preview
@@ -326,72 +329,11 @@
 // 	@apply dark:bg-purple-500
 
 
-// Schemes
+// Preview Scheme Toggler
+.sbpst-scheme_preview .sbpst-dark,
+.sbpst-scheme_preview .sbpst-light
+	min-height: 150px
 
-// \:root
-// 	@apply bg-white
-
-// 	&.dark
-// 		@apply bg-gray-900
-
-// body
-// 	@apply text-gray-500 dark:text-gray-400
-
-// .light
-// 	color-scheme: only light
-// 	--fui-scheme: only light
-
-// .dark
-// 	color-scheme: only dark
-// 	--fui-scheme: only dark
-
-// .docs-story
-// 	@apply bg-white
-
-// 	&.dark
-// 		@apply bg-gray-900
-
-\:root:has(.storybook-scheme_preview)
-	height: 100%
-
-	body
-		height: 100%
-
-		#storybook-root
-			height: 100%
-
-.storybook-scheme_preview
-	display: flex
-	flex-direction: column
-	height: 100%
-	flex-wrap: wrap
-
-	&.columns
-		flex-direction: row
-		justify-content: space-evenly
-
-	.light
-		flex-grow: 1
-		display: flex
-		justify-content: center
-		align-items: center
-
-		min-height: 150px
-		padding: 24px
-
-		color-scheme: only light
-		--fui-scheme: only light
-		background-color: #ffffff
-
-	.dark
-		flex-grow: 1
-		display: flex
-		justify-content: center
-		align-items: center
-
-		min-height: 150px
-		padding: 24px
-
-		color-scheme: only dark
-		--fui-scheme: only dark
-		background-color: #111827
+.docs-story > :first-child
+	min-height: 150px
+	box-sizing: border-box

@@ -2,7 +2,7 @@ import { setup } from '@storybook/vue3';
 import Toast, { TYPE } from 'vue-toastification';
 
 import 'vue-toastification/dist/index.css';
-import '../.storybook/styles.sass';
+import './styles.sass';
 
 import '@/styles.sass';
 import '@/theme.sass';
@@ -26,11 +26,10 @@ setup((app) => {
 /** @type { import('@storybook/vue3').Preview } */
 const preview = {
 	parameters: {
-		controls: {
-			matchers: {
-				color: /(background|color)$/i,
-				date: /Date$/i,
-			},
+		backgrounds: { disable: true },
+		previewSchemeToggler: {
+			darkColor: 'var(--fui-color-white)',
+			lightColor: 'var(--fui-color-gray-900)',
 		},
 	},
 };
