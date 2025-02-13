@@ -31,18 +31,29 @@ jobs:
       # - name: Install dependencies
       #   run: pnpm install --frozen-lockfile
 
-      - uses: bitovi/github-actions-storybook-to-github-pages@v1.0.3
+      # - uses: bitovi/github-actions-storybook-to-github-pages@v1.0.3
+      #   with:
+      #     install_command: pnpm install --frozen-lockfile # default: npm ci
+      #     build_command: pnpm build-storybook --output-dir storybook-static # default: npm run build-storybook
+      #     path: storybook-static # default: dist/storybook
+      #     # checkout: false # default: true
+
+      # - name: Build Plugin
+      #   run: pnpm run build
+
+      - name: Build Storybook
+        run: pnpm run build-storybook --output-dir storybook-static
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
         with:
-          install_command: pnpm install --frozen-lockfile # default: npm ci
-          build_command: pnpm build-storybook --output-dir storybook-static # default: npm run build-storybook
-          path: storybook-static # default: dist/storybook
-          # checkout: false # default: true
+          path: ./storybook-static
 
-      # # - name: Build Plugin
-      # #   run: pnpm run build
-
-      # - name: Build Storybook
-      #   run: pnpm run build-storybook --output-dir storybook-static
+      - name: Deploy to GitHub Pages
+        uses: actions/deploy-pages@v4
 
       # - name: Configure Git for GitHub Actions bot
       #   run: |
