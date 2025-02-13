@@ -11,7 +11,7 @@ permissions:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    if: "!contains(toLower(github.event.head_commit.message), 'ci skip') && !contains(toLower(github.event.head_commit.message), 'skip ci')"
+    if: "!contains(github.event.head_commit.message, 'ci skip') && !contains(github.event.head_commit.message, 'skip ci')"
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
