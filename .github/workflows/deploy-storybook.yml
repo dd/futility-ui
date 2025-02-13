@@ -1,0 +1,57 @@
+name: Deploy Storybook to GitHub Pages
+
+on:
+  push:
+    branches:
+      - master
+
+permissions:
+  contents: write
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    if: "!contains(toLower(github.event.head_commit.message), 'ci skip') && !contains(toLower(github.event.head_commit.message), 'skip ci')"
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10
+          run_install: false
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20
+          cache: 'pnpm'
+
+      # - name: Install dependencies
+      #   run: pnpm install --frozen-lockfile
+
+      - uses: bitovi/github-actions-storybook-to-github-pages@v1.0.3
+        with:
+          install_command: pnpm install --frozen-lockfile # default: npm ci
+          build_command: pnpm build-storybook --output-dir storybook-static # default: npm run build-storybook
+          path: storybook-static # default: dist/storybook
+          # checkout: false # default: true
+
+      # # - name: Build Plugin
+      # #   run: pnpm run build
+
+      # - name: Build Storybook
+      #   run: pnpm run build-storybook --output-dir storybook-static
+
+      # - name: Configure Git for GitHub Actions bot
+      #   run: |
+      #     git config --local user.name 'github-actions[bot]'
+      #     git config --local user.email 'github-actions[bot]@users.noreply.github.com'
+
+      # - name: Deploy to GitHub Pages
+      #   run: |
+      #     git remote set-url origin https://git:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git
+      #     npx pnpm run deploy-storybook -d storybook-static -u "github-actions-bot <support+actions@github.com>"
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
