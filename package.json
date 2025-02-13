@@ -21,15 +21,17 @@
     "type": "git",
     "url": "git@github.com:dd/futility-ui.git"
   },
+  "publishConfig": {
+    "access": "public"
+  },
   "type": "module",
-  "main": "dist/futility-ui.cjs.js",
-  "module": "dist/futility-ui.es.js",
   "exports": {
     ".": {
       "require": "./dist/futility-ui.cjs.js",
       "import": "./dist/futility-ui.es.js"
     }
   },
+  "sideEffects": false,
   "files": [
     "dist/**/*",
     "README.md"
@@ -43,17 +45,17 @@
   "devDependencies": {
     "@chromatic-com/storybook": "^3.2.4",
     "@spiriit/vite-plugin-svg-spritemap": "^3.0.0",
-    "@storybook/addon-essentials": "^8.5.3",
-    "@storybook/addon-interactions": "^8.5.3",
-    "@storybook/addon-onboarding": "^8.5.3",
-    "@storybook/blocks": "^8.5.3",
-    "@storybook/test": "^8.5.3",
-    "@storybook/vue3": "^8.5.3",
-    "@storybook/vue3-vite": "^8.5.3",
+    "@storybook/addon-essentials": "^8.5.5",
+    "@storybook/addon-interactions": "^8.5.5",
+    "@storybook/addon-onboarding": "^8.5.5",
+    "@storybook/blocks": "^8.5.5",
+    "@storybook/test": "^8.5.5",
+    "@storybook/vue3": "^8.5.5",
+    "@storybook/vue3-vite": "^8.5.5",
     "@vitejs/plugin-vue": "^5.2.1",
     "@vueuse/core": "^12.5.0",
     "sass": "^1.84.0",
-    "storybook": "^8.5.3",
+    "storybook": "^8.5.5",
     "storybook-preview-scheme-toggler": "^1.0.2",
     "svgo": "^3.3.2",
     "vite": "^6.1.0",
@@ -62,5 +64,14 @@
   },
   "peerDependencies": {
     "vue": "^3.5.13"
+  },
+  "peerDependenciesMeta": {
+    "vue": {
+      "optional": false
+    }
+  },
+  "engines": {
+    "node": ">=18",
+    "pnpm": ">=10"
   }
 }
