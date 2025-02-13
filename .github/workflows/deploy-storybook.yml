@@ -28,8 +28,8 @@ jobs:
           node-version: 20
           cache: 'pnpm'
 
-      # - name: Install dependencies
-      #   run: pnpm install --frozen-lockfile
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
 
       # - uses: bitovi/github-actions-storybook-to-github-pages@v1.0.3
       #   with:
