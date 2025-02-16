@@ -7,6 +7,7 @@ import VitePluginSvgSpritemap from '@spiriit/vite-plugin-svg-spritemap'
 
 
 export default defineConfig({
+	base: process.env.BASE_URL || '/',
 	plugins: [
 		vue(),
 		VitePluginSvgSpritemap(
