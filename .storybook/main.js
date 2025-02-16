@@ -15,5 +15,9 @@ const config = {
 		name: '@storybook/vue3-vite',
 		options: {},
 	},
+	viteFinal: (config) => {
+		config.base = '/test/';
+		return config;
+	},
 };
 export default config;
