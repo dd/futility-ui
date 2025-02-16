@@ -16,7 +16,7 @@ const config = {
 		options: {},
 	},
 	viteFinal: (config) => {
-		config.base = '/test/';
+		config.base = process.env.BASE_URL || '/';
 		return config;
 	},
 };
