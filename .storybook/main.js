@@ -5,10 +5,13 @@ const config = {
 		'../src/**/*.stories.@(js|jsx|mjs|ts|tsx)',
 	],
 	addons: [
+		// '@storybook/addon-links',
 		'@storybook/addon-onboarding',
 		'@storybook/addon-essentials',
 		'@chromatic-com/storybook',
 		'@storybook/addon-interactions',
+		// 'storybook-addon-mock',
+		// './scheme-toggler',
 		'storybook-preview-scheme-toggler',
 	],
 	framework: {

@@ -39,6 +39,7 @@
   "scripts": {
     "build": "vite build",
     "test": "echo \"Error: no test specified\" && exit 1",
+    "release": "pnpm build && auto shipit",
     "storybook": "storybook dev -p ${APP_PORT:-6008}",
     "build-storybook": "storybook build"
   },
@@ -54,6 +55,7 @@
     "@storybook/vue3-vite": "^8.5.5",
     "@vitejs/plugin-vue": "^5.2.1",
     "@vueuse/core": "^12.5.0",
+    "auto": "^11.3.0",
     "sass": "^1.84.0",
     "storybook": "^8.5.5",
     "storybook-preview-scheme-toggler": "^1.0.2",
