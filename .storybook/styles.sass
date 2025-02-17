@@ -1,0 +1,339 @@
+@charset "UTF-8"
+
+// @use 'fonts/roboto'
+// @use 'fonts/robotomono'
+
+
+// FIXES /////////////////////////////////
+
+// #storybook-preview-iframe
+// .sb-show-main
+// 	color: light-dark(red, var(--fui-color-white))
+
+// // fix llinks color
+// .sb-unstyled
+// 	> h1:first-child
+// 		margin-top: 0
+
+// 	.sbdocs-a
+// 		@apply link-styles
+
+
+// // Fix bg color for dark theme
+// .sb-show-main .sbdocs
+// 	// @media (prefers-color-scheme: dark)
+// 	background: transparent
+
+
+// // PRESETS ///////////////////////////////
+
+// .square_preview
+// 	display: flex
+// 	flex-direction: row
+
+// 	@apply gap-2
+
+// 	> *
+// 		display: flex
+// 		justify-content: center
+// 		align-items: center
+
+// 		width: 80px
+// 		height: 80px
+
+// 		text-align: center
+// 		line-height: 1em
+// 		@apply text-xs
+// 		@apply bg-purple-400
+// 		@apply rounded
+// 		@apply text-gray-900
+
+
+// // PAGES /////////////////////////////////
+
+
+// // Colors
+
+// .colors-preview_table
+// 	border-collapse: collapse
+// 	border-spacing: 0
+
+// 	tr
+// 		border-top: none
+
+// 	.color_preview-name-cell
+// 		padding: 0
+// 		@apply pt-4
+
+// 	.color_preview-preview-row
+// 		@apply shadow
+// 		@apply rounded
+
+// 	.color_preview-preview-cell
+// 		width: 60px
+// 		height: 40px
+
+// 		@apply p-2
+
+// 		&:first-child
+// 			@apply rounded-l
+
+// 		&:last-child
+// 			@apply rounded-r
+
+// 	.color_preview-preview-name
+// 		padding: 0
+// 		margin: 0
+
+// 		@apply text-xs
+
+// 	.color_preview-preview-color
+// 		padding: 0
+// 		margin: 6px 0 0
+
+// 		@apply text-xs
+
+
+// // Spacing
+
+// .spacing_preview
+// 	@apply bg-red-300
+// 	@apply dark:bg-purple-500
+
+// 	.spacing_preview-vertical &
+// 		width: 400px
+
+
+// // Sizes
+
+// .text_size_preview-table
+// 	width: 100%
+// 	max-width: 100%
+// 	table-layout: fixed
+// 	@apply border-spacing-1
+// 	border-collapse: initial
+// 	--first-col-size: 70px
+
+// 	tr
+// 		border-top: none
+
+// 	td
+// 		padding: 0
+
+// 	.text_size_preview-name
+// 		width: var(--first-col-size)
+// 		@apply text-xs
+// 		@apply pr-2
+
+// 	.text_size_preview
+// 		width: calc(100% - var(--first-col-size))
+// 		max-width: 100%
+// 		position: relative
+// 		@apply bg-red-200
+
+// 		> *
+// 			overflow: hidden
+// 			text-overflow: ellipsis
+// 			white-space: collapse nowrap
+// 			@apply bg-blue-200
+
+
+// // Font
+
+// .font_preview-roboto *
+// 	font-family: Roboto
+
+// .font_preview-robotomono *
+// 	font-family: 'Roboto Mono'
+
+// .font_preview-inter *
+// 	font-family: Inter
+
+// .font_preview-firacode *
+// 	font-family: FiraCode
+
+// .font_preview-sizes-wrapper
+// 	overflow: hidden
+// 	@apply mt-5
+
+// .font_preview-sizes
+// 	border-collapse: collapse
+// 	border-spacing: 0
+
+// 	.font_preview-size-title
+// 		text-align: center
+// 		border-radius: 0
+// 		@apply text-xs
+// 		@apply bg-gray-200
+// 		@apply dark:bg-gray-700
+
+// 	tr
+// 		border-top: none
+
+// 		&:first-child .font_preview-size-title
+// 			@apply rounded-t
+
+// 		&:last-child .font_preview-size-title
+// 			@apply rounded-b
+
+// 	td
+// 		@apply p-2
+
+// 		&:last-child
+// 			line-height: 1em
+// 			white-space: nowrap
+
+// .font_preview-example-wrapper
+// 	display: flex
+// 	flex-direction: row
+// 	flex-wrap: wrap
+// 	justify-content: space-between
+// 	align-items: stretch
+// 	align-content: stretch
+
+// 	@apply mt-5
+// 	@apply p-3
+// 	@apply rounded
+// 	@apply bg-white
+
+// 	&.dark
+// 		@apply bg-gray-900
+
+// .font_preview-example
+// 	position: relative
+
+// 	width: 15em
+// 	height: 200px
+
+// 	line-height: 1.3em
+// 	flex-grow: 1
+// 	overflow: hidden
+// 	margin: 0
+// 	@apply mr-2
+
+// 	.light &,
+// 	.light & *
+// 		@apply text-gray-500
+
+// 	.dark &,
+// 	.dark & *
+// 		@apply text-gray-400
+
+// 	&::after
+// 		content: ""
+
+// 		position: absolute
+// 		bottom: 0
+// 		left: 0
+// 		right: 0
+
+// 		width: 100%
+// 		height: 60px
+
+// 		background: linear-gradient(to bottom, rgba(255,255,255,0) 0%,rgba(255,255,255,0.88) 55%,rgba(255,255,255,1) 85%,rgba(255,255,255,1) 100%)
+
+// 		.dark &
+// 			background: linear-gradient(to bottom, rgba(17,24,39,0) 0%,rgba(17,24,39,0.88) 55%,rgba(17,24,39,1) 85%,rgba(17,24,39,1) 100%)
+
+// .font_preview-example-title
+// 	margin-right: 0.4em
+
+
+// // Border width
+
+// .border_width_preview-item
+// 	border-style: solid
+// 	@apply border-purple-800
+
+
+// // Screens
+
+// .screens-preview_table
+// 	border-collapse: collapse
+// 	border-spacing: 0
+
+// 	td
+// 		@apply p-2
+
+
+// // Buttons
+
+// .button-preview_table,
+// .state-preview_table
+// 	// border-collapse: collapse
+// 	// border-spacing: 0
+
+// 	td
+// 		@apply text-xs
+// 		@apply p-2
+
+// 	&.colors
+// 		td:first-child
+// 			text-align: right
+
+// 	.light
+// 		color-scheme: only light
+// 		--fui-scheme: only light
+// 		@apply bg-white
+
+// 		td
+// 			@apply text-gray-900
+
+// 	.dark
+// 		color-scheme: only dark
+// 		--fui-scheme: only dark
+// 		@apply bg-gray-900
+
+.icon_preview
+	display: flex
+	flex-direction: row
+	flex-wrap: wrap
+	justify-content: center
+	align-items: center
+	align-content: center
+	max-width: 500px
+	gap: var(--fui-spacing-4)
+	// @apply text-gray-900 dark:text-white
+
+.icon_preview-wrapper
+	flex-direction: column
+
+// // Grid
+
+// .grid-preview
+// 	display: flex
+// 	flex-direction: row
+// 	flex-wrap: wrap
+// 	height: 100px
+// 	width: 100%
+// 	@apply my-4
+
+// .grid-item
+// 	display: flex
+// 	justify-content: center
+// 	align-items: center
+// 	@apply text-xs
+// 	@apply bg-red-300
+// 	@apply dark:bg-purple-500
+
+// .grid-item-additional
+// 	@apply bg-red-100
+
+// .grid-spacer
+// 	// display: flex
+// 	// justify-content: center
+// 	// align-items: center
+// 	// @apply text-xs
+// 	@apply w-5
+// 	@apply bg-purple-300
+// 	@apply dark:bg-purple-500
+
+
+// Preview Scheme Toggler
+.sbpst-scheme_preview .sbpst-dark,
+.sbpst-scheme_preview .sbpst-light
+	min-height: 150px
+
+.docs-story > :first-child
+	min-height: 150px
+	box-sizing: border-box

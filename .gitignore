@@ -9,3 +9,5 @@ old*
 dist
 storybook-static
 node_modules
+
+*storybook.log
