@@ -98,4 +98,4 @@ We welcome contributions of all sizes!
 
 * [x] Storybook at github pages
 * [x] Deploy to npm
-* [ ] System for customize styles
+* [ ] Web interface for customize styles
