@@ -1,8 +1,10 @@
 import FIcon from './components/FIcon';
+import FLoader from './components/FLoader';
 
 
 export {
 	FIcon,
+	FLoader,
 };
 
 export const version = __VERSION__;
@@ -10,6 +12,7 @@ export const version = __VERSION__;
 
 const components = {
 	FIcon,
+	FLoader,
 };
 
 const install = (app) => {
