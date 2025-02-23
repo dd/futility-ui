@@ -25,7 +25,7 @@ module.exports = {
 			'npm',
 			{
 				exact: true,
-				// setRcToken: false,
+				alwaysCommit: true,
 				commitNextVersion: true,
 			},
 		],
