@@ -1,3 +1,14 @@
+# v0.1.4 (Sun Feb 23 2025)
+
+#### 🐛 Bug Fix
+
+
+#### Authors: 1
+
+- Dmitry Dobrynin ([@dd](https://github.com/dd))
+
+---
+
 # v0.1.3 (Mon Feb 17 2025)
 
 #### 🐛 Bug Fix
