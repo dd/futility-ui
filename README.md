@@ -46,7 +46,7 @@ pnpm run storybook
 To create a production-ready build:
 
 ```console
-npm run build
+pnpm run build
 ```
 
 
@@ -96,5 +96,6 @@ We welcome contributions of all sizes!
 
 #### Dev
 
-* [ ] Storybook at github pages
-* [ ] Deploy to npm
+* [x] Storybook at github pages
+* [x] Deploy to npm
+* [ ] Web interface for customize styles
