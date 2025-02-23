@@ -20,13 +20,4 @@ module.exports = {
 		},
 	],
 	prereleaseBranches: ['next'],
-	plugins: [
-		[
-			'npm',
-			{
-				exact: true,
-				commitNextVersion: true,
-			},
-		],
-	],
 };
