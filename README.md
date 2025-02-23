@@ -74,7 +74,7 @@ We welcome contributions of all sizes!
 * [ ] FileSelect
 * [ ] FileSelectArea
 * [ ] Input
-* [ ] Loader
+* [x] Loader
 * [ ] Modal
 * [ ] Tree Editor
 * [ ] MultiSelect
