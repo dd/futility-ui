@@ -25,7 +25,6 @@ module.exports = {
 			'npm',
 			{
 				exact: true,
-				alwaysCommit: true,
 				commitNextVersion: true,
 			},
 		],
