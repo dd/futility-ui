@@ -20,14 +20,4 @@ module.exports = {
 		},
 	],
 	prereleaseBranches: ['next'],
-	versionBranches: true,
-	plugins: [
-		[
-			'npm',
-			{
-				exact: true,
-				setRcToken: false,
-			},
-		],
-	],
 };
