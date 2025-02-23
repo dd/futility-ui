@@ -23,6 +23,28 @@ export default {
 
 export const Default = {};
 
+
+export const Diversity = {
+	render: (args, { argTypes, updateArgs }) => ({
+		name: 'FLoaderDiversityStory',
+		props: Object.keys(argTypes),
+		components: { FLoader },
+		setup() {
+			return { args };
+		},
+		template: `
+<div class="loader_preview" >
+	<FLoader v-bind="args" size="sm" />
+	<FLoader v-bind="args" />
+	<FLoader v-bind="args" size="lg" />
+</div>
+`,
+	}),
+	argTypes: {
+		size: { control: { type: null }},
+	},
+};
+
 export const Scheme = {
 	parameters: { layout: 'fullscreen' },
 	render: (args, { argTypes, updateArgs }) => ({
