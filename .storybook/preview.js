@@ -28,8 +28,10 @@ const preview = {
 	parameters: {
 		backgrounds: { disable: true },
 		previewSchemeToggler: {
-			darkColor: 'var(--fui-color-white)',
-			lightColor: 'var(--fui-color-gray-900)',
+			darkColor: 'var(--fui-color-gray-400)',
+			lightColor: 'var(--fui-color-gray-600)',
+			darkBackground: 'var(--fui-color-gray-900)',
+			lightBackground: 'var(--fui-color-white)',
 		},
 	},
 };
