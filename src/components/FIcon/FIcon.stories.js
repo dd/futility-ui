@@ -121,26 +121,26 @@ export const Diversity = {
 <div class="icon_preview" >
 	<FIcon
 		v-for="icon in ICON_LIST_SOLID"
-		:key="icon[1]"
+		:key="icon"
 		:name="icon"
-		@click="copyHandler(icon[1])"
+		@click="copyHandler(icon)"
 	/>
 </div>
 <div class="icon_preview" style="margin-top:40px" >
 	<FIcon
 		v-for="icon in ICON_LIST_OUTLINE"
-		:key="icon[1]"
+		:key="icon"
 		:name="icon"
-		@click="copyHandler(icon[1])"
+		@click="copyHandler(icon)"
 	/>
 </div>
 <div class="icon_preview" style="margin-top:40px" >
 	<FIcon
 		v-for="icon in ICON_LIST_OTHER"
-		:key="icon[1]"
+		:key="icon"
 		:name="icon"
 		:title="icon"
-		@click="copyHandler(icon[1])"
+		@click="copyHandler(icon)"
 	/>
 </div>
 `,
@@ -174,26 +174,26 @@ export const Scheme = {
 		<div class="icon_preview" >
 			<FIcon
 				v-for="icon in ICON_LIST_SOLID"
-				:key="icon[1]"
+				:key="icon"
 				:name="icon"
-				@click="copyHandler(icon[1])"
+				@click="copyHandler(icon)"
 			/>
 		</div>
 		<div class="icon_preview" style="margin-top:40px" >
 			<FIcon
 				v-for="icon in ICON_LIST_OUTLINE"
-				:key="icon[1]"
+				:key="icon"
 				:name="icon"
-				@click="copyHandler(icon[1])"
+				@click="copyHandler(icon)"
 			/>
 		</div>
 		<div class="icon_preview" style="margin-top:40px" >
 			<FIcon
 				v-for="icon in ICON_LIST_OTHER"
-				:key="icon[1]"
+				:key="icon"
 				:name="icon"
 				:title="icon"
-				@click="copyHandler(icon[1])"
+				@click="copyHandler(icon)"
 			/>
 		</div>
 	</div>
@@ -201,26 +201,26 @@ export const Scheme = {
 		<div class="icon_preview" >
 			<FIcon
 				v-for="icon in ICON_LIST_SOLID"
-				:key="icon[1]"
+				:key="icon"
 				:name="icon"
-				@click="copyHandler(icon[1])"
+				@click="copyHandler(icon)"
 			/>
 		</div>
 		<div class="icon_preview" style="margin-top:40px" >
 			<FIcon
 				v-for="icon in ICON_LIST_OUTLINE"
-				:key="icon[1]"
+				:key="icon"
 				:name="icon"
-				@click="copyHandler(icon[1])"
+				@click="copyHandler(icon)"
 			/>
 		</div>
 		<div class="icon_preview" style="margin-top:40px" >
 			<FIcon
 				v-for="icon in ICON_LIST_OTHER"
-				:key="icon[1]"
+				:key="icon"
 				:name="icon"
 				:title="icon"
-				@click="copyHandler(icon[1])"
+				@click="copyHandler(icon)"
 			/>
 		</div>
 	</div>
