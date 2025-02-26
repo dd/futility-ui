@@ -1,6 +1,6 @@
 # Futility UI
 
-A set of ready-to-use UI components for Vue 3, styled according to the Flowbite design system, providing a fast start and a consistent visual style for your application.
+A set of ready-to-use UI components for Vue 3, styled according to the [Flowbite](https://flowbite.com/) design system, providing a fast start and a consistent visual style for your application.
 
 [Live Demo](https://dd.github.io/futility-ui/)
 

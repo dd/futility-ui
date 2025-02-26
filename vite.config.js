@@ -29,17 +29,18 @@ export default defineConfig({
 	build: {
 		lib: {
 			name: 'Futility UI',
-			entry: resolve(__dirname, 'src/index.js'),
-			fileName: (format) => `futility-ui.${format}.js`,
+			entry: {
+				index: resolve(__dirname, 'src/index.js'),
+				FLoader: resolve(__dirname, 'src/components/FLoader/index.vue'),
+				FIcon: resolve(__dirname, 'src/components/FIcon/index.vue'),
+				styles: resolve(__dirname, 'src/styles.sass'),
+				theme: resolve(__dirname, 'src/theme.sass'),
+			},
+			fileName: (format, entryName) =>`${entryName}.${format}.js`,
 			formats: [ 'es', 'cjs' ],
 		},
 		rollupOptions: {
 			external: [ 'vue' ],
-			input: {
-				main: './src/index.js',
-				styles: './src/styles.sass',
-				theme: './src/theme.sass',
-			},
 			output: {
 				globals: {
 					vue: 'Vue',
@@ -54,6 +55,7 @@ export default defineConfig({
 			},
 		},
 		cssCodeSplit: true,
+		treeShaking: true,
 	},
 	server: {
 		fs: {
@@ -64,7 +66,6 @@ export default defineConfig({
 		extensions: ['.mjs', '.js', '.mts', '.ts', '.jsx', '.tsx', '.json', '.vue', '.mdx', '.less', '.scss', '.sass' ],
 		alias: {
 			'@': fileURLToPath(new URL('./src', import.meta.url)),
-			'futility-ui': '@',
 		},
 	},
 });
