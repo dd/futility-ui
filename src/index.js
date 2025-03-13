@@ -15,9 +15,8 @@ const components = {
 	FLoader,
 };
 
-const install = (app) => {
+export const install = (app) => {
 	Object.keys(components).forEach((key) => {
 		app.component(key, components[key]);
 	});
 };
-export default { install };

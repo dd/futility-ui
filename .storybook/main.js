@@ -4,6 +4,7 @@ const config = {
 		'../src/**/*.mdx',
 		'../src/**/*.stories.@(js|jsx|mjs|ts|tsx)',
 	],
+
 	addons: [
 		// '@storybook/addon-links',
 		'@storybook/addon-onboarding',
@@ -13,6 +14,7 @@ const config = {
 		// 'storybook-addon-mock',
 		'storybook-preview-scheme-toggler',
 	],
+
 	framework: {
 		name: '@storybook/vue3-vite',
 		options: {},
