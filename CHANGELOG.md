@@ -1,3 +1,15 @@
+# v0.2.1 (Thu Mar 13 2025)
+
+#### 🐛 Bug Fix
+
+- Fix build sprite.svg and usage in FIcon component [#10](https://github.com/dd/futility-ui/pull/10) ([@dd](https://github.com/dd))
+
+#### Authors: 1
+
+- Dmitry Dobrynin ([@dd](https://github.com/dd))
+
+---
+
 # v0.2.0 (Sun Feb 23 2025)
 
 #### 🚀 Enhancement
