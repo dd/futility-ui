@@ -24,10 +24,10 @@ const config = {
 	},
 
 	viteFinal(config) {
-		config.resolve = config.resolve || {};
 		config.resolve.alias = {
 			...config.resolve.alias,
-			'./assets/sprite.svg': resolve(__dirname, '../dist/assets/sprite.svg'), // для фиктивного спрайта
+			'./assets/sprite.svg': resolve(__dirname, '../dist/assets/sprite.svg'),
+			'./futility-ui/assets/sprite.svg': resolve(__dirname, '../dist/assets/sprite.svg'),
 		};
 		config.build.chunkSizeWarningLimit = 1000;
 		return config;
