@@ -52,6 +52,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "release": "pnpm build && auto shipit",
     "storybook": "storybook dev -p ${APP_PORT:-6008}",
+    "prebuild-storybook": "if [ -f ./dist/assets/sprite.svg ]; then :; else pnpm run build; fi",
     "build-storybook": "storybook build"
   },
   "devDependencies": {

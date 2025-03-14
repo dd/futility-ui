@@ -1,3 +1,6 @@
+import { resolve } from 'path';
+
+
 /** @type { import('@storybook/vue3-vite').StorybookConfig } */
 const config = {
 	stories: [
@@ -18,6 +21,16 @@ const config = {
 	framework: {
 		name: '@storybook/vue3-vite',
 		options: {},
+	},
+
+	viteFinal(config) {
+		config.resolve = config.resolve || {};
+		config.resolve.alias = {
+			...config.resolve.alias,
+			'./assets/sprite.svg': resolve(__dirname, '../dist/assets/sprite.svg'), // для фиктивного спрайта
+		};
+		config.build.chunkSizeWarningLimit = 1000;
+		return config;
 	},
 };
 export default config;
