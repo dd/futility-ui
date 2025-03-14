@@ -16,12 +16,17 @@ import { version } from './package.json';
  * (left over from the source structure) to the final path './assets/sprite.svg',
  * which should match the one declared in package.json exports.
  */
-function FixSpriteImport() {
+function FixFIconSpriteImport() {
 	const RAW_ID = './__spritemap';
 	const VIRTUAL_ID = '\0virtual:__spritemap';
+	let baseUrl;
 
 	return {
 		name: 'fix-sprite-import',
+
+		configResolved(resolvedConfig) {
+			baseUrl = resolvedConfig.base;
+		},
 
 		resolveId(source) {
 			if (source === RAW_ID) {
@@ -40,13 +45,11 @@ function FixSpriteImport() {
 		},
 
 		generateBundle(_, bundle) {
+			const path = `./components/FIcon${baseUrl}assets/sprite.svg`;
 			for (const chunk of Object.values(bundle)) {
-				if (chunk.type === 'chunk' && chunk.code.includes('./components/FIcon/assets/sprite.svg')) {
+				if (chunk.type === 'chunk' && chunk.code.includes(path)) {
 					// Replace the legacy path left from the original source structure
-					chunk.code = chunk.code.replaceAll(
-						'./components/FIcon/assets/sprite.svg',
-						'./assets/sprite.svg'
-					);
+					chunk.code = chunk.code.replaceAll(path, './assets/sprite.svg');
 				}
 			}
 		},
@@ -70,7 +73,7 @@ export default defineConfig({
 				prefix: 'ficon-',
 			},
 		),
-		FixSpriteImport(),
+		FixFIconSpriteImport(),
 	],
 	define: {
 		__VERSION__: JSON.stringify(version),
@@ -91,7 +94,7 @@ export default defineConfig({
 		rollupOptions: {
 			external: [
 				'vue',
-				'./assets/sprite.svg',
+				`.${process.env.BASE_URL || '/'}assets/sprite.svg`,
 			],
 			output: {
 				globals: {
