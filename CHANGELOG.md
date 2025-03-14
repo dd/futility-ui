@@ -1,3 +1,15 @@
+# v0.2.5 (Fri Mar 14 2025)
+
+#### 🐛 Bug Fix
+
+- 🐛 (storybook): Fix build storybook [#14](https://github.com/dd/futility-ui/pull/14) ([@dd](https://github.com/dd))
+
+#### Authors: 1
+
+- Dmitry Dobrynin ([@dd](https://github.com/dd))
+
+---
+
 # v0.2.4 (Fri Mar 14 2025)
 
 #### 🐛 Bug Fix
