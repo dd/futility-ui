@@ -24,9 +24,9 @@ export default {
 export const Default = {};
 
 
-export const Diversity = {
+export const Sizes = {
 	render: (args, { argTypes, updateArgs }) => ({
-		name: 'FLoaderDiversityStory',
+		name: 'FLoaderSizesStory',
 		props: Object.keys(argTypes),
 		components: { FLoader },
 		setup() {
@@ -48,6 +48,7 @@ export const Diversity = {
 export const Scheme = {
 	parameters: { layout: 'fullscreen' },
 	render: (args, { argTypes, updateArgs }) => ({
+		name: 'FLoaderSchemeStory',
 		props: Object.keys(argTypes),
 		components: { FLoader },
 		setup() {

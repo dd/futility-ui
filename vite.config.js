@@ -85,6 +85,7 @@ export default defineConfig({
 				index: resolve(__dirname, 'src/index.js'),
 				FLoader: resolve(__dirname, 'src/components/FLoader/index.vue'),
 				FIcon: resolve(__dirname, 'src/components/FIcon/index.vue'),
+				FButton: resolve(__dirname, 'src/components/FButton/index.vue'),
 				styles: resolve(__dirname, 'src/styles.sass'),
 				theme: resolve(__dirname, 'src/theme.sass'),
 			},

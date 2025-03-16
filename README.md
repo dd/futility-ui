@@ -1,4 +1,14 @@
-# Futility UI
+<h1 align="center" >Futility UI</h1>
+
+<p align="center">
+	<a href="https://www.npmjs.com/package/futility-ui">
+		<img src="https://img.shields.io/npm/v/futility-ui.svg" alt="Version">
+	</a>
+	<a href="https://raw.githubusercontent.com/dd/futility-ui/master/LICENSE" target="_blank">
+		<img src="https://img.shields.io/pypi/l/meringue?color=008033" alt="License - GNU Lesser General Public License v3.0" />
+	</a>
+</p>
+
 
 A set of ready-to-use UI components for Vue 3, styled according to the [Flowbite](https://flowbite.com/) design system, providing a fast start and a consistent visual style for your application.
 
@@ -66,22 +76,22 @@ We welcome contributions of all sizes!
 ### Roadmap
 
 * [x] Icons
-* [ ] Buttons
+* [x] Loader
+* [ ] Buttons <- in progress
+* [ ] Input
 * [ ] Checkbox
+* [ ] Switch
+* [ ] Radio button
 * [ ] DatePicker
 * [ ] TimePicker
 * [ ] DropDown
 * [ ] FileSelect
 * [ ] FileSelectArea
-* [ ] Input
-* [x] Loader
 * [ ] Modal
 * [ ] Tree Editor
 * [ ] MultiSelect
 * [ ] Number picker
-* [ ] Radio button
 * [ ] Select
-* [ ] Switch
 * [ ] Tabs
 * [ ] Tag Select
 * [ ] Textarea
