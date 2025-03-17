@@ -1,7 +1,9 @@
 import { ref, onBeforeUnmount } from 'vue';
 
 import FButton from '.';
+import FIcon from '@/components/FIcon';
 import { COMPONENT_TYPES, SIZE_CHOICES, COLOR_CHOICES, DESIGN_CHOICES } from './constants';
+import { ICON_LIST_SOLID, ICON_LIST_OUTLINE, ICON_LIST_OTHER } from '@/components/FIcon/constants';
 // import { FIcon } from 'futility-ui';
 
 
@@ -59,6 +61,8 @@ export default {
 		size: 'default',
 		design: 'normal',
 		disabled: false,
+		busy: false,
+		icon: false,
 	},
 };
 
@@ -78,9 +82,9 @@ export const Types = {
 		setup() {
 			return { args, COMPONENT_TYPES };
 		},
-		template: `<table>
+		template: `<table class="preview-table" >
 	<tr v-for="type in COMPONENT_TYPES" :key="type" >
-		<td>{{ type }}</td>
+		<td class="label" >{{ type }}</td>
 		<td><FButton v-bind="args" :type="type" >{{ args.default }}</FButton></td>
 	</tr>
 </table>`,
@@ -89,7 +93,32 @@ export const Types = {
 		type: { control: { type: null }},
 	},
 	args: {
+		type: '<type>',
 		default: 'Button text',
+	},
+};
+
+
+export const Icon = {
+	render: (args, { argTypes }) => ({
+		name: 'FButtonIconStory',
+		props: Object.keys(argTypes),
+		components: { FButton, FIcon },
+		setup() {
+			return { args };
+		},
+		template: `<FButton v-bind="args" ><FIcon :name="args.default" /></FButton>`,
+	}),
+	argTypes: {
+		icon: { control: { type: null }},
+		default: {
+			options: [ ...ICON_LIST_SOLID, ...ICON_LIST_OUTLINE, ...ICON_LIST_OTHER ],
+			control: { type: 'select' },
+		},
+	},
+	args: {
+		default: ICON_LIST_SOLID[0],
+		icon: true,
 	},
 };
 
@@ -102,9 +131,9 @@ export const Design = {
 		setup() {
 			return { args, DESIGN_CHOICES };
 		},
-		template: `<table>
+		template: `<table class="preview-table" >
 	<tr v-for="design in DESIGN_CHOICES" :key="design" >
-		<td>{{ design }}</td>
+		<td class="label" >{{ design }}</td>
 		<td><FButton v-bind="args" :design="design" >{{ args.default }}</FButton></td>
 	</tr>
 </table>`,
@@ -113,6 +142,7 @@ export const Design = {
 		design: { control: { type: null }},
 	},
 	args: {
+		design: '<design>',
 		default: 'Button text',
 	},
 };
@@ -122,7 +152,7 @@ export const Sizes = {
 	render: (args, { argTypes }) => ({
 		name: 'FButtonSizesStory',
 		props: Object.keys(argTypes),
-		components: { FButton },
+		components: { FButton, FIcon },
 		setup() {
 			const sizes = [
 				[ SIZE_CHOICES[0], '34px' ],
@@ -133,11 +163,12 @@ export const Sizes = {
 			];
 			return { args, sizes };
 		},
-		template: `<table>
+		template: `<table class="preview-table" >
 	<tr v-for="size in sizes" :key="size[0]" >
-		<td>{{ size[1] }}</td>
-		<td>{{ size[0] }}</td>
+		<td class="label" >{{ size[1] }}</td>
+		<td class="label" >{{ size[0] }}</td>
 		<td><FButton v-bind="args" :size="size[0]" >{{ args.default }}</FButton></td>
+		<td><FButton v-bind="args" :size="size[0]" icon ><FIcon name="plus" /></FButton></td>
 	</tr>
 </table>`,
 	}),
@@ -145,6 +176,7 @@ export const Sizes = {
 		size: { control: { type: null }},
 	},
 	args: {
+		size: '<size>',
 		default: 'Button text',
 	},
 };
@@ -158,9 +190,9 @@ export const Colors = {
 		setup() {
 			return { args, COLOR_CHOICES };
 		},
-		template: `<table>
+		template: `<table class="preview-table" >
 	<tr v-for="color in COLOR_CHOICES" :key="color" >
-		<td>{{ color }}</td>
+		<td class="label" >{{ color }}</td>
 		<td><FButton v-bind="args" :color="color" >{{ args.default }}</FButton></td>
 	</tr>
 </table>`,
@@ -169,85 +201,10 @@ export const Colors = {
 		color: { control: { type: null }},
 	},
 	args: {
+		color: '<color>',
 		default: 'Button text',
 	},
 };
-
-
-// export const TextButton = {
-// 	render: (args, { argTypes }) => ({
-// 		name: 'FButtonTextButtonStory',
-// 		props: Object.keys(argTypes),
-// 		components: {
-// 			FButton,
-// 		},
-// 		setup() { return { args }; },
-// 		template: `<p>Так же кнопку можно вставить напрямую в текст,<br />для этого необходимо задать <code>design='text'</code> - <FButton v-bind="args" >Button</FButton>.</p>`,
-// 	}),
-// 	argTypes: {
-// 		design: { control: { type: null }},
-// 	},
-// 	args: {
-// 		design: 'text',
-// 	},
-// };
-
-
-
-
-
-
-
-
-// export const Test = {
-// 	render: (args, { argTypes }) => ({
-// 		name: 'FButtonTestStory',
-// 		props: Object.keys(argTypes),
-// 		components: {
-// 			FButton,
-// 		},
-// 		setup() { return { args }; },
-// 		template: `<FButton v-bind="args" class="test" >{{ args.default }}</FButton>`,
-// 	}),
-// 	argTypes: {
-// 		design: { control: { type: null }},
-// 	},
-// 	args: {
-// 		default: 'Button text',
-// 	},
-// };
-
-
-
-
-
-
-
-
-// export const IconButton = {
-// 	render: (args, { argTypes }) => ({
-// 		name: 'FButtonIconButtonStory',
-// 		props: Object.keys(argTypes),
-// 		components: {
-// 			FButton,
-// 			FIcon,
-// 		},
-// 		setup() { return { args }; },
-// 		template: `<div>
-// 	<div><FButton v-bind="args" design="normal" ><FIcon name="close" /></FButton></div>
-// 	<p>Кнопка-Иконка в тексте: <FButton design="text" >Button</FButton>.</p>
-// 	<p>А это кнопка иконка в посреди абзаца. Для такого случая<br />могут быть проблемы с вертикальным <FButton v-bind="args" design="text" ><FIcon name="close" /></FButton>  выравниванием<br/>
-// 	Но мы вроде справились.</p>
-// </div>`,
-// 	}),
-// 	argTypes: {
-// 		design: { control: { type: null }},
-// 		icon: { control: { type: null }},
-// 	},
-// 	args: {
-// 		icon: true,
-// 	},
-// };
 
 
 // export const Busy = {
@@ -302,7 +259,7 @@ export const Scheme = {
 		template: `
 <div class="sbpst-scheme_preview sbpst-row" >
 	<div class="sbpst-light" >
-		<table>
+		<table class="preview-table" >
 			<tr v-for="color in COLOR_CHOICES" :key="color" >
 				<td v-for="design in DESIGN_CHOICES" :key="design" >
 					<FButton v-bind="args" :color="color" :design="design" >{{ args.default }}</FButton>
@@ -311,7 +268,7 @@ export const Scheme = {
 		</table>
 	</div>
 	<div class="sbpst-dark" >
-		<table>
+		<table class="preview-table" >
 			<tr v-for="color in COLOR_CHOICES" :key="color" >
 				<td v-for="design in DESIGN_CHOICES" :key="design" >
 					<FButton v-bind="args" :color="color" :design="design" >{{ args.default }}</FButton>
@@ -328,5 +285,7 @@ export const Scheme = {
 	},
 	args: {
 		default: 'Button text',
+		color: '<color>',
+		design: '<design>',
 	},
 };

@@ -43,6 +43,9 @@ export const Sizes = {
 	argTypes: {
 		size: { control: { type: null }},
 	},
+	args: {
+		size: '<size>',
+	},
 };
 
 export const Scheme = {

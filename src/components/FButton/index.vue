@@ -6,8 +6,9 @@
 			`fui-b-design-${design}`,
 			`fui-b-size-${size}`,
 			`fui-b-color-${color}`,
-			// { 'fui-b-busy': busy },
-			// { 'fui-b-icon': icon },
+			{ 'fui-b-busy': busy },
+			{ 'fui-b-disabled': disabled || busy },
+			{ 'fui-b-icon': icon },
 		]"
 		v-bind="extraAttributes"
 	>
@@ -64,11 +65,17 @@ const props = defineProps({
 		default: false,
 	},
 
-	// /** Make button busy - add loader and disable click. */
-	// busy: Boolean,
+	/** Make button busy - add loader and disable click. */
+	busy: {
+		type: Boolean,
+		default: false,
+	},
 
-	// /** Icon-Button modifier. */
-	// icon: Boolean,
+	/** Icon-Button modifier. */
+	icon: {
+		type: Boolean,
+		default: false,
+	},
 });
 
 const attrs = useAttrs()
@@ -90,7 +97,7 @@ const extraAttributes = computed(() => {
 
 	if (componentType.value === 'button') {
 		result.type = props.type;
-		result.disabled = props.disabled || props.busy || false;
+		result.disabled = props.disabled || props.busy;
 	}
 
 	return result;
