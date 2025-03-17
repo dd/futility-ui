@@ -5,7 +5,7 @@
 		<img src="https://img.shields.io/npm/v/futility-ui.svg" alt="Version">
 	</a>
 	<a href="https://raw.githubusercontent.com/dd/futility-ui/master/LICENSE" target="_blank">
-		<img src="https://img.shields.io/pypi/l/meringue?color=008033" alt="License - GNU Lesser General Public License v3.0" />
+		<img src="https://img.shields.io/npm/l/futility-ui" alt="License - Mozilla Public License Version 2.0" />
 	</a>
 </p>
 
