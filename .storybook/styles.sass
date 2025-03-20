@@ -1,6 +1,23 @@
 @charset "UTF-8"
 
 
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap')
+
+:root
+	font-family: Inter, Helvetica, Arial, sans-serif
+
+
+
+// Preview Tables
+.preview-table
+	td
+		padding: var(--fui-spacing-2)
+
+		&.label
+			font-size: var(--fui-text-size-xs)
+			line-height: 150%
+
+
 // Preview Scheme Toggler
 .sbpst-scheme_preview .sbpst-dark,
 .sbpst-scheme_preview .sbpst-light
@@ -10,13 +27,11 @@
 	min-height: 150px
 	box-sizing: border-box
 
+
 // FIcon
-// .fui-icon
-// :root
-body
+.icon_preview
 	--fui-icon-color: light-dark(#000000, #ffffff)
 
-.icon_preview
 	display: flex
 	flex-direction: row
 	flex-wrap: wrap
@@ -30,11 +45,6 @@ body
 .icon_preview-wrapper
 	flex-direction: column
 
-// .sbpst-dark
-// 	color: var(--fui-color-gray-400)
-
-// .sbpst-light
-// 	color: var(--fui-color-gray-600)
 
 // FLoader
 .loader_preview
