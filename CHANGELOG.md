@@ -1,3 +1,15 @@
+# v0.3.1 (Thu Mar 20 2025)
+
+#### 🐛 Bug Fix
+
+- 📄 (license): Сhange license LGPLv3 -> MPL-2 [#17](https://github.com/dd/futility-ui/pull/17) ([@dd](https://github.com/dd))
+
+#### Authors: 1
+
+- Dmitry Dobrynin ([@dd](https://github.com/dd))
+
+---
+
 # v0.3.0 (Thu Mar 20 2025)
 
 #### 🚀 Enhancement
