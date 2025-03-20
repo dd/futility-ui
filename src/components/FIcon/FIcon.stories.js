@@ -2,77 +2,7 @@ import { useClipboard } from '@vueuse/core';
 import { useToast } from 'vue-toastification';
 
 import FIcon from '.';
-
-
-const ICON_LIST_SOLID = [
-	'archive_solid',
-	'archive_up_solid',
-	'archive_down_solid',
-	'calendar_solid',
-	'check_circle_solid',
-	'circle_solid',
-	'close_circle_solid',
-	'cog_solid',
-	'copy_solid',
-	'edit_solid',
-	'envelope_solid',
-	'exclamation_circle_solid',
-	'eye_solid',
-	'filter_solid',
-	'info_circle_solid',
-	'lightbulb_solid',
-	'phone_solid',
-	'print_solid',
-	'rectangle_list_solid',
-];
-
-
-const ICON_LIST_OUTLINE = [
-	'archive_outline',
-	'archive_up_outline',
-	'archive_down_outline',
-	'calendar_outline',
-	'check_circle_outline',
-	'circle_outline',
-	'close_circle_outline',
-	'cog_outline',
-	'copy_outline',
-	'edit_outline',
-	'envelope_outline',
-	'exclamation_circle_outline',
-	'eye_outline',
-	'filter_outline',
-	'info_circle_outline',
-	'lightbulb_outline',
-	'phone_outline',
-	'print_outline',
-	'rectangle_list_outline',
-];
-
-
-const ICON_LIST_OTHER = [
-	'arrow_bottom',
-	'arrow_left',
-	'arrow_right',
-	'arrow_top',
-	'bars',
-	'calendar',
-	'check',
-	'chevron_down',
-	'chevron_left',
-	'chevron_right',
-	'chevron_up',
-	'close',
-	'dots_horizontal',
-	'dots_vertical',
-	'infinity',
-	'link',
-	'maximize',
-	'minimize',
-	'minus',
-	'plus',
-	'refresh',
-];
+import { ICON_LIST_SOLID, ICON_LIST_OUTLINE, ICON_LIST_OTHER } from './constants';
 
 
 export default {
@@ -147,6 +77,9 @@ export const Diversity = {
 	}),
 	argTypes: {
 		name: { control: { type: null }},
+	},
+	args: {
+		name: '<name>',
 	},
 };
 
@@ -228,5 +161,8 @@ export const Scheme = {
 	}),
 	argTypes: {
 		name: { control: { type: null }},
+	},
+	args: {
+		name: '<name>',
 	},
 };

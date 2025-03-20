@@ -38,8 +38,13 @@
       "require": "./dist/FIcon.cjs.js",
       "import": "./dist/FIcon.es.js"
     },
+    "./FButton": {
+      "require": "./dist/FButton.cjs.js",
+      "import": "./dist/FButton.es.js"
+    },
     "./styles.css": "./dist/styles/styles.css",
-    "./theme.css": "./dist/styles/theme.css"
+    "./theme.css": "./dist/styles/theme.css",
+    "./assets/sprite.svg": "./dist/assets/sprite.svg"
   },
   "sideEffects": false,
   "files": [
@@ -51,23 +56,24 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "release": "pnpm build && auto shipit",
     "storybook": "storybook dev -p ${APP_PORT:-6008}",
+    "prebuild-storybook": "if [ -f ./dist/assets/sprite.svg ]; then :; else pnpm run build; fi",
     "build-storybook": "storybook build"
   },
   "devDependencies": {
     "@chromatic-com/storybook": "^3.2.4",
-    "@spiriit/vite-plugin-svg-spritemap": "^3.0.0",
-    "@storybook/addon-essentials": "^8.5.8",
-    "@storybook/addon-interactions": "^8.5.8",
-    "@storybook/addon-onboarding": "^8.5.8",
-    "@storybook/blocks": "^8.5.8",
-    "@storybook/test": "^8.5.8",
-    "@storybook/vue3": "^8.5.8",
-    "@storybook/vue3-vite": "^8.5.8",
+    "@spiriit/vite-plugin-svg-spritemap": "^4.0.0",
+    "@storybook/addon-essentials": "^8.6.4",
+    "@storybook/addon-interactions": "^8.6.4",
+    "@storybook/addon-onboarding": "^8.6.4",
+    "@storybook/blocks": "^8.6.4",
+    "@storybook/test": "^8.6.4",
+    "@storybook/vue3": "^8.6.4",
+    "@storybook/vue3-vite": "^8.6.4",
     "@vitejs/plugin-vue": "^5.2.1",
-    "@vueuse/core": "^12.7.0",
+    "@vueuse/core": "^13.0.0",
     "auto": "^11.3.0",
     "sass": "^1.85.0",
-    "storybook": "^8.5.8",
+    "storybook": "^8.6.4",
     "storybook-preview-scheme-toggler": "^1.0.2",
     "svgo": "^3.3.2",
     "vite": "^6.1.1",
