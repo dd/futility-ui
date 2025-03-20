@@ -1,3 +1,23 @@
+# v0.3.0 (Thu Mar 20 2025)
+
+#### 🚀 Enhancement
+
+
+#### 🐛 Bug Fix
+
+- Dev [#15](https://github.com/dd/futility-ui/pull/15) ([@dd](https://github.com/dd))
+- 🔧 (package): Added links to styles [#9](https://github.com/dd/futility-ui/pull/9) ([@dd](https://github.com/dd))
+- Dev [#8](https://github.com/dd/futility-ui/pull/8) ([@dd](https://github.com/dd))
+- Dev [#6](https://github.com/dd/futility-ui/pull/6) ([@dd](https://github.com/dd))
+- 👷 (release): Fix release config [#5](https://github.com/dd/futility-ui/pull/5) ([@dd](https://github.com/dd))
+- 👷 (release): Try to change version in next brunch [#4](https://github.com/dd/futility-ui/pull/4) ([@dd](https://github.com/dd))
+
+#### Authors: 1
+
+- Dmitry Dobrynin ([@dd](https://github.com/dd))
+
+---
+
 # v0.2.5 (Fri Mar 14 2025)
 
 #### 🐛 Bug Fix
