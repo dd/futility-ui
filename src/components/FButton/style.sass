@@ -100,8 +100,11 @@
 	--fui-b-spacing-y: var(--fui-spacing-3)
 	--fui-b-fontsize: var(--fui-text-size-xs)
 	--fui-b-boxshadow-size: 2px
+	--fui-b-height: 34px
+	--fui-b-bheight: 14px
 
 	&.fui-b-icon
+		--fui-b-height: 20px
 		--fui-b-spacing-x: calc(var(--fui-spacing-2) - 6px)
 
 		.fui-b-content > svg
@@ -112,8 +115,12 @@
 	--fui-b-spacing-y: var(--fui-spacing-3)
 	--fui-b-fontsize: var(--fui-text-size-sm)
 	--fui-b-boxshadow-size: 3px
+	--fui-b-height: 37px
+	--fui-b-bheight: 14px
 
 	&.fui-b-icon
+		--fui-b-height: 28px
+		--fui-b-bheight: 16px
 		--fui-b-spacing-x: calc(var(--fui-spacing-2) - 2px)
 
 		.fui-b-content > svg
@@ -124,8 +131,11 @@
 	--fui-b-spacing-y: var(--fui-spacing-5)
 	--fui-b-fontsize: var(--fui-text-size-sm)
 	--fui-b-boxshadow-size: 3px
+	--fui-b-height: 42px
+	--fui-b-bheight: 22px
 
 	&.fui-b-icon
+		--fui-b-height: 34px
 		--fui-b-spacing-x: calc(var(--fui-spacing-2_5) - 2.5px)
 
 		.fui-b-content > svg
@@ -136,8 +146,11 @@
 	--fui-b-spacing-y: var(--fui-spacing-5)
 	--fui-b-fontsize: var(--fui-text-size-base)
 	--fui-b-boxshadow-size: 3px
+	--fui-b-height: 48px
+	--fui-b-bheight: 22px
 
 	&.fui-b-icon
+		--fui-b-height: 40px
 		--fui-b-spacing-x: calc(var(--fui-spacing-3) - 3px)
 
 		.fui-b-content > svg
@@ -148,8 +161,11 @@
 	--fui-b-spacing-y: var(--fui-spacing-6)
 	--fui-b-fontsize: var(--fui-text-size-base)
 	--fui-b-boxshadow-size: 3px
+	--fui-b-height: 52px
+	--fui-b-bheight: 26px
 
 	&.fui-b-icon
+		--fui-b-height: 44px
 		--fui-b-spacing-x: calc(var(--fui-spacing-3_5) - 3px)
 
 		.fui-b-content > svg
@@ -165,7 +181,6 @@
 
 		.fui-b-content > svg
 			display: block
-			color: inherit
 
 
 // Colors ///////////////////////////////////////
@@ -223,24 +238,39 @@
 		color: light-dark(var(--fui-b-textcolor), var(--fui-b-basecolor))
 
 
-// // Busy
+// Busy /////////////////////////////////////////
 
-// .fui-b-busy > .fui-b-content
-// 	transform: translate3d(var(--fui-b-spacing-x), 0, 0)
+.fui-button
+	position: relative
 
-// .fui-button
-// 	.fui-b-busy-indicator
-// 		position: absolute
-// 		top: calc((100% - var(--fui-b-lineheight)) / 2)
-// 		left: calc(var(--fui-b-spacing-x) / 2)
-// 		height: var(--fui-b-lineheight)
-// 		color: inherit
+.fui-b-busy-indicator
+	position: absolute
+	top: calc((var(--fui-b-height) - var(--fui-b-bheight)) / 2)
+	left: calc(var(--fui-b-spacing-x) / 2)
+	height: var(--fui-b-bheight)
 
-// .loader-fade-enter-active,
-// .loader-fade-leave-active
-// 	transition: transform .1s linear, opacity .1s linear
+	.fui-load-track
+		stroke-width: 6
 
-// .loader-fade-enter-from,
-// .loader-fade-leave-to
-// 	opacity: 0
-// 	transform: translate3d(-10px, 0, 0)
+.fui-b-busy-indicator + .fui-b-content
+	// Shift the button content when the preloader enabled
+	display: block
+	transform: translate3d(var(--fui-b-spacing-x), 0, 0)
+
+.loader-fade-enter-active,
+.loader-fade-leave-active
+	transition: transform .1s linear, opacity .1s linear
+
+.loader-fade-enter-from,
+.loader-fade-leave-to
+	opacity: 0
+	transform: translate3d(-10px, 0, 0)
+
+// Busy icon
+.fui-b-icon
+	.fui-b-busy-indicator
+		left: calc((var(--fui-b-height) - var(--fui-b-bheight)) / 2)
+
+	.fui-b-busy-indicator + .fui-b-content
+		display: block
+		transform: translate3d(var(--fui-b-height), 0, 0)

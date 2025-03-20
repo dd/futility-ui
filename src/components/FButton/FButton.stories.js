@@ -1,10 +1,9 @@
 import { ref, onBeforeUnmount } from 'vue';
 
-import FButton from '.';
 import FIcon from '@/components/FIcon';
-import { COMPONENT_TYPES, SIZE_CHOICES, COLOR_CHOICES, DESIGN_CHOICES } from './constants';
 import { ICON_LIST_SOLID, ICON_LIST_OUTLINE, ICON_LIST_OTHER } from '@/components/FIcon/constants';
-// import { FIcon } from 'futility-ui';
+import FButton from '.';
+import { COMPONENT_TYPES, SIZE_CHOICES, COLOR_CHOICES, DESIGN_CHOICES } from './constants';
 
 
 export default {
@@ -43,6 +42,17 @@ export default {
 				defaultValue: { summary: null },
 			},
 		},
+		iconName: {
+			name: 'icon',
+			control: { type: 'select' },
+			options: [ ...ICON_LIST_SOLID, ...ICON_LIST_OUTLINE, ...ICON_LIST_OTHER ],
+			description: 'Icon for use inside the icon button.',
+			table: {
+				category: 'slots',
+				type: { summary: 'text' },
+				defaultValue: { summary: null },
+			},
+		},
 
 		// EVENTS
 		onClick: {
@@ -68,8 +78,21 @@ export default {
 
 
 export const Default = {
+	render: (args, { argTypes }) => ({
+		name: 'FButtonDefaultStory',
+		props: Object.keys(argTypes),
+		components: { FButton, FIcon },
+		setup() {
+			return { args, COMPONENT_TYPES };
+		},
+		template: `<FButton  v-bind="args" :type="type" >
+	<FIcon v-if="args.icon" :name="args.iconName" />
+	<template v-else >{{ args.default }}</template>
+</FButton>`,
+	}),
 	args: {
 		default: 'Button text',
+		iconName: ICON_LIST_SOLID[0],
 	},
 };
 
@@ -78,14 +101,19 @@ export const Types = {
 	render: (args, { argTypes }) => ({
 		name: 'FButtonTypesStory',
 		props: Object.keys(argTypes),
-		components: { FButton },
+		components: { FButton, FIcon },
 		setup() {
 			return { args, COMPONENT_TYPES };
 		},
 		template: `<table class="preview-table" >
 	<tr v-for="type in COMPONENT_TYPES" :key="type" >
 		<td class="label" >{{ type }}</td>
-		<td><FButton v-bind="args" :type="type" >{{ args.default }}</FButton></td>
+		<td>
+			<FButton  v-bind="args" :type="type" >
+				<FIcon v-if="args.icon" :name="args.iconName" />
+				<template v-else >{{ args.default }}</template>
+			</FButton>
+		</td>
 	</tr>
 </table>`,
 	}),
@@ -95,6 +123,7 @@ export const Types = {
 	args: {
 		type: '<type>',
 		default: 'Button text',
+		iconName: ICON_LIST_SOLID[0],
 	},
 };
 
@@ -107,18 +136,15 @@ export const Icon = {
 		setup() {
 			return { args };
 		},
-		template: `<FButton v-bind="args" ><FIcon :name="args.default" /></FButton>`,
+		template: `<FButton v-bind="args" ><FIcon :name="args.iconName" /></FButton>`,
 	}),
 	argTypes: {
 		icon: { control: { type: null }},
-		default: {
-			options: [ ...ICON_LIST_SOLID, ...ICON_LIST_OUTLINE, ...ICON_LIST_OTHER ],
-			control: { type: 'select' },
-		},
+		default: { control: { type: null }},
 	},
 	args: {
-		default: ICON_LIST_SOLID[0],
 		icon: true,
+		iconName: ICON_LIST_SOLID[0],
 	},
 };
 
@@ -127,14 +153,19 @@ export const Design = {
 	render: (args, { argTypes }) => ({
 		name: 'FButtonDesignStory',
 		props: Object.keys(argTypes),
-		components: { FButton },
+		components: { FButton, FIcon },
 		setup() {
 			return { args, DESIGN_CHOICES };
 		},
 		template: `<table class="preview-table" >
 	<tr v-for="design in DESIGN_CHOICES" :key="design" >
 		<td class="label" >{{ design }}</td>
-		<td><FButton v-bind="args" :design="design" >{{ args.default }}</FButton></td>
+		<td>
+			<FButton v-bind="args" :design="design" >
+				<FIcon v-if="args.icon" :name="args.iconName" />
+				<template v-else >{{ args.default }}</template>
+			</FButton>
+		</td>
 	</tr>
 </table>`,
 	}),
@@ -144,6 +175,7 @@ export const Design = {
 	args: {
 		design: '<design>',
 		default: 'Button text',
+		iconName: ICON_LIST_SOLID[0],
 	},
 };
 
@@ -155,11 +187,11 @@ export const Sizes = {
 		components: { FButton, FIcon },
 		setup() {
 			const sizes = [
-				[ SIZE_CHOICES[0], '34px' ],
-				[ SIZE_CHOICES[1], '37px' ],
-				[ SIZE_CHOICES[2], '42px' ],
-				[ SIZE_CHOICES[3], '48px' ],
-				[ SIZE_CHOICES[4], '52px' ],
+				[ SIZE_CHOICES[0], '34px', '20px' ],
+				[ SIZE_CHOICES[1], '37px', '28px' ],
+				[ SIZE_CHOICES[2], '42px', '34px' ],
+				[ SIZE_CHOICES[3], '48px', '40px' ],
+				[ SIZE_CHOICES[4], '52px', '44px' ],
 			];
 			return { args, sizes };
 		},
@@ -167,17 +199,43 @@ export const Sizes = {
 	<tr v-for="size in sizes" :key="size[0]" >
 		<td class="label" >{{ size[1] }}</td>
 		<td class="label" >{{ size[0] }}</td>
-		<td><FButton v-bind="args" :size="size[0]" >{{ args.default }}</FButton></td>
-		<td><FButton v-bind="args" :size="size[0]" icon ><FIcon name="plus" /></FButton></td>
+		<td><FButton v-bind="args" :size="size[0]" :icon="false" >{{ args.default }}</FButton></td>
+		<td align="right" ><FButton v-bind="args" :size="size[0]" icon ><FIcon :name="args.iconName" /></FButton></td>
+		<td class="label" >{{ size[2] }}</td>
 	</tr>
 </table>`,
 	}),
 	argTypes: {
 		size: { control: { type: null }},
+		icon: { control: { type: null }},
 	},
 	args: {
+		icon: 'true|false',
 		size: '<size>',
 		default: 'Button text',
+		iconName: 'plus',
+	},
+};
+
+
+export const Busy = {
+	render: (args, { argTypes }) => ({
+		name: 'FButtonBusyStory',
+		props: Object.keys(argTypes),
+		components: { FButton, FIcon },
+		setup() {
+			return { args };
+		},
+		template: `
+<FButton v-bind="args" :color="color" >
+	<FIcon v-if="args.icon" :name="args.iconName" />
+	<template v-else >{{ args.default }}</template>
+</FButton>
+`,
+	}),
+	args: {
+		default: 'Button text',
+		iconName: ICON_LIST_SOLID[0],
 	},
 };
 
@@ -186,14 +244,19 @@ export const Colors = {
 	render: (args, { argTypes }) => ({
 		name: 'FButtonColorsStory',
 		props: Object.keys(argTypes),
-		components: { FButton },
+		components: { FButton, FIcon },
 		setup() {
 			return { args, COLOR_CHOICES };
 		},
 		template: `<table class="preview-table" >
 	<tr v-for="color in COLOR_CHOICES" :key="color" >
 		<td class="label" >{{ color }}</td>
-		<td><FButton v-bind="args" :color="color" >{{ args.default }}</FButton></td>
+		<td>
+			<FButton v-bind="args" :color="color" >
+				<FIcon v-if="args.icon" :name="args.iconName" />
+				<template v-else >{{ args.default }}</template>
+			</FButton>
+		</td>
 	</tr>
 </table>`,
 	}),
@@ -203,6 +266,7 @@ export const Colors = {
 	args: {
 		color: '<color>',
 		default: 'Button text',
+		iconName: ICON_LIST_SOLID[0],
 	},
 };
 
@@ -252,7 +316,7 @@ export const Scheme = {
 	render: (args, { argTypes }) => ({
 		name: 'FButtonSchemeStory',
 		props: Object.keys(argTypes),
-		components: { FButton },
+		components: { FButton, FIcon },
 		setup() {
 			return { args, COLOR_CHOICES, DESIGN_CHOICES };
 		},
@@ -262,7 +326,10 @@ export const Scheme = {
 		<table class="preview-table" >
 			<tr v-for="color in COLOR_CHOICES" :key="color" >
 				<td v-for="design in DESIGN_CHOICES" :key="design" >
-					<FButton v-bind="args" :color="color" :design="design" >{{ args.default }}</FButton>
+					<FButton v-bind="args" :color="color" :design="design" >
+						<FIcon v-if="args.icon" :name="args.iconName" />
+						<template v-else >{{ args.default }}</template>
+					</FButton>
 				</td>
 			</tr>
 		</table>
@@ -271,7 +338,10 @@ export const Scheme = {
 		<table class="preview-table" >
 			<tr v-for="color in COLOR_CHOICES" :key="color" >
 				<td v-for="design in DESIGN_CHOICES" :key="design" >
-					<FButton v-bind="args" :color="color" :design="design" >{{ args.default }}</FButton>
+					<FButton v-bind="args" :color="color" :design="design" >
+						<FIcon v-if="args.icon" :name="args.iconName" />
+						<template v-else >{{ args.default }}</template>
+					</FButton>
 				</td>
 			</tr>
 		</table>
@@ -287,5 +357,6 @@ export const Scheme = {
 		default: 'Button text',
 		color: '<color>',
 		design: '<design>',
+		iconName: ICON_LIST_SOLID[0],
 	},
 };

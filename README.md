@@ -77,8 +77,9 @@ We welcome contributions of all sizes!
 
 * [x] Icons
 * [x] Loader
-* [ ] Buttons <- in progress
-* [ ] Input
+* [x] Buttons
+* [ ] Input <- you are here
+* [ ] Text button
 * [ ] Checkbox
 * [ ] Switch
 * [ ] Radio button

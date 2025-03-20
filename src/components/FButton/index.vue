@@ -12,9 +12,9 @@
 		]"
 		v-bind="extraAttributes"
 	>
-		<!-- <transition name="loader-fade" >
-			<FLoader v-if="busy" class="fui-b-busy-indicator" />
-		</transition> -->
+		<transition name="loader-fade" >
+			<FLoader v-if="busy && !noBusyLoader" class="fui-b-busy-indicator" />
+		</transition>
 		<span class="fui-b-content"><slot /></span>
 	</component>
 </template>
@@ -22,8 +22,7 @@
 <script setup>
 import { computed, useAttrs } from 'vue';
 
-// import FLoader from 'futility-ui/FLoader';
-// import FLoader from '@/components/FLoader';
+import FLoader from '@/components/FLoader';
 import { COMPONENT_TYPES } from './constants';
 
 
@@ -67,6 +66,12 @@ const props = defineProps({
 
 	/** Make button busy - add loader and disable click. */
 	busy: {
+		type: Boolean,
+		default: false,
+	},
+
+	/** Hides the preloader when the button is busy. */
+	noBusyLoader: {
 		type: Boolean,
 		default: false,
 	},
