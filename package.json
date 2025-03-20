@@ -16,7 +16,7 @@
   ],
   "version": "0.3.0",
   "author": "Dmitry Dobrynin <dd@tovarisch.engineer>",
-  "license": "LGPL-3.0",
+  "license": "MPL-2.0",
   "repository": {
     "type": "git",
     "url": "git@github.com:dd/futility-ui.git"
