@@ -38,6 +38,10 @@
       "require": "./dist/FIcon.cjs.js",
       "import": "./dist/FIcon.es.js"
     },
+    "./FButton": {
+      "require": "./dist/FButton.cjs.js",
+      "import": "./dist/FButton.es.js"
+    },
     "./styles.css": "./dist/styles/styles.css",
     "./theme.css": "./dist/styles/theme.css",
     "./assets/sprite.svg": "./dist/assets/sprite.svg"
