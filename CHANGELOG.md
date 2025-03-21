@@ -1,3 +1,15 @@
+# v0.3.2 (Fri Mar 21 2025)
+
+#### 🐛 Bug Fix
+
+- Deploy 0.3.2 [#18](https://github.com/dd/futility-ui/pull/18) ([@dd](https://github.com/dd))
+
+#### Authors: 1
+
+- Dmitry Dobrynin ([@dd](https://github.com/dd))
+
+---
+
 # v0.3.1 (Thu Mar 20 2025)
 
 #### 🐛 Bug Fix
