@@ -14,16 +14,8 @@
 // --fui-b-textcolor-alternative
 
 .fui-button
-	// position: relative
-	// box-sizing: border-box
-
-	// display: inline-flex
+	position: relative
 	display: inline-block
-	// flex-direction: row
-	// justify-content: center
-	// align-items: center
-
-	// gap: var(--fui-spacing-2)
 
 	appearance: none
 	overflow: clip
@@ -248,9 +240,11 @@
 	top: calc((var(--fui-b-height) - var(--fui-b-bheight)) / 2)
 	left: calc(var(--fui-b-spacing-x) / 2)
 	height: var(--fui-b-bheight)
+	color: inherit
 
-	.fui-load-track
-		stroke-width: 6
+	.fui-b-design-outline &
+		top: calc((var(--fui-b-height) - var(--fui-b-bheight)) / 2 - var(--fui-b-bordersize))
+		left: calc(var(--fui-b-spacing-x) / 2 - var(--fui-b-bordersize))
 
 .fui-b-busy-indicator + .fui-b-content
 	// Shift the button content when the preloader enabled
@@ -266,11 +260,23 @@
 	opacity: 0
 	transform: translate3d(-10px, 0, 0)
 
-// Busy icon
+// Busy icon button
 .fui-b-icon
 	.fui-b-busy-indicator
 		left: calc((var(--fui-b-height) - var(--fui-b-bheight)) / 2)
 
+	&.fui-b-design-outline .fui-b-busy-indicator
+		left: calc((var(--fui-b-height) - var(--fui-b-bheight)) / 2 - var(--fui-b-bordersize))
+
 	.fui-b-busy-indicator + .fui-b-content
 		display: block
 		transform: translate3d(var(--fui-b-height), 0, 0)
+
+// White button is a special case
+.fui-b-color-white
+	.fui-b-busy-indicator
+		left: calc(var(--fui-b-spacing-x) / 2 - var(--fui-b-bordersize))
+		top: calc((var(--fui-b-height) - var(--fui-b-bheight)) / 2 - var(--fui-b-bordersize))
+
+	&.fui-b-icon .fui-b-busy-indicator
+		left: calc((var(--fui-b-height) - var(--fui-b-bheight)) / 2 - var(--fui-b-bordersize))

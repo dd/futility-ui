@@ -73,6 +73,7 @@ export default {
 		disabled: false,
 		busy: false,
 		icon: false,
+		noBusyLoader: false,
 	},
 };
 

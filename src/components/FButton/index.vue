@@ -13,7 +13,7 @@
 		v-bind="extraAttributes"
 	>
 		<transition name="loader-fade" >
-			<FLoader v-if="busy && !noBusyLoader" class="fui-b-busy-indicator" />
+			<FLoader v-if="busy && !noBusyLoader" hideTrack class="fui-b-busy-indicator" />
 		</transition>
 		<span class="fui-b-content"><slot /></span>
 	</component>
