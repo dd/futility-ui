@@ -8,15 +8,12 @@ export default {
 	parameters: { layout: 'centered' },
 	argTypes: {
 		size: {
-			options: [ 'sm', null, 'lg' ],
-			control: {
-				type: 'select',
-				labels: { null: 'Default' },
-			},
+			options: [ 'sm', 'md', 'lg' ],
+			control: { type: 'select' },
 		},
 	},
 	args: {
-		size: null,
+		size: 'md',
 		hideTrack: false,
 	},
 };
@@ -33,11 +30,22 @@ export const Sizes = {
 			return { args };
 		},
 		template: `
-<div class="loader_preview" >
-	<FLoader v-bind="args" size="sm" />
-	<FLoader v-bind="args" />
-	<FLoader v-bind="args" size="lg" />
+<div class="loader_preview-table-wrapper" >
+	<table class="preview-table loader_preview-table" >
+		<tr>
+			<td class="label" >sm: 25px</td>
+			<td class="label" >md: 50px</td>
+			<td class="label" >lg: 75px</td>
+		</tr>
+		<tr>
+			<td><FLoader v-bind="args" size="sm" /></td>
+			<td><FLoader v-bind="args" size="md" /></td>
+			<td><FLoader v-bind="args" size="lg" /></td>
+		</tr>
+	</table>
 </div>
+<p>You can specify any custom size if needed — the loader will receive a class in the format <code>.fui-loader-&lt;size&gt;</code>, which you can then style according to your design.</p>
+<p style="text-align: center" ><FLoader v-bind="args" size="custom" /></p>
 `,
 	}),
 	argTypes: {

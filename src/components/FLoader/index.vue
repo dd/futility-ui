@@ -55,7 +55,10 @@
 defineOptions({ name: 'FLoader' });
 defineProps({
 	/** Loader size. */
-	size: String,
+	size: {
+		type: String,
+		default: 'md',
+	},
 
 	/** Hide track. */
 	hideTrack: Boolean,
