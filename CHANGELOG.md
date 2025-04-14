@@ -1,3 +1,15 @@
+# v0.3.3 (Mon Apr 14 2025)
+
+#### 🐛 Bug Fix
+
+- Update FIcons [#19](https://github.com/dd/futility-ui/pull/19) ([@dd](https://github.com/dd))
+
+#### Authors: 1
+
+- Dmitry Dobrynin ([@dd](https://github.com/dd))
+
+---
+
 # v0.3.2 (Fri Mar 21 2025)
 
 #### 🐛 Bug Fix
