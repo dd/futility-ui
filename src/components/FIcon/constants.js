@@ -51,7 +51,6 @@ export const ICON_LIST_OTHER = [
 	'arrow_right',
 	'arrow_top',
 	'bars',
-	'calendar',
 	'check',
 	'chevron_down',
 	'chevron_left',

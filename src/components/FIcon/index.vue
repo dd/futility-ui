@@ -1,5 +1,5 @@
 <template>
-	<svg role="img" aria-hidden="true" class="fui-icon" >
+	<svg role="img" aria-hidden="true" :class="['fui-icon', `fui-icon-${name}`]" >
 		<use :xlink:href="iconPath"></use>
 	</svg>
 </template>
