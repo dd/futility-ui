@@ -9,7 +9,7 @@ export const COMPONENT_TYPES = Object.freeze([
 export const SIZE_CHOICES = Object.freeze([
 	'xs',
 	's',
-	'default',
+	'm',
 	'l',
 	'xl',
 ]);

@@ -54,7 +54,7 @@ const props = defineProps({
 	/** Button size. */
 	size: {
 		type: String,
-		default: 'default',
+		default: 'm',
 		// validator: (size) => SIZE_CHOICES.includes(size),
 	},
 
@@ -103,6 +103,14 @@ const extraAttributes = computed(() => {
 	if (componentType.value === 'button') {
 		result.type = props.type;
 		result.disabled = props.disabled || props.busy;
+	}
+
+	if (props.busy) {
+		result['aria-busy'] = 'true';
+	}
+
+	if ((props.disabled || props.busy) && componentType.value != 'button') {
+		result['aria-disabled'] = 'true';
 	}
 
 	return result;
