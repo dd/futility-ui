@@ -1,3 +1,63 @@
+# v0.3.6 (Wed Apr 16 2025)
+
+#### 🐛 Bug Fix
+
+- ♻️ (FButton): Refactor FButton sizes and icon state [#22](https://github.com/dd/futility-ui/pull/22) ([@dd](https://github.com/dd))
+
+#### Authors: 1
+
+- Dmitry Dobrynin ([@dd](https://github.com/dd))
+
+---
+
+# v0.3.5 (Wed Apr 16 2025)
+
+#### 🐛 Bug Fix
+
+- ⚰️ (styles): Remove using of :where [#21](https://github.com/dd/futility-ui/pull/21) ([@dd](https://github.com/dd))
+
+#### Authors: 1
+
+- Dmitry Dobrynin ([@dd](https://github.com/dd))
+
+---
+
+# v0.3.4 (Wed Apr 16 2025)
+
+#### 🐛 Bug Fix
+
+- Refactor FButton and docs [#20](https://github.com/dd/futility-ui/pull/20) ([@dd](https://github.com/dd))
+
+#### Authors: 1
+
+- Dmitry Dobrynin ([@dd](https://github.com/dd))
+
+---
+
+# v0.3.3 (Mon Apr 14 2025)
+
+#### 🐛 Bug Fix
+
+- Update FIcons [#19](https://github.com/dd/futility-ui/pull/19) ([@dd](https://github.com/dd))
+
+#### Authors: 1
+
+- Dmitry Dobrynin ([@dd](https://github.com/dd))
+
+---
+
+# v0.3.2 (Fri Mar 21 2025)
+
+#### 🐛 Bug Fix
+
+- Deploy 0.3.2 [#18](https://github.com/dd/futility-ui/pull/18) ([@dd](https://github.com/dd))
+
+#### Authors: 1
+
+- Dmitry Dobrynin ([@dd](https://github.com/dd))
+
+---
+
 # v0.3.1 (Thu Mar 20 2025)
 
 #### 🐛 Bug Fix
