@@ -5,10 +5,37 @@ import FIcon from '.';
 import { ICON_LIST_SOLID, ICON_LIST_OUTLINE, ICON_LIST_OTHER } from './constants';
 
 
+const usage = `
+### Usage
+
+Import the component:
+
+\`\`\`js
+import { FIcon } from 'futility-ui'
+// or
+import FIcon from 'futility-ui/FIcon'
+\`\`\`
+
+Use it in your template:
+
+\`\`\`html
+<FIcon name="archive_solid" />
+\`\`\`
+
+That's it!
+`;
+
 export default {
 	title: 'FIcon',
 	component: FIcon,
-	parameters: { layout: 'centered' },
+	parameters: {
+		layout: 'centered',
+		docs: {
+			description: {
+				component: usage,
+			},
+		}
+	},
 	tags: [ 'autodocs' ],
 	argTypes: {
 		name: {
@@ -30,6 +57,13 @@ export const Default = {};
 
 
 export const Diversity = {
+	parameters: {
+		docs: {
+			description: {
+				story: 'The complete set of icons can be found [here](https://flowbite.com/icons/). They will gradually be migrated to this component — feel free to contribute to the process if you\'d like.',
+			},
+		},
+	},
 	render: (args, { argTypes, updateArgs }) => ({
 		name: 'FIconDiversityStory',
 		props: Object.keys(argTypes),

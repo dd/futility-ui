@@ -1,5 +1,7 @@
+import React from 'react';
 import { setup } from '@storybook/vue3';
 import Toast, { TYPE } from 'vue-toastification';
+import { Title, Primary, Controls, Stories, Description, Subtitle } from '@storybook/blocks';
 
 import 'vue-toastification/dist/index.css';
 import './styles.sass';
@@ -32,6 +34,27 @@ const preview = {
 			lightColor: 'var(--fui-color-gray-600)',
 			darkBackground: 'var(--fui-color-gray-900)',
 			lightBackground: 'var(--fui-color-white)',
+		},
+		options: {
+			storySort: {
+				order: [
+					'Introduction',
+					'*',
+				],
+			},
+		},
+		docs: {
+			toc: true,
+			page: () => (
+				<>
+					<Title />
+					<Subtitle />
+					<Description />
+					<Primary />
+					<Controls />
+					<Stories includePrimary={false} title={null} />
+				</>
+			),
 		},
 	},
 };
