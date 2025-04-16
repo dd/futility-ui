@@ -1,3 +1,15 @@
+# v0.3.4 (Wed Apr 16 2025)
+
+#### 🐛 Bug Fix
+
+- Refactor FButton and docs [#20](https://github.com/dd/futility-ui/pull/20) ([@dd](https://github.com/dd))
+
+#### Authors: 1
+
+- Dmitry Dobrynin ([@dd](https://github.com/dd))
+
+---
+
 # v0.3.3 (Mon Apr 14 2025)
 
 #### 🐛 Bug Fix
