@@ -1,3 +1,15 @@
+# v0.3.7 (Wed Apr 16 2025)
+
+#### 🐛 Bug Fix
+
+- Add more colors and design to button [#23](https://github.com/dd/futility-ui/pull/23) ([@dd](https://github.com/dd))
+
+#### Authors: 1
+
+- Dmitry Dobrynin ([@dd](https://github.com/dd))
+
+---
+
 # v0.3.6 (Wed Apr 16 2025)
 
 #### 🐛 Bug Fix
