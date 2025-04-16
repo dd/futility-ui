@@ -7,6 +7,8 @@ export const COMPONENT_TYPES = Object.freeze([
 ]);
 
 export const SIZE_CHOICES = Object.freeze([
+	'3xs',
+	'2xs',
 	'xs',
 	's',
 	'm',
@@ -26,4 +28,10 @@ export const COLOR_CHOICES = Object.freeze([
 export const DESIGN_CHOICES = Object.freeze([
 	'normal',
 	'outline',
+	'transparent',
+]);
+
+export const ICON_STYLE_CHOICES = Object.freeze([
+	'circle',
+	'square',
 ]);

@@ -5,7 +5,7 @@ import { Title, Primary, Controls, Stories, Markdown } from '@storybook/blocks';
 import FIcon from '@/components/FIcon';
 import { ICON_LIST_SOLID, ICON_LIST_OUTLINE, ICON_LIST_OTHER } from '@/components/FIcon/constants';
 import FButton from '.';
-import { COMPONENT_TYPES, SIZE_CHOICES, COLOR_CHOICES, DESIGN_CHOICES } from './constants';
+import { COMPONENT_TYPES, SIZE_CHOICES, COLOR_CHOICES, DESIGN_CHOICES, ICON_STYLE_CHOICES } from './constants';
 
 
 const usage = `
@@ -97,6 +97,17 @@ export default {
 			control: { type: 'select' },
 		},
 
+		icon: {
+			options: [ undefined, ...ICON_STYLE_CHOICES ],
+			control: {
+				type: 'select',
+				labels: {
+					undefined: '—',
+					...ICON_STYLE_CHOICES,
+				},
+			},
+		},
+
 		// SLOTS
 		default: {
 			control: 'text',
@@ -137,7 +148,7 @@ export default {
 		design: 'normal',
 		disabled: false,
 		busy: false,
-		icon: false,
+		icon: undefined,
 		noBusyLoader: false,
 	},
 };
@@ -167,7 +178,12 @@ export const Types = {
 	parameters: {
 		docs: {
 			description: {
-				story: 'The `type` prop controls the behavior and semantics of the button.',
+				story: `The \`type\` prop controls the behavior and semantics of the button.
+
+\`\`\`html
+<FButton type="<type>" >Button text</FButton>
+\`\`\`
+`,
 			},
 		},
 	},
@@ -196,13 +212,13 @@ export const Types = {
 	}),
 	argTypes: {
 		type: { control: { type: null }},
-		icon: { control: { type: null }},
 		default: { control: { type: null }},
+		icon: { control: { type: null }},
+		iconName: { control: { type: null }},
 	},
 	args: {
 		type: '<type>',
 		default: 'Button content',
-		iconName: ICON_LIST_SOLID[0],
 	},
 };
 
@@ -211,7 +227,12 @@ export const Design = {
 	parameters: {
 		docs: {
 			description: {
-				story: 'Switch between the following visual styles:',
+				story: `Switch between the following visual styles:
+
+\`\`\`html
+<FButton design="<design>" >Button text</FButton>
+\`\`\`
+`,
 			},
 		},
 	},
@@ -220,29 +241,31 @@ export const Design = {
 		props: Object.keys(argTypes),
 		components: { FButton, FIcon },
 		setup() {
-			const DESIGNS = [
-				[ 'normal', 'Normal' ],
-				[ 'outline', 'Outline' ],
+			const LABELS = [
+				'Normal',
+				'Outline',
+				'Transparent',
 			];
-			return { args, DESIGNS };
+			return { args, LABELS, DESIGN_CHOICES };
 		},
 		template: `<table class="preview-table" ><tbody>
-	<tr v-for="[ design, label ] in DESIGNS" :key="design" >
+	<tr v-for="design, i in DESIGN_CHOICES" :key="design" >
+		<td class="label" >{{ design }}</td>
 		<td>
-			<FButton v-bind="args" :design="design" >{{ label }}</FButton>
+			<FButton v-bind="args" :design="design" >{{ LABELS[i] }}</FButton>
 		</td>
 	</tr>
 </tbody></table>`,
 	}),
 	argTypes: {
 		design: { control: { type: null }},
-		icon: { control: { type: null }},
 		default: { control: { type: null }},
+		icon: { control: { type: null }},
+		iconName: { control: { type: null }},
 	},
 	args: {
 		design: '<design>',
 		default: 'Button content',
-		iconName: ICON_LIST_SOLID[0],
 	},
 };
 
@@ -251,7 +274,12 @@ export const Sizes = {
 	parameters: {
 		docs: {
 			description: {
-				story: 'Predefined sizes for different contexts:',
+				story: `Predefined sizes for different contexts:
+
+\`\`\`html
+<FButton size="<size>" >Button text</FButton>
+\`\`\`
+`,
 			},
 		},
 	},
@@ -260,31 +288,35 @@ export const Sizes = {
 		props: Object.keys(argTypes),
 		components: { FButton, FIcon },
 		setup() {
-			const sizes = [
-				[ SIZE_CHOICES[0], '34px', '20px' ],
-				[ SIZE_CHOICES[1], '37px', '28px' ],
-				[ SIZE_CHOICES[2], '42px', '34px' ],
-				[ SIZE_CHOICES[3], '48px', '40px' ],
-				[ SIZE_CHOICES[4], '52px', '44px' ],
+			const LABELS = [
+				'20px',
+				'28px',
+				'34px',
+				'37px',
+				'42px',
+				'48px',
+				'52px',
 			];
-			return { args, sizes };
+			return { args, LABELS, SIZE_CHOICES };
 		},
 		template: `<table class="preview-table" ><tbody>
-	<tr v-for="size in sizes" :key="size[0]" >
-		<td class="label" >{{ size[1] }}</td>
-		<td class="label" >{{ size[0] }}</td>
-		<td><FButton v-bind="args" :size="size[0]" :icon="false" >{{ args.default }}</FButton></td>
-		<td align="right" ><FButton v-bind="args" :size="size[0]" icon ><FIcon :name="args.iconName" /></FButton></td>
-		<td class="label" >{{ size[2] }}</td>
+	<tr v-for="size, i in SIZE_CHOICES" :key="size[0]" >
+		<td class="label" >{{ LABELS[i] }}</td>
+		<td class="label" >{{ size }}</td>
+		<td><FButton v-bind="args" :size="size" :icon="undefined" >{{ args.default }}</FButton></td>
+		<td align="center" ><FButton v-bind="args" :size="size" ><FIcon :name="args.iconName" /></FButton></td>
 	</tr>
 </tbody></table>`,
 	}),
 	argTypes: {
 		size: { control: { type: null }},
-		icon: { control: { type: null }},
+		default: { control: { type: null }},
+		icon: {
+			options: ICON_STYLE_CHOICES,
+		},
 	},
 	args: {
-		icon: 'true|false',
+		icon: ICON_STYLE_CHOICES[0],
 		size: '<size>',
 		default: 'Button text',
 		iconName: 'plus',
@@ -297,7 +329,12 @@ export const Icon = {
 	parameters: {
 		docs: {
 			description: {
-				story: 'Use the `icon` prop for a circular icon-only button. The content should be an icon or SVG.',
+				story: `Use the \`icon\` prop for a icon-only button.
+
+\`\`\`html
+<FButton icon="<icon_style>" >Button text</FButton>
+\`\`\`
+`,
 			},
 		},
 	},
@@ -306,16 +343,23 @@ export const Icon = {
 		props: Object.keys(argTypes),
 		components: { FButton, FIcon },
 		setup() {
-			return { args };
+			return { args, ICON_STYLE_CHOICES };
 		},
-		template: `<FButton v-bind="args" ><FIcon :name="args.iconName" /></FButton>`,
+		template: `<table class="preview-table" ><tbody>
+	<tr v-for="istyle in ICON_STYLE_CHOICES" :key="istyle" >
+		<td class="label" >{{ istyle }}</td>
+		<td><FButton v-bind="args" :icon="istyle" ><FIcon :name="args.iconName" /></FButton></td>
+	</tr>
+</tbody></table>
+
+`,
 	}),
 	argTypes: {
 		icon: { control: { type: null }},
 		default: { control: { type: null }},
 	},
 	args: {
-		icon: true,
+		icon: ICON_STYLE_CHOICES.join('|'),
 		iconName: ICON_LIST_SOLID[0],
 	},
 };
@@ -326,7 +370,12 @@ export const Busy = {
 	parameters: {
 		docs: {
 			description: {
-				story: 'Use the `busy` prop to disable the button and show a spinner.',
+				story: `Use the \`busy\` prop to disable the button and show a spinner.
+
+\`\`\`html
+<FButton :busy="true" >Button text</FButton>
+\`\`\`
+`,
 			},
 		},
 	},
@@ -339,20 +388,21 @@ export const Busy = {
 		},
 		template: `<table class="preview-table" ><tbody>
 	<tr>
-		<td><FButton v-bind="args" :icon="false" >{{ args.default }}</FButton></td>
-		<td><FButton v-bind="args" icon ><FIcon :name="args.iconName" /></FButton></td>
+		<td><FButton v-bind="args" :icon="undefined" >{{ args.default }}</FButton></td>
+		<td><FButton v-bind="args" ><FIcon :name="args.iconName" /></FButton></td>
 	</tr>
-</tbody></table>
-`,
+</tbody></table>`,
 	}),
 	argTypes: {
-		icon: { control: { type: null }},
+		icon: {
+			options: ICON_STYLE_CHOICES,
+		},
 	},
 	args: {
+		icon: ICON_STYLE_CHOICES[0],
 		default: 'Button text',
 		iconName: ICON_LIST_SOLID[0],
 		busy: true,
-		icon: 'true|false',
 	},
 };
 
@@ -362,7 +412,12 @@ export const Colors = {
 	parameters: {
 		docs: {
 			description: {
-				story: 'Predefined color values include:',
+				story: `Predefined color values include:
+
+\`\`\`html
+<FButton color="<color>" >Button text</FButton>
+\`\`\`
+`,
 			},
 		},
 	},
