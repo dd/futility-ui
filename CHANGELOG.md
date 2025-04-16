@@ -1,3 +1,15 @@
+# v0.3.6 (Wed Apr 16 2025)
+
+#### 🐛 Bug Fix
+
+- ♻️ (FButton): Refactor FButton sizes and icon state [#22](https://github.com/dd/futility-ui/pull/22) ([@dd](https://github.com/dd))
+
+#### Authors: 1
+
+- Dmitry Dobrynin ([@dd](https://github.com/dd))
+
+---
+
 # v0.3.5 (Wed Apr 16 2025)
 
 #### 🐛 Bug Fix
