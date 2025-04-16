@@ -18,17 +18,19 @@ export const SIZE_CHOICES = Object.freeze([
 
 export const COLOR_CHOICES = Object.freeze([
 	'primary',
-	'gray',
 	'green',
 	'red',
 	'blue',
 	'white',
+	'gray-light',
+	'gray',
 ]);
 
 export const DESIGN_CHOICES = Object.freeze([
 	'normal',
 	'outline',
 	'transparent',
+	'text',
 ]);
 
 export const ICON_STYLE_CHOICES = Object.freeze([

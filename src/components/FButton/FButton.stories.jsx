@@ -245,6 +245,7 @@ export const Design = {
 				'Normal',
 				'Outline',
 				'Transparent',
+				'Text',
 			];
 			return { args, LABELS, DESIGN_CHOICES };
 		},
