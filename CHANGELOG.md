@@ -1,3 +1,15 @@
+# v0.3.5 (Wed Apr 16 2025)
+
+#### 🐛 Bug Fix
+
+- ⚰️ (styles): Remove using of :where [#21](https://github.com/dd/futility-ui/pull/21) ([@dd](https://github.com/dd))
+
+#### Authors: 1
+
+- Dmitry Dobrynin ([@dd](https://github.com/dd))
+
+---
+
 # v0.3.4 (Wed Apr 16 2025)
 
 #### 🐛 Bug Fix
