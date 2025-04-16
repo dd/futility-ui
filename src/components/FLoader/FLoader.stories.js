@@ -1,11 +1,38 @@
 import FLoader from '.';
 
 
+const usage = `
+### Usage
+
+Import the component:
+
+\`\`\`js
+import { FLoader } from 'futility-ui'
+// or
+import FLoader from 'futility-ui/FLoader'
+\`\`\`
+
+Use it in your template:
+
+\`\`\`html
+<FLoader />
+\`\`\`
+
+That's it!
+`;
+
 export default {
 	title: 'FLoader',
 	component: FLoader,
 	tags: [ 'autodocs' ],
-	parameters: { layout: 'centered' },
+	parameters: {
+		layout: 'centered',
+		docs: {
+			description: {
+				component: usage,
+			},
+		}
+	},
 	argTypes: {
 		size: {
 			options: [ 'sm', 'md', 'lg' ],
@@ -22,6 +49,13 @@ export const Default = {};
 
 
 export const Sizes = {
+	parameters: {
+		docs: {
+			description: {
+				story: 'You can use one of the standard throbber sizes:',
+			},
+		},
+	},
 	render: (args, { argTypes, updateArgs }) => ({
 		name: 'FLoaderSizesStory',
 		props: Object.keys(argTypes),
@@ -32,20 +66,20 @@ export const Sizes = {
 		template: `
 <div class="loader_preview-table-wrapper" >
 	<table class="preview-table loader_preview-table" >
-		<tr>
-			<td class="label" >sm: 25px</td>
-			<td class="label" >md: 50px</td>
-			<td class="label" >lg: 75px</td>
-		</tr>
-		<tr>
-			<td><FLoader v-bind="args" size="sm" /></td>
-			<td><FLoader v-bind="args" size="md" /></td>
-			<td><FLoader v-bind="args" size="lg" /></td>
-		</tr>
+		<tbody>
+			<tr>
+				<td class="label" >sm: 25px</td>
+				<td class="label" >md: 50px</td>
+				<td class="label" >lg: 75px</td>
+			</tr>
+			<tr>
+				<td><FLoader v-bind="args" size="sm" /></td>
+				<td><FLoader v-bind="args" size="md" /></td>
+				<td><FLoader v-bind="args" size="lg" /></td>
+			</tr>
+		</tbody>
 	</table>
 </div>
-<p>You can specify any custom size if needed — the loader will receive a class in the format <code>.fui-loader-&lt;size&gt;</code>, which you can then style according to your design.</p>
-<p style="text-align: center" ><FLoader v-bind="args" size="custom" /></p>
 `,
 	}),
 	argTypes: {
@@ -53,6 +87,31 @@ export const Sizes = {
 	},
 	args: {
 		size: '<size>',
+	},
+};
+
+
+export const CustomSize = {
+	parameters: {
+		docs: {
+			description: {
+				story: `
+If needed, define a custom size by using the \`fui-loader-<custom_size>\` selector.
+
+\`\`\`css
+.fui-loader-custom {
+	height: 100px;
+}
+\`\`\`
+`,
+			},
+		},
+	},
+	argTypes: {
+		size: { control: { type: null }},
+	},
+	args: {
+		size: 'custom',
 	},
 };
 
