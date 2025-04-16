@@ -15,7 +15,7 @@
 // --fui-b-bordercolor-active
 // --fui-b-boxshadow-color
 
-:where(.fui-button)
+.fui-button
 	position: relative
 	display: inline-block
 
@@ -51,7 +51,7 @@
 // Designes /////////////////////////////////////
 
 // Default
-:where(.fui-button)
+.fui-button
 	--fui-b-bordersize: 0px
 
 	color: var(--fui-b-textcolor)
@@ -67,7 +67,7 @@
 		outline-color: var(--fui-b-boxshadow-color)
 
 // Outline
-:where(.fui-b-design-outline)
+.fui-b-design-outline
 	--fui-b-bordersize: 1px
 
 	color: var(--fui-b-bgcolor)
@@ -80,7 +80,7 @@
 
 // Sizes ////////////////////////////////////////
 
-:where(.fui-button)
+.fui-button
 	font-size: var(--fui-b-fontsize)
 	min-height: var(--fui-b-height)
 	box-sizing: border-box
@@ -89,7 +89,7 @@
 		height: var(--fui-b-height)
 
 // XS
-:where(.fui-b-size-xs)
+.fui-b-size-xs
 	--fui-b-spacing-x: var(--fui-spacing-2)
 	--fui-b-spacing-y: var(--fui-spacing-3)
 	--fui-b-fontsize: var(--fui-text-size-xs)
@@ -105,7 +105,7 @@
 		height: 16px
 
 // S
-:where(.fui-b-size-s)
+.fui-b-size-s
 	--fui-b-spacing-x: var(--fui-spacing-2)
 	--fui-b-spacing-y: var(--fui-spacing-3)
 	--fui-b-fontsize: var(--fui-text-size-sm)
@@ -122,7 +122,7 @@
 		height: 16px
 
 // M
-:where(.fui-b-size-m)
+.fui-b-size-m
 	--fui-b-spacing-x: var(--fui-spacing-2_5)
 	--fui-b-spacing-y: var(--fui-spacing-5)
 	--fui-b-fontsize: var(--fui-text-size-sm)
@@ -138,7 +138,7 @@
 		height: 19px
 
 // L
-:where(.fui-b-size-l)
+.fui-b-size-l
 	--fui-b-spacing-x: var(--fui-spacing-3)
 	--fui-b-spacing-y: var(--fui-spacing-5)
 	--fui-b-fontsize: var(--fui-text-size-base)
@@ -154,7 +154,7 @@
 		height: 22px
 
 // XL
-:where(.fui-b-size-xl)
+.fui-b-size-xl
 	--fui-b-spacing-x: var(--fui-spacing-3_5)
 	--fui-b-spacing-y: var(--fui-spacing-6)
 	--fui-b-fontsize: var(--fui-text-size-base)
@@ -172,7 +172,7 @@
 
 // Icon /////////////////////////////////////////
 
-:where(.fui-button).fui-b-icon
+.fui-button.fui-b-icon
 	--fui-b-spacing-y: var(--fui-b-spacing-x)
 	vertical-align: middle
 	border-radius: 50%
@@ -183,7 +183,7 @@
 
 // Colors ///////////////////////////////////////
 
-:where(.fui-b-color-primary)
+.fui-b-color-primary
 	--fui-b-textcolor: var(--fui-color-white)
 	--fui-b-textcolor-active: var(--fui-b-textcolor)
 	--fui-b-bgcolor: var(--fui-color-primary-700)
@@ -192,7 +192,7 @@
 	--fui-b-bordercolor-active: var(--fui-b-bgcolor-active)
 	--fui-b-boxshadow-color: light-dark(var(--fui-color-primary-200), var(--fui-color-primary-900))
 
-:where(.fui-b-color-gray)
+.fui-b-color-gray
 	--fui-b-textcolor: var(--fui-color-white)
 	--fui-b-textcolor-active: var(--fui-b-textcolor)
 	--fui-b-bgcolor: var(--fui-color-gray-800)
@@ -204,7 +204,7 @@
 	&.fui-b-design-outline
 		--fui-b-bgcolor: light-dark(var(--fui-color-gray-800), var(--fui-color-gray-600))
 
-:where(.fui-b-color-green)
+.fui-b-color-green
 	--fui-b-textcolor: var(--fui-color-white)
 	--fui-b-textcolor-active: var(--fui-b-textcolor)
 	--fui-b-bgcolor: var(--fui-color-green-700)
@@ -213,7 +213,7 @@
 	--fui-b-bordercolor-active: var(--fui-b-bgcolor-active)
 	--fui-b-boxshadow-color: light-dark(var(--fui-color-green-200), var(--fui-color-green-900))
 
-:where(.fui-b-color-red)
+.fui-b-color-red
 	--fui-b-textcolor: var(--fui-color-white)
 	--fui-b-textcolor-active: var(--fui-b-textcolor)
 	--fui-b-bgcolor: var(--fui-color-red-700)
@@ -222,7 +222,7 @@
 	--fui-b-bordercolor-active: var(--fui-b-bgcolor-active)
 	--fui-b-boxshadow-color: light-dark(var(--fui-color-red-200), var(--fui-color-red-900))
 
-:where(.fui-b-color-blue)
+.fui-b-color-blue
 	--fui-b-textcolor: var(--fui-color-white)
 	--fui-b-textcolor-active: var(--fui-b-textcolor)
 	--fui-b-bgcolor: var(--fui-color-blue-700)
@@ -231,7 +231,7 @@
 	--fui-b-bordercolor-active: var(--fui-b-bgcolor-active)
 	--fui-b-boxshadow-color: light-dark(var(--fui-color-blue-200), var(--fui-color-blue-900))
 
-:where(.fui-b-color-white)
+.fui-b-color-white
 	--fui-b-bordersize: 1px
 
 	--fui-b-textcolor: var(--fui-color-gray-900)
@@ -254,10 +254,10 @@
 
 // Busy /////////////////////////////////////////
 
-:where(.fui-button)
+.fui-button
 	position: relative
 
-:where(.fui-b-busy-indicator)
+.fui-b-busy-indicator
 	position: absolute
 	top: calc((var(--fui-b-height) - var(--fui-b-bheight)) / 2 - var(--fui-b-bordersize))
 	left: calc(var(--fui-b-spacing-x) / 2 - var(--fui-b-bordersize))
@@ -269,17 +269,17 @@
 		display: block
 		transform: translate3d(var(--fui-b-spacing-x), 0, 0)
 
-:where(.loader-fade-enter-active),
-:where(.loader-fade-leave-active)
+.loader-fade-enter-active,
+.loader-fade-leave-active
 	transition: transform .1s linear, opacity .1s linear
 
-:where(.loader-fade-enter-from),
-:where(.loader-fade-leave-to)
+.loader-fade-enter-from,
+.loader-fade-leave-to
 	opacity: 0
 	transform: translate3d(-10px, 0, 0)
 
 // Busy icon button
-:where(.fui-b-icon)
+.fui-b-icon
 	.fui-b-busy-indicator
 		left: calc((var(--fui-b-height) - var(--fui-b-bheight)) / 2 - var(--fui-b-bordersize))
 
