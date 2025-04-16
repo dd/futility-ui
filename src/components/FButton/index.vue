@@ -6,9 +6,11 @@
 			`fui-b-design-${design}`,
 			`fui-b-size-${size}`,
 			`fui-b-color-${color}`,
-			{ 'fui-b-busy': busy },
-			{ 'fui-b-disabled': disabled || busy },
-			{ 'fui-b-icon': icon },
+			{
+				'fui-b-busy': busy,
+				'fui-b-disabled': disabled || busy,
+				[`fui-b-icon-${icon}`]: icon,
+			},
 		]"
 		v-bind="extraAttributes"
 	>
@@ -78,8 +80,9 @@ const props = defineProps({
 
 	/** Icon-Button modifier. */
 	icon: {
-		type: Boolean,
-		default: false,
+		type: String,
+		// default: 'circle',
+		// validator: (style) => ICON_STYLE_CHOICES.includes(style),
 	},
 });
 
