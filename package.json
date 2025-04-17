@@ -35,12 +35,20 @@
       "import": "./dist/FLoader.es.js"
     },
     "./FIcon": {
-      "require": "./dist/FIcon.cjs.js",
-      "import": "./dist/FIcon.es.js"
+      "require": "./dist/FIcon/index.cjs.js",
+      "import": "./dist/FIcon/index.es.js"
+    },
+    "./FIcon/constants": {
+      "require": "./dist/FIcon/constants.cjs.js",
+      "import": "./dist/FIcon/constants.es.js"
     },
     "./FButton": {
-      "require": "./dist/FButton.cjs.js",
-      "import": "./dist/FButton.es.js"
+      "require": "./dist/FButton/index.cjs.js",
+      "import": "./dist/FButton/index.es.js"
+    },
+    "./FButton/constants": {
+      "require": "./dist/FButton/constants.cjs.js",
+      "import": "./dist/FButton/constants.es.js"
     },
     "./styles.css": "./dist/styles/styles.css",
     "./theme.css": "./dist/styles/theme.css",
