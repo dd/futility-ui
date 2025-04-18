@@ -38,6 +38,9 @@
 	outline-width: var(--fui-b-boxshadow-size)
 	outline-offset: 0
 
+	transition-property: opacity, color, background-color, outline-color, border-color
+	transition-duration: .1s
+
 	&.fui-b-disabled,
 	&.fui-b-busy
 		pointer-events: none
@@ -46,6 +49,14 @@
 	&:disabled:not(.fui-b-busy)
 		cursor: default
 		opacity: 0.5
+
+	.fui-b-content
+		align-items: center
+		transition: transform .2s ease
+
+	.fui-icon
+		height: 1.2em
+		vertical-align: text-bottom
 
 
 // Designes /////////////////////////////////////
@@ -82,19 +93,6 @@
 	color: var(--fui-b-bgcolor)
 	background-color: transparent
 
-// Text
-.fui-b-design-text
-	color: var(--fui-b-bgcolor)
-	background-color: transparent
-
-	&:hover:not(.fui-b-disabled)
-		background-color: transparent
-		color: var(--fui-b-bgcolor-active)
-
-	&:focus-visible
-		background-color: transparent
-		color: var(--fui-b-bgcolor-active)
-
 
 // Sizes ////////////////////////////////////////
 
@@ -118,6 +116,7 @@
 	--fui-b-boxshadow-size: 2px
 	--fui-b-height: 20px
 	--fui-b-bheight: 10px
+
 	--fui-b-busy-i-left: 3px
 
 	border-radius: var(--fui-rounded-md)
@@ -135,6 +134,7 @@
 	--fui-b-boxshadow-size: 2px
 	--fui-b-height: 28px
 	--fui-b-bheight: 14px
+
 	--fui-b-busy-i-left: 3px
 	--fui-b-busy-c-transform: 10px
 
@@ -153,6 +153,7 @@
 	--fui-b-boxshadow-size: 2px
 	--fui-b-height: 34px
 	--fui-b-bheight: 14px
+
 	--fui-b-busy-i-left: 4px
 	--fui-b-busy-c-transform: 10px
 
@@ -250,8 +251,7 @@
 	--fui-b-boxshadow-color: light-dark(var(--fui-color-gray-200), var(--fui-color-gray-850))
 
 	&.fui-b-design-transparent,
-	&.fui-b-design-outline,
-	&.fui-b-design-text
+	&.fui-b-design-outline
 		--fui-b-bgcolor: light-dark(var(--fui-color-gray-800), var(--fui-color-gray-600))
 
 .fui-b-color-gray-light
@@ -262,10 +262,6 @@
 	--fui-b-bordercolor: light-dark(var(--fui-color-gray-300), var(--fui-color-gray-700))
 	--fui-b-bordercolor-active: light-dark(var(--fui-color-gray-400), var(--fui-color-gray-500))
 	--fui-b-boxshadow-color: light-dark(var(--fui-color-gray-200), var(--fui-color-gray-850))
-
-	&.fui-b-design-text
-		--fui-b-bgcolor-active: light-dark(var(--fui-color-gray-800), var(--fui-color-gray-200))
-		--fui-b-bordercolor-active: light-dark(var(--fui-color-gray-800), var(--fui-color-gray-200))
 
 .fui-b-color-green
 	--fui-b-textcolor: var(--fui-color-white)
@@ -305,14 +301,13 @@
 
 	--fui-b-boxshadow-color: light-dark(var(--fui-color-gray-100), var(--fui-color-gray-600))
 
-	&:not(.fui-b-design-transparent):not(.fui-b-design-text),
-	&:hover:not(.fui-b-disabled):not(.fui-b-design-text),
-	&:focus-visible:not(.fui-b-design-text)
+	&:not(.fui-b-design-transparent),
+	&:hover:not(.fui-b-disabled),
+	&:focus-visible
 		--fui-b-bordersize: 1px
 
 	&.fui-b-design-transparent,
-	&.fui-b-design-outline,
-	&.fui-b-design-text
+	&.fui-b-design-outline
 		// change color for neutral state
 		color: light-dark(var(--fui-b-textcolor), var(--fui-b-bgcolor))
 
@@ -360,5 +355,4 @@
 		left: calc((var(--fui-b-height) - var(--fui-b-bheight)) / 2 - var(--fui-b-bordersize))
 
 	.fui-b-busy-indicator + .fui-b-content
-		display: block
 		transform: translate3d(var(--fui-b-height), 0, 0)

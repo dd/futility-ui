@@ -30,7 +30,6 @@ export const DESIGN_CHOICES = Object.freeze([
 	'normal',
 	'outline',
 	'transparent',
-	'text',
 ]);
 
 export const ICON_STYLE_CHOICES = Object.freeze([

@@ -1,5 +1,4 @@
-
-export const ICON_LIST_SOLID = [
+export const ICON_LIST_SOLID = Object.freeze([
 	'archive_solid',
 	'archive_up_solid',
 	'archive_down_solid',
@@ -19,10 +18,10 @@ export const ICON_LIST_SOLID = [
 	'phone_solid',
 	'print_solid',
 	'rectangle_list_solid',
-];
+]);
 
 
-export const ICON_LIST_OUTLINE = [
+export const ICON_LIST_OUTLINE = Object.freeze([
 	'archive_outline',
 	'archive_up_outline',
 	'archive_down_outline',
@@ -42,10 +41,10 @@ export const ICON_LIST_OUTLINE = [
 	'phone_outline',
 	'print_outline',
 	'rectangle_list_outline',
-];
+]);
 
 
-export const ICON_LIST_OTHER = [
+export const ICON_LIST_OTHER = Object.freeze([
 	'arrow_bottom',
 	'arrow_left',
 	'arrow_right',
@@ -66,4 +65,4 @@ export const ICON_LIST_OTHER = [
 	'minus',
 	'plus',
 	'refresh',
-];
+]);
