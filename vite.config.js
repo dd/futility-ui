@@ -88,6 +88,8 @@ export default defineConfig({
 				'FIcon/constants': resolve(__dirname, 'src/components/FIcon/constants.js'),
 				'FButton/index': resolve(__dirname, 'src/components/FButton/index.vue'),
 				'FButton/constants': resolve(__dirname, 'src/components/FButton/constants.js'),
+				'FButtonText/index': resolve(__dirname, 'src/components/FButtonText/index.vue'),
+				'FButtonText/constants': resolve(__dirname, 'src/components/FButtonText/constants.js'),
 				styles: resolve(__dirname, 'src/styles.sass'),
 				theme: resolve(__dirname, 'src/theme.sass'),
 			},

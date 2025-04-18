@@ -50,6 +50,14 @@
       "require": "./dist/FButton/constants.cjs.js",
       "import": "./dist/FButton/constants.es.js"
     },
+    "./FButtonText": {
+      "require": "./dist/FButtonText/index.cjs.js",
+      "import": "./dist/FButtonText/index.es.js"
+    },
+    "./FButtonText/constants": {
+      "require": "./dist/FButtonText/constants.cjs.js",
+      "import": "./dist/FButtonText/constants.es.js"
+    },
     "./styles.css": "./dist/styles/styles.css",
     "./theme.css": "./dist/styles/theme.css",
     "./assets/sprite.svg": "./dist/assets/sprite.svg"
