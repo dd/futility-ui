@@ -1,3 +1,15 @@
+# v0.3.8 (Fri Apr 18 2025)
+
+#### 🐛 Bug Fix
+
+- Added text button component [#24](https://github.com/dd/futility-ui/pull/24) ([@dd](https://github.com/dd))
+
+#### Authors: 1
+
+- Dmitry Dobrynin ([@dd](https://github.com/dd))
+
+---
+
 # v0.3.7 (Wed Apr 16 2025)
 
 #### 🐛 Bug Fix
