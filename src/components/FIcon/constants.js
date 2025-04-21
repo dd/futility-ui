@@ -16,6 +16,8 @@ export const ICON_LIST_SOLID = Object.freeze([
 	'info_circle_solid',
 	'lightbulb_solid',
 	'phone_solid',
+	'floppy_disk_alt_solid',
+	'floppy_disk_solid',
 	'print_solid',
 	'rectangle_list_solid',
 ]);
@@ -39,6 +41,8 @@ export const ICON_LIST_OUTLINE = Object.freeze([
 	'info_circle_outline',
 	'lightbulb_outline',
 	'phone_outline',
+	'floppy_disk_alt_outline',
+	'floppy_disk_outline',
 	'print_outline',
 	'rectangle_list_outline',
 ]);
