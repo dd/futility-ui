@@ -14,7 +14,7 @@
     "frontend",
     "component-library"
   ],
-  "version": "0.3.8",
+  "version": "0.4.0",
   "author": "Dmitry Dobrynin <dd@tovarisch.engineer>",
   "license": "MPL-2.0",
   "repository": {
