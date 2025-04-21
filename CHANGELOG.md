@@ -1,3 +1,15 @@
+# v0.4.0 (Mon Apr 21 2025)
+
+#### 🚀 Enhancement
+
+- Update Button colors [#25](https://github.com/dd/futility-ui/pull/25) ([@dd](https://github.com/dd))
+
+#### Authors: 1
+
+- Dmitry Dobrynin ([@dd](https://github.com/dd))
+
+---
+
 # v0.3.8 (Fri Apr 18 2025)
 
 #### 🐛 Bug Fix
