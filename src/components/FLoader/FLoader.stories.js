@@ -115,6 +115,15 @@ If needed, define a custom size by using the \`fui-loader-<custom_size>\` select
 	},
 };
 
+export const WithoutTrack = {
+	argTypes: {
+		hideTrack: { control: { type: null }},
+	},
+	args: {
+		hideTrack: true,
+	},
+};
+
 export const Scheme = {
 	parameters: { layout: 'fullscreen' },
 	render: (args, { argTypes, updateArgs }) => ({
