@@ -2,6 +2,7 @@ import FIcon from './components/FIcon';
 import FLoader from './components/FLoader';
 import FButton from './components/FButton';
 import FButtonText from './components/FButtonText';
+import FSwitch from './components/FSwitch';
 
 
 export {
@@ -9,6 +10,7 @@ export {
 	FLoader,
 	FButton,
 	FButtonText,
+	FSwitch,
 };
 
 export const version = __VERSION__;
@@ -19,6 +21,7 @@ const components = {
 	FLoader,
 	FButton,
 	FButtonText,
+	FSwitch,
 };
 
 export const install = (app) => {

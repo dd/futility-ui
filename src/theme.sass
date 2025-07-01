@@ -1,5 +1,9 @@
 @charset "UTF-8"
 
+@use 'components/FIcon/theme' as *
+@use 'components/FSwitch/theme' as *
+
+
 :root
 
 	// palette
@@ -107,15 +111,20 @@
 	// --fui-text-size-2xl: 24px
 	// --fui-text-size-4xl: 36px
 
+	// Text color
+	--fui-text-color-default: light-dark(var(--fui-color-gray-500), var(--fui-color-gray-400))
+	--fui-text-color-default-highlight: light-dark(var(--fui-color-gray-900), var(--fui-color-white))
+
 	// font
 	--fui-font: Inter, Helvetica, Arial, sans-serif
 
+	// focus
+	--fui-focus-color: light-dark(var(--fui-color-primary-200), var(--fui-color-primary-800))
+	--fui-focus-size: 4px
+	--fui-focus-offset: 0
+
 
 	// Components ///////////////////////////////
-
-	// Icons
-	--fui-icon-color: inherit
-	--fui-icon-size: 24px
 
 	// Button text
 	--fui-bt-rounded-lg: var(--fui-rounded-sm)

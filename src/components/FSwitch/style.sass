@@ -1,0 +1,130 @@
+.fui-tsw-select
+	position: absolute
+	top: 0
+	left: 0
+
+	display: block
+	margin: 0
+	width: 0
+	height: 0
+	padding: 0
+
+	border: none
+	background: none
+	outline: none
+	opacity: 0
+
+
+.fui-binary_switch,
+.fui-tsw-widget
+	flex-grow: 0
+	flex-shrink: 0
+
+	position: relative
+	box-sizing: border-box
+	margin: 0
+	height: var(--fui-sw-height)
+	width: var(--fui-sw-width)
+	padding: 0
+
+	cursor: pointer
+	border: none
+	border-radius: calc(var(--fui-sw-height) / 2)
+	background-image: none
+	appearance: none
+
+	transition: background-color .2s ease
+	will-change: background-color
+
+	&::after
+		content: ""
+		position: absolute
+		top: var(--fui-sw-border)
+		left: var(--fui-sw-border)
+
+		display: block
+		width: var(--fui-sw-circle-size)
+		height: var(--fui-sw-circle-size)
+
+		background-color: var(--fui-sw-circle-false)
+		border-radius: 50%
+
+		transition: transform .2s ease, background-color .2s ease
+		will-change: transform, background-color
+
+	&:disabled
+		cursor: default
+
+	&:focus-visible
+		outline: var(--fui-focus-size) solid var(--fui-focus-color)
+		outline-offset: var(--fui-focus-offset)
+
+	// &.has-error
+
+
+// Binary
+.fui-binary_switch
+	background-color: var(--fui-bsw-bg-false)
+
+	&:checked
+		background-color: var(--fui-bsw-bg-true)
+
+		&::after
+			background-color: var(--fui-sw-circle-true)
+			transform: translateX(calc(var(--fui-sw-width) - var(--fui-sw-circle-size) - var(--fui-sw-border) * 2))
+
+
+.fui-binary_switch:disabled
+	background-color: var(--fui-bsw-bg-disabled-false)
+
+	&::after
+		background-color: var(--fui-sw-circle-disabled-false)
+
+	&:checked
+		background-color: var(--fui-bsw-bg-disabled-true)
+
+		&::after
+			background-color: var(--fui-sw-circle-disabled-true)
+
+
+// Ternary
+.fui-tsw-widget
+
+	&.fui-value-false
+		background-color: var(--fui-tsw-bg-false)
+
+		&::after
+			background-color: var(--fui-sw-circle-true)
+
+	&.fui-value-null
+		background-color: var(--fui-tsw-bg-null)
+
+		&::after
+			transform: translateX(calc((var(--fui-sw-width) - var(--fui-sw-circle-size)) / 2 - var(--fui-sw-border)))
+
+	&.fui-value-true
+		background-color: var(--fui-tsw-bg-true)
+
+		&::after
+			background-color: var(--fui-sw-circle-true)
+			transform: translateX(calc(var(--fui-sw-width) - var(--fui-sw-circle-size) - var(--fui-sw-border) * 2))
+
+.fui-tsw-widget:disabled
+
+	&.fui-value-false
+		background-color: var(--fui-tsw-bg-disabled-false)
+
+		&::after
+			background-color: var(--fui-sw-circle-disabled-true)
+
+	&.fui-value-null
+		background-color: var(--fui-tsw-bg-disabled-null)
+
+		&::after
+			background-color: var(--fui-sw-circle-disabled-false)
+
+	&.fui-value-true
+		background-color: var(--fui-tsw-bg-disabled-true)
+
+		&::after
+			background-color: var(--fui-sw-circle-disabled-true)

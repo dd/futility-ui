@@ -1,10 +1,10 @@
 <h1 align="center" >Futility UI</h1>
 
 <p align="center">
-	<a href="https://www.npmjs.com/package/futility-ui">
+	<a href="https://www.npmjs.com/package/futility-ui" target="_blank" title="Version">
 		<img src="https://img.shields.io/npm/v/futility-ui.svg" alt="Version">
 	</a>
-	<a href="https://raw.githubusercontent.com/dd/futility-ui/master/LICENSE" target="_blank">
+	<a href="https://raw.githubusercontent.com/dd/futility-ui/master/LICENSE" target="_blank" title="License - Mozilla Public License Version 2.0" >
 		<img src="https://img.shields.io/npm/l/futility-ui?cache-cracker" alt="License - Mozilla Public License Version 2.0" />
 	</a>
 </p>
@@ -78,10 +78,12 @@ We welcome contributions of all sizes!
 * [x] Icons
 * [x] Loader
 * [x] Buttons
+* [x] Text button
+* [x] Switch
 * [ ] Input <- you are here
-* [ ] Text button
+* [ ] Input group (компонент для визуального склеивания элементов формы без зазоров, одной общей границей и т.д.)
+* [ ] Select
 * [ ] Checkbox
-* [ ] Switch
 * [ ] Radio button
 * [ ] DatePicker
 * [ ] TimePicker
@@ -92,10 +94,14 @@ We welcome contributions of all sizes!
 * [ ] Tree Editor
 * [ ] MultiSelect
 * [ ] Number picker
-* [ ] Select
 * [ ] Tabs
 * [ ] Tag Select
 * [ ] Textarea
+
+#### Refactor
+
+* [ ] Move some of button themes styles to theme
+* [ ] Update button focus styles
 
 #### Extended
 
@@ -110,3 +116,28 @@ We welcome contributions of all sizes!
 * [x] Storybook at github pages
 * [x] Deploy to npm
 * [ ] Web interface for customize styles
+
+
+## Oh great, another UI library.
+
+You might be wondering: why the heck do we need yet another UI library? The short answer is: just because.
+
+This library isn\`t necessarily better than others. It has a much smaller community, it evolves more slowly, and it doesn\`t really have any unique killer feature. It exists simply because none of the existing options fully work for me. Either there aren\`t enough components, or they\`re incredibly complicated, or not truly native to Vue, or they\`re paid, or… they just look ugly. So, I decided to build my own.
+
+This library grew out of components I use at work. And my colleagues are probably asking themselves: why bother extracting the UI into a separate repo? Here are a few reasons:
+
+* I don\`t like monorepos.
+
+* It\`s easier to isolate components, code style, and dependencies.
+
+* Components are simpler to organize and structure.
+
+* Writing documentation is easier when you build components outside the context of the main project.
+
+* A separate repo makes it simpler to set up tests, build processes, and all that stuff. (Yeah, yeah - I know there are no tests yet, but eventually I\`ll add some, at least out of curiosity.)
+
+* You can improve the UI independently from the main project.
+
+* It helps keep the main project\`s codebase cleaner - less clutter unrelated to business logic.
+
+* Reusability? That\`s a cliche argument, and it\`s not really the main goal here (But who knows - maybe I\`ll use this library in other projects too. I already have a few ideas).
