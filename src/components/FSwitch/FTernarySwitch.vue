@@ -32,7 +32,7 @@
 </template>
 
 <script setup >
-import { computed, defineModel, useAttrs, useSlots } from 'vue';
+import { computed, useAttrs } from 'vue';
 
 
 defineOptions({
