@@ -1,0 +1,47 @@
+.fui-checkbox
+	height: var(--fui-cb-size)
+	width: var(--fui-cb-size)
+
+	border-radius: var(--fui-cb-radius)
+	background-color: var(--fui-cb-color-bg-false)
+	border: var(--fui-cb-border-size) solid var(--fui-cb-color-border-false)
+
+	appearance: none
+	cursor: pointer
+
+	&:checked
+		border-color: var(--fui-cb-color-true)
+		background-color: var(--fui-cb-color-true)
+		print-color-adjust: exact
+
+		&::after
+			content: ""
+			background-color: var(--fui-cb-icon-color)
+			display: block
+			margin-left: calc((var(--fui-cb-size) - var(--fui-cb-icon-size)) / 2 - var(--fui-cb-border-size))
+			margin-top: calc((var(--fui-cb-size) - var(--fui-cb-icon-size)) / 2 - var(--fui-cb-border-size))
+			height: var(--fui-cb-icon-size)
+			width: var(--fui-cb-icon-size)
+			mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14 14'%3E%3Cpath fill='%23000000' d='M11.7,3.7c0.1,0.1,0.2,0.3,0.2,0.5c0,0.2-0.1,0.4-0.2,0.5l-5.6,5.6c-0.1,0.1-0.3,0.2-0.5,0.2 c-0.2,0-0.4-0.1-0.5-0.2L2.3,7.5C2.2,7.4,2.1,7.2,2.1,7c0-0.2,0.1-0.4,0.2-0.5c0.1-0.1,0.3-0.2,0.5-0.2c0.2,0,0.4,0.1,0.5,0.2 l2.3,2.3l5.1-5.1c0.1-0.1,0.3-0.2,0.5-0.2C11.4,3.5,11.6,3.6,11.7,3.7z'/%3E%3C/svg%3E%0A") no-repeat center
+			mask-size: contain
+
+	&:disabled
+		cursor: default
+		background-color: var(--fui-cb-color-bg-false-disabled)
+		border-color: var(--fui-cb-color-border-false-disabled)
+
+		&:checked
+			background-color: var(--fui-cb-color-true-disabled)
+			border-color: var(--fui-cb-color-true-disabled)
+
+			&::after
+				background-color: var(--fui-cb-icon-color-disabled)
+
+	&:focus-visible
+		outline: var(--fui-focus-size) solid var(--fui-focus-color)
+		outline-offset: var(--fui-focus-offset)
+
+		&:not(:checked)
+			border-color: var(--fui-cb-color-true)
+
+	// &.has-error

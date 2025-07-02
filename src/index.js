@@ -3,6 +3,7 @@ import FLoader from './components/FLoader';
 import FButton from './components/FButton';
 import FButtonText from './components/FButtonText';
 import FSwitch from './components/forms/FSwitch';
+import FCheckbox from './components/forms/FCheckbox';
 
 
 export {
@@ -11,6 +12,7 @@ export {
 	FButton,
 	FButtonText,
 	FSwitch,
+	FCheckbox,
 };
 
 export const version = __VERSION__;
@@ -22,6 +24,7 @@ const components = {
 	FButton,
 	FButtonText,
 	FSwitch,
+	FCheckbox,
 };
 
 export const install = (app) => {
