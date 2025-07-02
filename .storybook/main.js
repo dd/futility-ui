@@ -15,7 +15,9 @@ const config = {
 		// '@storybook/addon-interactions',
 		// 'storybook-addon-mock',
 		'storybook-preview-scheme-toggler',
-		'@storybook/addon-docs'
+		'@storybook/addon-docs',
+		// '@storybook/addon-actions',
+		'storybook/actions',
 	],
 
 	framework: {

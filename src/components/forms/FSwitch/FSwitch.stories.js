@@ -1,7 +1,7 @@
 import { ref } from 'vue';
 import { useArgs } from 'storybook/preview-api';
 import FSwitch from '.';
-import { makeRenderer, makeUpdateArg } from '@/utils/storybook';
+import { makeRenderer } from '@/utils/storybook';
 
 
 const usage = `
@@ -12,7 +12,7 @@ Import the component:
 \`\`\`js
 import { FSwitch } from 'futility-ui'
 // or
-import FSwitch from 'futility-ui/FSwitch'
+import FSwitch from 'futility-ui/forms/FSwitch'
 \`\`\`
 
 Use it in your template:
@@ -39,7 +39,6 @@ export default {
 	tags: [ 'autodocs' ],
 	argTypes: {
 		modelValue: {
-			type: 'boolean',
 			description: 'Switch flag.',
 			table: {
 				category: 'props',
@@ -64,7 +63,7 @@ export default {
 		// },
 
 		// EVENTS
-		'onUpdate:modelValue': {
+		'update:modelValue': {
 			action: 'update:modelValue',
 			name: 'update:modelValue',
 			control: false,
@@ -80,7 +79,7 @@ export default {
 		modelValue: false,
 		nullable: false,
 		disabled: false,
-		error: false,
+		// error: false,
 	},
 	render: makeRenderer([ 'modelValue' ]),
 };
@@ -129,6 +128,15 @@ export const Types = {
 		modelValue: '<value>',
 	},
 };
+
+// export const WithError = {
+// 	argTypes: {
+// 		error: { control: { type: null }},
+// 	},
+// 	args: {
+// 		error: true,
+// 	},
+// };
 
 export const Scheme = {
 	name: 'Scheme (Light/Dark)',

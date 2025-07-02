@@ -2,7 +2,7 @@ import FIcon from './components/FIcon';
 import FLoader from './components/FLoader';
 import FButton from './components/FButton';
 import FButtonText from './components/FButtonText';
-import FSwitch from './components/FSwitch';
+import FSwitch from './components/forms/FSwitch';
 
 
 export {

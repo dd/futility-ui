@@ -1,3 +1,4 @@
+import { action } from 'storybook/actions';
 import { useArgs } from 'storybook/preview-api';
 import throttle from 'lodash/throttle';
 
@@ -21,22 +22,13 @@ import throttle from 'lodash/throttle';
  */
 export const makeUpdateArg = (argOption, args, updateArgs) => {
 	const arg = Array.isArray(argOption) ? argOption[0] : argOption;
-	const updateArg = `update:${arg}`;
-	const onUpdateArg = Array.isArray(argOption) ? argOption[1] : `onUpdate:${arg}`;
-
+	const updateArg = Array.isArray(argOption) ? argOption[1] : `update:${arg}`;
 	return [
-		onUpdateArg,
-		throttle((newValue) => {
-			if (onUpdateArg in args) {
-				args[onUpdateArg](newValue);
-			}
-
-			if (updateArg in args) {
-				args[updateArg](newValue);
-			}
-
+		updateArg,
+		(newValue) => {
+			action(updateArg)(newValue);
 			updateArgs({ [arg]: newValue });
-		}, 300, { trailing: true }),
+		},
 	];
 };
 
@@ -61,10 +53,9 @@ export const makeRenderer = (updatableArgs) => {
 					acc[updateArg[0]] = updateArg[1];
 					return acc;
 				}, {});
-
 				return { args, promisedArgs };
 			},
-			template: `<${component.name} v-bind="{ ...args, ...promisedArgs }" />`,
+			template: `<${component.name} v-bind="args" v-on="promisedArgs" />`,
 		};
 	};
 };

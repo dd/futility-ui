@@ -10,13 +10,10 @@
 </template>
 
 <script setup >
-defineOptions({
-	name: 'FBinarySwitch',
-});
+defineOptions({ name: 'FBinarySwitch' });
 
-const model = defineModel({
-	type: Boolean,
-});
+defineEmits([ 'update:modelValue' ]);
+const model = defineModel({ type: Boolean });
 
 const props = defineProps({
 	/** Error flag. */

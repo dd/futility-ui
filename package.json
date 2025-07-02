@@ -58,9 +58,9 @@
       "require": "./dist/FButtonText/constants.cjs.js",
       "import": "./dist/FButtonText/constants.es.js"
     },
-    "./FSwitch": {
-      "require": "./dist/FSwitch/index.cjs.js",
-      "import": "./dist/FSwitch/index.es.js"
+    "./forms/FSwitch": {
+      "require": "./dist/forms/FSwitch/index.cjs.js",
+      "import": "./dist/forms/FSwitch/index.es.js"
     },
     "./styles.css": "./dist/styles/styles.css",
     "./theme.css": "./dist/styles/theme.css",

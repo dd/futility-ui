@@ -8,9 +8,7 @@ import { defineAsyncComponent } from 'vue';
 const FBinarySwitch = defineAsyncComponent(() => import('./FBinarySwitch.vue'));
 const FTernarySwitch = defineAsyncComponent(() => import('./FTernarySwitch.vue'));
 
-defineOptions({
-	name: 'FSwitch',
-});
+defineOptions({ name: 'FSwitch' });
 
 defineProps({
 	/** Flag of whether the switch has a null state */

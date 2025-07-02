@@ -1,28 +1,14 @@
-.fui-tsw-select
-	position: absolute
-	top: 0
-	left: 0
-
-	display: block
+.fui-switch
+	display: inline-block
+	flex-grow: 0
+	flex-shrink: 0
 	margin: 0
-	width: 0
-	height: 0
-	padding: 0
-
-	border: none
-	background: none
-	outline: none
-	opacity: 0
 
 
 .fui-binary_switch,
 .fui-tsw-widget
-	flex-grow: 0
-	flex-shrink: 0
-
 	position: relative
 	box-sizing: border-box
-	margin: 0
 	height: var(--fui-sw-height)
 	width: var(--fui-sw-width)
 	padding: 0
@@ -64,6 +50,8 @@
 
 // Binary
 .fui-binary_switch
+	flex-grow: 0
+	flex-shrink: 0
 	background-color: var(--fui-bsw-bg-false)
 
 	&:checked
@@ -88,7 +76,24 @@
 
 
 // Ternary
+.fui-tsw-select
+	position: absolute
+	top: 0
+	left: 0
+
+	display: block
+	margin: 0
+	width: 0
+	height: 0
+	padding: 0
+
+	border: none
+	background: none
+	outline: none
+	opacity: 0
+
 .fui-tsw-widget
+	display: block
 
 	&.fui-value-false
 		background-color: var(--fui-tsw-bg-false)

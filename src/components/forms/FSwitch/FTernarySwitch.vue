@@ -40,9 +40,8 @@ defineOptions({
 	inheritAttrs: false,
 });
 
-const model = defineModel({
-	type: [ Boolean, null ],
-});
+defineEmits([ 'update:modelValue' ]);
+const model = defineModel({ type: [ Boolean, null ]});
 
 const props = defineProps({
 	/** Disabled flag. */
