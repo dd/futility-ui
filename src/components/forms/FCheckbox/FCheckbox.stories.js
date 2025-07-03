@@ -1,7 +1,8 @@
 import { ref } from 'vue';
+import { useArgs } from 'storybook/preview-api';
+
 import FCheckbox from '.';
 import { makeRenderer, makeUpdateArg } from '@/utils/storybook';
-import { useArgs } from 'storybook/preview-api';
 
 
 const usage = `

@@ -4,6 +4,7 @@ import FButton from './components/FButton';
 import FButtonText from './components/FButtonText';
 import FSwitch from './components/forms/FSwitch';
 import FCheckbox from './components/forms/FCheckbox';
+import FInput from './components/forms/FInput';
 
 
 export {
@@ -13,6 +14,7 @@ export {
 	FButtonText,
 	FSwitch,
 	FCheckbox,
+	FInput,
 };
 
 export const version = __VERSION__;
@@ -25,6 +27,7 @@ const components = {
 	FButtonText,
 	FSwitch,
 	FCheckbox,
+	FInput,
 };
 
 export const install = (app) => {

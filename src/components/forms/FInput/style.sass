@@ -1,0 +1,267 @@
+@use "sass:math"
+
+// special variables
+// --fui-input-icon
+// --fui-itime-min_width
+// --fui-itime-min_width
+// --fui-idate-min_width
+// --fui-idate-min_width
+
+
+
+// special variables
+// --fui-input-textcolor
+// --fui-input-bordercolor
+
+$padding-x: 16px
+$border-size: 1px
+$radius: 8px
+$gap: 10px
+$lineheight: 1.5
+
+.fui-input
+	display: flex
+	flex-direction: row
+	flex-wrap: nowrap
+	align-items: center
+	gap: $gap
+
+	// min-width: var(--fui-widget-min_width)
+	padding: 0 $padding-x
+
+	// box-sizing: border-box
+	color: var(--fui-input-color)
+	border: $border-size solid var(--fui-input-border)
+	border-radius: $radius
+	background-color: var(--fui-input-bg)
+
+	font-family: var(--fui-font)
+	font-weight: 400
+	letter-spacing: 0.015em
+	line-height: 100% * $lineheight
+
+	// outline-style: solid
+	// outline-color: transparent
+	// outline-width: var(--fui-box-shadow-focus-size)
+	// outline-offset: 0
+
+	// transition-property: outline-color, border-color
+	// transition-duration: var(--fui-transition-duration-1)
+
+	.fui-input-input
+		flex-grow: 1
+		flex-shrink: 1
+
+		// padding: calc(var(--fui-spacing-3) - var(--fui-border-width)) calc(var(--fui-spacing-4) - var(--fui-border-width))
+
+		// height: calc(var(--fui-lineheight-1) + (var(--fui-spacing-3) - var(--fui-border-width)) * 2)
+		// width: inherit
+		// min-width: 0
+		border: none
+		background: none
+		box-shadow: none
+		// box-sizing: border-box
+
+		color: inherit
+		font-family: inherit
+		font-size: inherit
+		font-weight: inherit
+		letter-spacing: inherit
+		line-height: inherit
+
+		// // // @screen md
+		// // @media (min-width: 768px)
+		// // 	padding: var(--fui-spacing-2) calc(var(--fui-spacing-4) - var(--fui-border-width))
+
+		&:active,
+		&:focus,
+		&:focus-visible
+			outline: none
+			// border: none
+			// box-shadow: none
+
+		&::placeholder
+			color: var(--fui-input-placeholder)
+
+	// Focus
+	&:has(.fui-input-input:focus)
+		border-color: var(--fui-input-border-focus)
+
+	&:has(.fui-input-input:focus-visible)
+		outline: var(--fui-focus-size) solid var(--fui-focus-color)
+		outline-offset: var(--fui-focus-offset)
+
+	// &.has-error:has(.fui-input-input:focus)
+	// 	border-color: var(--fui-color-red-500)
+
+	// &.has-error:has(.fui-input-input:focus-visible)
+	// 	outline-color: light-dark(var(--fui-color-red-200), var(--fui-color-red-900))
+
+	// Disabled
+	&:has(.fui-input-input:disabled)
+		color: var(--fui-input-color-disabled)
+		border-color: var(--fui-input-border-disabled)
+		background-color: var(--fui-input-bg-disabled)
+
+	.fui-input-input:disabled::placeholder
+		color: var(--fui-input-placeholder-disabled)
+
+	// Error
+	&.has-error
+		color: var(--fui-input-color-error)
+		border-color: var(--fui-input-border-error)
+		background-color: var(--fui-input-bg-error)
+
+		.fui-input-input::placeholder
+			color: var(--fui-input-placeholder-error)
+
+		&:has(.fui-input-input:focus)
+			border-color: var(--fui-input-border-error)
+
+		&:has(.fui-input-input:focus-visible)
+			outline-color: var(--fui-input-focus-error)
+
+		// Error + Disabled
+		// &:has(.fui-input-input:disabled)
+		// 	color: var(--fui-input-color-disabled)
+		// 	border-color: var(--fui-input-border-disabled)
+		// 	background-color: var(--fui-input-bg-disabled)
+
+		// .fui-input-input:disabled::placeholder
+		// 	color: var(--fui-input-placeholder-disabled)
+
+	// With units
+	// .fui-input-input + *,
+	// * + .fui-input-input
+	// 	flex-grow: 0
+	// 	flex-shrink: 0
+
+	// &.has-units
+	// 	padding-right: var(--fui-spacing-4)
+
+
+// // TYPES ////////////////////////////////////////
+
+// // FInputText
+// .fui-input-text-time
+// 	width: var(--fui-itime-min_width)
+// 	min-width: var(--fui-itime-min_width)
+
+
+// // FInputDate
+// .fui-input-date
+// 	width: var(--fui-idate-min_width)
+// 	min-width: var(--fui-idate-min_width)
+
+// 	.fui-input-input
+// 		// box-sizing: border-box
+// 		// height: calc(var(--fui-lineheight-1) + (var(--fui-spacing-3) - var(--fui-border-width)) * 2)
+
+// 		&.custom-datepicker
+// 			min-width: 102px
+// 			padding-right: 0
+
+// 			&::-webkit-calendar-picker-indicator
+// 				-webkit-appearance: none
+// 				display: none
+
+// 			&::-webkit-input-placeholder
+// 				visibility: hidden !important
+
+// 			&::-webkit-datetime-edit-fields-wrapper
+// 				padding: 0
+
+// 	.fui-idate-d-button
+// 		padding: 0 calc(var(--fui-spacing-3) - var(--fui-border-width))
+// 		border: none
+// 		background: transparent
+// 		cursor: pointer
+// 		align-self: stretch
+
+// 	.fui-idate-d-icon
+// 		width: var(--fui-input-icon)
+// 		color: light-dark(var(--fui-color-gray-500), var(--fui-color-gray-400))
+
+// 	&.has-error .fui-idate-d-icon
+// 		color: light-dark(var(--fui-color-red-700), var(--fui-color-red-500))
+
+// .tippy-box[data-theme="fui-idate-datepicker"]
+// 	.tippy-content
+// 		padding: 0
+// 		box-shadow: 0px 1px 2px -1px rgba(0, 0, 0, 0.10), 0px 1px 3px 0px rgba(0, 0, 0, 0.10)
+
+
+// // FInputPassword
+// .fui-input-password
+// 	.fui-input-input
+// 		padding-right: 0
+
+// .fui-ipassword-show_button
+// 	display: flex
+// 	flex-direction: row
+// 	justify-content: center
+// 	align-items: center
+
+// 	align-self: stretch
+// 	padding: 0
+// 	width: calc((var(--fui-spacing-3) - var(--fui-border-width)) * 2 + var(--fui-lineheight-1))
+
+// 	color: light-dark(var(--fui-color-gray-500), var(--fui-color-gray-400))
+// 	border: none
+// 	border-radius: 0 var(--fui-border-radius-default) var(--fui-border-radius-default) 0
+// 	background: none
+// 	outline: var(--fui-box-shadow-focus-size) solid transparent
+
+// 	transition-property: outline, color
+// 	transition-duration: .2s
+
+// 	&:not(:disabled)
+// 		cursor: pointer
+
+// 	&:hover:not(:disabled)
+// 		color: light-dark(var(--fui-color-gray-600), var(--fui-color-gray-300))
+
+// 	&:focus-visible:not(:disabled)
+// 		outline-color: light-dark(var(--fui-color-primary-200), var(--fui-color-primary-900))
+
+// 	.fui-input-password.has-error &
+// 		color: light-dark(var(--fui-color-red-700), var(--fui-color-red-500))
+
+// 		&:hover
+// 			color: light-dark(var(--fui-color-red-800), var(--fui-color-red-600))
+
+// 		&:focus-visible:not(:disabled)
+// 			outline-color: light-dark(var(--fui-color-red-200), var(--fui-color-red-900))
+
+// .fui-ipassword-show_button-icon
+// 	width: var(--fui-input-icon)
+
+
+// Sizes ////////////////////////////////////////
+
+$height-s: 37px
+$lineheight-s: 14px * $lineheight
+$padding-y-s: math.div($height-s - $lineheight-s, 2) - $border-size
+.fui-input-size-s
+	font-size: var(--fui-text-size-sm)
+
+	.fui-input-input
+		padding: $padding-y-s 0
+
+$height-m: 42px
+$lineheight-m: 14px * $lineheight
+$padding-y-m: math.div($height-m - $lineheight-m, 2) - $border-size
+.fui-input-size-m
+	font-size: var(--fui-text-size-sm)
+
+	.fui-input-input
+		padding: $padding-y-m 0
+
+$height-xl: 52px
+$lineheight-xl: 16px * $lineheight
+$padding-y-xl: math.div($height-xl - $lineheight-xl, 2) - $border-size
+.fui-input-size-xl
+	font-size: var(--fui-text-size-base)
+
+	.fui-input-input
+		padding: $padding-y-xl 0

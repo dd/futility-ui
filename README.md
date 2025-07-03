@@ -80,11 +80,18 @@ We welcome contributions of all sizes!
 * [x] Buttons
 * [x] Text button
 * [x] Switch
-* [ ] Input <- you are here
-* [ ] Input group (компонент для визуального склеивания элементов формы без зазоров, одной общей границей и т.д.)
-* [ ] Select
-* [ ] Checkbox
+* [x] Checkbox
+* [ ] Input
+	* [x] Standart input text widget
+	* [x] Slots in start and ending of widget
+	* [ ] Clear button <- you are here
+	* [ ] Password input
+	* [ ] Date input
+	* [ ] Time input
+* [ ] Form row (A component that renders a form row with a label, widget, help text, and error text.)
 * [ ] Radio button
+* [ ] Widgets group (A component that visually merges widgets without spacing, such as an input field immediately followed by a button.)
+* [ ] Select
 * [ ] DatePicker
 * [ ] TimePicker
 * [ ] DropDown

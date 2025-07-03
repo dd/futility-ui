@@ -66,6 +66,10 @@
       "require": "./dist/forms/FCheckbox/index.cjs.js",
       "import": "./dist/forms/FCheckbox/index.es.js"
     },
+    "./forms/FInput": {
+      "require": "./dist/forms/FInput/index.cjs.js",
+      "import": "./dist/forms/FInput/index.es.js"
+    },
     "./styles.css": "./dist/styles/styles.css",
     "./theme.css": "./dist/styles/theme.css",
     "./assets/sprite.svg": "./dist/assets/sprite.svg"
