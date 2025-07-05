@@ -148,3 +148,5 @@ This library grew out of components I use at work. And my colleagues are probabl
 * It helps keep the main project\`s codebase cleaner - less clutter unrelated to business logic.
 
 * Reusability? That\`s a cliche argument, and it\`s not really the main goal here (But who knows - maybe I\`ll use this library in other projects too. I already have a few ideas).
+
+* An attempt to turn legacy code into a documented library that anyone can use.
