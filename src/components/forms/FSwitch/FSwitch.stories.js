@@ -84,9 +84,19 @@ export default {
 	render: makeRenderer([ 'modelValue' ]),
 };
 
+
 export const Default = {};
 
+
 export const Types = {
+	parameters: {
+		docs: {
+			description: {
+				story: `The standard switch works like a checkbox - it toggles between \`true\` and \`false\` values.
+However, by enabling the \`nullable\` flag, you can make the switch three-state, adding a \`null\` value.`,
+			},
+		},
+	},
 	render: (args, { argTypes }) => {
 		const [ , updateArgs ] = useArgs();
 		return {
@@ -129,6 +139,7 @@ export const Types = {
 	},
 };
 
+
 // export const WithError = {
 // 	argTypes: {
 // 		error: { control: { type: null }},
@@ -137,6 +148,7 @@ export const Types = {
 // 		error: true,
 // 	},
 // };
+
 
 export const Scheme = {
 	name: 'Scheme (Light/Dark)',

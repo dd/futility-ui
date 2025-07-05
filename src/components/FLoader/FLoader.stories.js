@@ -90,6 +90,22 @@ export const Sizes = {
 	},
 };
 
+export const WithoutTrack = {
+	parameters: {
+		docs: {
+			description: {
+				story: `If needed, you can hide the loader track by setting the \`hideTrack\` prop.`,
+			},
+		},
+	},
+	argTypes: {
+		hideTrack: { control: { type: null }},
+	},
+	args: {
+		hideTrack: true,
+	},
+};
+
 
 export const CustomSize = {
 	parameters: {
@@ -112,15 +128,6 @@ If needed, define a custom size by using the \`fui-loader-<custom_size>\` select
 	},
 	args: {
 		size: 'custom',
-	},
-};
-
-export const WithoutTrack = {
-	argTypes: {
-		hideTrack: { control: { type: null }},
-	},
-	args: {
-		hideTrack: true,
 	},
 };
 
