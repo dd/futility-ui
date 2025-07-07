@@ -1,57 +1,63 @@
-// --fui-rb-size
+// // --fui-rb-size
 
 .fui-radiobutton
-	display: inline-flex
-	padding: 0
-	align-items: flex-start
-	gap: var(--fui-spacing-2)
+	// display: inline-flex
+	// padding: 0
+	// align-items: flex-start
+	// gap: var(--fui-spacing-2)
 
-	color: var(--fui-color-gray-900)
+	// color: var(--fui-color-gray-900)
 
-	font-size: var(--fui-text-size-sm)
-	font-weight: normal
-	line-height: var(--fui-lineheight-1)
+	// font-size: var(--fui-text-size-sm)
+	// font-weight: normal
+	// line-height: var(--fui-lineheight-1)
 
-	&:has(:disabled)
-		opacity: var(--fui-disabled-opacity)
-		color: var(--fui-color-gray-500)
+	// &:has(:disabled)
+	// 	opacity: var(--fui-disabled-opacity)
+	// 	color: var(--fui-color-gray-500)
 
-	.fui-rb-input
-		height: var(--fui-rb-size)
-		width: var(--fui-rb-size)
-		box-sizing: border-box
+	// .fui-rb-input
+	height: 16px
+	width: 16px
+	box-sizing: border-box
 
-		border-radius: 50%
-		background-color: var(--fui-color-gray-50)
-		border: 1px solid var(--fui-color-gray-200)
+	border-radius: 50%
+	background-color: var(--fui-rb-bg)
+	border: 1px solid var(--fui-rb-border)
 
-		appearance: none
-		cursor: pointer
+	appearance: none
+	cursor: pointer
 
-		&:focus
-			outline: none
-			box-shadow: none
+	// &:focus
+	// 	outline: none
+	// 	box-shadow: none
 
-		&:focus-visible
-			outline: var(--fui-box-shadow-focus-size) solid var(--fui-color-primary-200)
-			outline-offset: 0
-			border-color: var(--fui-color-primary-500)
+	&:checked
+		background-image: none
+		background-color: var(--fui-rb-checked-bg)
+		border: 4px solid var(--fui-rb-checked-border)
+		print-color-adjust: exact
+
+	&:disabled
+		cursor: default
+		background-color: var(--fui-rb-disabled-bg)
+		border-color: var(--fui-rb-disabled-border)
 
 		&:checked
-			background-image: none
-			background-color: var(--fui-color-white)
-			border: 4px solid var(--fui-color-primary-700)
-			print-color-adjust: exact
+			background-color: var(--fui-rb-disabled-checked-bg)
+			border-color: var(--fui-rb-disabled-checked-border)
 
-		&:disabled
-			cursor: default
+			// &::after
+			// 	background-color: var(--fui-cb-icon-color-disabled)
 
-.has-error
+	// &:disabled
+	// 	cursor: default
 
-	.fui-rb-input:checked,
-	.fui-rb-input
-		border-color: var(--fui-color-red-700)
-		background-color: var(--fui-color-red-50)
+	&:focus-visible
+		outline: var(--fui-focus-size) solid var(--fui-focus-color)
+		outline-offset: var(--fui-focus-offset)
 
-	.fui-rb-slot
-		color: var(--fui-color-red-600)
+		&:not(:checked)
+			border-color: var(--fui-cb-color-true)
+
+// .has-error

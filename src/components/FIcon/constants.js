@@ -29,7 +29,13 @@ export const ICON_LIST_SOLID = Object.freeze([
 	'user_settings_solid',
 	'users_group_solid',
 	'users_solid',
+	'clipboard_solid',
+	'clipboard_check_solid',
+	'clipboard_clean_solid',
+	'clipboard_list_solid',
 	'ruler_combined_solid',
+	'swatchbook_solid',
+	'bookmark_solid',
 ]);
 
 
@@ -64,7 +70,13 @@ export const ICON_LIST_OUTLINE = Object.freeze([
 	'user_settings_outline',
 	'users_group_outline',
 	'users_outline',
+	'clipboard_outline',
+	'clipboard_check_outline',
+	'clipboard_clean_outline',
+	'clipboard_list_outline',
 	'ruler_combined_outline',
+	'swatchbook_outline',
+	'bookmark_outline',
 ]);
 
 
@@ -89,4 +101,6 @@ export const ICON_LIST_OTHER = Object.freeze([
 	'minus',
 	'plus',
 	'refresh',
+	'facebook',
+	'paper_clip',
 ]);

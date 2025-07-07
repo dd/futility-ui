@@ -82,26 +82,29 @@ We welcome contributions of all sizes!
 * [x] Switch
 * [x] Checkbox
 * [x] Input
-* [ ] Form row (A component that renders a form row with a label, widget, help text, and error text.) <- you are here
-* [ ] Radio button
-* [ ] Widgets group (A component that visually merges widgets without spacing, such as an input field immediately followed by a button.)
+* [x] Widgets group (A component that visually merges widgets without spacing, such as an input field immediately followed by a button.)
+* [x] Radio button
+* [ ] Form row (A component that renders a form row with a label, widget, help text, and error text.) **`<- you are here`**
 * [ ] Select
-* [ ] DatePicker
-* [ ] TimePicker
 * [ ] DropDown
 * [ ] FileSelect
 * [ ] FileSelectArea
+* [ ] Textarea
+* [ ] Number picker
 * [ ] Modal
 * [ ] Tree Editor
 * [ ] MultiSelect
-* [ ] Number picker
-* [ ] Tabs
 * [ ] Tag Select
-* [ ] Textarea
+* [ ] Tabs
+* [ ] DatePicker
+* [ ] TimePicker
+* [ ] Paginator
+* etc.
 
 #### Refactor
 
-* [ ] Move some of button themes styles to theme
+* [ ] Split styles into base styles and theme-specific styles
+* [ ] Add support for scaling the icon inside the button
 * [ ] Update button focus styles
 
 #### Extended

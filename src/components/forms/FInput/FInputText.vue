@@ -26,7 +26,7 @@
 <script setup >
 import { computed, useAttrs, defineAsyncComponent } from 'vue';
 const FIcon = defineAsyncComponent(() => import('@/components/FIcon'));
-import { TEXT_ALLOWED_TYPES } from './base';
+import { TEXT_ALLOWED_TYPES } from './constants';
 
 
 defineOptions({
