@@ -103,7 +103,8 @@ We welcome contributions of all sizes!
 
 #### Refactor
 
-* [ ] Move some of button themes styles to theme
+* [ ] Split styles into base styles and theme-specific styles
+* [ ] Add support for scaling the icon inside the button
 * [ ] Update button focus styles
 
 #### Extended

@@ -25,6 +25,11 @@ Use it in your template:
 \`\`\`
 
 That's it!
+
+### TODO
+
+* Split styles into base styles and theme-specific styles
+* Add support for scaling the icon inside the button
 `;
 
 
@@ -119,9 +124,9 @@ export default {
 		},
 		iconName: {
 			name: 'icon',
+			description: 'Icon for use inside the icon button. (not real slot, just for presentation)',
 			control: { type: 'select' },
 			options: [ ...ICON_LIST_SOLID, ...ICON_LIST_OUTLINE, ...ICON_LIST_OTHER ],
-			description: 'Icon for use inside the icon button.',
 			table: {
 				category: 'slots',
 				type: { summary: 'text' },
