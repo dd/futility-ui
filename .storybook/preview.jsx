@@ -1,7 +1,7 @@
 import React from 'react';
-import { setup } from '@storybook/vue3';
+import { setup } from '@storybook/vue3-vite';
 import Toast, { TYPE } from 'vue-toastification';
-import { Title, Primary, Controls, Stories, Description, Subtitle } from '@storybook/blocks';
+import { Title, Primary, Controls, Stories, Description, Subtitle } from '@storybook/addon-docs/blocks';
 
 import 'vue-toastification/dist/index.css';
 import './styles.sass';
@@ -25,7 +25,7 @@ setup((app) => {
 });
 
 
-/** @type { import('@storybook/vue3').Preview } */
+/** @type { import('@storybook/vue3-vite').Preview } */
 const preview = {
 	parameters: {
 		backgrounds: { disable: true },

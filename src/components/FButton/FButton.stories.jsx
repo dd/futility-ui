@@ -1,5 +1,5 @@
 import React from 'react';
-import { Title, Primary, Controls, Stories, Markdown } from '@storybook/blocks';
+import { Title, Primary, Controls, Stories, Markdown } from '@storybook/addon-docs/blocks';
 
 import FIcon from '@/components/FIcon';
 import { ICON_LIST_SOLID, ICON_LIST_OUTLINE, ICON_LIST_OTHER } from '@/components/FIcon/constants';

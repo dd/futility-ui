@@ -90,6 +90,22 @@ export const Sizes = {
 	},
 };
 
+export const WithoutTrack = {
+	parameters: {
+		docs: {
+			description: {
+				story: `If needed, you can hide the loader track by setting the \`hideTrack\` prop.`,
+			},
+		},
+	},
+	argTypes: {
+		hideTrack: { control: { type: null }},
+	},
+	args: {
+		hideTrack: true,
+	},
+};
+
 
 export const CustomSize = {
 	parameters: {

@@ -1,0 +1,242 @@
+@use "sass:math"
+
+
+$padding-x: 16px
+$border-size: 1px
+$radius: 8px
+$gap: 10px
+$lineheight: 1.5
+
+.fui-input
+	display: flex
+	flex-direction: row
+	flex-wrap: nowrap
+	align-items: center
+	gap: $gap
+
+	padding: 0 $padding-x
+
+	color: var(--fui-input-color)
+	border: $border-size solid var(--fui-input-border)
+	border-radius: $radius
+	background-color: var(--fui-input-bg)
+
+	font-family: var(--fui-font)
+	font-weight: 400
+	letter-spacing: 0.015em
+	line-height: 100% * $lineheight
+
+	.fui-input-input
+		flex-grow: 1
+		flex-shrink: 1
+
+		border: none
+		background: none
+		box-shadow: none
+
+		color: inherit
+		font-family: inherit
+		font-size: inherit
+		font-weight: inherit
+		letter-spacing: inherit
+		line-height: inherit
+
+		&:active,
+		&:focus,
+		&:focus-visible
+			outline: none
+
+		&::placeholder
+			color: var(--fui-input-placeholder)
+
+	// Focus
+	&:has(.fui-input-input:focus)
+		border-color: var(--fui-input-border-focus)
+
+	&:has(.fui-input-input:focus-visible)
+		outline: var(--fui-focus-size) solid var(--fui-focus-color)
+		outline-offset: var(--fui-focus-offset)
+
+	// Disabled
+	&:has(.fui-input-input:disabled)
+		color: var(--fui-input-color-disabled)
+		border-color: var(--fui-input-border-disabled)
+		background-color: var(--fui-input-bg-disabled)
+
+	.fui-input-input:disabled::placeholder
+		color: var(--fui-input-placeholder-disabled)
+
+	// Error
+	&.has-error
+		color: var(--fui-input-color-error)
+		border-color: var(--fui-input-border-error)
+		background-color: var(--fui-input-bg-error)
+
+		.fui-input-input::placeholder
+			color: var(--fui-input-placeholder-error)
+
+		// Error + Focus
+		&:has(.fui-input-input:focus)
+			border-color: var(--fui-input-border-error)
+
+		&:has(.fui-input-input:focus-visible)
+			outline-color: var(--fui-input-focus-error)
+
+		// Error + Disabled
+		&:has(.fui-input-input:disabled)
+			color: var(--fui-input-color-error-disabled)
+			border-color: var(--fui-input-border-error-disabled)
+			background-color: var(--fui-input-bg-error-disabled)
+
+		.fui-input-input:disabled::placeholder
+			color: var(--fui-input-placeholder-error-disabled)
+
+
+	// Customize widgets
+
+	// Search
+	&:has(.fui-input-clear_btn) .fui-input-input[type="search"]::-webkit-search-cancel-button
+		appearance: none
+		display: none
+
+	// Date and Time
+	.fui-input-input[type="date"],
+	.fui-input-input[type="datetime-local"],
+	.fui-input-input[type="month"],
+	.fui-input-input[type="week"],
+	.fui-input-input[type="time"]
+		appearance: none
+
+		&::-webkit-calendar-picker-indicator
+			opacity: 0
+
+	.fui-input-input[type="date"] + .fui-input-date_icon,
+	.fui-input-input[type="datetime-local"] + .fui-input-date_icon,
+	.fui-input-input[type="month"] + .fui-input-date_icon,
+	.fui-input-input[type="week"] + .fui-input-date_icon,
+	.fui-input-input[type="time"] + .fui-input-time_icon
+		position: relative
+		margin-left: -$gap
+
+		.fui-icon
+			position: absolute
+			top: calc(var(--fui-icon-size) / -2)
+			right: 0
+			pointer-events: none
+
+	.fui-input-input[type="date"]:disabled + .fui-input-date_icon,
+	.fui-input-input[type="datetime-local"]:disabled + .fui-input-date_icon,
+	.fui-input-input[type="month"]:disabled + .fui-input-date_icon,
+	.fui-input-input[type="week"]:disabled + .fui-input-date_icon,
+	.fui-input-input[type="time"]:disabled + .fui-input-time_icon
+		display: none
+
+	// Extra Button
+	.fui-input-extra_btn
+		border: none
+		background: none
+		padding: 0
+		margin: 0
+
+		cursor: pointer
+		color: inherit
+
+		.fui-icon
+			display: block
+			transition: color .2s ease
+			will-change: color
+
+		&:focus-visible
+			outline: var(--fui-focus-size) solid var(--fui-focus-color)
+
+	// Extra Button + Error
+	&.has-error
+		.fui-input-extra_btn
+			&:focus-visible
+				outline-color: var(--fui-input-focus-error)
+
+	// Extra Button + Disabled
+	&:has(.fui-input-input:disabled)
+		.fui-input-extra_btn
+			display: none
+
+
+// Sizes ////////////////////////////////////////
+
+$height-s: 37px
+$lineheight-s: 14px * $lineheight
+$padding-y-s: math.div($height-s - $lineheight-s, 2) - $border-size
+$icon-size-s: 20px
+$button-offset-s: -6px
+.fui-input-size-s
+	--fui-icon-size: #{$icon-size-s}
+	font-size: var(--fui-text-size-sm)
+
+	.fui-input-input
+		padding: $padding-y-s 0
+
+	.fui-input-extra_btn
+		$button-size-s: $height-s - $border-size * 2
+		$button-padding: math.div($button-size-s - $icon-size-s, 2)
+		height: $button-size-s
+		widows: $button-size-s
+		padding: $button-padding
+		margin: 0 -$button-padding
+
+		// not sure this is correct, but it work
+		border-radius: $radius - math.div($button-offset-s, 2)
+
+		&:focus-visible
+			outline-offset: $button-offset-s
+
+$height-m: 42px
+$lineheight-m: 14px * $lineheight
+$padding-y-m: math.div($height-m - $lineheight-m, 2) - $border-size
+$icon-size-m: 20px
+$button-offset-m: -10px
+.fui-input-size-m
+	--fui-icon-size: #{$icon-size-m}
+	font-size: var(--fui-text-size-sm)
+
+	.fui-input-input
+		padding: $padding-y-m 0
+
+	.fui-input-extra_btn
+		$button-size-m: $height-m - $border-size * 2
+		$button-padding: math.div($button-size-m - $icon-size-m, 2)
+		height: $button-size-m
+		widows: $button-size-m
+		padding: $button-padding
+		margin: 0 -$button-padding
+
+		// not sure this is correct, but it work
+		border-radius: $radius - math.div($button-offset-m, 2)
+
+		&:focus-visible
+			outline-offset: $button-offset-m
+
+$height-xl: 52px
+$lineheight-xl: 16px * $lineheight
+$padding-y-xl: math.div($height-xl - $lineheight-xl, 2) - $border-size
+$icon-size-xl: 20px
+$button-offset-xl: -10px
+.fui-input-size-xl
+	--fui-icon-size: #{$icon-size-xl}
+	font-size: var(--fui-text-size-base)
+
+	.fui-input-input
+		padding: $padding-y-xl 0
+
+	.fui-input-extra_btn
+		$button-size-xl: $height-xl - $border-size * 2
+		$button-padding: math.div($button-size-xl - $icon-size-xl, 2)
+		height: $button-size-xl
+		widows: $button-size-xl
+		padding: $button-padding
+		margin: 0 -$button-padding
+
+		// not sure this is correct, but it work
+		border-radius: $radius - math.div($button-offset-xl, 2)
+
+		&:focus-visible
+			outline-offset: $button-offset-xl

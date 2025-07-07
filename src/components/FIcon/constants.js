@@ -3,6 +3,7 @@ export const ICON_LIST_SOLID = Object.freeze([
 	'archive_up_solid',
 	'archive_down_solid',
 	'calendar_solid',
+	'clock_solid',
 	'check_circle_solid',
 	'circle_solid',
 	'close_circle_solid',
@@ -20,6 +21,15 @@ export const ICON_LIST_SOLID = Object.freeze([
 	'floppy_disk_solid',
 	'print_solid',
 	'rectangle_list_solid',
+	'user_circle_solid',
+	'user_add_solid',
+	'user_edit_solid',
+	'user_solid',
+	'user_remove_solid',
+	'user_settings_solid',
+	'users_group_solid',
+	'users_solid',
+	'ruler_combined_solid',
 ]);
 
 
@@ -28,6 +38,7 @@ export const ICON_LIST_OUTLINE = Object.freeze([
 	'archive_up_outline',
 	'archive_down_outline',
 	'calendar_outline',
+	'clock_outline',
 	'check_circle_outline',
 	'circle_outline',
 	'close_circle_outline',
@@ -45,6 +56,15 @@ export const ICON_LIST_OUTLINE = Object.freeze([
 	'floppy_disk_outline',
 	'print_outline',
 	'rectangle_list_outline',
+	'user_circle_outline',
+	'user_add_outline',
+	'user_edit_outline',
+	'user_outline',
+	'user_remove_outline',
+	'user_settings_outline',
+	'users_group_outline',
+	'users_outline',
+	'ruler_combined_outline',
 ]);
 
 

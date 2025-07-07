@@ -1,0 +1,28 @@
+:root
+	$height: 20px
+	$width: 40px
+	$border: 2px
+	--fui-sw-height: #{$height}
+	--fui-sw-width: #{$width}
+	--fui-sw-border: #{$border}
+	--fui-sw-circle-size: #{$height - $border * 2}
+
+	// Pallete
+	--fui-sw-circle-false: light-dark(var(--fui-color-white), var(--fui-color-gray-400))
+	--fui-sw-circle-disabled-false: light-dark(var(--fui-color-white), var(--fui-color-gray-900))
+	--fui-sw-circle-true: var(--fui-color-white)
+	--fui-sw-circle-disabled-true: light-dark(var(--fui-color-white), var(--fui-color-gray-900))
+
+	// Binary
+	--fui-bsw-bg-false: light-dark(var(--fui-color-gray-200), var(--fui-color-gray-600))
+	--fui-bsw-bg-disabled-false: light-dark(var(--fui-color-gray-100), var(--fui-color-gray-800))
+	--fui-bsw-bg-true: var(--fui-color-primary-700)
+	--fui-bsw-bg-disabled-true: light-dark(var(--fui-color-primary-200), var(--fui-color-primary-900))
+
+	// Ternary
+	--fui-tsw-bg-false: var(--fui-color-red-700)
+	--fui-tsw-bg-disabled-false: light-dark(var(--fui-color-red-200), var(--fui-color-red-900))
+	--fui-tsw-bg-null: light-dark(var(--fui-color-gray-200), var(--fui-color-gray-600))
+	--fui-tsw-bg-disabled-null: light-dark(var(--fui-color-gray-100), var(--fui-color-gray-800))
+	--fui-tsw-bg-true: var(--fui-color-green-700)
+	--fui-tsw-bg-disabled-true: light-dark(var(--fui-color-green-200), var(--fui-color-green-900))
