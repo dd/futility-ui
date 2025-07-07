@@ -1,3 +1,15 @@
+# v0.4.2 (Mon Jul 07 2025)
+
+#### 🐛 Bug Fix
+
+- Added FInput, FSwitch, FCheckbox and more icons [#27](https://github.com/dd/futility-ui/pull/27) ([@dd](https://github.com/dd))
+
+#### Authors: 1
+
+- Dmitry Dobrynin ([@dd](https://github.com/dd))
+
+---
+
 # v0.4.1 (Mon Apr 21 2025)
 
 #### 🐛 Bug Fix
