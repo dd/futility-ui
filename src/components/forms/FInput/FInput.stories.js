@@ -1,14 +1,18 @@
 import { computed, ref } from 'vue';
 import { useArgs } from 'storybook/preview-api';
 
-import { makeRenderer, makeUpdateArg } from '@/utils/storybook';
+import { makeUpdateArg } from '@/utils/storybook';
+import FIcon from '@/components/FIcon';
 import FInput from './index.vue';
 import { TEXT_ALLOWED_TYPES, SIZE_CHOICES } from './base';
 
-const ALL_ALLOWED_TYPES = TEXT_ALLOWED_TYPES.concat([ 'date', 'password' ]);
+const ALL_ALLOWED_TYPES = TEXT_ALLOWED_TYPES.concat([ 'password' ]);
 
 
 const usage = `
+\`FInput\` is a versatile input component with built-in styling, validation states, and slot support
+for icons and actions.
+
 ### Usage
 
 Import the component:
@@ -22,7 +26,7 @@ import FInput from 'futility-ui/forms/FInput'
 Use it in your template:
 
 \`\`\`html
-<FInput />
+<FInput v-model="value" />
 \`\`\`
 
 That's it!
@@ -38,7 +42,7 @@ export default {
 			description: {
 				component: usage,
 			},
-		}
+		},
 	},
 	tags: [ 'autodocs' ],
 	argTypes: {
@@ -51,7 +55,7 @@ export default {
 			},
 		},
 		type: {
-			description: `Input type. Supported types: <i>${ALL_ALLOWED_TYPES.join('</i>, <i>')}</i>.`,
+			description: `Input type.`,
 			options: ALL_ALLOWED_TYPES,
 			control: 'select',
 			table: {
@@ -66,22 +70,6 @@ export default {
 			table: {
 				category: 'props',
 				type: { summary: 'text' },
-			},
-		},
-		placeholder: {
-			control: 'text',
-			description: 'Placeholder text.',
-			table: {
-				category: 'props',
-				type: { summary: 'text' },
-			},
-		},
-		disabled: {
-			description: 'Disabled flag.',
-			control: 'boolean',
-			table: {
-				category: 'props',
-				type: { summary: 'boolean' },
 			},
 		},
 		error: {
@@ -105,7 +93,7 @@ export default {
 		},
 		// SLOTS
 		start: {
-			description: 'Слот перед инпутом.',
+			description: 'Слот в начале виджета.',
 			control: 'text',
 			table: {
 				category: 'slots',
@@ -114,7 +102,7 @@ export default {
 			},
 		},
 		end: {
-			description: 'Слот после инпута.',
+			description: 'Слот в конце виджета.',
 			control: 'text',
 			table: {
 				category: 'slots',
@@ -124,202 +112,100 @@ export default {
 		},
 	},
 	args: {
+		modelValue: '',
 		type: 'text',
-		disabled: false,
+		size: 'm',
 		error: false,
-		placeholder: 'Placeholder',
 		start: '',
 		end: '',
 	},
-	render: makeRenderer([ 'modelValue' ]),
+	render: (args, { argTypes, component }) => {
+		const [ , updateArgs ] = useArgs();
+		return {
+			props: Object.keys(argTypes),
+			components: { FInput },
+			setup() {
+				const updateValue = makeUpdateArg('modelValue', args, updateArgs);
+				const promisedArgs = { [updateValue[0]]: updateValue[1] };
+				return { args, promisedArgs };
+			},
+			template: `<FInput v-bind="args" v-on="promisedArgs" placeholder="Placeholder" >
+		<template v-if="args.start" v-slot:start >{{ args.start }}</template>
+		<template v-if="args.end" v-slot:end >{{ args.end }}</template>
+	</FInput>`,
+		};
+	},
 };
 
 
 export const Default = {};
 
 
-export const Text = {
-	render: (args, { argTypes }) => ({
-		name: 'FInputTextWithSlotsStory',
-		props: Object.keys(argTypes),
-		components: { FInput },
-		setup() { return { args }; },
-		template: `<FInput v-bind="args" >
-	<template v-if="args.start" v-slot:start >{{ args.start }}</template>
-	<template v-if="args.end" v-slot:end >{{ args.end }}</template>
-</FInput>`,
-	}),
+export const Types = {
+	parameters: {
+		docs: {
+			description: {
+				story: `The \`type\` prop defines the input’s behavior, validation, and appearance.
+
+\`FInput\` supports the following types: <i>${ALL_ALLOWED_TYPES.join('</i>, <i>')}</i>.
+
+\`\`\`html
+<FInput type="<type>" />
+\`\`\``,
+			},
+		},
+	},
+	render: (args, { argTypes, component }) => {
+		const [ , updateArgs ] = useArgs();
+		return {
+			name: 'FInputTypesStory',
+			props: Object.keys(argTypes),
+			components: { FInput },
+			setup() {
+				const updateValue = makeUpdateArg('modelValue', args, updateArgs);
+				const promisedArgs = { [updateValue[0]]: updateValue[1] };
+				return { args, promisedArgs, ALL_ALLOWED_TYPES };
+			},
+			template: `<table class="preview-table" ><tbody>
+		<tr v-for="type in ALL_ALLOWED_TYPES" :key="type" >
+			<td class="label" >{{ type }}</td>
+			<td>
+				<FInput v-bind="args" v-on="promisedArgs" :type="type" placeholder="Placeholder" >
+					<template v-if="args.start" v-slot:start >{{ args.start }}</template>
+					<template v-if="args.end" v-slot:end >{{ args.end }}</template>
+				</FInput>
+			</td>
+		</tr>
+	</tbody></table>`,
+		};
+	},
 	argTypes: {
-		type: { options: TEXT_ALLOWED_TYPES },
+		type: { control: { type: null }},
 	},
 	args: {
-		start: '$',
-		end: '%',
+		type: '<type>',
 	},
 };
 
 
-/**
- * @todo add icons
- */
-export const TextWithIcons = {
-	render: (args, { argTypes }) => ({
-		name: 'FInputTextWithSlotsStory',
-		props: Object.keys(argTypes),
-		components: { FInput },
-		setup() { return { args }; },
-		template: `<FInput v-bind="args" >
-	<template v-if="args.start" v-slot:start >{{ args.start }}</template>
-	<template v-if="args.end" v-slot:end >{{ args.end }}</template>
-</FInput>`,
-	}),
-	argTypes: {
-		type: { options: TEXT_ALLOWED_TYPES },
+export const ErrorState = {
+	parameters: {
+		docs: {
+			description: {
+				story: `You can use the \`error\` prop to indicate validation errors. It visually
+highlights the input to draw attention.
+
+\`\`\`html
+<FInput error />
+\`\`\``,
+			},
+		},
 	},
-	args: {
-		start: '$',
-		end: '%',
-	},
-};
-
-
-/**
- * @todo add clear button
- */
-export const TextWithClearButton = {
-	render: (args, { argTypes }) => ({
-		name: 'FInputTextWithSlotsStory',
-		props: Object.keys(argTypes),
-		components: { FInput },
-		setup() { return { args }; },
-		template: `<FInput v-bind="args" >
-	<template v-if="args.start" v-slot:start >{{ args.start }}</template>
-	<template v-if="args.end" v-slot:end >{{ args.end }}</template>
-</FInput>`,
-	}),
-	argTypes: {
-		type: { options: TEXT_ALLOWED_TYPES },
-	},
-	args: {
-		start: '$',
-		end: '%',
-	},
-};
-
-
-// export const Date = {
-// 	argTypes: {
-// 		type: { control: { type: null }},
-// 		useCustomPicker: {
-// 			control: 'boolean',
-// 			description: 'Use custom datepicker.',
-// 			table: {
-// 				category: 'props',
-// 				type: { summary: 'boolean' },
-// 			},
-// 		},
-// 		showHeader: {
-// 			control: 'boolean',
-// 			description: 'show header at custom datepicker.',
-// 			table: {
-// 				category: 'props',
-// 				type: { summary: 'boolean' },
-// 			},
-// 		},
-// 	},
-// 	args: {
-// 		type: 'date',
-// 	},
-// };
-
-
-// export const Password = {
-// 	argTypes: {
-// 		type: { control: { type: null }},
-// 	},
-// 	args: {
-// 		placeholder: 'Password',
-// 		type: 'password',
-// 	},
-// };
-
-// export let Sizes = {
-// 	argTypes: {
-// 		size: { control: { type: null }},
-// 	},
-// 	render: (args, { argTypes, updateArgs }) => ({
-// 		props: Object.keys(argTypes),
-// 		components: { FInputAutocomplete },
-// 		setup() {
-// 			let modelValue = makeUpdateArg('modelValue', args, updateArgs);
-// 			let query = makeUpdateArg('query', args, updateArgs);
-// 			let newArgs = computed(() => ({ ...args, 'onUpdate:modelValue': modelValue[1], 'onUpdate:query': query[1] }));
-// 			return { args: newArgs };
-// 		},
-// 		template: `<table class="state-preview_table" >
-// 	<tbody>
-// 		<tr>
-// 			<td>small</td>
-// 			<td>37px</td>
-// 			<td><FInputAutocomplete v-bind="args" size="small" /></td>
-// 		</tr>
-// 		<tr>
-// 			<td>regular</td>
-// 			<td>42px</td>
-// 			<td><FInputAutocomplete v-bind="args" size="regular" /></td>
-// 		</tr>
-// 		<tr>
-// 			<td>large</td>
-// 			<td>52px</td>
-// 			<td><FInputAutocomplete v-bind="args" size="large" /></td>
-// 		</tr>
-// 	</tbody>
-// </table>`,
-// 	}),
-// };
-
-// export let Scheme = {
-// 	parameters: { layout: 'fullscreen' },
-// 	argTypes: {
-// 		modelValue: { control: { type: null }},
-// 		units: { control: { type: null }},
-// 		type: { control: { type: null }},
-// 	},
-// 	render: (args, { argTypes, updateArgs }) => ({
-// 		props: Object.keys(argTypes),
-// 		components: { FInput },
-// 		setup() {
-// 			let text = ref();
-// 			let date = ref();
-// 			let password = ref();
-// 			let newArgs = computed(() => {
-// 				const { type, ..._args } = args; // eslint-disable-line no-unused-vars
-// 				return _args;
-// 			});
-// 			return { text, date, password, args: newArgs };
-// 		},
-// 		template: `<div class="storybook-scheme_preview columns" >
-// 		<div class="light" ><div>
-// 			<p><FInput v-model="text" v-bind="args" type="text" /></p>
-// 			<p><FInput v-model="date" v-bind="args" type="date" /></p>
-// 			<p><FInput v-model="password" v-bind="args" type="password" /></p>
-// 		</div></div>
-// 		<div class="dark" ><div>
-// 			<p><FInput v-model="text" v-bind="args" type="text" /></p>
-// 			<p><FInput v-model="date" v-bind="args" type="date" /></p>
-// 			<p><FInput v-model="password" v-bind="args" type="password" /></p>
-// 		</div></div>
-// </div>`,
-// 	}),
-// };
-
-
-export const WithError = {
 	argTypes: {
 		error: { control: { type: null }},
 	},
 	args: {
-		error: '<error>',
+		error: true,
 	},
 };
 
@@ -328,11 +214,16 @@ export const Sizes = {
 	parameters: {
 		docs: {
 			description: {
-				story: `Predefined sizes for different contexts:
+				story: `The \`size\` prop defines the input height and padding:
 
 \`\`\`html
 <FInput size="<size>" />
-\`\`\``,
+\`\`\`
+
+You can also specify any custom size value.
+In that case, the input automatically receives the class: \`fui-input-size-<size>\`
+which you can use to apply your own styles.
+`,
 			},
 		},
 	},
@@ -360,7 +251,12 @@ export const Sizes = {
 		<tr v-for="size, i in SIZE_CHOICES" :key="size[0]" >
 			<td class="label" >{{ LABELS[i] }}</td>
 			<td class="label" >{{ size }}</td>
-			<td><FInput v-bind="args" v-on="promisedArgs" :size="size" /></td>
+			<td>
+				<FInput v-bind="args" v-on="promisedArgs" :size="size" placeholder="Placeholder" >
+					<template v-if="args.start" v-slot:start >{{ args.start }}</template>
+					<template v-if="args.end" v-slot:end >{{ args.end }}</template>
+				</FInput>
+			</td>
 		</tr>
 	</tbody></table>`,
 		};
@@ -372,6 +268,129 @@ export const Sizes = {
 		size: '<size>',
 	},
 };
+
+
+export const Slots = {
+	parameters: {
+		docs: {
+			description: {
+				story: `
+The component provides two slots, \`start\` and \`end\`, which can be used to display additional
+content inside the input, such as units of measurement or any other contextual information.
+
+These slots are intended primarily for supplementary elements that do not take over input control.
+If you need to create a compound field (for example, combining a select dropdown for currency with
+a text input for the amount), consider using the \`FWidgetsGroup\` component (in progress).
+
+\`\`\`html
+<FInput>
+	<template #start>
+		<!-- Your content here -->
+	</template>
+	<template #end>
+		<!-- Your content here -->
+	</template>
+</FInput>
+\`\`\`
+
+For inputs with \`type="password"\`, the following properties are available in the slot scope:
+
+* \`showPasswordStatus\` - a boolean indicating whether the password is currently visible.
+* \`showPassword\` - a method that shows the password.
+* \`hidePassword\` - a method that hides the password.
+
+Using these props, you can implement your own custom password visibility toggle button, or simply
+use the built-in [FInputShowPasswordButton](?path=/docs/forms-finput-showpasswordbutton--docs)
+component.`,
+			},
+		},
+	},
+	render: (args, { argTypes, component }) => {
+		const [ , updateArgs ] = useArgs();
+		return {
+			props: Object.keys(argTypes),
+			components: { FInput, FIcon },
+			setup() {
+				const updateValue = makeUpdateArg('modelValue', args, updateArgs);
+				const promisedArgs = { [updateValue[0]]: updateValue[1] };
+				return { args, promisedArgs };
+			},
+			template: `<FInput v-bind="args" v-on="promisedArgs" placeholder="Placeholder" >
+	<template v-slot:start ><FIcon name="ruler_combined_outline" /></template>
+	<template v-slot:end >mm</template>
+</FInput>`,
+		};
+	},
+	argTypes: {
+		start: { control: { type: null }},
+		end: { control: { type: null }},
+	},
+};
+
+
+export const AttributesPassthrough = {
+	parameters: {
+		docs: {
+			description: {
+				story: `All attributes passed to the component will be forwarded to the underlying
+\`<input>\`	 element, except for \`class\`, which is applied to the wrapper element.
+
+This allows you to use any standard input attributes, such as: \`id\`, \`name\`, \`placeholder\`,
+\`maxlength\`, \`disabled\`, \`aria-*\` etc.`,
+			},
+		},
+	},
+	render: (args, { argTypes, component }) => {
+		const [ , updateArgs ] = useArgs();
+		return {
+			props: Object.keys(argTypes),
+			components: { FInput },
+			setup() {
+				const updateValue = makeUpdateArg('modelValue', args, updateArgs);
+				const promisedArgs = { [updateValue[0]]: updateValue[1] };
+				return { args, promisedArgs };
+			},
+			template: `<FInput v-bind="args" v-on="promisedArgs" />`,
+		};
+	},
+	argTypes: {
+		id: {
+			control: 'text',
+			table: {
+				category: 'Standart Props',
+				type: { summary: 'text' },
+			},
+		},
+		name: {
+			control: 'text',
+			table: {
+				category: 'Standart Props',
+				type: { summary: 'text' },
+			},
+		},
+		placeholder: {
+			control: 'text',
+			table: {
+				category: 'Standart Props',
+				type: { summary: 'text' },
+			},
+		},
+		disabled: {
+			control: 'boolean',
+			table: {
+				category: 'Standart Props',
+				type: { summary: 'boolean' },
+			},
+		},
+	},
+	args: {
+		id: 'example_input',
+		name: 'example_input',
+		placeholder: 'Placeholder',
+		disabled: false,
+	},
+};
+
 
 export const Scheme = {
 	name: 'Scheme (Light/Dark)',
@@ -392,12 +411,18 @@ export const Scheme = {
 			<table class="preview-table" ><tbody>
 				<tr>
 					<td>
-						<FInput v-bind="args" v-on="promisedArgs" :disabled="false" />
+						<FInput v-bind="args" v-on="promisedArgs" placeholder="Placeholder" >
+							<template v-if="args.start" v-slot:start >{{ args.start }}</template>
+							<template v-if="args.end" v-slot:end >{{ args.end }}</template>
+						</FInput>
 					</td>
 				</tr>
 				<tr>
 					<td>
-						<FInput v-bind="args" v-on="promisedArgs" disabled />
+						<FInput v-bind="args" v-on="promisedArgs" disabled placeholder="Placeholder" >
+							<template v-if="args.start" v-slot:start >{{ args.start }}</template>
+							<template v-if="args.end" v-slot:end >{{ args.end }}</template>
+						</FInput>
 					</td>
 				</tr>
 			</tbody></table>
@@ -406,23 +431,23 @@ export const Scheme = {
 			<table class="preview-table" ><tbody>
 				<tr>
 					<td>
-						<FInput v-bind="args" v-on="promisedArgs" :disabled="false" />
+						<FInput v-bind="args" v-on="promisedArgs" placeholder="Placeholder" >
+							<template v-if="args.start" v-slot:start >{{ args.start }}</template>
+							<template v-if="args.end" v-slot:end >{{ args.end }}</template>
+						</FInput>
 					</td>
 				</tr>
 				<tr>
 					<td>
-						<FInput v-bind="args" v-on="promisedArgs" disabled />
+						<FInput v-bind="args" v-on="promisedArgs" disabled placeholder="Placeholder" >
+							<template v-if="args.start" v-slot:start >{{ args.start }}</template>
+							<template v-if="args.end" v-slot:end >{{ args.end }}</template>
+						</FInput>
 					</td>
 				</tr>
 			</tbody></table>
 		</div>
 	</div>`,
 		};
-	},
-	argTypes: {
-		disabled: { control: { type: null }},
-	},
-	args: {
-		disabled: '<disabled>',
 	},
 };

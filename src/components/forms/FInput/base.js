@@ -1,11 +1,15 @@
 export const TEXT_ALLOWED_TYPES = Object.freeze([
+	'text',
+	'search',
+	'url',
+	'tel',
 	'email',
 	'number',
-	'search',
-	'text',
-	'tel',
-	'url',
+	'date',
 	'time',
+	'datetime-local',
+	'month',
+	'week',
 ]);
 
 export const SIZE_CHOICES = Object.freeze([
