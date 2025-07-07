@@ -29,6 +29,7 @@ export const ICON_LIST_SOLID = Object.freeze([
 	'user_settings_solid',
 	'users_group_solid',
 	'users_solid',
+	'ruler_combined_solid',
 ]);
 
 
@@ -63,6 +64,7 @@ export const ICON_LIST_OUTLINE = Object.freeze([
 	'user_settings_outline',
 	'users_group_outline',
 	'users_outline',
+	'ruler_combined_outline',
 ]);
 
 
