@@ -1,3 +1,15 @@
+# v0.5.0 (Mon Jul 07 2025)
+
+#### 🚀 Enhancement
+
+- Added FRadioButton, FStack and more icons [#28](https://github.com/dd/futility-ui/pull/28) ([@dd](https://github.com/dd))
+
+#### Authors: 1
+
+- Dmitry Dobrynin ([@dd](https://github.com/dd))
+
+---
+
 # v0.4.2 (Mon Jul 07 2025)
 
 #### 🐛 Bug Fix
