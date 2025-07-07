@@ -82,8 +82,8 @@ We welcome contributions of all sizes!
 * [x] Switch
 * [x] Checkbox
 * [x] Input
-* [ ] Widgets group (A component that visually merges widgets without spacing, such as an input field immediately followed by a button.)
-* [ ] Radio button
+* [x] Widgets group (A component that visually merges widgets without spacing, such as an input field immediately followed by a button.)
+* [x] Radio button
 * [ ] Form row (A component that renders a form row with a label, widget, help text, and error text.) **`<- you are here`**
 * [ ] Select
 * [ ] DropDown

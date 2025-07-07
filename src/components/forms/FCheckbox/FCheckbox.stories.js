@@ -1,4 +1,3 @@
-import { ref } from 'vue';
 import { useArgs } from 'storybook/preview-api';
 
 import FCheckbox from '.';
@@ -47,8 +46,8 @@ export default {
 			},
 		},
 		disabled: {
-			control: 'boolean',
 			description: 'Disabled flag.',
+			control: 'boolean',
 			table: {
 				category: 'props',
 				type: { summary: 'boolean' },
@@ -62,8 +61,8 @@ export default {
 		// EVENTS
 		'update:modelValue': {
 			action: 'update:modelValue',
-			control: false,
 			description: 'Event on update value',
+			control: false,
 			table: {
 				category: 'events',
 				type: { summary: null },
@@ -101,7 +100,6 @@ export const CheckboxGroup = {
 	},
 	args: {
 		modelValue: [],
-		name: "test_group",
 	},
 };
 
