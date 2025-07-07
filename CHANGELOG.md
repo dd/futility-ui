@@ -1,3 +1,15 @@
+# v0.5.1 (Mon Jul 07 2025)
+
+#### 🐛 Bug Fix
+
+- Fix build and update FStack styles [#29](https://github.com/dd/futility-ui/pull/29) ([@dd](https://github.com/dd))
+
+#### Authors: 1
+
+- Dmitry Dobrynin ([@dd](https://github.com/dd))
+
+---
+
 # v0.5.0 (Mon Jul 07 2025)
 
 #### 🚀 Enhancement
