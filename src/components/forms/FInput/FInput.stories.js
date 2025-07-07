@@ -4,7 +4,7 @@ import { useArgs } from 'storybook/preview-api';
 import { makeUpdateArg } from '@/utils/storybook';
 import FIcon from '@/components/FIcon';
 import FInput from './index.vue';
-import { TEXT_ALLOWED_TYPES, SIZE_CHOICES } from './base';
+import { TEXT_ALLOWED_TYPES, SIZE_CHOICES } from './constants';
 
 const ALL_ALLOWED_TYPES = TEXT_ALLOWED_TYPES.concat([ 'password' ]);
 

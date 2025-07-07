@@ -25,7 +25,7 @@ import { computed, defineAsyncComponent, provide } from 'vue';
 const FIcon = defineAsyncComponent(() => import('@/components/FIcon'));
 const FInputText = defineAsyncComponent(() => import('./FInputText.vue'));
 const FInputPassword = defineAsyncComponent(() => import('./FInputPassword.vue'));
-import { TEXT_ALLOWED_TYPES } from './base';
+import { TEXT_ALLOWED_TYPES } from './constants';
 
 defineOptions({ name: 'FInput' });
 defineEmits([ 'update:modelValue' ]);

@@ -70,6 +70,10 @@
       "require": "./dist/forms/FInput/index.cjs.js",
       "import": "./dist/forms/FInput/index.es.js"
     },
+    "./forms/FInput/constants": {
+      "require": "./dist/forms/FInput/constants.cjs.js",
+      "import": "./dist/forms/FInput/constants.es.js"
+    },
     "./styles.css": "./dist/styles/styles.css",
     "./theme.css": "./dist/styles/theme.css",
     "./assets/sprite.svg": "./dist/assets/sprite.svg"
