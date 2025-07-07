@@ -74,6 +74,10 @@
       "require": "./dist/forms/FInput/constants.cjs.js",
       "import": "./dist/forms/FInput/constants.es.js"
     },
+    "./FStack": {
+      "require": "./dist/FStack/index.cjs.js",
+      "import": "./dist/FStack/index.es.js"
+    },
     "./forms/FRadioButton": {
       "require": "./dist/forms/FRadioButton/index.cjs.js",
       "import": "./dist/forms/FRadioButton/index.es.js"
