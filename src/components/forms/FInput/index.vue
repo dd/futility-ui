@@ -31,20 +31,20 @@ defineOptions({ name: 'FInput' });
 defineEmits([ 'update:modelValue' ]);
 const model = defineModel();
 const props = defineProps({
-	/** Input type. */
+	/** The HTML input type. */
 	type: {
 		type: String,
 		validator: (type) => TEXT_ALLOWED_TYPES.includes(type) || type === 'password',
 	},
 
-	/** Input size. */
+	/** Predefined size of the input or a custom size class. */
 	size: {
 		type: String,
 		default: 'm',
 		// validator: (size) => SIZE_CHOICES.includes(size),
 	},
 
-	/** Error flag. */
+	/** Whether to display the input in an error state. */
 	error: Boolean,
 });
 

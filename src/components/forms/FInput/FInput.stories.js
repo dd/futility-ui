@@ -47,7 +47,7 @@ export default {
 	tags: [ 'autodocs' ],
 	argTypes: {
 		modelValue: {
-			description: 'Input value. The type depends on the input type.',
+			description: 'The input value. The type depends on the input type.',
 			control: 'text',
 			table: {
 				category: 'props',
@@ -55,7 +55,6 @@ export default {
 			},
 		},
 		type: {
-			description: `Input type.`,
 			options: ALL_ALLOWED_TYPES,
 			control: 'select',
 			table: {
@@ -64,7 +63,9 @@ export default {
 			},
 		},
 		size: {
-			description: 'Input size.',
+			description: `
+Predefined size of the input (${SIZE_CHOICES.join(', ')}) or a custom size class.
+			`,
 			options: SIZE_CHOICES,
 			control: 'select',
 			table: {
@@ -73,27 +74,15 @@ export default {
 			},
 		},
 		error: {
-			description: 'Error flag.',
 			control: 'boolean',
 			table: {
 				category: 'props',
 				type: { summary: 'boolean' },
 			},
 		},
-		// EVENTS
-		'update:modelValue': {
-			action: 'update:modelValue',
-			description: 'Event on update value',
-			control: false,
-			table: {
-				category: 'events',
-				type: { summary: null },
-				defaultValue: { summary: null },
-			},
-		},
 		// SLOTS
 		start: {
-			description: 'Слот в начале виджета.',
+			description: 'Slot content rendered at the start of the input.',
 			control: 'text',
 			table: {
 				category: 'slots',
@@ -102,11 +91,22 @@ export default {
 			},
 		},
 		end: {
-			description: 'Слот в конце виджета.',
+			description: 'Slot content rendered at the end of the input.',
 			control: 'text',
 			table: {
 				category: 'slots',
 				type: { summary: 'vnode' },
+				defaultValue: { summary: null },
+			},
+		},
+		// EVENTS
+		'update:modelValue': {
+			action: 'update:modelValue',
+			description: 'Emitted when the input value changes.',
+			control: false,
+			table: {
+				category: 'events',
+				type: { summary: null },
 				defaultValue: { summary: null },
 			},
 		},
