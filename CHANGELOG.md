@@ -1,3 +1,15 @@
+# v0.6.2 (Tue Jul 08 2025)
+
+#### 🐛 Bug Fix
+
+- 🩹 (FInput): Fix FInput styles [#32](https://github.com/dd/futility-ui/pull/32) ([@dd](https://github.com/dd))
+
+#### Authors: 1
+
+- Dmitry Dobrynin ([@dd](https://github.com/dd))
+
+---
+
 # v0.6.1 (Tue Jul 08 2025)
 
 #### 🐛 Bug Fix
