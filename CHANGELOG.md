@@ -1,3 +1,15 @@
+# v0.6.0 (Tue Jul 08 2025)
+
+#### 🚀 Enhancement
+
+- Added FControlLabel component [#30](https://github.com/dd/futility-ui/pull/30) ([@dd](https://github.com/dd))
+
+#### Authors: 1
+
+- Dmitry Dobrynin ([@dd](https://github.com/dd))
+
+---
+
 # v0.5.1 (Mon Jul 07 2025)
 
 #### 🐛 Bug Fix
