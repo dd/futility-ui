@@ -9,8 +9,6 @@ The \`FInputClearButton\` component provides a convenient way to add a clear (re
 \`FInput\` field.
 
 \`\`\`js
-import { FInputClearButton } from 'futility-ui'
-// or
 import FInputClearButton from 'futility-ui/forms/FInput/ClearButton'
 \`\`\`
 

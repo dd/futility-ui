@@ -78,6 +78,14 @@
       "require": "./dist/forms/FInput/constants.cjs.js",
       "import": "./dist/forms/FInput/constants.es.js"
     },
+    "./forms/FInput/ClearButton": {
+      "require": "./dist/forms/FInput/ClearButton.cjs.js",
+      "import": "./dist/forms/FInput/ClearButton.es.js"
+    },
+    "./forms/FInput/ShowPasswordButton": {
+      "require": "./dist/forms/FInput/ShowPasswordButton.cjs.js",
+      "import": "./dist/forms/FInput/ShowPasswordButton.es.js"
+    },
     "./forms/FRadioButton": {
       "require": "./dist/forms/FRadioButton/index.cjs.js",
       "import": "./dist/forms/FRadioButton/index.es.js"
