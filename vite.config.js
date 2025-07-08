@@ -96,6 +96,7 @@ export default defineConfig({
 				'forms/FInput/index': resolve(__dirname, 'src/components/forms/FInput/index.vue'),
 				'forms/FInput/constants': resolve(__dirname, 'src/components/forms/FInput/constants.js'),
 				'forms/FRadioButton/index': resolve(__dirname, 'src/components/forms/FRadioButton/index.vue'),
+				'forms/FControlLabel/index': resolve(__dirname, 'src/components/forms/FControlLabel/index.vue'),
 				styles: resolve(__dirname, 'src/styles.sass'),
 				theme: resolve(__dirname, 'src/theme.sass'),
 			},

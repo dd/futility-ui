@@ -1,0 +1,19 @@
+.fui-control_label
+	display: inline-flex
+	align-items: flex-start
+	gap: var(--fui-spacing-2)
+
+	font-size: var(--fui-text-size-sm)
+	line-height: 125%
+	font-weight: 500
+	color: var(--fui-text-color-default-highlight)
+
+	&:has(.fui-switch)
+		line-height: 20px
+
+	&.has-error
+		color: var(--fui-text-color-error)
+
+	.fui-checkbox,
+	.fui-radiobutton
+		margin: 0

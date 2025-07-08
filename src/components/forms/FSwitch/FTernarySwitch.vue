@@ -47,9 +47,6 @@ const props = defineProps({
 	/** Disabled flag. */
 	disabled: Boolean,
 
-	/** Error flag. */
-	error: Boolean,
-
 	/** Widget title. */
 	title: String,
 
@@ -87,10 +84,6 @@ const widgetClasses = computed(() => {
 
 	if (attrs.class) {
 		result.push(attrs.class);
-	}
-
-	if (props.error) {
-		result.push('has-error');
 	}
 
 	return result;

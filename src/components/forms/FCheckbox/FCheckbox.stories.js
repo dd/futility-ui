@@ -53,10 +53,6 @@ export default {
 				type: { summary: 'boolean' },
 			},
 		},
-		error: {
-			table: { disable: true },
-			control: false,
-		},
 
 		// EVENTS
 		'update:modelValue': {
@@ -73,7 +69,6 @@ export default {
 	args: {
 		modelValue: false,
 		disabled: false,
-		// error: false,
 	},
 	render: makeRenderer([ 'modelValue' ]),
 };
