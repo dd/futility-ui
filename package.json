@@ -58,6 +58,10 @@
       "require": "./dist/FButtonText/constants.cjs.js",
       "import": "./dist/FButtonText/constants.es.js"
     },
+    "./FStack": {
+      "require": "./dist/FStack/index.cjs.js",
+      "import": "./dist/FStack/index.es.js"
+    },
     "./forms/FSwitch": {
       "require": "./dist/forms/FSwitch/index.cjs.js",
       "import": "./dist/forms/FSwitch/index.es.js"
@@ -74,13 +78,13 @@
       "require": "./dist/forms/FInput/constants.cjs.js",
       "import": "./dist/forms/FInput/constants.es.js"
     },
-    "./FStack": {
-      "require": "./dist/FStack/index.cjs.js",
-      "import": "./dist/FStack/index.es.js"
-    },
     "./forms/FRadioButton": {
       "require": "./dist/forms/FRadioButton/index.cjs.js",
       "import": "./dist/forms/FRadioButton/index.es.js"
+    },
+    "./forms/FControlLabel": {
+      "require": "./dist/forms/FControlLabel/index.cjs.js",
+      "import": "./dist/forms/FControlLabel/index.es.js"
     },
     "./styles.css": "./dist/styles/styles.css",
     "./theme.css": "./dist/styles/theme.css",

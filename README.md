@@ -109,6 +109,7 @@ We welcome contributions of all sizes!
 
 #### Extended
 
+* [ ] Integrate Tailwind configuration and theming
 * [ ] Tag panel
 * [ ] Input Autocomplete (with loading options)
 * [ ] Select Autocomplete
