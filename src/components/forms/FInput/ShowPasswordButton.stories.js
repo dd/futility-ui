@@ -10,8 +10,6 @@ You can place it into any slot of the [FInput](?path=/docs/forms-finput--docs) f
 \`type="password"\`.
 
 \`\`\`js
-import { FInputShowPasswordButton } from 'futility-ui'
-// or
 import FInputShowPasswordButton from 'futility-ui/forms/FInput/ShowPasswordButton'
 \`\`\`
 

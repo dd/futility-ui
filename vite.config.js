@@ -95,6 +95,8 @@ export default defineConfig({
 				'forms/FCheckbox/index': resolve(__dirname, 'src/components/forms/FCheckbox/index.vue'),
 				'forms/FInput/index': resolve(__dirname, 'src/components/forms/FInput/index.vue'),
 				'forms/FInput/constants': resolve(__dirname, 'src/components/forms/FInput/constants.js'),
+				'forms/FInput/ClearButton': resolve(__dirname, 'src/components/forms/FInput/ClearButton.vue'),
+				'forms/FInput/ShowPasswordButton': resolve(__dirname, 'src/components/forms/FInput/ShowPasswordButton.vue'),
 				'forms/FRadioButton/index': resolve(__dirname, 'src/components/forms/FRadioButton/index.vue'),
 				'forms/FControlLabel/index': resolve(__dirname, 'src/components/forms/FControlLabel/index.vue'),
 				styles: resolve(__dirname, 'src/styles.sass'),
