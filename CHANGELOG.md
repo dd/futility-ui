@@ -1,3 +1,15 @@
+# v0.6.1 (Tue Jul 08 2025)
+
+#### 🐛 Bug Fix
+
+- 🩹 (FInput): Added ClearButton and ShowPasswordButton to build [#31](https://github.com/dd/futility-ui/pull/31) ([@dd](https://github.com/dd))
+
+#### Authors: 1
+
+- Dmitry Dobrynin ([@dd](https://github.com/dd))
+
+---
+
 # v0.6.0 (Tue Jul 08 2025)
 
 #### 🚀 Enhancement
