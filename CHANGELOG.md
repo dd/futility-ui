@@ -1,3 +1,15 @@
+# v0.6.5 (Wed Jul 09 2025)
+
+#### 🐛 Bug Fix
+
+- 💄 (FButton): Update button styles for text + icon [#35](https://github.com/dd/futility-ui/pull/35) ([@dd](https://github.com/dd))
+
+#### Authors: 1
+
+- Dmitry Dobrynin ([@dd](https://github.com/dd))
+
+---
+
 # v0.6.4 (Wed Jul 09 2025)
 
 #### 🐛 Bug Fix
