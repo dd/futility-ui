@@ -47,6 +47,10 @@ export const ICON_LIST_SOLID = Object.freeze([
 	'truck_solid',
 	'map_pin_solid',
 	'map_pin_alt_solid',
+	'sun_solid',
+	'moon_solid',
+	'moon_plus_solid',
+	'cookie_solid',
 ]);
 
 
@@ -99,6 +103,10 @@ export const ICON_LIST_OUTLINE = Object.freeze([
 	'truck_outline',
 	'map_pin_outline',
 	'map_pin_alt_outline',
+	'sun_outline',
+	'moon_outline',
+	'moon_plus_outline',
+	'cookie_outline',
 ]);
 
 
@@ -125,4 +133,5 @@ export const ICON_LIST_OTHER = Object.freeze([
 	'refresh',
 	'facebook',
 	'paper_clip',
+	'ban',
 ]);
