@@ -3,7 +3,7 @@
 	xmlns='http://www.w3.org/2000/svg'
 	viewBox="0 0 24 24"
 	fill="none"
-	class="fui-icon fui-icon-solid icon-phone icon-phone-solid"
+	class="fui-icon fui-icon-outline icon-phone icon-phone-outline"
 >
 	<path
 		stroke="currentColor"

@@ -3,7 +3,7 @@
 	xmlns="http://www.w3.org/2000/svg"
 	fill="currentColor"
 	viewBox="0 0 24 24"
-	class="fui-icon fui-icon-outline icon-archive_up icon-archive_up-outline"
+	class="fui-icon fui-icon-solid icon-archive_up icon-archive_up-solid"
 >
 	<path
 		fill-rule="evenodd"
