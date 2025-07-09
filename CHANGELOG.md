@@ -1,3 +1,15 @@
+# v0.6.6 (Wed Jul 09 2025)
+
+#### 🐛 Bug Fix
+
+- 💄 (FIcon): Added icons and fix styles [#36](https://github.com/dd/futility-ui/pull/36) ([@dd](https://github.com/dd))
+
+#### Authors: 1
+
+- Dmitry Dobrynin ([@dd](https://github.com/dd))
+
+---
+
 # v0.6.5 (Wed Jul 09 2025)
 
 #### 🐛 Bug Fix
