@@ -4,7 +4,6 @@ import Toast, { TYPE } from 'vue-toastification';
 import { Title, Primary, Controls, Stories, Description, Subtitle } from '@storybook/addon-docs/blocks';
 
 import 'vue-toastification/dist/index.css';
-import './styles.css';
 import './styles-fui.css';
 
 

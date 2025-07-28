@@ -1,10 +1,10 @@
 <h1 align="center" >Futility UI</h1>
 
-<p align="center">
-	<a href="https://www.npmjs.com/package/futility-ui" target="_blank" title="Version">
+<p align="center" class="readme-shields" >
+	<a href="https://www.npmjs.com/package/futility-ui" target="_blank" title="Version" class="shield" >
 		<img src="https://img.shields.io/npm/v/futility-ui.svg" alt="Version">
 	</a>
-	<a href="https://raw.githubusercontent.com/dd/futility-ui/master/LICENSE" target="_blank" title="License - Mozilla Public License Version 2.0" >
+	<a href="https://raw.githubusercontent.com/dd/futility-ui/master/LICENSE" target="_blank" title="License - Mozilla Public License Version 2.0" class="shield" >
 		<img src="https://img.shields.io/npm/l/futility-ui?cache-cracker" alt="License - Mozilla Public License Version 2.0" />
 	</a>
 </p>

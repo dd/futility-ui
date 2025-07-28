@@ -1,2 +1,7 @@
 @import "@/styles.css";
 @import "flowbite/src/themes/default";
+
+
+.readme-shields img {
+	display: inline;
+}
