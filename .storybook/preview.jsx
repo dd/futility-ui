@@ -4,10 +4,8 @@ import Toast, { TYPE } from 'vue-toastification';
 import { Title, Primary, Controls, Stories, Description, Subtitle } from '@storybook/addon-docs/blocks';
 
 import 'vue-toastification/dist/index.css';
-import './styles.sass';
-
-import '@/styles.sass';
-import '@/theme.sass';
+import './styles.css';
+import './styles-fui.css';
 
 
 setup((app) => {
@@ -30,10 +28,10 @@ const preview = {
 	parameters: {
 		backgrounds: { disable: true },
 		previewSchemeToggler: {
-			darkColor: 'var(--fui-color-gray-400)',
-			lightColor: 'var(--fui-color-gray-600)',
-			darkBackground: 'var(--fui-color-gray-900)',
-			lightBackground: 'var(--fui-color-white)',
+			darkColor: 'var(--pst-dark-color)',
+			lightColor: 'var(--pst-light-color)',
+			darkBackground: 'var(--pst-dark-bg)',
+			lightBackground: 'var(--pst-light-bg)',
 		},
 		options: {
 			storySort: {

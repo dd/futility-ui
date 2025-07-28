@@ -1,0 +1,73 @@
+@import "tailwindcss" prefix(fui) ;
+/*@import "tailwindcss/theme.css" prefix(fui);*/
+
+@import "./FIcon/style.css";
+@import "./FLoader/style.css";
+@import "./FButton/style.css";
+@import "./FButton/theme.css";
+@import "./FButtonText/style.css";
+@import "./FButtonText/theme.css";
+@import "./FStack/style.css";
+@import "./forms/FSwitch/style.css";
+@import "./forms/FCheckbox/style.css";
+@import "./forms/FInput/style.css";
+@import "./forms/FRadioButton/style.css";
+@import "./forms/FControlLabel/style.css";
+
+
+@theme {
+	--color-primary-50: var(--fui-color-blue-50);
+	--color-primary-100: var(--fui-color-blue-100);
+	--color-primary-200: var(--fui-color-blue-200);
+	--color-primary-300: var(--fui-color-blue-300);
+	--color-primary-400: var(--fui-color-blue-400);
+	--color-primary-500: var(--fui-color-blue-500);
+	--color-primary-600: var(--fui-color-blue-600);
+	--color-primary-700: var(--fui-color-blue-700);
+	--color-primary-800: var(--fui-color-blue-800);
+	--color-primary-900: var(--fui-color-blue-900);
+	--color-primary-950: var(--fui-color-blue-950);
+
+	/* Text color */
+	--color-text: light-dark(var(--fui-color-gray-500), var(--fui-color-gray-400));
+	--color-header: light-dark(var(--fui-color-gray-900), var(--fui-color-white));
+	--color-error: light-dark(var(--fui-color-red-600), var(--fui-color-red-500));
+
+	/* Focus */
+	--color-focus: light-dark(var(--fui-color-primary-200), var(--fui-color-primary-900));
+	--color-focus-error: light-dark(var(--fui-color-red-200), var(--fui-color-red-900));
+
+	/* Spacing */
+	--spacing-0\.5: 2px;
+	--spacing: 4px;
+	--spacing-1: 4px;
+	--spacing-1\.5: 6px;
+	--spacing-2: 8px;
+	--spacing-2\.5: 10px;
+	--spacing-3: 12px;
+	--spacing-3\.5: 14px;
+	--spacing-4: 16px;
+	--spacing-5: 20px;
+	--spacing-6: 24px;
+}
+
+@theme inline {
+	/* Other */
+	--font-sans: Inter, Helvetica, Arial, sans-serif;
+	--radius-lg: 0.5rem;
+}
+
+/* Focus */
+@theme inline {
+	/* Focus */
+	--outline-size-focus: 4px;
+	--outline-offset-focus: 0;
+}
+
+@utility outline-focus-prepear {
+	outline-style: solid;
+	outline-width: 4px;
+	outline-offset: 0;
+	outline-color: transparent;
+}
+/* End of Focus */

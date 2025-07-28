@@ -1,13 +1,13 @@
-import FIcon from './components/FIcon';
-import FLoader from './components/FLoader';
-import FButton from './components/FButton';
-import FButtonText from './components/FButtonText';
-import FStack from './components/FStack';
-import FSwitch from './components/forms/FSwitch';
-import FCheckbox from './components/forms/FCheckbox';
-import FInput from './components/forms/FInput';
-import FRadioButton from './components/forms/FRadioButton';
-import FControlLabel from './components/forms/FControlLabel';
+import FIcon from './FIcon';
+import FLoader from './FLoader';
+import FButton from './FButton';
+import FButtonText from './FButtonText';
+import FStack from './FStack';
+import FSwitch from './forms/FSwitch';
+import FCheckbox from './forms/FCheckbox';
+import FInput from './forms/FInput';
+import FRadioButton from './forms/FRadioButton';
+import FControlLabel from './forms/FControlLabel';
 
 
 export {
