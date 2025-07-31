@@ -1,7 +1,96 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
 @import "@/styles.css";
 @import "flowbite/src/themes/default";
 
 
+/* Readme */
 .readme-shields img {
 	display: inline;
 }
+
+
+/* Preview Scheme Toggler */
+:root {
+	--pst-dark-color: var(--fui-color-gray-400);
+	--pst-light-color: var(--fui-color-gray-600);
+	--pst-dark-bg: var(--fui-color-gray-900);
+	--pst-light-bg: var(--fui-color-white);
+}
+
+.sbpst-scheme_preview .sbpst-dark,
+.sbpst-scheme_preview .sbpst-light {
+	min-height: 150px;
+}
+
+.docs-story > :first-child {
+	min-height: 150px;
+	box-sizing: border-box;
+}
+/* End Of Preview Scheme Toggler */
+
+/* Previews */
+.preview-table {
+	td {
+		@apply fui:p-2;
+
+		&.label {
+			@apply fui:text-xs;
+			line-height: 150%;
+		}
+	}
+
+	th.min-label {
+		@apply fui:text-xs;
+		font-weight: normal;
+		line-height: 150%;
+	}
+}
+/* End Of Previews */
+
+
+/* FIcons */
+#story--ficon--default--primary,
+#story--ficon--default {
+	--fui-icon-color: light-dark(#000000, #ffffff);
+}
+
+.icon_preview {
+	--fui-icon-color: light-dark(#000000, #ffffff);
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: center;
+	align-items: center;
+	align-content: center;
+	max-width: 500px;
+	@apply fui:gap-4;
+}
+
+.icon_preview-wrapper {
+	flex-direction: column;
+}
+/* End Of FIcons */
+
+
+/* FLoader */
+.loader_preview-table-wrapper {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: center;
+}
+
+.loader_preview-table td {
+	text-align: center;
+	width: 100px;
+
+	svg {
+		display: inline;
+	}
+}
+
+.fui-loader-custom {
+	height: 100px;
+}
+/* End Of FLoader */

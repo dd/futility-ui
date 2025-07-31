@@ -64,4 +64,3 @@ defineProps({
 	hideTrack: Boolean,
 });
 </script>
-
