@@ -4,9 +4,15 @@
 @import "flowbite/src/themes/default";
 
 
-/* Readme */
-.readme-shields img {
-	display: inline;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	a svg {
+		display: inline;
+	}
 }
 
 
@@ -28,6 +34,13 @@
 	box-sizing: border-box;
 }
 /* End Of Preview Scheme Toggler */
+
+
+/* Readme */
+.readme-shields img {
+	display: inline;
+}
+
 
 /* Previews */
 .preview-table {

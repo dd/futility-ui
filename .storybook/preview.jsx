@@ -36,12 +36,13 @@ const preview = {
 			storySort: {
 				order: [
 					'Introduction',
+					'Contributing',
 					'*',
 				],
 			},
 		},
 		docs: {
-			toc: true,
+			toc: { headingSelector: 'h2, h3' },
 			page: () => (
 				<>
 					<Title />
