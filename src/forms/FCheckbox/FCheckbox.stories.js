@@ -88,8 +88,8 @@ export const CheckboxGroup = {
 			},
 			template: `<div>
 		<FCheckbox v-bind="args" v-on="promisedArgs" name="test_group" value="checkbox-1" />
-		<FCheckbox v-bind="args" v-on="promisedArgs" name="test_group" value="checkbox-2" class="storybook:ml-2" />
-		<FCheckbox v-bind="args" v-on="promisedArgs" name="test_group" value="checkbox-3" class="storybook:ml-2" />
+		<FCheckbox v-bind="args" v-on="promisedArgs" name="test_group" value="checkbox-2" class="fui:ml-4" />
+		<FCheckbox v-bind="args" v-on="promisedArgs" name="test_group" value="checkbox-3" class="fui:ml-4" />
 	</div>`,
 		};
 	},

@@ -94,7 +94,8 @@
       "require": "./dist/forms/FControlLabel/index.cjs.js",
       "import": "./dist/forms/FControlLabel/index.es.js"
     },
-    "./styles.css": "./dist/styles.css",
+    "./styles.base.css": "./dist/styles.base.css",
+    "./styles.tailwind.css": "./dist/styles.tailwind.css",
     "./assets/sprite.svg": "./dist/assets/sprite.svg"
   },
   "sideEffects": false,

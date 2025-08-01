@@ -94,8 +94,8 @@ export const RadioButtonGroup = {
 			},
 			template: `<div>
 		<FRadioButton v-bind="args" v-on="promisedArgs" name="test_group" value="variant-1" />
-		<FRadioButton v-bind="args" v-on="promisedArgs" name="test_group" value="variant-2" class="storybook:ml-2" />
-		<FRadioButton v-bind="args" v-on="promisedArgs" name="test_group" value="variant-3" class="storybook:ml-2" />
+		<FRadioButton v-bind="args" v-on="promisedArgs" name="test_group" value="variant-2" class="fui:ml-4" />
+		<FRadioButton v-bind="args" v-on="promisedArgs" name="test_group" value="variant-3" class="fui:ml-4" />
 	</div>`,
 		};
 	},

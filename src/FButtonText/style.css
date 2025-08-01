@@ -1,7 +1,7 @@
 .fui-button-text {
 	display: inline-block;
 	appearance: none;
-	border-radius: var(--fui-bt-rounded-lg);
+	@apply fui:rounded-sm;
 	font-family: inherit;
 	font-size: inherit;
 	font-weight: inherit;
