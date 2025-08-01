@@ -1,0 +1,49 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+
+<Meta title="Usage" />
+
+## Getting Started
+
+Install the package and decide how to include the stylesheet.
+
+```bash
+pnpm add futility-ui
+```
+
+### Importing the styles
+
+You can import the stylesheet from JavaScript:
+
+```javascript
+import 'futility-ui/styles.tailwind.css'; // or styles.base.css
+```
+
+or from your main CSS file:
+
+```css
+@import 'futility-ui/styles.tailwind.css'; /* or styles.base.css */
+```
+
+`styles.tailwind.css` bundles Tailwind\'s preflight together with the component theme.
+Choose `styles.base.css` if Tailwind is already configured in your project.
+
+### Using the components
+
+Install the whole library as a plugin:
+
+```javascript
+import { createApp } from 'vue';
+import FutilityUI from 'futility-ui';
+
+createApp(App)
+  .use(FutilityUI)
+  .mount('#app');
+```
+
+Alternatively import only the components you need:
+
+```javascript
+import { FButton, FInput } from 'futility-ui';
+```
+
+Now you can use the imported components in your templates.
