@@ -26,7 +26,36 @@ pnpm add futility-ui
 
 ## Usage
 
-WIP
+Install the library and include one of the provided style sheets.
+
+```bash
+pnpm add futility-ui
+```
+
+Import the styles in JavaScript:
+
+```javascript
+import 'futility-ui/styles.tailwind.css'; // or styles.base.css
+```
+
+Or from your main CSS file:
+
+```css
+@import 'futility-ui/styles.tailwind.css'; /* or styles.base.css */
+```
+
+Finally register the plugin in your Vue application:
+
+```javascript
+import { createApp } from 'vue';
+import FutilityUI from 'futility-ui';
+
+createApp(App)
+  .use(FutilityUI)
+  .mount('#app');
+```
+
+For details about choosing a stylesheet and other options, see the `usage` page in Storybook.
 
 
 ## Development
