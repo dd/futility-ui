@@ -1,8 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
 
-@import "@/styles.base.css";
-/*@import "@/styles.tailwind.css";*/
-@import "flowbite/src/themes/default";
+/*@import '@/styles.tailwind.css';*/
+@import 'tailwindcss';
+@import '@/styles.base.css';
+@import 'flowbite/src/themes/default';
 
 
 h1,

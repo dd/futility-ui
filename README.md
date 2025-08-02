@@ -15,18 +15,9 @@ A set of ready-to-use UI components for Vue 3, styled according to the [Flowbite
 [Live Demo](https://dd.github.io/futility-ui/)
 
 
-## Installation
-
-First, install the package:
-
-```sh
-pnpm add futility-ui
-```
-
-
 ## Usage
 
-Install the library and include one of the provided style sheets.
+Install the library:
 
 ```bash
 pnpm add futility-ui
@@ -34,7 +25,7 @@ pnpm add futility-ui
 
 Import the styles in JavaScript:
 
-```javascript
+```js
 import 'futility-ui/styles.tailwind.css'; // or styles.base.css
 ```
 
@@ -44,62 +35,25 @@ Or from your main CSS file:
 @import 'futility-ui/styles.tailwind.css'; /* or styles.base.css */
 ```
 
-Finally register the plugin in your Vue application:
+You can either register the plugin globally:
 
-```javascript
+```js
 import { createApp } from 'vue';
 import FutilityUI from 'futility-ui';
 
 createApp(App)
-  .use(FutilityUI)
-  .mount('#app');
+	.use(FutilityUI)
+	.mount('#app')
+;
 ```
 
-For details about choosing a stylesheet and other options, see the `usage` page in Storybook.
+...or import only the components you need:
 
-
-## Development
-
-### Setting Up for Development
-
-Clone the repository and install dependencies:
-
-```console
-git clone git@github.com:dd/futility-ui.git
-cd futility-ui
-pnpm install
+```js
+import { FButton, FInput } from 'futility-ui';
 ```
 
-
-### Running in Development Mode
-
-Use Vite to start a local development server:
-
-```console
-pnpm run storybook
-```
-
-
-### Building the Library
-
-To create a production-ready build:
-
-```console
-pnpm run build
-```
-
-
-### Contributing
-
-1. Fork the repository on GitHub.
-
-2. Create a new branch for your feature or fix.
-
-3. Make your changes and commit them with clear messages.
-
-4. Open a pull request and describe your changes.
-
-We welcome contributions of all sizes!
+For more information about choosing a stylesheet and other options, see the [Usage page](https://dd.github.io/futility-ui/?path=/docs/usage--docs) in the documentation.
 
 
 ### Roadmap

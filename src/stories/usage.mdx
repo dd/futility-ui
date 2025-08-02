@@ -2,15 +2,13 @@ import { Meta } from '@storybook/addon-docs/blocks';
 
 <Meta title="Usage" />
 
-## Getting Started
-
 Install the package and decide how to include the stylesheet.
 
 ```bash
 pnpm add futility-ui
 ```
 
-### Importing the styles
+## Importing the styles
 
 You can import the stylesheet from JavaScript:
 
@@ -24,8 +22,41 @@ or from your main CSS file:
 @import 'futility-ui/styles.tailwind.css'; /* or styles.base.css */
 ```
 
-`styles.tailwind.css` bundles Tailwind\'s preflight together with the component theme.
-Choose `styles.base.css` if Tailwind is already configured in your project.
+### Choosing a stylesheet
+
+The library provides two stylesheet options:
+
+* `styles.base.css` – Base stylesheet containing only the core component styles from the Futility UI library.
+* `styles.tailwind.css` – Extended stylesheet that includes both the component styles and all Tailwind CSS styles.
+
+
+## Configuring component styles
+
+You can override styling parameters using standard Tailwind CSS methods in your custom stylesheets:
+
+```css
+@import 'futility-ui/styles.base.css';
+/* or */
+@import 'tailwindcss';
+@import 'futility-ui/styles.tailwind.css';
+
+@theme {
+	--color-primary-50: var(--fui-color-red-50);
+	--color-primary-100: var(--fui-color-red-100);
+	--color-primary-200: var(--fui-color-red-200);
+	--color-primary-300: var(--fui-color-red-300);
+	--color-primary-400: var(--fui-color-red-400);
+	--color-primary-500: var(--fui-color-red-500);
+	--color-primary-600: var(--fui-color-red-600);
+	--color-primary-700: var(--fui-color-red-700);
+	--color-primary-800: var(--fui-color-red-800);
+	--color-primary-900: var(--fui-color-red-900);
+	--color-primary-950: var(--fui-color-red-950);
+
+	--spacing: 3px;
+}
+```
+
 
 ### Using the components
 
@@ -36,8 +67,9 @@ import { createApp } from 'vue';
 import FutilityUI from 'futility-ui';
 
 createApp(App)
-  .use(FutilityUI)
-  .mount('#app');
+	.use(FutilityUI)
+	.mount('#app')
+;
 ```
 
 Alternatively import only the components you need:
