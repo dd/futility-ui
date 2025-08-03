@@ -1,0 +1,57 @@
+@theme {
+	--color-radiobutton-bg: light-dark(var(--fui-color-gray-50), var(--fui-color-gray-700));
+	--color-radiobutton-b: light-dark(var(--fui-color-gray-300), var(--fui-color-gray-600));
+	--color-radiobutton-cbg: var(--fui-color-gray-50);
+	--color-radiobutton-cb: var(--fui-color-primary-700);
+	--color-radiobutton-dbg: light-dark(var(--fui-color-gray-100), var(--fui-color-gray-800));
+	--color-radiobutton-db: light-dark(var(--fui-color-gray-100), var(--fui-color-gray-800));
+	--color-radiobutton-dcbg: light-dark(var(--fui-color-white), var(--fui-color-gray-900));
+	--color-radiobutton-dcb: light-dark(var(--fui-color-primary-200), var(--fui-color-primary-900));
+}
+
+
+.fui-radiobutton {
+	height: 16px;
+	width: 16px;
+	box-sizing: border-box;
+
+	border-radius: 50%;
+	@apply fui:bg-radiobutton-bg;
+	border: 1px solid;
+	@apply fui:border-radiobutton-b;
+
+	appearance: none;
+	cursor: pointer;
+
+	@apply fui:outline-focus-prepear;
+	transition-property: background-color, border-color, outline-color;
+	transition-duration: .1s;
+	will-change: background-color, border-color, outline-color;
+
+	&:checked {
+		background-image: none;
+		@apply fui:bg-radiobutton-cbg;
+		border: 4px solid;
+		@apply fui:border-radiobutton-cb;
+		print-color-adjust: exact;
+	}
+
+	&:disabled {
+		cursor: default;
+		@apply fui:bg-radiobutton-dbg;
+		@apply fui:border-radiobutton-db;
+
+		&:checked {
+			@apply fui:bg-radiobutton-dcbg;
+			@apply fui:border-radiobutton-dcb;
+		}
+	}
+
+	&:focus-visible {
+		@apply fui:outline-focus;
+
+		&:not(:checked) {
+			@apply fui:border-radiobutton-cb;
+		}
+	}
+}

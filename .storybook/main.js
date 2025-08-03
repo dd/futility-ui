@@ -10,12 +10,14 @@ const config = {
 
 	addons: [
 		// '@storybook/addon-links',
-		'@storybook/addon-onboarding',
-		'@storybook/addon-essentials',
+		// '@storybook/addon-essentials',
 		'@chromatic-com/storybook',
-		'@storybook/addon-interactions',
+		// '@storybook/addon-interactions',
 		// 'storybook-addon-mock',
 		'storybook-preview-scheme-toggler',
+		'@storybook/addon-docs',
+		// '@storybook/addon-actions',
+		'storybook/actions',
 	],
 
 	framework: {

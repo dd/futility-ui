@@ -1,0 +1,315 @@
+@theme {
+	--color-input-c: light-dark(var(--fui-color-gray-900), var(--fui-color-white));
+	--color-input-b: light-dark(var(--fui-color-gray-300), var(--fui-color-gray-600));
+	--color-input-bg: light-dark(var(--fui-color-gray-50), var(--fui-color-gray-700));
+	--color-input-p: light-dark(var(--fui-color-gray-500), var(--fui-color-gray-400));
+	/* focus */
+	--color-input-bf: var(--fui-color-primary-600);
+	/* disabled */
+	--color-input-cd: light-dark(var(--fui-color-gray-400), var(--fui-color-gray-500));
+	--color-input-bd: light-dark(var(--fui-color-gray-200), var(--fui-color-gray-700));
+	--color-input-bgd: light-dark(var(--fui-color-gray-50), var(--fui-color-gray-800));
+	--color-input-pd: light-dark(var(--fui-color-gray-200), var(--fui-color-gray-600));
+
+	/* error */
+	--color-input-ce: light-dark(var(--fui-color-red-700), var(--fui-color-red-500));
+	--color-input-be: var(--fui-color-red-500);
+	--color-input-bge: light-dark(var(--fui-color-red-50), var(--fui-color-gray-800));
+	--color-input-pe: light-dark(var(--fui-color-red-400), var(--fui-color-red-800));
+	/* error + disabled */
+	--color-input-ced: light-dark(var(--fui-color-red-400), var(--fui-color-red-500));
+	--color-input-bed: light-dark(var(--fui-color-red-200), var(--fui-color-red-700));
+	--color-input-bged: light-dark(var(--fui-color-red-50), var(--fui-color-red-800));
+	--color-input-ped: light-dark(var(--fui-color-red-200), var(--fui-color-red-600));
+}
+
+
+.fui-input {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	align-items: center;
+	gap: 10px;
+
+	padding: 0 16px;
+	box-sizing: border-box;
+
+	@apply fui:text-input-c;
+	border: 1px solid;
+	@apply fui:border-input-b;
+	@apply fui:rounded-lg;
+	@apply fui:bg-input-bg;
+
+	@apply fui:font-sans;
+	font-weight: 400;
+	letter-spacing: 0.015em;
+	line-height: 150%;
+
+	@apply fui:outline-focus-prepear;
+	transition-property: outline-color;
+	transition-duration: .1s;
+	will-change: outline-color;
+
+	.fui-input-input {
+		flex-grow: 1;
+		flex-shrink: 1;
+		min-width: 0;
+
+		border: none;
+		background: none;
+		box-shadow: none;
+
+		color: inherit;
+		font-family: inherit;
+		font-size: inherit;
+		font-weight: inherit;
+		letter-spacing: inherit;
+		line-height: inherit;
+
+		&:active,
+		&:focus,
+		&:focus-visible {
+			outline: none;
+		}
+
+		&::placeholder {
+			@apply fui:text-input-p;
+		}
+	}
+
+	/* Focus */
+	&:has(.fui-input-input:focus) {
+		@apply fui:border-input-bf;
+	}
+
+	&:has(.fui-input-input:focus-visible) {
+		@apply fui:outline-focus;
+	}
+
+	/* Disabled */
+	&:has(.fui-input-input:disabled) {
+		@apply fui:text-input-cd;
+		@apply fui:border-input-bd;
+		@apply fui:bg-input-bgd;
+	}
+
+	.fui-input-input:disabled::placeholder {
+		@apply fui:text-input-pd;
+	}
+
+	/* Error */
+	&.has-error {
+		@apply fui:text-input-ce;
+		@apply fui:border-input-be;
+		@apply fui:bg-input-bge;
+
+		.fui-input-input::placeholder {
+			@apply fui:text-input-pe;
+		}
+
+		/* Error + Focus */
+		&:has(.fui-input-input:focus) {
+			@apply fui:border-input-be;
+		}
+
+		&:has(.fui-input-input:focus-visible) {
+			@apply fui:outline-focus-error;
+		}
+
+		/* Error + Disabled */
+		&:has(.fui-input-input:disabled) {
+			@apply fui:text-input-ced;
+			@apply fui:border-input-bed;
+			@apply fui:bg-input-bged;
+		}
+
+		.fui-input-input:disabled::placeholder {
+			@apply fui:text-input-ped;
+		}
+	}
+
+
+	/* Customize widgets */
+
+	/* Search */
+	&:has(.fui-input-clear_btn) .fui-input-input[type="search"]::-webkit-search-cancel-button {
+		appearance: none;
+		display: none;
+	}
+
+	/* Date and Time */
+	.fui-input-input[type="date"],
+	.fui-input-input[type="datetime-local"],
+	.fui-input-input[type="month"],
+	.fui-input-input[type="week"],
+	.fui-input-input[type="time"] {
+		appearance: none;
+
+		&::-webkit-calendar-picker-indicator {
+			opacity: 0;
+		}
+	}
+
+	.fui-input-input[type="date"] + .fui-input-date_icon,
+	.fui-input-input[type="datetime-local"] + .fui-input-date_icon,
+	.fui-input-input[type="month"] + .fui-input-date_icon,
+	.fui-input-input[type="week"] + .fui-input-date_icon,
+	.fui-input-input[type="time"] + .fui-input-time_icon {
+		position: relative;
+		margin-left: -10px;  /* - gap */
+
+		.fui-icon {
+			position: absolute;
+			top: calc(var(--fui-icon-size) / -2);
+			right: 0;
+			pointer-events: none;
+		}
+	}
+
+	.fui-input-input[type="date"]:disabled + .fui-input-date_icon,
+	.fui-input-input[type="datetime-local"]:disabled + .fui-input-date_icon,
+	.fui-input-input[type="month"]:disabled + .fui-input-date_icon,
+	.fui-input-input[type="week"]:disabled + .fui-input-date_icon,
+	.fui-input-input[type="time"]:disabled + .fui-input-time_icon {
+		display: none;
+	}
+
+	/* Extra Button */
+	.fui-input-extra_btn {
+		border: none;
+		background: none;
+		padding: 0;
+		margin: 0;
+
+		cursor: pointer;
+		color: inherit;
+
+		@apply fui:outline-focus-prepear;
+		transition-property: outline-color;
+		transition-duration: .1s;
+		will-change: outline-color;
+
+		.fui-icon {
+			display: block;
+			transition: color .2s ease;
+			will-change: color;
+		}
+
+		&:focus-visible {
+			@apply fui:outline-focus;
+		}
+	}
+
+	/* Extra Button + Error */
+	&.has-error {
+		.fui-input-extra_btn {
+			&:focus-visible {
+				@apply fui:outline-focus-error;
+			}
+		}
+	}
+
+	/* Extra Button + Disabled */
+	&:has(.fui-input-input:disabled) {
+		.fui-input-extra_btn {
+			display: none;
+		}
+	}
+}
+
+
+/* Sizes //////////////////////////////////////// */
+/* lineheight: 1.5 */
+
+/* height-s: 37px */
+/* lineheight-s: 14px * lineheight = 21px */
+/* padding-y-s: (height-s - lineheight-s) / 2 - 1px = 7px */
+/* icon-size-s: 20px */
+/* button-offset-s: -6px */
+.fui-input-size-s {
+	--fui-icon-size: 20px;
+	/*@apply fui:text-sm;*/
+	font-size: theme(text.sm);
+	line-height: 150%;
+
+	.fui-input-input {
+		padding: 7px 0;
+	}
+
+	.fui-input-extra_btn {
+		/* button-size-s: height-s - 1px * 2 = 35px */
+		/* button-padding: (button-size-s - icon-size-s) / 2 = 7.5px */
+		height: 35px;
+		widows: 35px;
+		padding: 7.5px;
+		margin: 0 -7.5px;
+
+		/* not sure this is correct, but it work */
+		/* 8px - button-offset-s / 2 */
+		border-radius: 11px;
+
+		outline-offset: -6px;
+	}
+}
+
+/* height-m: 42px */
+/* lineheight-m: 14px * lineheight = 21px */
+/* padding-y-m: (height-m - lineheight-m) / 2 - 1px = 9.5px */
+/* icon-size-m: 20px */
+/* button-offset-m: -10px */
+.fui-input-size-m {
+	--fui-icon-size: 20px;
+/*	@apply fui:text-sm;*/
+	font-size: theme(text.sm);
+	line-height: 150%;
+
+	.fui-input-input {
+		padding: 9.5px 0;
+	}
+
+	.fui-input-extra_btn {
+		/* button-size-m: height-m - 1px * 2 = 40px */
+		/* button-padding: (button-size-m - icon-size-m) / 2 = 10px */
+		height: 40px;
+		widows: 40px;
+		padding: 10px;
+		margin: 0 -10px;
+
+		/* not sure this is correct, but it work */
+		/* 8px - button-offset-m / 2 */
+		border-radius: 13px;
+		outline-offset: -10px;
+
+	}
+}
+
+/* height-xl: 52px */
+/* lineheight-xl: 16px * lineheight = 24px */
+/* padding-y-xl: (height-xl - lineheight-xl) / 2 - 1px = 13px */
+/* icon-size-xl: 20px */
+/* button-offset-xl: -10px */
+.fui-input-size-xl {
+	--fui-icon-size: 20px;
+/*	@apply fui:text-base;*/
+	font-size: theme(text.base);
+	line-height: 150%;
+
+	.fui-input-input {
+		padding: 13px 0;
+	}
+
+	.fui-input-extra_btn {
+		/* button-size-xl: height-xl - 1px * 2 = 50px */
+		/* button-padding: (button-size-xl - icon-size-xl) / 2 = 15px */
+		height: 50px;
+		widows: 50px;
+		padding: 15px;
+		margin: 0 -15px;
+
+		/* not sure this is correct, but it work */
+		/* 8px - button-offset-xl / 2 */
+		border-radius: 13px;
+
+		outline-offset: -10px;
+	}
+}

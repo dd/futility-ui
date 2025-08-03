@@ -14,9 +14,9 @@
     "frontend",
     "component-library"
   ],
-  "version": "0.2.0",
+  "version": "0.3.6",
   "author": "Dmitry Dobrynin <dd@tovarisch.engineer>",
-  "license": "LGPL-3.0",
+  "license": "MPL-2.0",
   "repository": {
     "type": "git",
     "url": "git@github.com:dd/futility-ui.git"
@@ -35,15 +35,67 @@
       "import": "./dist/FLoader.es.js"
     },
     "./FIcon": {
-      "require": "./dist/FIcon.cjs.js",
-      "import": "./dist/FIcon.es.js"
+      "require": "./dist/FIcon/index.cjs.js",
+      "import": "./dist/FIcon/index.es.js"
+    },
+    "./FIcon/constants": {
+      "require": "./dist/FIcon/constants.cjs.js",
+      "import": "./dist/FIcon/constants.es.js"
     },
     "./FButton": {
-      "require": "./dist/FButton.cjs.js",
-      "import": "./dist/FButton.es.js"
+      "require": "./dist/FButton/index.cjs.js",
+      "import": "./dist/FButton/index.es.js"
     },
-    "./styles.css": "./dist/styles/styles.css",
-    "./theme.css": "./dist/styles/theme.css",
+    "./FButton/constants": {
+      "require": "./dist/FButton/constants.cjs.js",
+      "import": "./dist/FButton/constants.es.js"
+    },
+    "./FButtonText": {
+      "require": "./dist/FButtonText/index.cjs.js",
+      "import": "./dist/FButtonText/index.es.js"
+    },
+    "./FButtonText/constants": {
+      "require": "./dist/FButtonText/constants.cjs.js",
+      "import": "./dist/FButtonText/constants.es.js"
+    },
+    "./FStack": {
+      "require": "./dist/FStack/index.cjs.js",
+      "import": "./dist/FStack/index.es.js"
+    },
+    "./forms/FSwitch": {
+      "require": "./dist/forms/FSwitch/index.cjs.js",
+      "import": "./dist/forms/FSwitch/index.es.js"
+    },
+    "./forms/FCheckbox": {
+      "require": "./dist/forms/FCheckbox/index.cjs.js",
+      "import": "./dist/forms/FCheckbox/index.es.js"
+    },
+    "./forms/FInput": {
+      "require": "./dist/forms/FInput/index.cjs.js",
+      "import": "./dist/forms/FInput/index.es.js"
+    },
+    "./forms/FInput/constants": {
+      "require": "./dist/forms/FInput/constants.cjs.js",
+      "import": "./dist/forms/FInput/constants.es.js"
+    },
+    "./forms/FInput/ClearButton": {
+      "require": "./dist/forms/FInput/ClearButton.cjs.js",
+      "import": "./dist/forms/FInput/ClearButton.es.js"
+    },
+    "./forms/FInput/ShowPasswordButton": {
+      "require": "./dist/forms/FInput/ShowPasswordButton.cjs.js",
+      "import": "./dist/forms/FInput/ShowPasswordButton.es.js"
+    },
+    "./forms/FRadioButton": {
+      "require": "./dist/forms/FRadioButton/index.cjs.js",
+      "import": "./dist/forms/FRadioButton/index.es.js"
+    },
+    "./forms/FControlLabel": {
+      "require": "./dist/forms/FControlLabel/index.cjs.js",
+      "import": "./dist/forms/FControlLabel/index.es.js"
+    },
+    "./styles.base.css": "./dist/styles.base.css",
+    "./styles.tailwind.css": "./dist/styles.tailwind.css",
     "./assets/sprite.svg": "./dist/assets/sprite.svg"
   },
   "sideEffects": false,
@@ -60,24 +112,31 @@
     "build-storybook": "storybook build"
   },
   "devDependencies": {
-    "@chromatic-com/storybook": "^3.2.4",
-    "@spiriit/vite-plugin-svg-spritemap": "^4.0.0",
-    "@storybook/addon-essentials": "^8.6.4",
-    "@storybook/addon-interactions": "^8.6.4",
-    "@storybook/addon-onboarding": "^8.6.4",
-    "@storybook/blocks": "^8.6.4",
-    "@storybook/test": "^8.6.4",
-    "@storybook/vue3": "^8.6.4",
-    "@storybook/vue3-vite": "^8.6.4",
-    "@vitejs/plugin-vue": "^5.2.1",
-    "@vueuse/core": "^13.0.0",
+    "@chromatic-com/storybook": "^4.0.1",
+    "@spiriit/vite-plugin-svg-spritemap": "^5.0.0",
+    "@storybook/addon-a11y": "^9.1.0",
+    "@storybook/addon-docs": "^9.1.0",
+    "@storybook/addon-onboarding": "^9.1.0",
+    "@storybook/addon-vitest": "^9.1.0",
+    "@storybook/vue3-vite": "^9.1.0",
+    "@tailwindcss/vite": "^4.1.11",
+    "@vitejs/plugin-vue": "^6.0.1",
+    "@vitest/browser": "^3.2.4",
+    "@vitest/coverage-v8": "^3.2.4",
+    "@vueuse/core": "^13.6.0",
     "auto": "^11.3.0",
-    "sass": "^1.85.0",
-    "storybook": "^8.6.4",
-    "storybook-preview-scheme-toggler": "^1.0.2",
-    "svgo": "^3.3.2",
-    "vite": "^6.1.1",
-    "vue": "^3.5.13",
+    "autoprefixer": "^10.4.21",
+    "flowbite": "^3.1.2",
+    "lodash": "^4.17.21",
+    "playwright": "^1.54.1",
+    "sass": "^1.89.2",
+    "storybook": "^9.1.0",
+    "storybook-preview-scheme-toggler": "^1.0.3",
+    "svgo": "^4.0.0",
+    "tailwindcss": "^4.1.11",
+    "vite": "^7.0.6",
+    "vitest": "^3.2.4",
+    "vue": "^3.5.18",
     "vue-toastification": "2.0.0-rc.5"
   },
   "peerDependencies": {

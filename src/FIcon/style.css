@@ -1,0 +1,15 @@
+@theme {
+	--icon-color: inherit;
+	--icon-size: 24px;
+}
+
+
+@layer components {
+	.fui-icon {
+		color: var(--fui-icon-color);
+		height: var(--fui-icon-size);
+		aspect-ratio: 1;
+		flex-grow: 0;
+		flex-shrink: 0;
+	}
+}
