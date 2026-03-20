@@ -8,6 +8,7 @@
 			[`fui-loader-${size}`]: size,
 		}"
 		viewBox="0 0 100 100"
+		aria-live="polite"
 	>
 		<circle
 			v-if="!hideTrack"

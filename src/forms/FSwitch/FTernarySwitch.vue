@@ -25,7 +25,6 @@
 			}"
 			:aria-label="ariaLabel"
 			:disabled="disabled"
-			role="switch"
 			@click="switchValue"
 		/>
 	</div>
