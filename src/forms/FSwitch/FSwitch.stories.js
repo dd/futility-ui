@@ -5,6 +5,8 @@ import { makeRenderer } from '@/utils/storybook';
 
 
 const usage = `
+A toggle switch component for switching between two or three states.
+
 ### Usage
 
 Import the component:

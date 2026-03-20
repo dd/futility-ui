@@ -2,6 +2,9 @@ import FLoader from '.';
 
 
 const usage = `
+A standard loading spinner component used to indicate ongoing processes or data fetching.
+
+
 ### Usage
 
 Import the component:

@@ -5,6 +5,9 @@ import { makeRenderer, makeUpdateArg } from '@/utils/storybook';
 
 
 const usage = `
+A radio button component for selecting a single option from a group.
+
+
 ### Usage
 
 Import the component:

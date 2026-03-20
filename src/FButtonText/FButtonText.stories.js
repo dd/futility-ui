@@ -8,6 +8,8 @@ import { COMPONENT_TYPES, COLOR_CHOICES } from './constants';
 
 
 const usage = `
+A text-style button component. Functionally identical to FButton, but visually appears as plain text.
+
 ### Usage
 
 Import the component:
@@ -35,7 +37,6 @@ export default {
 	parameters: {
 		layout: 'centered',
 		docs: {
-			subtitle: 'Text button component',
 			description: {
 				component: usage,
 			},
