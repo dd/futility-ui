@@ -1,6 +1,6 @@
 import FInput from './index.vue';
 import ShowPasswordButton from './ShowPasswordButton.vue';
-
+import { SHOW_PASSWORD_DEFAULT_TEXTS } from './constants';
 
 const usage = `
 ### Usage
@@ -57,9 +57,15 @@ export default {
 				defaultValue: { summary: false },
 			},
 		},
+		texts: {
+			table: {
+				defaultValue: { summary: JSON.stringify(SHOW_PASSWORD_DEFAULT_TEXTS) },
+			},
+		},
 	},
 	args: {
 		toggleMode: false,
+		texts: SHOW_PASSWORD_DEFAULT_TEXTS,
 	},
 };
 

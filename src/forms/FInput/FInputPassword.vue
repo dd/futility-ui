@@ -65,18 +65,18 @@ const inputAttrs = computed(() => {
 
 
 // Show Password ////////////////////////////////
-const showPasswordStatus = ref(true);
+const showPasswordStatus = ref(false);
 
 const inputType = computed(() => {
 	if (showPasswordStatus.value) {
-		return 'password';
+		return 'text';
 	}
 
-	return 'text';
+	return 'password';
 });
 
-const showPasswordFn = () => { showPasswordStatus.value = false; };
-const hidePasswordFn = () => { showPasswordStatus.value = true; };
+const showPasswordFn = () => { showPasswordStatus.value = true; };
+const hidePasswordFn = () => { showPasswordStatus.value = false; };
 
 provide('showPasswordStatus', showPasswordStatus);
 provide('showPassword', showPasswordFn);

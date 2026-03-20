@@ -2,7 +2,12 @@
 	<button
 		class="fui-input-pswd_btn fui-input-extra_btn"
 		type="button"
-		v-on="events"
+		@click="clickHandler"
+		@mousedown="pressShowHandler"
+		@touchstart="pressShowHandler"
+		@keydown="keyShowHandler"
+		@keyup="keyHideHandler"
+		v-bind="buttonAttrs"
 	>
 		<FIcon name="eye_solid" />
 	</button>
@@ -11,12 +16,20 @@
 <script setup >
 import { computed, onMounted, onBeforeUnmount, inject } from 'vue';
 import FIcon from '@/FIcon';
-
+import { SHOW_PASSWORD_DEFAULT_TEXTS } from './constants';
 
 defineOptions({ name: 'FInputShowPasswordButton' });
 const props = defineProps({
 	/** Enables toggle behavior: click to show or hide the password instead of showing it only while pressed. */
 	toggleMode: Boolean,
+	/**
+	 * Custom text values for the password visibility button states.
+	 * Allows overriding default aria-label and title content.
+	 */
+	texts: {
+		type: Object,
+		default: () => ({}),
+	},
 });
 
 const showPasswordStatus = inject('showPasswordStatus');
@@ -24,53 +37,70 @@ const showPassword = inject('showPassword');
 const hidePassword = inject('hidePassword');
 
 const clickHandler = () => {
-	if (showPasswordStatus) {
-		hidePassword;
-	} else {
-		showPassword;
+	if (props.toggleMode) {
+		if (showPasswordStatus.value) {
+			hidePassword();
+		} else {
+			showPassword();
+		}
 	}
 };
 
-const events = computed(() => {
-	if (props.toggleMode) {
-		return {
-			'click': clickHandler,
-		};
+const pressShowHandler = (e) => {
+	if (!props.toggleMode) {
+		e.preventDefault();
+		showPassword();
 	}
+};
 
-	return {
-		'mousedown': (e) => {
-			e.preventDefault();
-			showPassword();
-		},
-		'touchstart': (e) => {
-			e.preventDefault();
-			showPassword();
-		},
-		'keydown': (e) => {
-			if (e.code === 'Space' || e.code === 'Enter') {
-				e.preventDefault();
-				showPassword();
-			}
-		},
-		'keyup': (e) => {
-			e.preventDefault();
-			hidePassword();
-		},
-	};
-});
+const pressHideHandler = () => {
+	if (!props.toggleMode) {
+		hidePassword();
+	}
+};
+
+const keyShowHandler =  (e) => {
+	if (!props.toggleMode && (e.code === 'Space' || e.code === 'Enter')) {
+		e.preventDefault();
+		showPassword();
+	}
+};
+
+const keyHideHandler =  (e) => {
+	if (!props.toggleMode && (e.code === 'Space' || e.code === 'Enter')) {
+		e.preventDefault();
+		hidePassword();
+	}
+};
 
 onMounted(() => {
-	if (!props.toggleMode) {
-		document.addEventListener('mouseup', hidePassword);
-		document.addEventListener('touchend', hidePassword);
-	}
+	document.addEventListener('mouseup', pressHideHandler);
+	document.addEventListener('touchend', pressHideHandler);
 });
 
 onBeforeUnmount(() => {
-	if (!props.toggleMode) {
-		document.removeEventListener('mouseup', hidePassword);
-		document.removeEventListener('touchend', hidePassword);
+	document.removeEventListener('mouseup', pressHideHandler);
+	document.removeEventListener('touchend', pressHideHandler);
+});
+
+const resolvedTexts = computed(() => ({
+  ...SHOW_PASSWORD_DEFAULT_TEXTS,
+  ...props.texts,
+}));
+
+const buttonAttrs = computed(() => {
+	const isShown = showPasswordStatus.value;
+	let result = {};
+
+	if (props.toggleMode) {
+		result['aria-label'] = isShown ? resolvedTexts.value.hide : resolvedTexts.value.show;
+		result['aria-pressed'] = isShown;
+	} else {
+		result['aria-label'] = isShown ? resolvedTexts.value.showing : resolvedTexts.value.show;
 	}
+
+	result['title'] = result['aria-label'];
+
+	return result;
 });
 </script>
