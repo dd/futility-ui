@@ -84,8 +84,8 @@ onBeforeUnmount(() => {
 });
 
 const resolvedTexts = computed(() => ({
-  ...SHOW_PASSWORD_DEFAULT_TEXTS,
-  ...props.texts,
+	...SHOW_PASSWORD_DEFAULT_TEXTS,
+	...props.texts,
 }));
 
 const buttonAttrs = computed(() => {
