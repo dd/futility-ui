@@ -67,6 +67,8 @@ For more information about choosing a stylesheet and other options, see the [Usa
 * [x] Input
 * [x] Widgets group (A component that visually merges widgets without spacing, such as an input field immediately followed by a button.)
 * [x] Radio button
+* [x] Input Autocomplete (with loading options)
+	- [ ] Ability to group options when needed
 * [ ] Form row (A component that renders a form row with a label, widget, help text, and error text.) **`<- you are here`**
 * [ ] Select
 * [ ] DropDown
@@ -94,10 +96,9 @@ For more information about choosing a stylesheet and other options, see the [Usa
 
 * [ ] Integrate Tailwind configuration and theming
 * [ ] Tag panel
-* [ ] Input Autocomplete (with loading options)
-* [ ] Select Autocomplete
 * [ ] Multi Select Autocomplete
 * [ ] Select with custom dropdown (search, loading, etc...)
+* [ ] Select Autocomplete (likely not needed if Input Autocomplete exists)
 
 #### Dev
 

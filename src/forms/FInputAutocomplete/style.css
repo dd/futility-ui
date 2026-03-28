@@ -1,0 +1,414 @@
+@theme {
+	--iauto-dd-minheight: 40px;
+	--iauto-dd-maxheight: 197px;
+	--color-iauto-dd-o-h: light-dark(var(--fui-color-gray-100), var(--fui-color-gray-600));
+	--color-iauto-dd-o-c: light-dark(var(--fui-color-gray-500), var(--fui-color-gray-400));
+	--color-iauto-dd-o-d: light-dark(var(--fui-color-gray-300), var(--fui-color-gray-600));
+	--color-iauto-dd-oc-c: light-dark(var(--fui-color-primary-700), var(--fui-color-primary-500));
+	--color-iauto-dd-empty: var(--fui-color-gray-400);
+}
+
+.fui-input-autocomplete {
+	position: relative;
+
+	.fui-iauto-label_wrapper {
+		position: relative;
+
+		display: block;
+		box-sizing: border-box;
+
+		border: 1px solid;
+		@apply fui:border-input-b;
+		@apply fui:rounded-lg;
+		@apply fui:bg-input-bg;
+
+		@apply fui:font-sans;
+		font-weight: 400;
+		letter-spacing: 0.015em;
+		@apply fui:text-input-p;
+		@apply fui:outline-focus-prepear;
+
+		transition-property: outline-color, border-color;
+		transition-duration: var(--fui-transition-duration-default);
+		will-change: outline-color, border-color;
+
+		&.has-value {
+			@apply fui:text-input-c;
+		}
+
+		/* Focus */
+		&:has(.fui-iauto-query_input:focus) {
+			@apply fui:border-input-bf;
+		}
+
+		&:has(.fui-iauto-query_input:focus-visible) {
+			@apply fui:outline-focus;
+		}
+	}
+
+	.fui-iauto-query_input {
+		box-sizing: border-box;
+		width: 100%;
+
+		border: none;
+		background: none;
+		box-shadow: none;
+
+		font-family: inherit;
+		font-weight: inherit;
+		letter-spacing: inherit;
+		line-height: inherit;
+		@apply fui:text-input-c;
+
+		transition-property: opacity;
+		transition-duration: var(--fui-transition-duration-default);
+		will-change: opacity;
+		opacity: 0;
+
+		&::placeholder {
+			@apply fui:text-input-p;
+		}
+
+		&:active,
+		&:focus,
+		&:focus-visible {
+			outline: none;
+		}
+
+		&:focus,
+		&:focus-visible {
+			opacity: 1;
+
+			+ .fui-iauto-label {
+				opacity: 0;
+
+				.fui-iauto-label_remove {
+					pointer-events: none;
+				}
+			}
+		}
+	}
+
+	.fui-iauto-label {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+
+		display: flex;
+		flex-direction: row;
+		flex-wrap: nowrap;
+		align-items: center;
+		gap: 10px;
+
+		padding: 0 16px;
+		box-sizing: border-box;
+		pointer-events: none;
+
+		font-family: inherit;
+		font-weight: inherit;
+		letter-spacing: inherit;
+		line-height: inherit;
+		color: inherit;
+
+		transition-property: opacity;
+		transition-duration: var(--fui-transition-duration-default);
+		will-change: opacity;
+	}
+
+	.fui-iauto-label_text {
+		flex-grow: 1;
+		flex-shrink: 1;
+		min-width: 0;
+
+		color: inherit;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+		overflow: hidden;
+
+		font-family: inherit;
+		font-weight: inherit;
+		letter-spacing: inherit;
+		line-height: inherit;
+		color: inherit;
+	}
+
+	.fui-iauto-label_remove {
+		border: none;
+		background: none;
+		padding: 0;
+		margin: 0;
+		aspect-ratio: 1 / 1;
+
+		font-family: inherit;
+		font-weight: inherit;
+		letter-spacing: inherit;
+		line-height: inherit;
+		color: inherit;
+
+		cursor: pointer;
+		pointer-events: auto;
+
+		@apply fui:outline-focus-prepear;
+		transition-property: outline-color;
+		transition-duration: .1s;
+		will-change: outline-color;
+
+		.fui-icon {
+			display: block;
+			transition: color .2s ease;
+			will-change: color;
+		}
+
+		&:focus-visible {
+			@apply fui:outline-input-eb-f;
+		}
+	}
+
+	/* Drop Down ********************************/
+	.fui-iauto-dropdown {
+		z-index: 1;
+		position: absolute;
+		/* to flip on other side look FDropDown */
+		top: calc(100% + var(--fui-spacing) * 2);
+
+		box-sizing: border-box;
+		width: 100%;
+		max-height: var(--fui-iauto-dd-maxheight);
+		min-height: var(--fui-iauto-dd-minheight);
+		padding: calc(var(--fui-spacing) * 2);
+		overflow-y: auto;
+
+		@apply fui:dropdown-wrapper;
+
+		> *:not(:first-child) {
+			margin-top: calc(var(--fui-spacing) * 2);
+		}
+	}
+
+	/* Loaders */
+
+	/* Loader next */
+	.fui-iauto-option-loader {
+		height: 30px;
+		text-align: center;
+		padding: 0;
+
+		.fui-loader {
+			display: inline;
+			height: 100%;
+		}
+	}
+
+	/* Loader options */
+	.fui-iauto-options_loading {
+		min-height: 120px;
+
+		.fui-iauto-option-loader {
+			position: absolute;
+			top: calc(50% - 20px);
+			left: calc(50% - 20px);
+			height: 40px;
+		}
+
+		.fui-iauto-option {
+			opacity: .5;
+			pointer-events: none;
+		}
+	}
+
+	/* Options */
+	.fui-iauto-option {
+		box-sizing: border-box;
+		display: block;
+		max-width: 100%;
+		width: 100%;
+		padding: calc(var(--fui-spacing) * 1) calc(var(--fui-spacing) * 2);
+
+		border: none;
+		background-color: transparent;
+		@apply fui:rounded-sm;
+
+		@apply fui:text-sm;
+		@apply fui:text-iauto-dd-o-c;
+		font-weight: normal;
+		text-align: left;
+		line-height: 100%;
+		letter-spacing: 0.015em;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+		overflow: hidden;
+
+		@apply fui:outline-focus-prepear;
+		cursor: pointer;
+
+		/* Focus */
+		&:not(:disabled):hover {
+			@apply fui:bg-iauto-dd-o-h;
+		}
+
+		&[aria-selected="true"],
+		&:focus-visible {
+			@apply fui:outline-focus;
+		}
+
+		/* Current  */
+		&.fui-iauto-option-current {
+			@apply fui:text-iauto-dd-oc-c;
+		}
+
+		/* Disabled option */
+		&:disabled {
+			@apply fui:text-iauto-dd-o-d;
+			cursor: default;
+		}
+	}
+
+	/* Empty text */
+	.fui-iauto-option-empty {
+		margin-top: calc(var(--fui-spacing) * 3);
+		margin-bottom: calc(var(--fui-spacing) * 3);
+
+		text-align: center;
+		@apply fui:text-sm;
+		line-height: 100%;
+		font-weight: normal;
+		letter-spacing: 0.015em;
+		@apply fui:text-iauto-dd-empty;
+	}
+
+	/* States ***********************************/
+
+	/* Disabled */
+	.fui-iauto-label_wrapper:has(.fui-iauto-input:disabled) {
+		@apply fui:text-input-cd;
+		@apply fui:border-input-bd;
+		@apply fui:bg-input-bgd;
+
+		.fui-iauto-query_input::placeholder {
+			@apply fui:text-input-pd;
+		}
+
+		.fui-iauto-label_remove {
+			cursor: default;
+		}
+	}
+
+	/* Errors */
+	.fui-iauto-label_wrapper.has-error {
+		@apply fui:text-input-ce;
+		@apply fui:border-input-be;
+		@apply fui:bg-input-bge;
+
+		.fui-iauto-query_input::placeholder {
+			@apply fui:text-input-pe;
+		}
+
+		/* Error + Focus */
+		&:has(.fui-iauto-query_input:focus) {
+			@apply fui:border-input-be;
+		}
+
+		&:has(.fui-iauto-query_input:focus-visible) {
+			@apply fui:outline-focus-error;
+		}
+
+		.fui-iauto-label_remove:focus-visible {
+			@apply fui:outline-focus-error;
+		}
+
+		/* Error + Disabled */
+		&:has(.fui-iauto-input:disabled) {
+			@apply fui:text-input-ced;
+			@apply fui:border-input-bed;
+			@apply fui:bg-input-bged;
+		}
+
+		.fui-iauto-input:disabled::placeholder {
+			@apply fui:text-input-ped;
+		}
+	}
+}
+
+
+/* Sizes ****************************************/
+.fui-iauto-size-s {
+	--fui-icon-size: 20px;
+
+	.fui-iauto-query_input,
+	.fui-iauto-label_text {
+		font-size: theme(text.sm);
+		line-height: 150%;
+	}
+
+	.fui-iauto-query_input {
+		padding: 7px 16px;
+	}
+
+	.fui-iauto-label_text {
+		padding: 7px 0;
+	}
+
+	.fui-iauto-label_remove {
+		height: 35px;
+		padding: 7.5px;
+		margin: 0 -7.5px;
+		border-radius: 11px;
+		outline-offset: -7.5px;
+	}
+}
+
+
+.fui-iauto-size-m {
+	--fui-icon-size: 20px;
+
+	.fui-iauto-query_input,
+	.fui-iauto-label_text {
+		font-size: theme(text.sm);
+		line-height: 150%;
+	}
+
+	.fui-iauto-query_input {
+		padding: 9.5px 16px;
+	}
+
+	.fui-iauto-label_text {
+		padding: 9.5px 0;
+	}
+
+	.fui-iauto-label_remove {
+		height: 40px;
+		padding: 10px;
+		margin: 0 -10px;
+		border-radius: 13px;
+		outline-offset: -10px;
+	}
+}
+
+
+.fui-iauto-size-xl {
+	--fui-icon-size: 20px;
+
+	.fui-iauto-query_input,
+	.fui-iauto-label_text {
+		font-size: theme(text.sm);
+		line-height: 150%;
+	}
+
+	.fui-iauto-query_input {
+		padding: 13px 16px;
+	}
+
+	.fui-iauto-label_text {
+		padding: 13px 0;
+	}
+
+	.fui-iauto-label_remove {
+		height: 50px;
+		padding: 15px;
+		margin: 0 -15px;
+		border-radius: 18px;
+		outline-offset: -15px;
+	}
+}
