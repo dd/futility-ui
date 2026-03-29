@@ -108,7 +108,8 @@
 <script setup >
 import { computed, onMounted, ref, useAttrs, useId, watch, nextTick } from 'vue';
 import { onClickOutside } from '@vueuse/core';
-import { FLoader, FIcon } from 'futility-ui';
+import FLoader from '@/FLoader';
+import FIcon from '@/FIcon';
 
 import { useFocusWithin } from './utils';
 import { DEFAULT_TEXTS } from './constants';
