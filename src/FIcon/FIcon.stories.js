@@ -6,6 +6,9 @@ import { ICON_LIST_SOLID, ICON_LIST_OUTLINE, ICON_LIST_OTHER } from './constants
 
 
 const usage = `
+A set of icons for use across the interface. Provides a consistent way to display and manage icons in your application.
+
+
 ### Usage
 
 Import the component:

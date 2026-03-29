@@ -63,9 +63,6 @@ export default {
 			},
 		},
 		size: {
-			description: `
-Predefined size of the input (${SIZE_CHOICES.join(', ')}) or a custom size class.
-			`,
 			options: SIZE_CHOICES,
 			control: 'select',
 			table: {
@@ -147,7 +144,7 @@ export const Types = {
 			description: {
 				story: `The \`type\` prop defines the input’s behavior, validation, and appearance.
 
-\`FInput\` supports the following types: <i>${ALL_ALLOWED_TYPES.join('</i>, <i>')}</i>.
+\`FInput\` supports the following types: _${ALL_ALLOWED_TYPES.join('_, _')}_.
 
 \`\`\`html
 <FInput type="<type>" />
@@ -167,16 +164,16 @@ export const Types = {
 				return { args, promisedArgs, ALL_ALLOWED_TYPES };
 			},
 			template: `<table class="preview-table" ><tbody>
-		<tr v-for="type in ALL_ALLOWED_TYPES" :key="type" >
-			<td class="label" >{{ type }}</td>
-			<td>
-				<FInput v-bind="args" v-on="promisedArgs" :type="type" placeholder="Placeholder" >
-					<template v-if="args.start" v-slot:start >{{ args.start }}</template>
-					<template v-if="args.end" v-slot:end >{{ args.end }}</template>
-				</FInput>
-			</td>
-		</tr>
-	</tbody></table>`,
+	<tr v-for="type in ALL_ALLOWED_TYPES" :key="type" >
+		<td class="label" >{{ type }}</td>
+		<td>
+			<FInput v-bind="args" v-on="promisedArgs" :type="type" placeholder="Placeholder" >
+				<template v-if="args.start" v-slot:start >{{ args.start }}</template>
+				<template v-if="args.end" v-slot:end >{{ args.end }}</template>
+			</FInput>
+		</td>
+	</tr>
+</tbody></table>`,
 		};
 	},
 	argTypes: {
@@ -188,24 +185,145 @@ export const Types = {
 };
 
 
-export const ErrorState = {
-	parameters: {
-		docs: {
-			description: {
-				story: `You can use the \`error\` prop to indicate validation errors. It visually
-highlights the input to draw attention.
-
-\`\`\`html
-<FInput error />
-\`\`\``,
-			},
-		},
-	},
+export const States = {
 	argTypes: {
+		modelValue: { control: { type: null }},
+		disabled: { control: { type: null }},
 		error: { control: { type: null }},
+		type: { control: { type: null }},
+	},
+	render: (args, { argTypes, component }) => {
+		const [ , updateArgs ] = useArgs();
+		return {
+			name: 'FInputStatesStory',
+			props: Object.keys(argTypes),
+			components: { FInput },
+			setup() {
+				const {
+					modelValue,
+					'update:modelValue': _a,
+					'disabled': _b,
+					'error': _c,
+					...filteredArgs
+				} = args;  // eslint-disable-line no-unused-vars
+				const modelValue1 = ref();
+				const modelValue2 = ref('opt1');
+				return { args: filteredArgs, modelValue1, modelValue2 };
+			},
+			template: `<table class="preview-table" ><tbody>
+	<tr>
+		<td></td>
+		<td style="text-align:center;" class="label" >default</td>
+		<td style="text-align:center;" class="label" >error</td>
+	</tr>
+	<tr>
+		<td class="label" >default</td>
+		<td>
+			<FInput
+				v-model="modelValue1"
+				v-bind="args"
+				placeholder="Placeholder"
+			>
+				<template v-if="args.start" v-slot:start >{{ args.start }}</template>
+				<template v-if="args.end" v-slot:end >{{ args.end }}</template>
+			</FInput>
+		</td>
+		<td>
+			<FInput
+				v-model="modelValue1"
+				v-bind="args"
+				placeholder="Placeholder"
+				error
+			>
+				<template v-if="args.start" v-slot:start >{{ args.start }}</template>
+				<template v-if="args.end" v-slot:end >{{ args.end }}</template>
+			</FInput>
+		</td>
+	</tr>
+	<tr>
+		<td class="label" >with&nbsp;value</td>
+		<td>
+			<FInput
+				v-model="modelValue2"
+				v-bind="args"
+				placeholder="Placeholder"
+			>
+				<template v-if="args.start" v-slot:start >{{ args.start }}</template>
+				<template v-if="args.end" v-slot:end >{{ args.end }}</template>
+			</FInput>
+		</td>
+		<td>
+			<FInput
+				v-model="modelValue2"
+				v-bind="args"
+				placeholder="Placeholder"
+				error
+			>
+				<template v-if="args.start" v-slot:start >{{ args.start }}</template>
+				<template v-if="args.end" v-slot:end >{{ args.end }}</template>
+			</FInput>
+		</td>
+	</tr>
+	<tr>
+		<td class="label" >disabled</td>
+		<td>
+			<FInput
+				v-model="modelValue1"
+				v-bind="args"
+				placeholder="Placeholder"
+				disabled
+			>
+				<template v-if="args.start" v-slot:start >{{ args.start }}</template>
+				<template v-if="args.end" v-slot:end >{{ args.end }}</template>
+			</FInput>
+		</td>
+		<td>
+			<FInput
+				v-model="modelValue1"
+				v-bind="args"
+				placeholder="Placeholder"
+				error
+				disabled
+			>
+				<template v-if="args.start" v-slot:start >{{ args.start }}</template>
+				<template v-if="args.end" v-slot:end >{{ args.end }}</template>
+			</FInput>
+		</td>
+	</tr>
+	<tr>
+		<td class="label" >disabled<br />+&nbsp;value</td>
+		<td>
+			<FInput
+				v-model="modelValue2"
+				v-bind="args"
+				placeholder="Placeholder"
+				disabled
+			>
+				<template v-if="args.start" v-slot:start >{{ args.start }}</template>
+				<template v-if="args.end" v-slot:end >{{ args.end }}</template>
+			</FInput>
+		</td>
+		<td>
+			<FInput
+				v-model="modelValue2"
+				v-bind="args"
+				placeholder="Placeholder"
+				error
+				disabled
+			>
+				<template v-if="args.start" v-slot:start >{{ args.start }}</template>
+				<template v-if="args.end" v-slot:end >{{ args.end }}</template>
+			</FInput>
+		</td>
+	</tr>
+</tbody></table>`,
+		};
 	},
 	args: {
-		error: true,
+		type: 'text',
+		modelValue: '<value>',
+		disabled: '<disabled>',
+		error: '<error>',
 	},
 };
 
@@ -234,31 +352,23 @@ which you can use to apply your own styles.
 			props: Object.keys(argTypes),
 			components: { FInput },
 			setup() {
-				const LABELS = [
-					// '20px',
-					// '28px',
-					// '34px',
-					'37px',
-					'42px',
-					// '48px',
-					'52px',
-				];
+				const LABELS = [ '37px', '42px', '52px' ];
 				const updateValue = makeUpdateArg('modelValue', args, updateArgs);
 				const promisedArgs = { [updateValue[0]]: updateValue[1] };
 				return { args, promisedArgs, LABELS, SIZE_CHOICES };
 			},
 			template: `<table class="preview-table" ><tbody>
-		<tr v-for="size, i in SIZE_CHOICES" :key="size[0]" >
-			<td class="label" >{{ LABELS[i] }}</td>
-			<td class="label" >{{ size }}</td>
-			<td>
-				<FInput v-bind="args" v-on="promisedArgs" :size="size" placeholder="Placeholder" >
-					<template v-if="args.start" v-slot:start >{{ args.start }}</template>
-					<template v-if="args.end" v-slot:end >{{ args.end }}</template>
-				</FInput>
-			</td>
-		</tr>
-	</tbody></table>`,
+	<tr v-for="size, i in SIZE_CHOICES" :key="size[0]" >
+		<td class="label" >{{ LABELS[i] }}</td>
+		<td class="label" >{{ size }}</td>
+		<td>
+			<FInput v-bind="args" v-on="promisedArgs" :size="size" placeholder="Placeholder" >
+				<template v-if="args.start" v-slot:start >{{ args.start }}</template>
+				<template v-if="args.end" v-slot:end >{{ args.end }}</template>
+			</FInput>
+		</td>
+	</tr>
+</tbody></table>`,
 		};
 	},
 	argTypes: {
@@ -407,47 +517,47 @@ export const Scheme = {
 				return { args, promisedArgs };
 			},
 			template: `<div class="sbpst-scheme_preview sbpst-row" >
-		<div class="sbpst-light" >
-			<table class="preview-table" ><tbody>
-				<tr>
-					<td>
-						<FInput v-bind="args" v-on="promisedArgs" placeholder="Placeholder" >
-							<template v-if="args.start" v-slot:start >{{ args.start }}</template>
-							<template v-if="args.end" v-slot:end >{{ args.end }}</template>
-						</FInput>
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<FInput v-bind="args" v-on="promisedArgs" disabled placeholder="Placeholder" >
-							<template v-if="args.start" v-slot:start >{{ args.start }}</template>
-							<template v-if="args.end" v-slot:end >{{ args.end }}</template>
-						</FInput>
-					</td>
-				</tr>
-			</tbody></table>
-		</div>
-		<div class="sbpst-dark" >
-			<table class="preview-table" ><tbody>
-				<tr>
-					<td>
-						<FInput v-bind="args" v-on="promisedArgs" placeholder="Placeholder" >
-							<template v-if="args.start" v-slot:start >{{ args.start }}</template>
-							<template v-if="args.end" v-slot:end >{{ args.end }}</template>
-						</FInput>
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<FInput v-bind="args" v-on="promisedArgs" disabled placeholder="Placeholder" >
-							<template v-if="args.start" v-slot:start >{{ args.start }}</template>
-							<template v-if="args.end" v-slot:end >{{ args.end }}</template>
-						</FInput>
-					</td>
-				</tr>
-			</tbody></table>
-		</div>
-	</div>`,
+	<div class="sbpst-light" >
+		<table class="preview-table" ><tbody>
+			<tr>
+				<td>
+					<FInput v-bind="args" v-on="promisedArgs" placeholder="Placeholder" >
+						<template v-if="args.start" v-slot:start >{{ args.start }}</template>
+						<template v-if="args.end" v-slot:end >{{ args.end }}</template>
+					</FInput>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<FInput v-bind="args" v-on="promisedArgs" disabled placeholder="Placeholder" >
+						<template v-if="args.start" v-slot:start >{{ args.start }}</template>
+						<template v-if="args.end" v-slot:end >{{ args.end }}</template>
+					</FInput>
+				</td>
+			</tr>
+		</tbody></table>
+	</div>
+	<div class="sbpst-dark" >
+		<table class="preview-table" ><tbody>
+			<tr>
+				<td>
+					<FInput v-bind="args" v-on="promisedArgs" placeholder="Placeholder" >
+						<template v-if="args.start" v-slot:start >{{ args.start }}</template>
+						<template v-if="args.end" v-slot:end >{{ args.end }}</template>
+					</FInput>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<FInput v-bind="args" v-on="promisedArgs" disabled placeholder="Placeholder" >
+						<template v-if="args.start" v-slot:start >{{ args.start }}</template>
+						<template v-if="args.end" v-slot:end >{{ args.end }}</template>
+					</FInput>
+				</td>
+			</tr>
+		</tbody></table>
+	</div>
+</div>`,
 		};
 	},
 };

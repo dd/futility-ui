@@ -37,7 +37,7 @@ const props = defineProps({
 		validator: (type) => TEXT_ALLOWED_TYPES.includes(type) || type === 'password',
 	},
 
-	/** Predefined size of the input or a custom size class. */
+	/** Predefined size of the input or a custom size. */
 	size: {
 		type: String,
 		default: 'm',

@@ -3,6 +3,7 @@
 		v-model="model"
 		type="checkbox"
 		class="fui-switch fui-binary_switch"
+		role="switch"
 	/>
 </template>
 

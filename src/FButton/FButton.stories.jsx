@@ -1,5 +1,5 @@
 import React from 'react';
-import { Title, Primary, Controls, Stories, Markdown } from '@storybook/addon-docs/blocks';
+import { Title, Primary, Controls, Stories, Markdown, Subtitle, Description } from '@storybook/addon-docs/blocks';
 
 import FIcon from '@/FIcon';
 import { ICON_LIST_SOLID, ICON_LIST_OUTLINE, ICON_LIST_OTHER } from '@/FIcon/constants';
@@ -8,6 +8,8 @@ import { COMPONENT_TYPES, SIZE_CHOICES, COLOR_CHOICES, DESIGN_CHOICES, ICON_STYL
 
 
 const usage = `
+A standard button component used for form actions and general interactions. Supports different states, sizes, and variants to fit common UI patterns.
+
 ### Usage
 
 Import the component:
@@ -25,10 +27,6 @@ Use it in your template:
 \`\`\`
 
 That's it!
-
-### TODO
-
-* Add support for scaling the icon inside the button
 `;
 
 
@@ -67,10 +65,14 @@ export default {
 	parameters: {
 		layout: 'centered',
 		docs: {
+			description: {
+				component: usage,
+			},
 			page: () => (
 				<>
 					<Title />
-					<Markdown children={usage} />
+					<Subtitle />
+					<Description />
 					<Primary />
 					<Controls />
 					<Stories includePrimary={false} title={null} />

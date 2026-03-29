@@ -10,6 +10,7 @@
 @import "./forms/FInput/style.css";
 @import "./forms/FRadioButton/style.css";
 @import "./forms/FControlLabel/style.css";
+@import "./forms/FInputAutocomplete/style.css";
 
 @theme {
 	--color-primary-50: var(--fui-color-blue-50);
@@ -49,20 +50,17 @@
 	);
 
 	/* Spacing */
-	/*--spacing-0\.5: 2px;*/
-	/*--spacing: 4px;*/
-	--spacing-1: 4px;
-	/*--spacing-1\.5: 6px;*/
-	--spacing-2: 8px;
-	--spacing-2\.5: 10px;
-	--spacing-3: 12px;
-	--spacing-3\.5: 14px;
-	/*--spacing-4: 16px;*/
-	--spacing-5: 20px;
-	--spacing-6: 24px;
+	--spacing: 4px;
 
 	--font-sans: Inter, Helvetica, Arial, sans-serif;
 	--radius-lg: 0.5rem;
+
+	--transition-duration-default: .2s;
+
+	--color-dd-bg: light-dark(var(--fui-color-white), var(--fui-color-gray-700));
+	--color-dd-b: light-dark(var(--fui-color-gray-200), var(--fui-color-gray-600));
+	--color-dd-bs1: #0000000d;
+	--color-dd-bs2: #0000001a;
 }
 
 /* Focus */
@@ -73,3 +71,14 @@
 	outline-color: transparent;
 }
 /* End of Focus */
+
+
+/* DropDown Wrapper */
+@utility dropdown-wrapper {
+	@apply fui:bg-dd-bg;
+	@apply fui:rounded-lg;
+	border: 1px solid;
+	@apply fui:border-dd-b;
+	box-shadow: 0px 2px 4px -2px var(--fui-color-dd-bs1), 0px 4px 6px -1px var(--fui-color-dd-bs2);
+}
+/* End of DropDown Wrapper */

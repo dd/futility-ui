@@ -21,3 +21,10 @@ export const SIZE_CHOICES = Object.freeze([
 	// 'l',
 	'xl',
 ]);
+
+export const SHOW_PASSWORD_DEFAULT_TEXTS = {
+	show: 'Show password',
+	hide: 'Hide password',
+	showing: 'Showing password',
+};
+

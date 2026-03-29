@@ -5,6 +5,7 @@
 	--color-input-p: light-dark(var(--fui-color-gray-500), var(--fui-color-gray-400));
 	/* focus */
 	--color-input-bf: var(--fui-color-primary-600);
+	--color-input-eb-f: light-dark(var(--fui-color-primary-200), var(--fui-color-gray-600));
 	/* disabled */
 	--color-input-cd: light-dark(var(--fui-color-gray-400), var(--fui-color-gray-500));
 	--color-input-bd: light-dark(var(--fui-color-gray-200), var(--fui-color-gray-700));
@@ -17,10 +18,10 @@
 	--color-input-bge: light-dark(var(--fui-color-red-50), var(--fui-color-gray-800));
 	--color-input-pe: light-dark(var(--fui-color-red-400), var(--fui-color-red-800));
 	/* error + disabled */
-	--color-input-ced: light-dark(var(--fui-color-red-400), var(--fui-color-red-500));
-	--color-input-bed: light-dark(var(--fui-color-red-200), var(--fui-color-red-700));
-	--color-input-bged: light-dark(var(--fui-color-red-50), var(--fui-color-red-800));
-	--color-input-ped: light-dark(var(--fui-color-red-200), var(--fui-color-red-600));
+	--color-input-ced: light-dark(var(--fui-color-red-400), var(--fui-color-red-900));
+	--color-input-bed: light-dark(var(--fui-color-red-200), var(--fui-color-red-950));
+	--color-input-bged: light-dark(var(--fui-color-red-50), var(--fui-color-gray-900));
+	--color-input-ped: light-dark(var(--fui-color-red-200), var(--fui-color-red-950));
 }
 
 
@@ -34,7 +35,6 @@
 	padding: 0 16px;
 	box-sizing: border-box;
 
-	@apply fui:text-input-c;
 	border: 1px solid;
 	@apply fui:border-input-b;
 	@apply fui:rounded-lg;
@@ -43,12 +43,12 @@
 	@apply fui:font-sans;
 	font-weight: 400;
 	letter-spacing: 0.015em;
-	line-height: 150%;
+	@apply fui:text-input-c;
 
 	@apply fui:outline-focus-prepear;
-	transition-property: outline-color;
-	transition-duration: .1s;
-	will-change: outline-color;
+	transition-property: outline-color, border-color;
+	transition-duration: var(--fui-transition-duration-default);
+	will-change: outline-color, border-color;
 
 	.fui-input-input {
 		flex-grow: 1;
@@ -129,7 +129,7 @@
 	}
 
 
-	/* Customize widgets */
+	/* Customize widgets ************************/
 
 	/* Search */
 	&:has(.fui-input-clear_btn) .fui-input-input[type="search"]::-webkit-search-cancel-button {
@@ -174,12 +174,15 @@
 		display: none;
 	}
 
+	/* Extra Buttons ****************************/
+
 	/* Extra Button */
 	.fui-input-extra_btn {
 		border: none;
 		background: none;
 		padding: 0;
 		margin: 0;
+		aspect-ratio: 1 / 1;
 
 		cursor: pointer;
 		color: inherit;
@@ -196,7 +199,7 @@
 		}
 
 		&:focus-visible {
-			@apply fui:outline-focus;
+			@apply fui:outline-input-eb-f;
 		}
 	}
 
@@ -218,7 +221,7 @@
 }
 
 
-/* Sizes //////////////////////////////////////// */
+/* Sizes ****************************************/
 /* lineheight: 1.5 */
 
 /* height-s: 37px */
@@ -240,7 +243,7 @@
 		/* button-size-s: height-s - 1px * 2 = 35px */
 		/* button-padding: (button-size-s - icon-size-s) / 2 = 7.5px */
 		height: 35px;
-		widows: 35px;
+		/*widows: 35px;*/
 		padding: 7.5px;
 		margin: 0 -7.5px;
 
@@ -259,7 +262,7 @@
 /* button-offset-m: -10px */
 .fui-input-size-m {
 	--fui-icon-size: 20px;
-/*	@apply fui:text-sm;*/
+	/*@apply fui:text-sm;*/
 	font-size: theme(text.sm);
 	line-height: 150%;
 
@@ -271,7 +274,7 @@
 		/* button-size-m: height-m - 1px * 2 = 40px */
 		/* button-padding: (button-size-m - icon-size-m) / 2 = 10px */
 		height: 40px;
-		widows: 40px;
+		/*width: 40px;*/
 		padding: 10px;
 		margin: 0 -10px;
 
@@ -279,7 +282,6 @@
 		/* 8px - button-offset-m / 2 */
 		border-radius: 13px;
 		outline-offset: -10px;
-
 	}
 }
 
@@ -290,7 +292,7 @@
 /* button-offset-xl: -10px */
 .fui-input-size-xl {
 	--fui-icon-size: 20px;
-/*	@apply fui:text-base;*/
+	/*@apply fui:text-base;*/
 	font-size: theme(text.base);
 	line-height: 150%;
 
@@ -302,7 +304,7 @@
 		/* button-size-xl: height-xl - 1px * 2 = 50px */
 		/* button-padding: (button-size-xl - icon-size-xl) / 2 = 15px */
 		height: 50px;
-		widows: 50px;
+		/*widows: 50px;*/
 		padding: 15px;
 		margin: 0 -15px;
 

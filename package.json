@@ -86,6 +86,14 @@
       "require": "./dist/forms/FInput/ShowPasswordButton.cjs.js",
       "import": "./dist/forms/FInput/ShowPasswordButton.es.js"
     },
+    "./forms/FInputAutocomplete": {
+      "require": "./dist/forms/FInputAutocomplete/index.cjs.js",
+      "import": "./dist/forms/FInputAutocomplete/index.es.js"
+    },
+    "./forms/FInputAutocomplete/constants": {
+      "require": "./dist/forms/FInputAutocomplete/constants.cjs.js",
+      "import": "./dist/forms/FInputAutocomplete/constants.es.js"
+    },
     "./forms/FRadioButton": {
       "require": "./dist/forms/FRadioButton/index.cjs.js",
       "import": "./dist/forms/FRadioButton/index.es.js"

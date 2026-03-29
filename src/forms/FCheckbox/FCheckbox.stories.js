@@ -5,6 +5,9 @@ import { makeRenderer, makeUpdateArg } from '@/utils/storybook';
 
 
 const usage = `
+A standard checkbox component for selecting one or multiple options.
+
+
 ### Usage
 
 Import the component:
