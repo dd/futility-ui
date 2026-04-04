@@ -21,7 +21,7 @@ import FCheckbox from 'futility-ui/forms/FCheckbox'
 Use it in your template:
 
 \`\`\`html
-<FCheckbox />
+<FCheckbox name="fcheckbox-1" />
 \`\`\`
 
 That's it!

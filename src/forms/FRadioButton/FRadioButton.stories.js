@@ -21,7 +21,7 @@ import FRadioButton from 'futility-ui/forms/FRadioButton'
 Use it in your template:
 
 \`\`\`html
-<FRadioButton />
+<FRadioButton name="fradiobutton-1" />
 \`\`\`
 
 That's it!

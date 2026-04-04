@@ -27,7 +27,11 @@ import FInputAutocomplete from 'futility-ui/forms/FInputAutocomplete'
 Use it in your template:
 
 \`\`\`html
-<FInputAutocomplete v-model="value" />
+<FInputAutocomplete
+	v-model="value"
+	name="finputauto-1"
+	:requestHandler="requestHandler"
+/>
 \`\`\`
 
 That's it!
