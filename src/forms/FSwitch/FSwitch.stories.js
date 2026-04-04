@@ -20,7 +20,7 @@ import FSwitch from 'futility-ui/forms/FSwitch'
 Use it in your template:
 
 \`\`\`html
-<FSwitch />
+<FSwitch name="fswitch-1" />
 \`\`\`
 
 That's it!

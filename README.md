@@ -69,8 +69,9 @@ For more information about choosing a stylesheet and other options, see the [Usa
 * [x] Radio button
 * [x] Input Autocomplete (with loading options)
 	- [ ] Ability to group options when needed
+* [x] Select
+	- [ ] Custom dropdown for desktop screen and native for mobile [???]
 * [ ] Form row (A component that renders a form row with a label, widget, help text, and error text.) **`<- you are here`**
-* [ ] Select
 * [ ] DropDown
 * [ ] FileSelect
 * [ ] FileSelectArea

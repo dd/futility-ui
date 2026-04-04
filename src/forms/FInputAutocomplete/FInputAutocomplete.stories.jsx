@@ -1,8 +1,8 @@
 import React from 'react';
 import { Title, Primary, Controls, Stories, Markdown, Subtitle, Description } from '@storybook/addon-docs/blocks';
 import { computed, ref, watch } from 'vue';
-
 import { useArgs } from 'storybook/preview-api';
+
 import FInputAutocomplete from '.';
 import FSwitch from '@/forms/FSwitch';
 import FControlLabel from '@/forms/FControlLabel';
@@ -27,7 +27,11 @@ import FInputAutocomplete from 'futility-ui/forms/FInputAutocomplete'
 Use it in your template:
 
 \`\`\`html
-<FInputAutocomplete v-model="value" />
+<FInputAutocomplete
+	v-model="value"
+	name="finputauto-1"
+	:requestHandler="requestHandler"
+/>
 \`\`\`
 
 That's it!
@@ -402,24 +406,24 @@ export const States = {
 			props: Object.keys(argTypes),
 			components: { FInputAutocomplete },
 			setup() {
-				const {
-					modelValue,
-					'update:modelValue': _a,
-					'disabled': _b,
-					'error': _c,
-					...filteredArgs
-				} = args;  // eslint-disable-line no-unused-vars
-
-				const updateValue = makeUpdateArg('modelValue', args, updateArgs);
+				const newArgs = computed(() => {
+					const {
+						modelValue,
+						disabled,
+						error,
+						'update:modelValue': _,
+						...filteredArgs
+					} = args;  // eslint-disable-line no-unused-vars
+					return filteredArgs;
+				});
 				const updateQuery = makeUpdateArg('query', args, updateArgs);
 				const promisedArgs = {
-					[updateValue[0]]: updateValue[1],
 					[updateQuery[0]]: updateQuery[1],
 				};
 
 				const modelValue1 = ref();
 				const modelValue2 = ref('opt1');
-				return { args: filteredArgs, promisedArgs, modelValue1, modelValue2 };
+				return { args: newArgs, promisedArgs, modelValue1, modelValue2 };
 			},
 			template: `<table class="preview-table" ><tbody>
 	<tr>
@@ -470,16 +474,16 @@ export const Sizes = {
 			components: { FInputAutocomplete },
 			setup() {
 				const LABELS = [ '37px', '42px', '52px' ];
-				const { 'size': _, ...filteredArgs } = args;  // eslint-disable-line no-unused-vars
 				const updateValue = makeUpdateArg('modelValue', args, updateArgs);
 				const updateQuery = makeUpdateArg('query', args, updateArgs);
-				const newArgs = computed(() => ({
-					...args,
-					'onUpdate:modelValue': updateValue[1],
-					'onUpdate:query': updateQuery[1],
-					[updateValue[0]]: updateValue[1],
-					[updateQuery[0]]: updateQuery[1],
-				}));
+				const newArgs = computed(() => {
+					const { 'size': _, ...filteredArgs } = args;  // eslint-disable-line no-unused-vars
+					return {
+						...filteredArgs,
+						'onUpdate:modelValue': updateValue[1],
+						'onUpdate:query': updateQuery[1],
+					}
+				});
 				return { args: newArgs, LABELS, SIZE_CHOICES };
 			},
 			template: `<table class="preview-table" ><tbody>

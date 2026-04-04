@@ -11,6 +11,7 @@
 @import "./forms/FRadioButton/style.css";
 @import "./forms/FControlLabel/style.css";
 @import "./forms/FInputAutocomplete/style.css";
+@import "./forms/FSelect/style.css";
 
 @theme {
 	--color-primary-50: var(--fui-color-blue-50);

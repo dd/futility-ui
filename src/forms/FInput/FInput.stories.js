@@ -26,7 +26,7 @@ import FInput from 'futility-ui/forms/FInput'
 Use it in your template:
 
 \`\`\`html
-<FInput v-model="value" />
+<FInput v-model="value" name="finput-1" />
 \`\`\`
 
 That's it!
@@ -207,7 +207,7 @@ export const States = {
 					...filteredArgs
 				} = args;  // eslint-disable-line no-unused-vars
 				const modelValue1 = ref();
-				const modelValue2 = ref('opt1');
+				const modelValue2 = ref('Brown fox');
 				return { args: filteredArgs, modelValue1, modelValue2 };
 			},
 			template: `<table class="preview-table" ><tbody>
