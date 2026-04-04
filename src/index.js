@@ -7,6 +7,7 @@ import FSwitch from './forms/FSwitch';
 import FCheckbox from './forms/FCheckbox';
 import FInput from './forms/FInput';
 import FInputAutocomplete from './forms/FInputAutocomplete';
+import FSelect from './forms/FSelect';
 import FRadioButton from './forms/FRadioButton';
 import FControlLabel from './forms/FControlLabel';
 
@@ -21,6 +22,7 @@ export {
 	FInput,
 	FInputAutocomplete,
 	FRadioButton,
+	FSelect,
 	FStack,
 	FControlLabel,
 };
@@ -38,6 +40,7 @@ const components = {
 	FInput,
 	FInputAutocomplete,
 	FRadioButton,
+	FSelect,
 	FStack,
 	FControlLabel,
 };
