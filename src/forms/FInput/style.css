@@ -16,7 +16,8 @@
 	--color-input-ce: light-dark(var(--fui-color-red-700), var(--fui-color-red-500));
 	--color-input-be: var(--fui-color-red-500);
 	--color-input-bge: light-dark(var(--fui-color-red-50), var(--fui-color-gray-800));
-	--color-input-pe: light-dark(var(--fui-color-red-400), var(--fui-color-red-800));
+	--color-input-pe: light-dark(var(--fui-color-red-400), var(--fui-color-red-700));
+
 	/* error + disabled */
 	--color-input-ced: light-dark(var(--fui-color-red-400), var(--fui-color-red-900));
 	--color-input-bed: light-dark(var(--fui-color-red-200), var(--fui-color-red-950));
