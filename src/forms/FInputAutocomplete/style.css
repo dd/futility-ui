@@ -122,7 +122,6 @@
 		flex-shrink: 1;
 		min-width: 0;
 
-		color: inherit;
 		text-overflow: ellipsis;
 		white-space: nowrap;
 		overflow: hidden;
@@ -281,13 +280,13 @@
 	/* States ***********************************/
 
 	/* Disabled */
-	.fui-iauto-label_wrapper:has(.fui-iauto-input:disabled) {
-		@apply fui:text-input-cd;
+	&:has(.fui-iauto-input:disabled) .fui-iauto-label_wrapper {
+		@apply fui:text-input-pd;
 		@apply fui:border-input-bd;
 		@apply fui:bg-input-bgd;
 
-		.fui-iauto-query_input::placeholder {
-			@apply fui:text-input-pd;
+		&.has-value {
+			@apply fui:text-input-cd;
 		}
 
 		.fui-iauto-label_remove {
@@ -297,9 +296,13 @@
 
 	/* Errors */
 	.fui-iauto-label_wrapper.has-error {
-		@apply fui:text-input-ce;
+		@apply fui:text-input-pe;
 		@apply fui:border-input-be;
 		@apply fui:bg-input-bge;
+
+		&.has-value {
+			@apply fui:text-input-ce;
+		}
 
 		.fui-iauto-query_input::placeholder {
 			@apply fui:text-input-pe;
@@ -317,16 +320,16 @@
 		.fui-iauto-label_remove:focus-visible {
 			@apply fui:outline-focus-error;
 		}
+	}
 
-		/* Error + Disabled */
-		&:has(.fui-iauto-input:disabled) {
+	/* Error + Disabled */
+	&:has(.fui-iauto-input:disabled) .fui-iauto-label_wrapper.has-error {
+		@apply fui:text-input-ped;
+		@apply fui:border-input-bed;
+		@apply fui:bg-input-bged;
+
+		&.has-value {
 			@apply fui:text-input-ced;
-			@apply fui:border-input-bed;
-			@apply fui:bg-input-bged;
-		}
-
-		.fui-iauto-input:disabled::placeholder {
-			@apply fui:text-input-ped;
 		}
 	}
 }
