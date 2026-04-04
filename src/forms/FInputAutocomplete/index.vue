@@ -58,6 +58,7 @@
 			}"
 			role="listbox"
 			:id="`listbox-${filterInputID}`"
+			tabindex="-1"
 			@scroll="handleScroll"
 		>
 			<button
