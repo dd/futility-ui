@@ -66,6 +66,16 @@ h1 {
 		line-height: 150%;
 	}
 }
+
+.preview-flex {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: center;
+	align-items: center;
+	align-content: center;
+	@apply fui:gap-4;
+}
 /* End Of Previews */
 
 
@@ -122,3 +132,44 @@ h1 {
 }
 /* End of FSelect */
 
+
+
+/* FTooltip */
+.sb-ftooltip-placement-preview {
+	display: grid;
+	grid-template-columns: repeat(5, auto);
+	gap: 8px;
+	padding: 60px;
+}
+
+.sb-ftooltip-trigger_example {
+	@apply fui:py-2.5;
+	@apply fui:px-4;
+	border-radius: 8px;
+	@apply fui:bg-primary-700;
+	@apply fui:text-gray-500 fui:dark:text-white;
+	@apply fui:font-sans;
+	@apply fui:text-sm;
+	font-weight: 400;
+	text-align: center;
+	cursor: help;
+}
+
+.sb-ftooltip-vmodel {
+	display: flex;
+	flex-direction: column;
+	flex-wrap: wrap;
+	justify-content: center;
+	align-items: center;
+	align-content: center;
+	@apply fui:gap-4;
+	padding-top: 20px;
+}
+
+.sb-ftooltip-text_example {
+	text-decoration-line: underline;
+	text-decoration-style: wavy;
+	text-underline-offset: 2.5px;
+	cursor: pointer;
+}
+/* End of FSelect */

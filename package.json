@@ -110,6 +110,18 @@
       "require": "./dist/forms/FControlLabel/index.cjs.js",
       "import": "./dist/forms/FControlLabel/index.es.js"
     },
+    "./FTooltip": {
+      "require": "./dist/FTooltip/index.cjs.js",
+      "import": "./dist/FTooltip/index.es.js"
+    },
+    "./FTooltip/directive": {
+      "require": "./dist/FTooltip/directive.cjs.js",
+      "import": "./dist/FTooltip/directive.es.js"
+    },
+    "./FTooltip/constants": {
+      "require": "./dist/FTooltip/constants.cjs.js",
+      "import": "./dist/FTooltip/constants.es.js"
+    },
     "./styles.base.css": "./dist/styles.base.css",
     "./styles.tailwind.css": "./dist/styles.tailwind.css",
     "./assets/sprite.svg": "./dist/assets/sprite.svg"
@@ -166,5 +178,8 @@
   "engines": {
     "node": ">=18",
     "pnpm": ">=10"
+  },
+  "dependencies": {
+    "@floating-ui/vue": "^1.1.11"
   }
 }

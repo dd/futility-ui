@@ -146,6 +146,7 @@ export default defineConfig({
 				...findVueEntries(resolve('src')),
 				'forms/FInput/ClearButton': resolve(__dirname, 'src/forms/FInput/ClearButton.vue'),
 				'forms/FInput/ShowPasswordButton': resolve(__dirname, 'src/forms/FInput/ShowPasswordButton.vue'),
+				'FTooltip/directive': resolve(__dirname, 'src/FTooltip/directive.js'),
 				'styles.base.css': resolve(__dirname, 'src/styles.base.css'),
 				'styles.tailwind.css': resolve(__dirname, 'src/styles.tailwind.css'),
 			},
