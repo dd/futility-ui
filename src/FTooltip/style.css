@@ -1,0 +1,167 @@
+@theme {
+	--color-tooltip-bg: light-dark(var(--fui-color-white), var(--fui-color-gray-800));
+	/*--color-tooltip-title-c: var(--fui-color-header);*/
+	/*--color-tooltip-text-c: var(--fui-color-text);*/
+	--tooltip-z: 1000;
+	--tooltip-arrow-width: 17px;
+	--tooltip-arrow-height: 8px;
+	--tooltip-offset: 8px;
+}
+
+
+/* Base *****************************************/
+
+.fui-tooltip {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: max-content;
+	z-index: var(--fui-tooltip-z);
+
+	&.fui-tooltip-non_interactive {
+		pointer-events: none;
+	}
+
+
+	/* Arrow ****************************************/
+	.fui-tooltip-arrow {
+		position: absolute;
+		width: 0;
+		height: 0;
+		/* hide the half that sticks out past the tooltip border */
+		clip-path: none;
+		border-style: solid;
+		border-color: transparent;
+	}
+
+	&[data-placement^='top'] {
+		padding-bottom: var(--fui-tooltip-offset);
+
+		.fui-tooltip-arrow {
+			bottom: calc(var(--fui-tooltip-offset) - var(--fui-tooltip-arrow-height));
+			border-top-width: var(--fui-tooltip-arrow-height);
+			border-right-width: calc(var(--fui-tooltip-arrow-width) / 2);
+			border-bottom-width: 0px;
+			border-left-width: calc(var(--fui-tooltip-arrow-width) / 2);
+			border-top-color: currentColor;
+		}
+	}
+
+	&[data-placement^='bottom'] {
+		padding-top: var(--fui-tooltip-offset);
+
+		.fui-tooltip-arrow {
+			top: calc(var(--fui-tooltip-offset) - var(--fui-tooltip-arrow-height));
+			border-top-width: 0px;
+			border-right-width: calc(var(--fui-tooltip-arrow-width) / 2);
+			border-bottom-width: var(--fui-tooltip-arrow-height);
+			border-left-width: calc(var(--fui-tooltip-arrow-width) / 2);
+			border-bottom-color: currentColor;
+		}
+	}
+
+	&[data-placement^='left'] {
+		padding-right: var(--fui-tooltip-offset);
+
+		.fui-tooltip-arrow {
+			right: calc(var(--fui-tooltip-offset) - var(--fui-tooltip-arrow-height));
+			border-top-width: calc(var(--fui-tooltip-arrow-width) / 2);
+			border-right-width: 0px;
+			border-bottom-width: calc(var(--fui-tooltip-arrow-width) / 2);
+			border-left-width: var(--fui-tooltip-arrow-height);
+			border-left-color: currentColor;
+		}
+	}
+
+	&[data-placement^='right'] {
+		padding-left: var(--fui-tooltip-offset);
+
+		.fui-tooltip-arrow {
+			left: calc(var(--fui-tooltip-offset) - var(--fui-tooltip-arrow-height));
+			border-top-width: calc(var(--fui-tooltip-arrow-width) / 2);
+			border-right-width: var(--fui-tooltip-arrow-height);
+			border-bottom-width: calc(var(--fui-tooltip-arrow-width) / 2);
+			border-left-width: 0px;
+			border-right-color: currentColor;
+		}
+	}
+}
+
+
+/* Vue Transition (component) *******************/
+
+.fui-tooltip-enter-active,
+.fui-tooltip-leave-active {
+	transition: opacity 0.1s ease;
+}
+
+.fui-tooltip-enter-from,
+.fui-tooltip-leave-to {
+	opacity: 0;
+}
+
+
+/* v-tooltip directive **************************/
+
+.fui-tooltip-directive:not(.fui-tooltip-visible) {
+	opacity: 0;
+	transition: opacity 0.1s ease;
+}
+
+.fui-tooltip-directive.fui-tooltip-visible {
+	opacity: 1;
+	transition: opacity 0.1s ease;
+}
+
+
+/* Theme ****************************************/
+
+/* tooltip */
+.fui-tooltip-theme-tooltip {
+	filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.08));
+
+	.fui-tooltip-content {
+		padding: calc(var(--fui-spacing) * 1.5) calc(var(--fui-spacing) * 3);
+		@apply fui:text-xs;
+		line-height: 1.4;
+		font-weight: 500;
+		max-width: 300px;
+		word-break: break-word;
+
+		@apply fui:rounded;
+		@apply fui:text-header;
+		background-color: light-dark(var(--fui-color-white), var(--fui-color-gray-800));
+	}
+
+	.fui-tooltip-arrow {
+		color: light-dark(var(--fui-color-white), var(--fui-color-gray-800));
+	}
+}
+
+/* tooltip-rich */
+.fui-tooltip-theme-tooltip-rich {
+	filter: drop-shadow(0 2px 4px var(--fui-color-dd-bs1))
+			drop-shadow(0 4px 6px var(--fui-color-dd-bs2));
+
+	.fui-tooltip-content {
+		padding: calc(var(--fui-spacing) * 2.5) calc(var(--fui-spacing) * 3);
+		@apply fui:text-xs;
+		line-height: 1.4;
+		font-weight: 400;
+		max-width: 300px;
+		word-break: break-word;
+
+		@apply fui:rounded;
+		@apply fui:text-text;
+		background-color: light-dark(var(--fui-color-white), var(--fui-color-gray-800));
+	}
+
+	.fui-tooltip-header {
+		@apply fui:text-header;
+		font-weight: 500;
+	}
+
+	.fui-tooltip-arrow {
+		color: light-dark(var(--fui-color-white), var(--fui-color-gray-800));
+	}
+}

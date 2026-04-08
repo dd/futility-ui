@@ -26,9 +26,10 @@ export const makeUpdateArg = (argOption, args, updateArgs) => {
 	return [
 		updateArg,
 		(newValue) => {
-			args[arg] = newValue;
 			action(updateArg)(newValue);
-			updateArgs({ [arg]: newValue });
+			if (updateArgs) {
+				setTimeout(() => { updateArgs({ [arg]: newValue }) }, 0);
+			}
 		},
 	];
 };
