@@ -176,3 +176,19 @@ h1 {
 	cursor: pointer;
 }
 /* End of FSelect */
+
+
+/* FFormRow */
+.sbfui-fformrow {
+	--fui-spacing-formrow-label: 70px;
+	align-items: flex-start;
+}
+.sbfui-fformrow-size {
+	--fui-spacing-formrow-label: 80px;
+	align-items: flex-start;
+
+	.fui-input-input {
+		width: 220px;
+	}
+}
+/* End of FFormRow */

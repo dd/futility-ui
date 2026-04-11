@@ -71,8 +71,9 @@ For more information about choosing a stylesheet and other options, see the [Usa
 	- [ ] Ability to group options when needed
 * [x] Select
 	- [ ] Custom dropdown for desktop screen and native for mobile [???]
-* [ ] Form row (A component that renders a form row with a label, widget, help text, and error text.) **`<- you are here`**
-* [ ] DropDown
+* [x] Tooltip
+* [x] Form row (A component that renders a form row with a label, widget, help text, and error text.)
+* [ ] Generic Form **`<- you are here`**
 * [ ] FileSelect
 * [ ] FileSelectArea
 * [ ] Textarea
@@ -82,9 +83,9 @@ For more information about choosing a stylesheet and other options, see the [Usa
 * [ ] MultiSelect
 * [ ] Tag Select
 * [ ] Tabs
-* [ ] DatePicker
-* [ ] TimePicker
 * [ ] Paginator
+* [ ] Dropdown
+* [ ] Popover
 * etc.
 
 #### Refactor
@@ -100,6 +101,9 @@ For more information about choosing a stylesheet and other options, see the [Usa
 * [ ] Multi Select Autocomplete
 * [ ] Select with custom dropdown (search, loading, etc...)
 * [ ] Select Autocomplete (likely not needed if Input Autocomplete exists)
+* [ ] Custom DatePicker
+* [ ] Custom TimePicker
+* [ ] Custom MultiSelect with filters
 
 #### Dev
 
