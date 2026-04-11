@@ -85,7 +85,7 @@ export const Diversity = {
 			return { ...args, copyHandler, ICON_LIST_SOLID, ICON_LIST_OUTLINE, ICON_LIST_OTHER };
 		},
 		template: `
-<div class="icon_preview" >
+<div class="sbfui-icon_preview" >
 	<FIcon
 		v-for="icon in ICON_LIST_SOLID"
 		:key="icon"
@@ -93,7 +93,7 @@ export const Diversity = {
 		@click="copyHandler(icon)"
 	/>
 </div>
-<div class="icon_preview" style="margin-top:40px" >
+<div class="sbfui-icon_preview" style="margin-top:40px" >
 	<FIcon
 		v-for="icon in ICON_LIST_OUTLINE"
 		:key="icon"
@@ -101,7 +101,7 @@ export const Diversity = {
 		@click="copyHandler(icon)"
 	/>
 </div>
-<div class="icon_preview" style="margin-top:40px" >
+<div class="sbfui-icon_preview" style="margin-top:40px" >
 	<FIcon
 		v-for="icon in ICON_LIST_OTHER"
 		:key="icon"
@@ -140,8 +140,8 @@ export const Scheme = {
 			return { ...args, copyHandler, ICON_LIST_SOLID, ICON_LIST_OUTLINE, ICON_LIST_OTHER };
 		},
 		template: `<div class="sbpst-scheme_preview sbpst-row" >
-	<div class="sbpst-light icon_preview-wrapper" >
-		<div class="icon_preview" >
+	<div class="sbpst-light sbfui-icon_preview-wrapper" >
+		<div class="sbfui-icon_preview" >
 			<FIcon
 				v-for="icon in ICON_LIST_SOLID"
 				:key="icon"
@@ -149,7 +149,7 @@ export const Scheme = {
 				@click="copyHandler(icon)"
 			/>
 		</div>
-		<div class="icon_preview" style="margin-top:40px" >
+		<div class="sbfui-icon_preview" style="margin-top:40px" >
 			<FIcon
 				v-for="icon in ICON_LIST_OUTLINE"
 				:key="icon"
@@ -157,7 +157,7 @@ export const Scheme = {
 				@click="copyHandler(icon)"
 			/>
 		</div>
-		<div class="icon_preview" style="margin-top:40px" >
+		<div class="sbfui-icon_preview" style="margin-top:40px" >
 			<FIcon
 				v-for="icon in ICON_LIST_OTHER"
 				:key="icon"
@@ -167,8 +167,8 @@ export const Scheme = {
 			/>
 		</div>
 	</div>
-	<div class="sbpst-dark icon_preview-wrapper" >
-		<div class="icon_preview" >
+	<div class="sbpst-dark sbfui-icon_preview-wrapper" >
+		<div class="sbfui-icon_preview" >
 			<FIcon
 				v-for="icon in ICON_LIST_SOLID"
 				:key="icon"
@@ -176,7 +176,7 @@ export const Scheme = {
 				@click="copyHandler(icon)"
 			/>
 		</div>
-		<div class="icon_preview" style="margin-top:40px" >
+		<div class="sbfui-icon_preview" style="margin-top:40px" >
 			<FIcon
 				v-for="icon in ICON_LIST_OUTLINE"
 				:key="icon"
@@ -184,7 +184,7 @@ export const Scheme = {
 				@click="copyHandler(icon)"
 			/>
 		</div>
-		<div class="icon_preview" style="margin-top:40px" >
+		<div class="sbfui-icon_preview" style="margin-top:40px" >
 			<FIcon
 				v-for="icon in ICON_LIST_OTHER"
 				:key="icon"

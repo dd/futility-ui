@@ -39,22 +39,7 @@ import FTooltip from 'futility-ui/FTooltip'
 		<div>Any <strong>rich</strong> content here</div>
 	</template>
 </FTooltip>
-\`\`\`
-
-
-### Directive
-
-\`\`\`js
-import { vTooltip } from 'futility-ui'
-// or register globally: app.directive('tooltip', vTooltip)
-\`\`\`
-
-\`\`\`html
-<button v-tooltip="'Hello world'">Hover me</button>
-<!-- or -->
-<button v-tooltip="{ text: 'Error!', placement: 'bottom', theme: 'tooltip' }">Field</button>
-\`\`\`
-`;
+\`\`\``;
 
 
 export default {
@@ -157,7 +142,7 @@ export default {
 			},
 			template: `
 <FTooltip v-bind="args" v-on="promisedArgs" >
-	<div class="sb-ftooltip-trigger_example">Hover me</div>
+	<div class="sbfui-ftooltip-trigger_example">Hover me</div>
 </FTooltip>
 			`,
 		};
@@ -198,13 +183,13 @@ export const Themes = {
 			const promisedArgs = { [updateOption[0]]: updateOption[1] };
 			return { args: newArgs, promisedArgs };
 		},
-		template: `<div class="preview-flex" >
+		template: `<div class="sbfui-preview-flex-x" >
 	<FTooltip v-bind="args" v-on="promisedArgs" theme="tooltip" text="Short hint" >
-		<div class="sb-ftooltip-trigger_example" >tooltip</div>
+		<div class="sbfui-ftooltip-trigger_example" >tooltip</div>
 	</FTooltip>
 
 	<FTooltip v-bind="args" v-on="promisedArgs" theme="tooltip-rich" >
-		<div class="sb-ftooltip-trigger_example" >tooltip-rich</div>
+		<div class="sbfui-ftooltip-trigger_example" >tooltip-rich</div>
 		<template #content >
 			<p class="fui-tooltip-header" >Tooltip title</p>
 			<p>Additional text explaining what is going on here.</p>
@@ -259,7 +244,7 @@ export const Placements = {
 				promisedArgs,
 			};
 		},
-		template: `<div class="sb-ftooltip-placement-preview" >
+		template: `<div class="sbfui-ftooltip-placement-preview" >
 	<template v-for="p, i in PLACEMENT_CHOICES" >
 		<FTooltip
 			v-if="p"
@@ -269,7 +254,7 @@ export const Placements = {
 			:placement="p"
 			:text="\`placement: \${p}\`"
 		>
-			<div class="sb-ftooltip-trigger_example" >{{ p }}</div>
+			<div class="sbfui-ftooltip-trigger_example" >{{ p }}</div>
 		</FTooltip>
 		<div v-else :key="\`div-\${i}\`" />
 	</template>
@@ -324,13 +309,13 @@ intercept mouse events. Use it for plain text hints that should only be read, no
 			return { args: newArgs, promisedArgs };
 		},
 		template: `
-<div class="preview-flex" >
-	<FTooltip v-bind="args" v-bind="promisedArgs" text="You can hover inside me" >
-		<div class="sb-ftooltip-trigger_example" >Default (interactive)</div>
+<div class="sbfui-preview-flex-x" >
+	<FTooltip v-bind="args" v-on="promisedArgs" text="You can hover inside me" >
+		<div class="sbfui-ftooltip-trigger_example" >Default (interactive)</div>
 	</FTooltip>
 
-	<FTooltip v-bind="args" v-bind="promisedArgs" text="You cannot hover inside me" non-interactive >
-		<div class="sb-ftooltip-trigger_example" >Non-interactive</div>
+	<FTooltip v-bind="args" v-on="promisedArgs" text="You cannot hover inside me" non-interactive >
+		<div class="sbfui-ftooltip-trigger_example" >Non-interactive</div>
 	</FTooltip>
 </div>`,
 	}),
@@ -388,7 +373,7 @@ export const Triggers = {
 				promisedArgs,
 			};
 		},
-		template: `<div class="preview-flex">
+		template: `<div class="sbfui-preview-flex-x">
 	<FTooltip
 		v-for="trigger, i in TRIGGER_CHOICES"
 		:key="i"
@@ -452,7 +437,7 @@ With \`trigger="manual"\` the tooltip is controlled **exclusively** via \`v-mode
 			return { args: newArgs, isOpen };
 		},
 		template: `
-<div class="sb-ftooltip-vmodel" >
+<div class="sbfui-ftooltip-vmodel" >
 	<FTooltip
 		v-model:open="isOpen"
 		v-bind="args"
@@ -462,7 +447,7 @@ With \`trigger="manual"\` the tooltip is controlled **exclusively** via \`v-mode
 		<FIcon name="bell_ring_outline" />
 	</FTooltip>
 
-	<div class="preview-flex" style="gap:4px;" >
+	<div class="sbfui-preview-flex-x" style="gap:4px;" >
 		<FButton @click="isOpen = true" >Show</FButton>
 		<FButton @click="isOpen = false" >Hide</FButton>
 	</div>
@@ -481,15 +466,27 @@ With \`trigger="manual"\` the tooltip is controlled **exclusively** via \`v-mode
 };
 
 
+const DIRECTIVE_DESCRIPTION = `
+The \`v-tooltip\` directive for simple use cases - no wrapper component needed.
+
+All the main props are available through the directive as well.
+
+\`\`\`js
+import { vTooltip } from 'futility-ui'
+// or register globally: app.directive('tooltip', vTooltip)
+\`\`\`
+
+\`\`\`html
+<button v-tooltip="'Hello world'">Hover me</button>
+<!-- or -->
+<button v-tooltip="{ text: 'Error!', placement: 'bottom', theme: 'tooltip' }">Hover me</button>
+\`\`\`
+`;
+
+
 export const Directive = {
 	parameters: {
-		docs: {
-			description: {
-				story: `The \`v-tooltip\` directive for simple use cases - no wrapper component needed.
-
-All the main props are available through the directive as well.`,
-			},
-		},
+		docs: { description: { story: DIRECTIVE_DESCRIPTION }},
 	},
 	render: (args) => ({
 		directives: { tooltip: vTooltip },
@@ -509,12 +506,12 @@ All the main props are available through the directive as well.`,
 		template: `
 <p>
 	The directive lets you add a quick hint directly inside
-	<span class="sb-ftooltip-text_example" v-tooltip="'Simple string'" >text</span> without
+	<span class="sbfui-ftooltip-text_example" v-tooltip="'Simple string'" >text</span> without
 	wrapping anything in a component.
 	<br />
 	All the main options are available too -
 	<span
-		class="sb-ftooltip-text_example"
+		class="sbfui-ftooltip-text_example"
 		v-tooltip="{ text: 'Bottom placement', ...args }"
 	>just pass an object</span>.
 </p>

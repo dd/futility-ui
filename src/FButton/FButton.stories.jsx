@@ -204,9 +204,9 @@ export const Types = {
 			];
 			return { args, COMPONENT_TYPES, LABELS };
 		},
-		template: `<table class="preview-table" ><tbody>
+		template: `<table class="sbfui-preview-table" ><tbody>
 	<tr v-for="type, i in COMPONENT_TYPES" :key="type" >
-		<td class="label" >{{ type }}</td>
+		<td class="sbfui-pt-label" >{{ type }}</td>
 		<td>
 			<FButton v-bind="args" :type="type" >{{ LABELS[i] }}</FButton>
 		</td>
@@ -252,9 +252,9 @@ export const Design = {
 			];
 			return { args, LABELS, DESIGN_CHOICES };
 		},
-		template: `<table class="preview-table" ><tbody>
+		template: `<table class="sbfui-preview-table" ><tbody>
 	<tr v-for="design, i in DESIGN_CHOICES" :key="design" >
-		<td class="label" >{{ design }}</td>
+		<td class="sbfui-pt-label" >{{ design }}</td>
 		<td>
 			<FButton v-bind="args" :design="design" >{{ LABELS[i] }}</FButton>
 		</td>
@@ -303,10 +303,10 @@ export const Sizes = {
 			];
 			return { args, LABELS, SIZE_CHOICES };
 		},
-		template: `<table class="preview-table" ><tbody>
+		template: `<table class="sbfui-preview-table" ><tbody>
 	<tr v-for="size, i in SIZE_CHOICES" :key="size[0]" >
-		<td class="label" >{{ LABELS[i] }}</td>
-		<td class="label" >{{ size }}</td>
+		<td class="sbfui-pt-label" >{{ LABELS[i] }}</td>
+		<td class="sbfui-pt-label" >{{ size }}</td>
 		<td><FButton v-bind="args" :size="size" :icon="undefined" >{{ args.default }}</FButton></td>
 		<td align="center" ><FButton v-bind="args" :size="size" ><FIcon :name="args.iconName" /></FButton></td>
 	</tr>
@@ -349,9 +349,9 @@ export const Icon = {
 		setup() {
 			return { args, ICON_STYLE_CHOICES };
 		},
-		template: `<table class="preview-table" ><tbody>
+		template: `<table class="sbfui-preview-table" ><tbody>
 	<tr v-for="istyle in ICON_STYLE_CHOICES" :key="istyle" >
-		<td class="label" >{{ istyle }}</td>
+		<td class="sbfui-pt-label" >{{ istyle }}</td>
 		<td><FButton v-bind="args" :icon="istyle" ><FIcon :name="args.iconName" /></FButton></td>
 	</tr>
 </tbody></table>`,
@@ -409,7 +409,7 @@ export const Busy = {
 		props: Object.keys(argTypes),
 		components: { FButton, FIcon },
 		setup() { return { args }},
-		template: `<table class="preview-table" ><tbody>
+		template: `<table class="sbfui-preview-table" ><tbody>
 	<tr>
 		<td><FButton v-bind="args" :icon="undefined" >{{ args.default }}</FButton></td>
 		<td><FButton v-bind="args" ><FIcon :name="args.iconName" /></FButton></td>
@@ -451,9 +451,9 @@ export const Colors = {
 		setup() {
 			return { args, COLOR_CHOICES };
 		},
-		template: `<table class="preview-table" ><tbody>
+		template: `<table class="sbfui-preview-table" ><tbody>
 	<tr v-for="color in COLOR_CHOICES" :key="color" >
-		<td class="label" >{{ color }}</td>
+		<td class="sbfui-pt-label" >{{ color }}</td>
 		<td>
 			<FButton v-bind="args" :color="color" >
 				<FIcon v-if="args.icon" :name="args.iconName" />
@@ -486,7 +486,7 @@ export const Scheme = {
 		},
 		template: `<div class="sbpst-scheme_preview sbpst-row" >
 	<div class="sbpst-light" >
-		<table class="preview-table" ><tbody>
+		<table class="sbfui-preview-table" ><tbody>
 			<tr v-for="color in COLOR_CHOICES" :key="color" >
 				<td v-for="design in DESIGN_CHOICES" :key="design" >
 					<FButton v-bind="args" :color="color" :design="design" >
@@ -498,7 +498,7 @@ export const Scheme = {
 		</tbody></table>
 	</div>
 	<div class="sbpst-dark" >
-		<table class="preview-table" ><tbody>
+		<table class="sbfui-preview-table" ><tbody>
 			<tr v-for="color in COLOR_CHOICES" :key="color" >
 				<td v-for="design in DESIGN_CHOICES" :key="design" >
 					<FButton v-bind="args" :color="color" :design="design" >

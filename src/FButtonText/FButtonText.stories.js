@@ -231,7 +231,7 @@ export const Scheme = {
 		},
 		template: `<div class="sbpst-scheme_preview sbpst-row" >
 	<div class="sbpst-light" >
-		<table class="preview-table" ><tbody>
+		<table class="sbfui-preview-table" ><tbody>
 			<tr v-for="color in COLOR_CHOICES" :key="color" >
 				<td>
 					<FButtonText v-bind="args" :color="color" >
@@ -243,7 +243,7 @@ export const Scheme = {
 		</tbody></table>
 	</div>
 	<div class="sbpst-dark" >
-		<table class="preview-table" ><tbody>
+		<table class="sbfui-preview-table" ><tbody>
 			<tr v-for="color in COLOR_CHOICES" :key="color" >
 				<td>
 					<FButtonText v-bind="args" :color="color" >

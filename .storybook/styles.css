@@ -50,26 +50,36 @@ h1 {
 
 
 /* Previews */
-.preview-table {
+.sbfui-preview-table {
 	td {
 		@apply fui:p-2;
 
-		&.label {
+		&.sbfui-pt-label {
 			@apply fui:text-xs;
 			line-height: 150%;
 		}
 	}
 
-	th.min-label {
+	th.sbfui-pt-min_label {
 		@apply fui:text-xs;
 		font-weight: normal;
 		line-height: 150%;
 	}
 }
 
-.preview-flex {
+.sbfui-preview-flex-x {
 	display: flex;
 	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: center;
+	align-items: center;
+	align-content: center;
+	@apply fui:gap-4;
+}
+
+.sbfui-preview-flex-y {
+	display: flex;
+	flex-direction: column;
 	flex-wrap: wrap;
 	justify-content: center;
 	align-items: center;
@@ -85,7 +95,7 @@ h1 {
 	--fui-icon-color: light-dark(#000000, #ffffff);
 }
 
-.icon_preview {
+.sbfui-icon_preview {
 	--fui-icon-color: light-dark(#000000, #ffffff);
 	display: flex;
 	flex-direction: row;
@@ -97,21 +107,21 @@ h1 {
 	@apply fui:gap-4;
 }
 
-.icon_preview-wrapper {
+.sbfui-icon_preview-wrapper {
 	flex-direction: column;
 }
 /* End Of FIcons */
 
 
 /* FLoader */
-.loader_preview-table-wrapper {
+.sbfui-loader_preview-table-wrapper {
 	display: flex;
 	flex-direction: row;
 	flex-wrap: wrap;
 	justify-content: center;
 }
 
-.loader_preview-table td {
+.sbfui-loader_preview-table td {
 	text-align: center;
 	width: 100px;
 
@@ -126,23 +136,16 @@ h1 {
 /* End Of FLoader */
 
 
-/* FSelect */
-.select-mw {
-	max-width: 200px;
-}
-/* End of FSelect */
-
-
 
 /* FTooltip */
-.sb-ftooltip-placement-preview {
+.sbfui-ftooltip-placement-preview {
 	display: grid;
 	grid-template-columns: repeat(5, auto);
 	gap: 8px;
 	padding: 60px;
 }
 
-.sb-ftooltip-trigger_example {
+.sbfui-ftooltip-trigger_example {
 	@apply fui:py-2.5;
 	@apply fui:px-4;
 	border-radius: 8px;
@@ -155,7 +158,7 @@ h1 {
 	cursor: help;
 }
 
-.sb-ftooltip-vmodel {
+.sbfui-ftooltip-vmodel {
 	display: flex;
 	flex-direction: column;
 	flex-wrap: wrap;
@@ -166,7 +169,7 @@ h1 {
 	padding-top: 20px;
 }
 
-.sb-ftooltip-text_example {
+.sbfui-ftooltip-text_example {
 	text-decoration-line: underline;
 	text-decoration-style: wavy;
 	text-underline-offset: 2.5px;

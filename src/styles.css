@@ -5,6 +5,7 @@
 @import "./FButtonText/style.css";
 @import "./FButtonText/theme.css";
 @import "./FStack/style.css";
+@import "./FTooltip/style.css";
 @import "./forms/FSwitch/style.css";
 @import "./forms/FCheckbox/style.css";
 @import "./forms/FInput/style.css";
@@ -12,7 +13,6 @@
 @import "./forms/FControlLabel/style.css";
 @import "./forms/FInputAutocomplete/style.css";
 @import "./forms/FSelect/style.css";
-@import "./FTooltip/style.css";
 
 @theme {
 	--color-primary-50: var(--fui-color-blue-50);

@@ -67,13 +67,13 @@ export const Sizes = {
 			return { args };
 		},
 		template: `
-<div class="loader_preview-table-wrapper" >
-	<table class="preview-table loader_preview-table" >
+<div class="sbfui-loader_preview-table-wrapper" >
+	<table class="sbfui-preview-table sbfui-loader_preview-table" >
 		<tbody>
 			<tr>
-				<td class="label" >sm: 25px</td>
-				<td class="label" >md: 50px</td>
-				<td class="label" >lg: 75px</td>
+				<td class="sbfui-pt-label" >sm: 25px</td>
+				<td class="sbfui-pt-label" >md: 50px</td>
+				<td class="sbfui-pt-label" >lg: 75px</td>
 			</tr>
 			<tr>
 				<td><FLoader v-bind="args" size="sm" /></td>

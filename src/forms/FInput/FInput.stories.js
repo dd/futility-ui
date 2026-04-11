@@ -163,9 +163,9 @@ export const Types = {
 				const promisedArgs = { [updateValue[0]]: updateValue[1] };
 				return { args, promisedArgs, ALL_ALLOWED_TYPES };
 			},
-			template: `<table class="preview-table" ><tbody>
+			template: `<table class="sbfui-preview-table" ><tbody>
 	<tr v-for="type in ALL_ALLOWED_TYPES" :key="type" >
-		<td class="label" >{{ type }}</td>
+		<td class="sbfui-pt-label" >{{ type }}</td>
 		<td>
 			<FInput v-bind="args" v-on="promisedArgs" :type="type" placeholder="Placeholder" >
 				<template v-if="args.start" v-slot:start >{{ args.start }}</template>
@@ -210,14 +210,14 @@ export const States = {
 				const modelValue2 = ref('Brown fox');
 				return { args: filteredArgs, modelValue1, modelValue2 };
 			},
-			template: `<table class="preview-table" ><tbody>
+			template: `<table class="sbfui-preview-table" ><tbody>
 	<tr>
 		<td></td>
-		<td style="text-align:center;" class="label" >default</td>
-		<td style="text-align:center;" class="label" >error</td>
+		<td style="text-align:center;" class="sbfui-pt-label" >default</td>
+		<td style="text-align:center;" class="sbfui-pt-label" >error</td>
 	</tr>
 	<tr>
-		<td class="label" >default</td>
+		<td class="sbfui-pt-label" >default</td>
 		<td>
 			<FInput
 				v-model="modelValue1"
@@ -241,7 +241,7 @@ export const States = {
 		</td>
 	</tr>
 	<tr>
-		<td class="label" >with&nbsp;value</td>
+		<td class="sbfui-pt-label" >with&nbsp;value</td>
 		<td>
 			<FInput
 				v-model="modelValue2"
@@ -265,7 +265,7 @@ export const States = {
 		</td>
 	</tr>
 	<tr>
-		<td class="label" >disabled</td>
+		<td class="sbfui-pt-label" >disabled</td>
 		<td>
 			<FInput
 				v-model="modelValue1"
@@ -291,7 +291,7 @@ export const States = {
 		</td>
 	</tr>
 	<tr>
-		<td class="label" >disabled<br />+&nbsp;value</td>
+		<td class="sbfui-pt-label" >disabled<br />+&nbsp;value</td>
 		<td>
 			<FInput
 				v-model="modelValue2"
@@ -357,10 +357,10 @@ which you can use to apply your own styles.
 				const promisedArgs = { [updateValue[0]]: updateValue[1] };
 				return { args, promisedArgs, LABELS, SIZE_CHOICES };
 			},
-			template: `<table class="preview-table" ><tbody>
+			template: `<table class="sbfui-preview-table" ><tbody>
 	<tr v-for="size, i in SIZE_CHOICES" :key="size[0]" >
-		<td class="label" >{{ LABELS[i] }}</td>
-		<td class="label" >{{ size }}</td>
+		<td class="sbfui-pt-label" >{{ LABELS[i] }}</td>
+		<td class="sbfui-pt-label" >{{ size }}</td>
 		<td>
 			<FInput v-bind="args" v-on="promisedArgs" :size="size" placeholder="Placeholder" >
 				<template v-if="args.start" v-slot:start >{{ args.start }}</template>
@@ -512,13 +512,17 @@ export const Scheme = {
 			props: Object.keys(argTypes),
 			components: { FInput },
 			setup() {
+				const clearArgs = computed(() => {
+					const { 'disabled': _, ...filteredArgs } = args;
+					return filteredArgs;
+				});
 				const updateValue = makeUpdateArg('modelValue', args, updateArgs);
 				const promisedArgs = { [updateValue[0]]: updateValue[1] };
-				return { args, promisedArgs };
+				return { args: clearArgs, promisedArgs };
 			},
 			template: `<div class="sbpst-scheme_preview sbpst-row" >
 	<div class="sbpst-light" >
-		<table class="preview-table" ><tbody>
+		<table class="sbfui-preview-table" ><tbody>
 			<tr>
 				<td>
 					<FInput v-bind="args" v-on="promisedArgs" placeholder="Placeholder" >
@@ -538,7 +542,7 @@ export const Scheme = {
 		</tbody></table>
 	</div>
 	<div class="sbpst-dark" >
-		<table class="preview-table" ><tbody>
+		<table class="sbfui-preview-table" ><tbody>
 			<tr>
 				<td>
 					<FInput v-bind="args" v-on="promisedArgs" placeholder="Placeholder" >
@@ -559,5 +563,11 @@ export const Scheme = {
 	</div>
 </div>`,
 		};
+	},
+	argTypes: {
+		disabled: { control: { type: null }},
+	},
+	args: {
+		disabled: '<disabled>',
 	},
 };
