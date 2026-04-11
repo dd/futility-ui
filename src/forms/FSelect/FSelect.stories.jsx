@@ -196,30 +196,30 @@ export const States = {
 				const modelValue2 = ref('opt1');
 				return { args: filteredArgs, promisedArgs, modelValue1, modelValue2 };
 			},
-			template: `<table class="preview-table" >
+			template: `<table class="sbfui-preview-table" >
 	<tbody>
 		<tr>
 			<td></td>
-			<td style="text-align:center;" class="label" >default</td>
-			<td style="text-align:center;" class="label" >error</td>
+			<td style="text-align:center;" class="sbfui-pt-label" >default</td>
+			<td style="text-align:center;" class="sbfui-pt-label" >error</td>
 		</tr>
 		<tr>
-			<td class="label" >default</td>
+			<td class="sbfui-pt-label" >default</td>
 			<td><FSelect class="select-mw" v-model="modelValue1" v-bind="args" v-on="promisedArgs" /></td>
 			<td><FSelect class="select-mw" v-model="modelValue1" v-bind="args" v-on="promisedArgs" error /></td>
 		</tr>
 		<tr>
-			<td class="label" >with value</td>
+			<td class="sbfui-pt-label" >with value</td>
 			<td><FSelect class="select-mw" v-model="modelValue2" v-bind="args" v-on="promisedArgs" /></td>
 			<td><FSelect class="select-mw" v-model="modelValue2" v-bind="args" v-on="promisedArgs" error /></td>
 		</tr>
 		<tr>
-			<td class="label" >disabled</td>
+			<td class="sbfui-pt-label" >disabled</td>
 			<td><FSelect class="select-mw" v-model="modelValue1" v-bind="args" v-on="promisedArgs" disabled /></td>
 			<td><FSelect class="select-mw" v-model="modelValue1" v-bind="args" v-on="promisedArgs" disabled error /></td>
 		</tr>
 		<tr>
-			<td class="label" >disabled<br />+ value</td>
+			<td class="sbfui-pt-label" >disabled<br />+ value</td>
 			<td><FSelect class="select-mw" v-model="modelValue2" v-bind="args" v-on="promisedArgs" disabled /></td>
 			<td><FSelect class="select-mw" v-model="modelValue2" v-bind="args" v-on="promisedArgs" disabled error /></td>
 		</tr>
@@ -257,10 +257,10 @@ export const Sizes = {
 				});
 				return { args: newArgs, LABELS, SIZE_CHOICES };
 			},
-			template: `<table class="preview-table" ><tbody>
+			template: `<table class="sbfui-preview-table" ><tbody>
 	<tr v-for="size, i in SIZE_CHOICES" :key="size[0]" >
-		<td class="label" >{{ LABELS[i] }}</td>
-		<td class="label" >{{ size }}</td>
+		<td class="sbfui-pt-label" >{{ LABELS[i] }}</td>
+		<td class="sbfui-pt-label" >{{ size }}</td>
 		<td><FSelect class="select-mw" v-bind="args" :size="size" /></td>
 	</tr>
 </tbody></table>`,
@@ -295,7 +295,7 @@ export const Scheme = {
 			},
 			template: `<div class="sbpst-scheme_preview sbpst-row" >
 	<div class="sbpst-light" >
-		<table class="preview-table" ><tbody>
+		<table class="sbfui-preview-table" ><tbody>
 			<tr>
 				<td>
 					<FSelect v-bind="args" v-on="promisedArgs" class="select-mw" />
@@ -309,7 +309,7 @@ export const Scheme = {
 		</tbody></table>
 	</div>
 	<div class="sbpst-dark" >
-		<table class="preview-table" ><tbody>
+		<table class="sbfui-preview-table" ><tbody>
 			<tr>
 				<td>
 					<FSelect v-bind="args" v-on="promisedArgs" class="select-mw" />

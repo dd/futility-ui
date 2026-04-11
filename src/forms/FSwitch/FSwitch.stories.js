@@ -111,11 +111,11 @@ However, by enabling the \`nullable\` flag, you can make the switch three-state,
 				return { args, dvalue, tvalue };
 			},
 			template: `
-			<table class="preview-table" >
+			<table class="sbfui-preview-table" >
 				<thead>
 					<tr>
-						<th class="min-label" >Default</th>
-						<th class="min-label" >Nullable</th>
+						<th class="sbfui-pt-min_label" >Default</th>
+						<th class="sbfui-pt-min_label" >Nullable</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -162,7 +162,7 @@ export const Scheme = {
 		setup() { return { args }; },
 		template: `<div class="sbpst-scheme_preview sbpst-row" >
 	<div class="sbpst-light" >
-		<table class="preview-table" ><tbody>
+		<table class="sbfui-preview-table" ><tbody>
 			<tr>
 				<td>
 					<FSwitch v-bind="args" :modelValue="false" :nullable="false" :disabled="false" />
@@ -206,7 +206,7 @@ export const Scheme = {
 		</tbody></table>
 	</div>
 	<div class="sbpst-dark" >
-		<table class="preview-table" ><tbody>
+		<table class="sbfui-preview-table" ><tbody>
 			<tr>
 				<td>
 					<FSwitch v-bind="args" :modelValue="false" :nullable="false" :disabled="false" />

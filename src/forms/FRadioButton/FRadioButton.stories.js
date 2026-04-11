@@ -119,7 +119,7 @@ export const Scheme = {
 			setup() { return { args }; },
 			template: `<div class="sbpst-scheme_preview sbpst-row" >
 		<div class="sbpst-light" >
-			<table class="preview-table" ><tbody>
+			<table class="sbfui-preview-table" ><tbody>
 				<tr>
 					<td>
 						<FRadioButton v-bind="args" value=1 :disabled="false" />
@@ -139,7 +139,7 @@ export const Scheme = {
 			</tbody></table>
 		</div>
 		<div class="sbpst-dark" >
-			<table class="preview-table" ><tbody>
+			<table class="sbfui-preview-table" ><tbody>
 				<tr>
 					<td>
 						<FRadioButton v-bind="args" value=1 :disabled="false" />

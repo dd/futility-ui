@@ -10,6 +10,8 @@ import FInputAutocomplete from './forms/FInputAutocomplete';
 import FSelect from './forms/FSelect';
 import FRadioButton from './forms/FRadioButton';
 import FControlLabel from './forms/FControlLabel';
+import FTooltip from './FTooltip';
+import { vTooltip } from './FTooltip/directive';
 
 
 export {
@@ -25,6 +27,8 @@ export {
 	FSelect,
 	FStack,
 	FControlLabel,
+	FTooltip,
+	vTooltip,
 };
 
 export const version = __VERSION__;
@@ -43,10 +47,12 @@ const components = {
 	FSelect,
 	FStack,
 	FControlLabel,
+	FTooltip,
 };
 
 export const install = (app) => {
 	Object.keys(components).forEach((key) => {
 		app.component(key, components[key]);
 	});
+	app.directive('tooltip', vTooltip);
 };

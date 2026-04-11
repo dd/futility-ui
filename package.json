@@ -62,6 +62,18 @@
       "require": "./dist/FStack/index.cjs.js",
       "import": "./dist/FStack/index.es.js"
     },
+    "./FTooltip": {
+      "require": "./dist/FTooltip/index.cjs.js",
+      "import": "./dist/FTooltip/index.es.js"
+    },
+    "./FTooltip/directive": {
+      "require": "./dist/FTooltip/directive.cjs.js",
+      "import": "./dist/FTooltip/directive.es.js"
+    },
+    "./FTooltip/constants": {
+      "require": "./dist/FTooltip/constants.cjs.js",
+      "import": "./dist/FTooltip/constants.es.js"
+    },
     "./forms/FSwitch": {
       "require": "./dist/forms/FSwitch/index.cjs.js",
       "import": "./dist/forms/FSwitch/index.es.js"
@@ -109,6 +121,14 @@
     "./forms/FControlLabel": {
       "require": "./dist/forms/FControlLabel/index.cjs.js",
       "import": "./dist/forms/FControlLabel/index.es.js"
+    },
+    "./forms/FFormRow": {
+      "require": "./dist/forms/FFormRow/index.cjs.js",
+      "import": "./dist/forms/FFormRow/index.es.js"
+    },
+    "./forms/FFormRow/constants": {
+      "require": "./dist/forms/FFormRow/constants.cjs.js",
+      "import": "./dist/forms/FFormRow/constants.es.js"
     },
     "./styles.base.css": "./dist/styles.base.css",
     "./styles.tailwind.css": "./dist/styles.tailwind.css",
@@ -166,5 +186,8 @@
   "engines": {
     "node": ">=18",
     "pnpm": ">=10"
+  },
+  "dependencies": {
+    "@floating-ui/vue": "^1.1.11"
   }
 }

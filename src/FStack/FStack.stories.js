@@ -53,8 +53,8 @@ export default {
 			},
 		},
 	},
-	render: (args, { argTypes, updateArgs }) => ({
-		name: 'FIconDiversityStory',
+	render: (args, { argTypes }) => ({
+		name: 'FStackStory',
 		props: Object.keys(argTypes),
 		components: { FStack, FButton, FInput, FIcon },
 		setup() { return { args }; },
