@@ -14,6 +14,7 @@
 @import "./forms/FInputAutocomplete/style.css";
 @import "./forms/FSelect/style.css";
 @import "./forms/FFormRow/style.css";
+@import "./forms/FGenericForm/style.css";
 
 @theme {
 	--color-primary-50: var(--fui-color-blue-50);

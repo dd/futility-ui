@@ -12,6 +12,8 @@ import FRadioButton from './forms/FRadioButton';
 import FControlLabel from './forms/FControlLabel';
 import FTooltip from './FTooltip';
 import { vTooltip } from './FTooltip/directive';
+import FGenericForm from './forms/FGenericForm';
+export { useWidget, WIDGET_PROPS, WIDGET_EMITS, getFormDefaults, getDiff, getDataForQuery, DEFAULT_WIDGETS } from './forms/FGenericForm/useWidget';
 
 
 export {
@@ -29,6 +31,7 @@ export {
 	FControlLabel,
 	FTooltip,
 	vTooltip,
+	FGenericForm,
 };
 
 export const version = __VERSION__;
@@ -48,6 +51,7 @@ const components = {
 	FStack,
 	FControlLabel,
 	FTooltip,
+	FGenericForm,
 };
 
 export const install = (app) => {

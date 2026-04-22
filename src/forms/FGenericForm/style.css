@@ -1,0 +1,5 @@
+.fui-generic-form {
+	display: flex;
+	flex-direction: column;
+	@apply fui:gap-4;
+}

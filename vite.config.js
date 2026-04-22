@@ -182,6 +182,7 @@ export default defineConfig({
 	resolve: {
 		extensions: [ '.mjs', '.js', '.mts', '.ts', '.jsx', '.tsx', '.json', '.vue', '.mdx' ],
 		alias: {
+			'@/.storybook': fileURLToPath(new URL('./.storybook', import.meta.url)),
 			'@': fileURLToPath(new URL('./src', import.meta.url)),
 		},
 	},
