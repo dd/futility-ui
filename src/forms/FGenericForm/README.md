@@ -43,10 +43,10 @@ const formData = ref(getFormDefaults(meta));
 
 At minimum, each item in `meta` should define:
 
-- `type` - the widget type to render
-- `fields` - an array of field definitions
-- `label` - optional label shown through `FFormRow`
-- `help_text` - optional helper text shown below the field
+- `type` — the widget type to render
+- `fields` — an array of field definitions
+- `label` — optional label shown through `FFormRow`
+- `help_text` — optional helper text shown below the field
 
 Typical field entries include:
 
@@ -56,7 +56,5 @@ Typical field entries include:
 - `readonly` — keeps the field visible but prevents editing
 - `required` — marks the field as required for validation and UI purposes
 
-Some widgets may also expect additional fields depending on their behavior. For example, select-like
-widgets may need option lists, and more complex widgets may rely on extra metadata for rendering or
-validation. When using the form, check the supported field parameters for each widget individually.
-For details, see the stories for the corresponding field component.
+Some widgets also accept additional fields. For example, select-like widgets need an option list.
+Check each widget's individual story for the full list of supported field parameters.

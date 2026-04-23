@@ -8,18 +8,19 @@ export { DEFAULT_WIDGETS } from './constants';
  * Spread into defineProps: defineProps({ ...WIDGET_PROPS })
  */
 export const WIDGET_PROPS = {
+	/** Widget meta entry (or array of entries for multi-row demos). */
 	meta: {
 		type: Object,
 		required: true,
 	},
 
-	/** Passed from FGenericForm; forwarded to FFormRow inside the widget. */
+	/** Row layout - forwarded to FFormRow. */
 	layout: {
 		type: String,
 		default: 'two_columns',
 	},
 
-	/** Passed from FGenericForm; forwarded to FFormRow inside the widget. */
+	/** Widget size - forwarded to FFormRow. */
 	size: {
 		type: String,
 		default: 'm',

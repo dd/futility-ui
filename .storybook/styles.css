@@ -258,16 +258,6 @@ h1 {
 
 
 /* Custom Widget story */
-.sbfui-color-input {
-	width: 40px;
-	height: 30px;
-	padding: 2px;
-	border: 1px solid var(--fui-color-gray-300);
-	border-radius: 6px;
-	cursor: pointer;
-	background: none;
-}
-
 .sbfui-color-swatch {
 	margin-top: 12px;
 	padding: 10px 14px;
@@ -277,3 +267,7 @@ h1 {
 	font-weight: 500;
 }
 /* End of Custom Widget story */
+
+
+/* Multi-field range widget demo */
+/* End of Multi-field range widget demo */

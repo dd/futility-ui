@@ -34,7 +34,7 @@ const props = defineProps({
 
 	/**
 	 * Field-level error messages.
-	 * Shape: `{ field_name: 'Error message string' }``
+	 * Shape: `{ field_name: 'Error message string' }`
 	 * Each widget receives only the errors for its own fields.
 	 */
 	errors: {

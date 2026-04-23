@@ -1,3 +1,6 @@
+import { INPUT_WIDGET_TYPES, LAYOUT_CHOICES, SIZE_CHOICES } from './constants.js';
+
+
 export const META_BASIC = [
 	{
 		type: 'text',
@@ -36,109 +39,6 @@ export const META_BASIC = [
 				field_name: 'email',
 				default: '',
 				required: true,
-				disabled: false,
-				readonly: false,
-			},
-		],
-	},
-];
-
-
-// All types currently registered in DEFAULT_WIDGETS (mirrors INPUT_WIDGET_TYPES in constants.js).
-export const META_BUILTIN_WIDGETS = [
-	{
-		type: 'text',
-		label: 'text',
-		help_text: null,
-		fields: [
-			{
-				field_name: 'f_text',
-				default: '',
-				required: false,
-				disabled: false,
-				readonly: false,
-			},
-		],
-	},
-	{
-		type: 'search',
-		label: 'search',
-		help_text: null,
-		fields: [
-			{
-				field_name: 'f_search',
-				default: '',
-				required: false,
-				disabled: false,
-				readonly: false,
-			},
-		],
-	},
-	{
-		type: 'url',
-		label: 'url',
-		help_text: null,
-		fields: [
-			{
-				field_name: 'f_url',
-				default: '',
-				required: false,
-				disabled: false,
-				readonly: false,
-			},
-		],
-	},
-	{
-		type: 'email',
-		label: 'email',
-		help_text: null,
-		fields: [
-			{
-				field_name: 'f_email',
-				default: '',
-				required: false,
-				disabled: false,
-				readonly: false,
-			},
-		],
-	},
-	{
-		type: 'tel',
-		label: 'tel',
-		help_text: null,
-		fields: [
-			{
-				field_name: 'f_tel',
-				default: '',
-				required: false,
-				disabled: false,
-				readonly: false,
-			},
-		],
-	},
-	{
-		type: 'password',
-		label: 'password',
-		help_text: null,
-		fields: [
-			{
-				field_name: 'f_password',
-				default: '',
-				required: false,
-				disabled: false,
-				readonly: false,
-			},
-		],
-	},
-	{
-		type: 'number',
-		label: 'number',
-		help_text: null,
-		fields: [
-			{
-				field_name: 'f_number',
-				default: null,
-				required: false,
 				disabled: false,
 				readonly: false,
 			},
@@ -237,3 +137,48 @@ export const META_ERRORS = [
 		],
 	},
 ];
+
+
+export const WIDGET_BASE_ARG_TYPES = {
+	modelValue: {
+		description: 'The form data object (v-model).',
+		table: { category: 'props' },
+	},
+	'update:modelValue': {
+		action: 'update:modelValue',
+		description: 'Emitted when any field value changes.',
+		control: false,
+		table: { category: 'events', type: { summary: null } },
+	},
+	meta: {
+		description: 'Widget meta entry (or array of entries for multi-row demos).',
+		table: { category: 'props' },
+	},
+	layout: {
+		description: 'Row layout - forwarded to FFormRow.',
+		options: LAYOUT_CHOICES,
+		control: 'select',
+		table: { category: 'props' },
+	},
+	size: {
+		description: 'Widget size - forwarded to FFormRow.',
+		options: SIZE_CHOICES,
+		control: 'select',
+		table: { category: 'props' },
+	},
+	fieldErrors: {
+		description: `Error messages for this widget's fields. Shape:
+\`{ field_name: 'Error message string' }\` Passed by FGenericForm from its \`errors\` prop.`,
+		table: { category: 'props' },
+	},
+};
+
+
+export const FINPUTWIDGET_META = INPUT_WIDGET_TYPES.map(type => ({
+	type,
+	label: type,
+	fields: [{
+		field_name: `f_${type.replace(/-/g, '_')}`,
+		default: type === 'number' ? null : '',
+	}],
+}));

@@ -67,6 +67,7 @@ function FixFIconSpriteImport() {
 	};
 }
 
+
 /**
  * Recursively scans a directory tree to discover Vue component entry points and constants modules.
  *
@@ -103,15 +104,19 @@ function findVueEntries(dir) {
 		if (item.isDirectory()) {
 			const sub = findVueEntries(fullPath);
 			Object.assign(entries, sub);
+
 		} else if (item.isFile() && item.name === 'index.vue') {
 			const rel = relative('src', fullPath).replace(/\.vue$/, '');
 			entries[rel] = resolve(fullPath);
+
 		} else if (item.isFile() && item.name === 'constants.js') {
 			const rel = relative('src', fullPath).replace(/\.js$/, '');
 			entries[rel] = resolve(fullPath);
+
 		} else if (item.isFile() && item.name === 'directive.js') {
 			const rel = relative('src', fullPath).replace(/\.js$/, '');
 			entries[rel] = resolve(fullPath);
+
 		} else if (item.isFile() && item.name === 'utils.js') {
 			const rel = relative('src', fullPath).replace(/\.js$/, '');
 			entries[rel] = resolve(fullPath);
@@ -150,7 +155,10 @@ export default defineConfig({
 			entry: {
 				'index': resolve(__dirname, 'src/index.js'),
 				...findVueEntries(resolve('src')),
+				'forms/FInput/ClearButton': resolve(__dirname, 'src/forms/FInput/ClearButton.vue'),
+				'forms/FInput/ShowPasswordButton': resolve(__dirname, 'src/forms/FInput/ShowPasswordButton.vue'),
 				'forms/FGenericForm/useWidget': resolve(__dirname, 'src/forms/FGenericForm/useWidget.js'),
+				'forms/FGenericForm/widgets/FInputWidget': resolve(__dirname, 'src/forms/FGenericForm/widgets/FInputWidget.vue'),
 				'styles.base.css': resolve(__dirname, 'src/styles.base.css'),
 				'styles.tailwind.css': resolve(__dirname, 'src/styles.tailwind.css'),
 			},

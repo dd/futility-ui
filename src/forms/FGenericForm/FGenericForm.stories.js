@@ -1,13 +1,11 @@
-import { ref, computed, defineComponent } from 'vue';
+import { computed } from 'vue';
 import { useArgs } from 'storybook/preview-api';
 
 import { makeRenderer, makeUpdateArg } from '@/.storybook/utils.js';
 
 import Readme from './README.md?raw';
-import { META_BASIC, META_BUILTIN_WIDGETS, META_STATES, META_ERRORS } from './constants.sb.js';
-import FFormRow from '@/forms/FFormRow';
+import { META_BASIC, META_STATES, META_ERRORS } from './constants.sb.js';
 import FGenericForm from '.';
-import { WIDGET_PROPS, WIDGET_EMITS, useWidget, useWidgetField } from './useWidget';
 import { getFormDefaults, getDiff, getDataForQuery } from './utils';
 import { DEFAULT_WIDGETS, LAYOUT_CHOICES, SIZE_CHOICES } from './constants.js';
 
@@ -18,7 +16,7 @@ export default {
 	parameters: {
 		layout: 'centered',
 		docs: {
-			description: { component: Readme.replace(/^# .+\n?/m, '')  },
+			description: { component: Readme.replace(/^# .+\n?/m, '') },
 		},
 	},
 	tags: [ 'autodocs' ],
@@ -58,268 +56,17 @@ export default {
 export const Default = {};
 
 
-const BUILTIN_WIDGETS_DESCRIPTION = `All types registered in \`DEFAULT_WIDGETS\` out of the box.
-See [Custom Widget](?path=/story/forms-fgenericform--custom-widget) for how to extend or replace
-them.`;
-
-
-export const BuiltinWidgets = {
-	name: 'Built-in Widgets',
-	parameters: {
-		layout: 'centered',
-		docs: { description: { story: BUILTIN_WIDGETS_DESCRIPTION }},
-	},
-	args: {
-		meta: META_BUILTIN_WIDGETS,
-	},
-};
-
-
-/* Custom widget demo *************************/
-
-/**
- * Minimal color-picker widget used only in the Custom Widget story.
- * Shows the full widget contract in ~10 lines.
- */
-const DemoColorWidget = defineComponent({
-	name: 'DemoColorWidget',
-	components: { FFormRow },
-	props: {
-		...WIDGET_PROPS,
-		modelValue: { type: Object, default: () => ({}) },
-	},
-	emits: WIDGET_EMITS,
-	setup(props, { emit }) {
-		const model = computed({
-			get: () => props.modelValue ?? {},
-			set: val => emit('update:modelValue', val),
-		});
-		const { fields, errorText } = useWidget(model, props);
-		const { value, disabled, readonly, required, error } = useWidgetField(
-			model, props, computed(() => fields.value[0])
-		);
-		return { value, disabled, readonly, required, error, errorText };
-	},
-	template: `
-		<FFormRow :layout="layout" :size="size" :error-text="errorText" :error-highlight="!!errorText">
-			<template v-if="meta.label" #label>{{ meta.label }}</template>
-			<input class="sbfui-color-input" type="color" v-model="value"
-				:disabled="disabled" :readonly="readonly" />
-			<template v-if="meta.help_text" #help>{{ meta.help_text }}</template>
-		</FFormRow>
-	`,
-});
-
-const META_CUSTOM_DEMO = [
-	{
-		type: 'color',
-		label: 'Background',
-		fields: [{ field_name: 'bg_color', default: '#4f46e5' }],
-	},
-	{
-		type: 'color',
-		label: 'Text color',
-		fields: [{ field_name: 'fg_color', default: '#ffffff' }],
-	},
-];
-
-
-const CUSTOM_WIDGET_DESCRIPTION = `
-Every custom widget is built around two composables and three constants from \`useWidget\`.
-
-**\`WIDGET_PROPS\`** / **\`WIDGET_EMITS\`** - spread into \`defineProps\` / \`defineEmits\`.
-Provide \`meta\`, \`layout\`, \`size\`, and \`fieldErrors\` to the widget.
-
----
-
-**\`useWidget(model, props)\`** - widget-level state. Call once per widget.
-
-- \`fields\` - computed array of all field metas (\`meta.fields\`)
-- \`getFieldMeta(fieldName)\` - returns a computed ref to a specific field's meta; shorthand for
-multi-field widgets
-- \`error\` - true when any field has an error; pass to FFormRow \`:error-highlight\`
-
-**\`useWidgetField(model, props, meta)\`** - field-level state. Call once per rendered input.
-\`meta\` is a computed ref pointing to the field meta object.
-
-- \`id\`        - field_name; pass to FFormRow \`:id\` and the input's \`:id\`
-- \`name\`      - field_name; pass to the input's \`:name\`
-- \`value\`     - writable computed; bind with \`v-model\`
-- \`disabled\`, \`readonly\`, \`required\` - from field meta
-- \`error\`     - true when this specific field has an error; pass to the input's \`:error\`
-- \`errorText\` - this field's error message
-
----
-
-### Single-field widget
-
-\`\`\`vue
-<template>
-	<FFormRow
-		:id="id"
-		:layout="layout"
-		:size="size"
-		:error-text="errorText"
-		:error-highlight="error"
-	>
-		<template v-if="meta.label" #label>{{ meta.label }}</template>
-		<MyInput
-			v-model="value"
-			:id="id"
-			:name="name"
-			:disabled="disabled"
-			:readonly="readonly"
-			:required="required"
-			:error="error"
-			:size="size"
-		/>
-		<template v-if="meta.help_text" #help>{{ meta.help_text }}</template>
-	</FFormRow>
-</template>
-
-<script setup>
-import { computed } from 'vue';
-import { useWidget, useWidgetField, WIDGET_PROPS, WIDGET_EMITS } from 'futility-ui/forms/FGenericForm/useWidget';
-import { FFormRow } from 'futility-ui';
-
-import MyInput from './MyInput.vue';
-
-defineEmits(WIDGET_EMITS);
-const model = defineModel({ type: Object });
-const props = defineProps({ ...WIDGET_PROPS });
-
-const { fields, errorText } = useWidget(model, props);
-const { id, name, value, disabled, readonly, required, error, errorText } = useWidgetField(
-  model, props, computed(() => fields.value[0])
-);
-</script>
-\`\`\`
-
-### Multi-field widget
-
-\`\`\`vue
-<template>
-	<FFormRow
-		:layout="layout"
-		:size="size"
-		:error-text="errorText"
-		:error-highlight="from.error || to.error"
-	>
-		<template v-if="meta.label" #label>{{ meta.label }}</template>
-		<MyInput v-model="from.value" :id="from.id" :name="from.name" :disabled="from.disabled" :error="from.error" />
-		<span>–</span>
-		<MyInput v-model="to.value" :id="to.id" :name="to.name" :disabled="to.disabled" :error="to.error" />
-	</FFormRow>
-</template>
-
-<script setup>
-import { computed } from 'vue';
-import { useWidget, useWidgetField, WIDGET_PROPS, WIDGET_EMITS } from 'futility-ui/forms/FGenericForm/useWidget';
-import { FFormRow } from 'futility-ui';
-
-import MyInput from './MyInput.vue';
-
-defineEmits(WIDGET_EMITS);
-const model = defineModel({ type: Object });
-const props = defineProps({ ...WIDGET_PROPS });
-
-const { error, errorText } = useWidget(model, props);
-const from = useWidgetField(model, props, computed(() => fields.value[0]));
-const to = useWidgetField(model, props, computed(() => fields.value[1]));
-</script>
-\`\`\`
-
----
-
-**normalize** - optional; coerces values for \`getDiff\` / \`getDataForQuery\`. Without it, raw
-values are compared as-is.
-
-**Registration**
-
-\`\`\`js
-import { DEFAULT_WIDGETS } from 'futility-ui/forms/FGenericForm/constants';
-import MyColorWidget from './MyColorWidget.vue';
-
-const widgets = {
-	...DEFAULT_WIDGETS,
-	color: {
-		component: MyColorWidget,
-		normalize: (value) => value ?? null,
-	},
-};
-\`\`\`
-
-\`\`\`html
-<FGenericForm :widgets="widgets" :meta="meta" v-model="formData" />
-\`\`\`
-
-The live example below registers a minimal \`color\` widget: a native \`<input type="color">\`
-for the \`'color'\` type.`;
-
-
-const CUSTOM_WIDGET_TEMPLATE = `<div class="sbfui-fgenericform-utils" >
-	<div>
-		<p class="sbfui-fgf-utils-label" >Custom color widget</p>
-		<FGenericForm v-bind="args" :widgets="customWidgets" class="sbfui-fgenericform" />
-	</div>
-	<div>
-		<p class="sbfui-fgf-utils-label" >v-model</p>
-		<pre class="sbfui-pre" >{{ JSON.stringify(args.modelValue, null, 2) }}</pre>
-		<div class="sbfui-color-swatch"
-			:style="{ background: args.modelValue?.bg_color, color: args.modelValue?.fg_color }" >
-			Sample text
-		</div>
-	</div>
-</div>`;
-
-
-export const CustomWidget = {
-	name: 'Custom Widget',
-	parameters: {
-		docs: { description: { story: CUSTOM_WIDGET_DESCRIPTION }},
-	},
-	render: (args, { argTypes, component }) => {
-		const [ , updateArgs ] = useArgs();
-		return {
-			name: 'FGenericFormCustomWidgetStory',
-			components: { FGenericForm },
-			setup() {
-				const modelValueArg = makeUpdateArg('modelValue', args, updateArgs);
-				const newArgs = computed(() => {
-					const result = { ...args };
-					delete result[modelValueArg[1]];
-					result[modelValueArg[0]] = modelValueArg[2];
-					return result;
-				});
-				const customWidgets = {
-					...DEFAULT_WIDGETS,
-					color: {
-						component: DemoColorWidget,
-						normalize: (value) => value ?? null,
-					},
-				};
-				return { args: newArgs, customWidgets };
-			},
-			template: CUSTOM_WIDGET_TEMPLATE,
-		};
-	},
-	args: {
-		meta: META_CUSTOM_DEMO,
-		modelValue: getFormDefaults(META_CUSTOM_DEMO),
-	},
-};
-
-
 const STATES_DESCRIPTION = `Field-level \`disabled\` and \`readonly\` flags come from the
 metadata and are forwarded to widgets automatically.`;
 
 
 export const States = {
 	parameters: {
-		docs: { description: { story: STATES_DESCRIPTION }},
+		docs: { description: { story: STATES_DESCRIPTION } },
 	},
 	args: {
 		meta: META_STATES,
+		modelValue: getFormDefaults(META_STATES),
 	},
 };
 
@@ -346,7 +93,7 @@ const SIZES_TEMPLATE = `<div class="sbfui-preview-flex-y sbfui-fgenericform-size
 
 export const Sizes = {
 	parameters: {
-		docs: { description: { story: SIZES_DESCRIPTION }},
+		docs: { description: { story: SIZES_DESCRIPTION } },
 	},
 	render: (args, { argTypes, component }) => {
 		const [ , updateArgs ] = useArgs();
@@ -391,7 +138,7 @@ const errors = {
 
 export const Errors = {
 	parameters: {
-		docs: { description: { story: ERRORS_DESCRIPTION }},
+		docs: { description: { story: ERRORS_DESCRIPTION } },
 	},
 	args: {
 		meta: META_ERRORS,
@@ -404,6 +151,10 @@ export const Errors = {
 
 
 const UTILITIES_DESCRIPTION = `Three utility functions ship alongside the component.
+
+\`\`\`js
+import { getFormDefaults, getDiff, getDataForQuery } from 'futility-ui';
+\`\`\`
 
 **\`getFormDefaults(meta)\`** extracts the \`default\` value from every field in the meta array.
 Use it to initialise the form and to serve as the comparison baseline for query params.
@@ -453,7 +204,7 @@ const UTILITIES_TEMPLATE = `<div class="sbfui-fgenericform-utils" >
 
 export const Utilities = {
 	parameters: {
-		docs: { description: { story: UTILITIES_DESCRIPTION }},
+		docs: { description: { story: UTILITIES_DESCRIPTION } },
 	},
 	render: (args, { argTypes, component }) => {
 		const [ , updateArgs ] = useArgs();
@@ -488,7 +239,7 @@ export const Utilities = {
 			first_name: 'Jane',
 			last_name: 'Doe',
 		},
-	}
+	},
 };
 
 
@@ -522,7 +273,7 @@ const LAYOUT_TEMPLATE = `<div class="sbfui-fgenericform-layouts" >
 
 export const Layouts = {
 	parameters: {
-		docs: { description: { story: LAYOUT_DESCRIPTION }},
+		docs: { description: { story: LAYOUT_DESCRIPTION } },
 	},
 	render: (args, { argTypes, component }) => {
 		const [ , updateArgs ] = useArgs();
