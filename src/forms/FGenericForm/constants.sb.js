@@ -1,6 +1,6 @@
 export const META_BASIC = [
 	{
-		type: 'string',
+		type: 'text',
 		label: 'First name',
 		// help_text: null,
 		fields: [
@@ -15,7 +15,7 @@ export const META_BASIC = [
 		],
 	},
 	{
-		type: 'string',
+		type: 'text',
 		label: 'Last name',
 		help_text: null,
 		fields: [
@@ -49,21 +49,6 @@ export const META_BASIC = [
 
 // All types currently registered in DEFAULT_WIDGETS (mirrors INPUT_WIDGET_TYPES in constants.js).
 export const META_BUILTIN_WIDGETS = [
-	{
-		type: 'string',
-		label: 'string',
-		help_text: '"string" is an alias for "text"',
-		fields: [
-			{
-				field_name: 'f_string',
-				default: '',
-				required: false,
-				allow_null: false,
-				disabled: false,
-				readonly: false,
-			},
-		],
-	},
 	{
 		type: 'text',
 		label: 'text',
@@ -174,7 +159,7 @@ export const META_BUILTIN_WIDGETS = [
 
 export const META_STATES = [
 	{
-		type: 'string',
+		type: 'text',
 		label: 'Active',
 		help_text: null,
 		fields: [
@@ -189,7 +174,7 @@ export const META_STATES = [
 		],
 	},
 	{
-		type: 'string',
+		type: 'text',
 		label: 'Disabled',
 		help_text: null,
 		fields: [
@@ -204,7 +189,7 @@ export const META_STATES = [
 		],
 	},
 	{
-		type: 'string',
+		type: 'text',
 		label: 'Readonly',
 		help_text: 'This field is read-only',
 		fields: [
@@ -223,7 +208,7 @@ export const META_STATES = [
 
 export const META_ERRORS = [
 	{
-		type: 'string',
+		type: 'text',
 		label: 'Username',
 		help_text: null,
 		fields: [
@@ -253,7 +238,7 @@ export const META_ERRORS = [
 		],
 	},
 	{
-		type: 'string',
+		type: 'text',
 		label: 'Website',
 		help_text: null,
 		fields: [

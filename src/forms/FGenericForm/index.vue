@@ -3,7 +3,9 @@
 		<component
 			v-for="entry in meta"
 			:key="entryKey(entry)"
+
 			:is="resolveWidget(entry.type)"
+
 			:model-value="extractData(entry)"
 			:meta="entry"
 			:layout="effectiveLayout"
@@ -31,18 +33,19 @@ const props = defineProps({
 	},
 
 	/**
-	 * Widget mapping: type → { component, normalize? }
-	 * Merged on top of built-in defaults.
+	 * Field-level error messages.
+	 * Shape: `{ field_name: 'Error message string' }``
+	 * Each widget receives only the errors for its own fields.
 	 */
-	widgets: {
+	errors: {
 		type: Object,
 		default: () => ({}),
 	},
 
 	/**
 	 * FFormRow layout forwarded to every widget.
-	 * Built-in values: 'two_columns' | 'one_column' | 'auto'.
-	 * 'auto' picks two_columns / one_column based on the form container width.
+	 * Built-in values: `two_columns` | `one_column` | `auto`.
+	 * `auto` picks `two_columns` / `one_column` based on the form container width.
 	 */
 	layout: {
 		type: String,
@@ -50,40 +53,28 @@ const props = defineProps({
 	},
 
 	/**
-	 * Container width threshold (px) used when layout='auto'.
-	 * At or above this value the form uses two_columns; below - one_column.
+	 * Container width threshold (px) used when layout=`auto`.
+	 * At or above this value the form uses `two_columns`; below - `one_column`.
 	 */
 	autoLayoutBreakpoint: {
 		type: Number,
 		default: 400,
 	},
 
-	/** FFormRow size forwarded to every widget. */
+	/** Widget size. */
 	widgetSize: {
 		type: String,
 		default: 'm',
 	},
 
 	/**
-	 * Field-level error messages.
-	 * Shape: { field_name: 'Error message string' }
-	 * Each widget receives only the errors for its own fields.
+	 * Widget mapping: type -> `{ component, normalize? }`
+	 * Merged on top of built-in defaults.
 	 */
-	errors: {
+	widgets: {
 		type: Object,
 		default: () => ({}),
 	},
-});
-
-
-/* Auto layout *********************************/
-
-const formRoot = ref(null);
-const { width: containerWidth } = useElementBounding(formRoot);
-
-const effectiveLayout = computed(() => {
-	if (props.layout !== 'auto') return props.layout;
-	return containerWidth.value >= props.autoLayoutBreakpoint ? 'two_columns' : 'one_column';
 });
 
 
@@ -128,4 +119,15 @@ function extractErrors(entry) {
 	}
 	return result;
 }
+
+
+/* Auto layout *********************************/
+
+const formRoot = ref(null);
+const { width: containerWidth } = useElementBounding(formRoot);
+
+const effectiveLayout = computed(() => {
+	if (props.layout !== 'auto') return props.layout;
+	return containerWidth.value >= props.autoLayoutBreakpoint ? 'two_columns' : 'one_column';
+});
 </script>

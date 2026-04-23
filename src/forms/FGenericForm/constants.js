@@ -21,10 +21,9 @@ export const SIZE_CHOICES = [
 
 /**
  * Meta types that FInputWidget can handle.
- * Each maps to a native HTML input type; 'string' is a common API alias for 'text'.
+ * Each maps to a native HTML input type.
  */
 export const INPUT_WIDGET_TYPES = Object.freeze([
-	'string',           // API alias → <input type="text">
 	'text',
 	'search',
 	'url',
@@ -32,11 +31,11 @@ export const INPUT_WIDGET_TYPES = Object.freeze([
 	'email',
 	'number',
 	'password',
-	// 'date',
-	// 'time',
-	// 'datetime-local',
-	// 'month',
-	// 'week',
+	'date',
+	'time',
+	'datetime-local',
+	'month',
+	'week',
 ]);
 
 

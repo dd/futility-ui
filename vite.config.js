@@ -109,6 +109,12 @@ function findVueEntries(dir) {
 		} else if (item.isFile() && item.name === 'constants.js') {
 			const rel = relative('src', fullPath).replace(/\.js$/, '');
 			entries[rel] = resolve(fullPath);
+		} else if (item.isFile() && item.name === 'directive.js') {
+			const rel = relative('src', fullPath).replace(/\.js$/, '');
+			entries[rel] = resolve(fullPath);
+		} else if (item.isFile() && item.name === 'utils.js') {
+			const rel = relative('src', fullPath).replace(/\.js$/, '');
+			entries[rel] = resolve(fullPath);
 		}
 	}
 
@@ -144,9 +150,7 @@ export default defineConfig({
 			entry: {
 				'index': resolve(__dirname, 'src/index.js'),
 				...findVueEntries(resolve('src')),
-				// 'forms/FInput/ClearButton': resolve(__dirname, 'src/forms/FInput/ClearButton.vue'),
-				// 'forms/FInput/ShowPasswordButton': resolve(__dirname, 'src/forms/FInput/ShowPasswordButton.vue'),
-				'FTooltip/directive': resolve(__dirname, 'src/FTooltip/directive.js'),
+				'forms/FGenericForm/useWidget': resolve(__dirname, 'src/forms/FGenericForm/useWidget.js'),
 				'styles.base.css': resolve(__dirname, 'src/styles.base.css'),
 				'styles.tailwind.css': resolve(__dirname, 'src/styles.tailwind.css'),
 			},

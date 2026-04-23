@@ -41,75 +41,75 @@ export const WIDGET_PROPS = {
  */
 export const WIDGET_EMITS = ['update:modelValue'];
 
+
 /**
- * Composable providing base functionality for form widgets.
+ * Widget-level composable. Call once per widget.
  *
- * @param {import('vue').Ref<Object>} model - The model ref from defineModel() (widget's v-model data object)
- * @param {Object} props - Component props (must include `meta` from WIDGET_PROPS)
+ * Returns:
+ *  - `fields`       - computed array of all field metas (meta.fields)
+ *  - `getFieldMeta` - (fieldName: string) => ComputedRef<fieldMeta>; shorthand for multi-field widgets
+ *  - `error`        - true when any field has an error; pass to FFormRow :error-highlight
  *
- * For single-field widgets, use `value` as a convenient scalar computed.
- * For multi-field widgets, use `fieldModel(fieldName)` to create a computed per field.
+ * @param {import('vue').Ref<Object>} model
+ * @param {Object} props  Must include meta and fieldErrors from WIDGET_PROPS.
  */
 export function useWidget(model, props) {
 	const fields = computed(() => props.meta.fields);
-	const fieldMeta = computed(() => fields.value[0]);
-
-	// Scalar computed for single-field widgets (first field's value).
-	const value = computed({
-		get() {
-			return model.value?.[fieldMeta.value?.field_name];
-		},
-		set(val) {
-			model.value = { ...model.value, [fieldMeta.value?.field_name]: val };
-		},
-	});
-
-	/**
-	 * Create a writable computed for a specific field by name.
-	 * Useful for multi-field widgets (e.g. price_from / price_to).
-	 */
-	function fieldModel(fieldName) {
-		return computed({
-			get() {
-				return model.value?.[fieldName];
-			},
-			set(val) {
-				model.value = { ...model.value, [fieldName]: val };
-			},
-		});
-	}
 
 	function getFieldMeta(fieldName) {
-		return fields.value.find(f => f.field_name === fieldName);
+		return computed(() => fields.value.find(f => f.field_name === fieldName));
 	}
 
-	const disabled = computed(() => fieldMeta.value?.disabled ?? false);
-	const readonly_ = computed(() => fieldMeta.value?.readonly ?? false);
-	const required = computed(() => fieldMeta.value?.required ?? false);
-
-	// true when any of this widget's fields has an error message.
 	const error = computed(() => {
 		const errs = props.fieldErrors ?? {};
 		return Object.values(errs).some(msg => msg != null && msg !== '');
 	});
 
-	// First non-empty error message — passed to FFormRow's errorText / errorHighlight.
-	const errorText = computed(() => {
-		const errs = props.fieldErrors ?? {};
-		return Object.values(errs).find(msg => msg != null && msg !== '') ?? null;
+	return { fields, getFieldMeta, error };
+}
+
+
+/**
+ * Field-level composable. Call once per rendered input.
+ *
+ * @param {import('vue').Ref<Object>} model
+ * @param {Object} props              Must include fieldErrors from WIDGET_PROPS.
+ * @param {import('vue').ComputedRef} meta  A computed ref pointing to the field meta object.
+ *                                          Use `computed(() => fields.value[0])` for single-field widgets,
+ *                                          or `getFieldMeta(name)` from useWidget for multi-field ones.
+ *
+ * Returns:
+ *  - `id`        - field_name; pass to FFormRow :id and the input's :id
+ *  - `name`      - field_name; pass to the input's :name
+ *  - `value`     - writable computed; bind with v-model on the input element
+ *  - `disabled`  - from field meta
+ *  - `readonly`  - from field meta
+ *  - `required`  - from field meta
+ *  - `error`     - true when this specific field has an error; pass to the input's :error
+ *  - `errorText` - this field's error message
+ */
+export function useWidgetField(model, props, meta) {
+	const fieldName = computed(() => meta.value?.field_name);
+
+	// Convenient aliases - both equal field_name.
+	const id = fieldName;
+	const name = fieldName;
+
+	const value = computed({
+		get() { return model.value?.[fieldName.value]; },
+		set(val) { model.value = { ...model.value, [fieldName.value]: val }; },
 	});
 
-	return {
-		model,
-		fields,
-		fieldMeta,
-		value,
-		fieldModel,
-		getFieldMeta,
-		disabled,
-		readonly: readonly_,
-		required,
-		error,
-		errorText,
-	};
+	const disabled = computed(() => meta.value?.disabled ?? false);
+	const readonly = computed(() => meta.value?.readonly ?? false);
+	const required = computed(() => meta.value?.required ?? false);
+
+	const errorMsg = computed(() => {
+		const msg = (props.fieldErrors ?? {})[fieldName.value];
+		return (msg != null && msg !== '') ? msg : null;
+	});
+	const error = computed(() => errorMsg.value !== null);
+	const errorText = computed(() => errorMsg.value);
+
+	return { id, name, value, disabled, readonly, required, error, errorText };
 }

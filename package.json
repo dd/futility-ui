@@ -130,6 +130,22 @@
       "require": "./dist/forms/FFormRow/constants.cjs.js",
       "import": "./dist/forms/FFormRow/constants.es.js"
     },
+    "./forms/FGenericForm": {
+      "require": "./dist/forms/FGenericForm/index.cjs.js",
+      "import": "./dist/forms/FGenericForm/index.es.js"
+    },
+    "./forms/FGenericForm/constants": {
+      "require": "./dist/forms/FGenericForm/constants.cjs.js",
+      "import": "./dist/forms/FGenericForm/constants.es.js"
+    },
+    "./forms/FGenericForm/utils": {
+      "require": "./dist/forms/FGenericForm/utils.cjs.js",
+      "import": "./dist/forms/FGenericForm/utils.es.js"
+    },
+    "./forms/FGenericForm/useWidget": {
+      "require": "./dist/forms/FGenericForm/useWidget.cjs.js",
+      "import": "./dist/forms/FGenericForm/useWidget.es.js"
+    },
     "./styles.base.css": "./dist/styles.base.css",
     "./styles.tailwind.css": "./dist/styles.tailwind.css",
     "./assets/sprite.svg": "./dist/assets/sprite.svg"

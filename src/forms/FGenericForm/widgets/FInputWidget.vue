@@ -1,14 +1,17 @@
 <template>
 	<FFormRow
+		:id="id"
 		:layout="layout"
 		:size="size"
 		:error-text="errorText"
-		:error-highlight="!!errorText"
+		:error-highlight="error"
 	>
 		<template v-if="meta.label" #label>{{ meta.label }}</template>
 		<FInput
 			v-model="value"
-			:type="inputType"
+			:id="id"
+			:name="name"
+			:type="props.meta.type"
 			:error="error"
 			:disabled="disabled"
 			:readonly="readonly"
@@ -21,19 +24,18 @@
 
 <script setup>
 import { computed } from 'vue';
+
 import FInput from '@/forms/FInput';
 import FFormRow from '@/forms/FFormRow';
-import { useWidget, WIDGET_PROPS, WIDGET_EMITS } from '../useWidget';
+import { useWidget, useWidgetField, WIDGET_PROPS, WIDGET_EMITS } from '../useWidget';
 
 defineOptions({ name: 'FInputWidget' });
-defineEmits(WIDGET_EMITS);
 const model = defineModel({ type: Object });
 const props = defineProps({ ...WIDGET_PROPS });
+defineEmits(WIDGET_EMITS);
 
-const { value, disabled, readonly, required, error, errorText } = useWidget(model, props);
-
-// 'string' is a common API type alias — map it to the native 'text' input type.
-// All other meta types are passed through directly to FInput.
-const HTML_TYPE_MAP = { string: 'text' };
-const inputType = computed(() => HTML_TYPE_MAP[props.meta.type] ?? props.meta.type);
+const { fields } = useWidget(model, props);
+const { id, name, value, disabled, readonly, required, error, errorText } = useWidgetField(
+	model, props, computed(() => fields.value[0])
+);
 </script>

@@ -255,3 +255,25 @@ h1 {
 	}
 }
 /* End of FGenericForm */
+
+
+/* Custom Widget story */
+.sbfui-color-input {
+	width: 40px;
+	height: 30px;
+	padding: 2px;
+	border: 1px solid var(--fui-color-gray-300);
+	border-radius: 6px;
+	cursor: pointer;
+	background: none;
+}
+
+.sbfui-color-swatch {
+	margin-top: 12px;
+	padding: 10px 14px;
+	border-radius: 8px;
+	@apply fui:font-sans;
+	@apply fui:text-sm;
+	font-weight: 500;
+}
+/* End of Custom Widget story */
