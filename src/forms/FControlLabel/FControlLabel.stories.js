@@ -10,7 +10,7 @@ import { makeRenderer, makeUpdateArg } from '@/utils/storybook';
 const usage = `
 The \`FControlLabel\` component is designed to wrap form controls such as
 [FCheckbox](?path=/docs/forms-fcheckbox--docs), [FSwitch](?path=/docs/forms-fswitch--docs), or
-[FRadioButton](?path=/docs/forms-fradiobutton--docs) and provide a label alongside them.
+[FRadioButton](?path=/docs/forms-fradiobutton--docs) and render a label alongside them.
 
 ### Usage
 
@@ -22,7 +22,7 @@ import { FControlLabel } from 'futility-ui'
 import FControlLabel from 'futility-ui/forms/FControlLabel'
 \`\`\`
 
-Use the label prop for plain text labels:
+Use the \`label\` prop for plain-text labels:
 
 \`\`\`html
 <FControlLabel label="Simple label." >
@@ -30,7 +30,7 @@ Use the label prop for plain text labels:
 </FControlLabel>
 \`\`\`
 
-To include HTML elements inside the label, use the default slot.
+To include HTML or richer markup in the label, use the default slot.
 
 > Wrap the content in a \`<span>\` or similar element to ensure proper layout.
 
@@ -71,7 +71,7 @@ export default {
 		label: '',
 		error: false,
 		default: `Complex label with <a href="https://en.wikipedia.org/wiki/HTML" target="_blank" >
-html</a>.
+HTML</a>.
 `,
 	},
 	render: (args, { argTypes }) => {

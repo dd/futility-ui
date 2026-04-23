@@ -4,7 +4,7 @@ import { Meta } from '@storybook/addon-docs/blocks';
 
 # Usage
 
-Install the package and decide how to include the stylesheet.
+Install the package, then choose how you want to include the stylesheet.
 
 ```bash
 pnpm add futility-ui
@@ -18,7 +18,7 @@ You can import the stylesheet from JavaScript:
 import 'futility-ui/styles.tailwind.css'; // or styles.base.css
 ```
 
-or from your main CSS file:
+Or import it from your main CSS file:
 
 ```css
 @import 'futility-ui/styles.tailwind.css'; /* or styles.base.css */
@@ -28,13 +28,13 @@ or from your main CSS file:
 
 The library provides two stylesheet options:
 
-* `styles.base.css` – Base stylesheet containing only the core component styles from the Futility UI library.
-* `styles.tailwind.css` – Extended stylesheet that includes both the component styles and all Tailwind CSS styles.
+- `styles.base.css` – Base stylesheet containing only the core Futility UI component styles.
+- `styles.tailwind.css` – Extended stylesheet that includes both the component styles and Tailwind CSS utilities.
 
 
 ## Configuring component styles
 
-You can override styling parameters using standard Tailwind CSS methods in your custom stylesheets:
+You can override styling parameters using standard Tailwind CSS techniques in your own stylesheets:
 
 ```css
 @import 'futility-ui/styles.base.css';
@@ -74,10 +74,13 @@ createApp(App)
 ;
 ```
 
-Alternatively import only the components you need:
+Alternatively, import only the components you need:
 
 ```javascript
 import { FButton, FInput } from 'futility-ui';
+// or
+import FButton from 'futility-ui/FButton';
+import FInput from 'futility-ui/FInput';
 ```
 
-Now you can use the imported components in your templates.
+You can now use the imported components in your templates.

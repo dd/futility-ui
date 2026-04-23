@@ -2,7 +2,7 @@ import FLoader from '.';
 
 
 const usage = `
-A standard loading spinner component used to indicate ongoing processes or data fetching.
+A loading spinner component used to indicate ongoing work such as data fetching or form submission.
 
 
 ### Usage
@@ -55,7 +55,7 @@ export const Sizes = {
 	parameters: {
 		docs: {
 			description: {
-				story: 'You can use one of the standard throbber sizes:',
+				story: 'Choose one of the built-in loader sizes:',
 			},
 		},
 	},
@@ -115,7 +115,7 @@ export const CustomSize = {
 		docs: {
 			description: {
 				story: `
-If needed, define a custom size by using the \`fui-loader-<custom_size>\` selector.
+If needed, you can define a custom size with the \`fui-loader-<custom_size>\` selector.
 
 \`\`\`css
 .fui-loader-custom {

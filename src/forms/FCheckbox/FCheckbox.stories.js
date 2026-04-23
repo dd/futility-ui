@@ -42,14 +42,14 @@ export default {
 	tags: [ 'autodocs' ],
 	argTypes: {
 		modelValue: {
-			description: 'Checkbox flag.',
+			description: 'Current checkbox value.',
 			table: {
 				category: 'props',
 				type: { summary: 'boolean | array' },
 			},
 		},
 		disabled: {
-			description: 'Disabled flag.',
+			description: 'Whether the checkbox is disabled.',
 			control: 'boolean',
 			table: {
 				category: 'props',
@@ -60,7 +60,7 @@ export default {
 		// EVENTS
 		'update:modelValue': {
 			action: 'update:modelValue',
-			description: 'Event on update value',
+			description: 'Emitted when the value changes.',
 			control: false,
 			table: {
 				category: 'events',

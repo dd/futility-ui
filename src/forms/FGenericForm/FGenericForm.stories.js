@@ -18,7 +18,7 @@ export default {
 	parameters: {
 		layout: 'centered',
 		docs: {
-			description: { component: Readme },
+			description: { component: Readme.replace(/^# .+\n?/m, '')  },
 		},
 	},
 	tags: [ 'autodocs' ],
@@ -253,7 +253,7 @@ const widgets = {
 <FGenericForm :widgets="widgets" :meta="meta" v-model="formData" />
 \`\`\`
 
-The live example below registers a minimal \`color\` widget - a native \`<input type="color">\` -
+The live example below registers a minimal \`color\` widget: a native \`<input type="color">\`
 for the \`'color'\` type.`;
 
 
@@ -311,7 +311,7 @@ export const CustomWidget = {
 
 
 const STATES_DESCRIPTION = `Field-level \`disabled\` and \`readonly\` flags come from the
-metadata and are forwarded automatically.`;
+metadata and are forwarded to widgets automatically.`;
 
 
 export const States = {
@@ -324,7 +324,7 @@ export const States = {
 };
 
 
-const SIZES_DESCRIPTION = `The \`widgetSize\` prop is forwarded to every widget's \`FFormRow\` as a \`size\` prop.
+const SIZES_DESCRIPTION = `The \`widgetSize\` prop is forwarded to each widget's \`FFormRow\` as the \`size\` prop.
 Available values come from \`SIZE_CHOICES\`: \`'s'\`, \`'m'\` (default), \`'xl'\`.`;
 
 
@@ -374,7 +374,7 @@ export const Sizes = {
 
 const ERRORS_DESCRIPTION = `Pass an \`errors\` object keyed by field name.
 FGenericForm routes each message to the right widget: the input highlights in red, the label turns
-red, and the message appears in a tooltip on the error icon. Works reactively - update \`errors\`
+red, and the message appears in a tooltip on the error icon. This works reactively: update \`errors\`
 and the form re-renders.
 
 \`\`\`js
@@ -409,7 +409,7 @@ const UTILITIES_DESCRIPTION = `Three utility functions ship alongside the compon
 Use it to initialise the form and to serve as the comparison baseline for query params.
 
 **\`getDiff(meta, currentData, originalData, widgets?)\`** returns only the fields whose normalised
-values differ from \`originalData\`. Designed for PATCH requests - pass the server response as
+values differ from \`originalData\`. It is designed for PATCH requests: pass the server response as
 \`originalData\` and you get exactly what changed.
 
 **\`getDataForQuery(meta, currentData, widgets?)\`** is shorthand for diffing against
@@ -492,7 +492,7 @@ export const Utilities = {
 };
 
 
-const LAYOUT_DESCRIUPTION = `
+const LAYOUT_DESCRIPTION = `
 Each built-in widget uses \`FFormRow\` internally - \`two_columns\`, \`one_column\` and custom
 layouts are documented in [FFormRow](?path=/docs/forms-fformrow--docs).
 
@@ -522,7 +522,7 @@ const LAYOUT_TEMPLATE = `<div class="sbfui-fgenericform-layouts" >
 
 export const Layouts = {
 	parameters: {
-		docs: { description: { story: LAYOUT_DESCRIUPTION }},
+		docs: { description: { story: LAYOUT_DESCRIPTION }},
 	},
 	render: (args, { argTypes, component }) => {
 		const [ , updateArgs ] = useArgs();

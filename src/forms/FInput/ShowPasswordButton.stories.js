@@ -6,7 +6,7 @@ const usage = `
 ### Usage
 
 To enable password visibility toggling, use the \`FInputShowPasswordButton\` component.
-You can place it into any slot of the [FInput](?path=/docs/forms-finput--docs) field with
+You can place it into a slot of an [FInput](?path=/docs/forms-finput--docs) field with
 \`type="password"\`.
 
 \`\`\`js

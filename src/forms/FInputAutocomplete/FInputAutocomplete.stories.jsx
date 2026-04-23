@@ -11,7 +11,7 @@ import { SIZE_CHOICES } from './constants';
 
 
 const usage = `
-\`FInputAutocomplete\` is an input component with built-in autocomplete, fetching and displaying
+\`FInputAutocomplete\` is an input component with built-in autocomplete that fetches and displays
 suggestions as the user types.
 
 ### Usage
@@ -40,7 +40,7 @@ That's it!
 const ending = `
 ### TODO
 
-* Ability to group options when needed
+* Support grouping options when needed
 `;
 
 const OPTIONS_EXAMPLE = [
@@ -126,7 +126,7 @@ export default {
 	argTypes: {
 		modelValue: {
 			type: 'string',
-			description: 'Input value.',
+			description: 'Selected value.',
 			table: {
 				category: 'props',
 				type: { summary: 'text | number | boolean' },
@@ -134,7 +134,7 @@ export default {
 		},
 		query: {
 			type: 'string',
-			description: 'Filter value.',
+			description: 'Current search query.',
 			table: {
 				category: 'props',
 				type: { summary: 'text' },
@@ -142,7 +142,7 @@ export default {
 		},
 		disabled: {
 			control: 'boolean',
-			description: 'Disabled flag.',
+			description: 'Whether the input is disabled.',
 			table: {
 				category: 'props',
 				type: { summary: 'boolean' },
@@ -159,7 +159,7 @@ export default {
 		// EVENTS
 		'update:modelValue': {
 			action: 'update:modelValue',
-			description: 'Event on update value.',
+			description: 'Emitted when the selected value changes.',
 			control: false,
 			table: {
 				category: 'events',
@@ -169,7 +169,7 @@ export default {
 		},
 		'update:query': {
 			action: 'update:query',
-			description: 'Event on update query.',
+			description: 'Emitted when the search query changes.',
 			control: false,
 			table: {
 				category: 'events',
@@ -179,7 +179,7 @@ export default {
 		},
 		'update:option': {
 			action: 'update:option',
-			description: 'Event on update option.',
+			description: 'Emitted when the selected option object changes.',
 			control: false,
 			table: {
 				category: 'events',
@@ -233,7 +233,7 @@ export const RequestOptions = {
 	parameters: {
 		docs: {
 			description: {
-				story: 'Displays a preloader while options are being loaded.'
+				story: 'Shows a loader while options are being fetched.'
 			},
 		},
 	},
@@ -321,7 +321,7 @@ export const CustomOptions = {
 	parameters: {
 		docs: {
 			description: {
-				story: 'Provides a slot to customize option rendering.'
+				story: 'Provides a slot for custom option rendering.'
 			},
 		},
 	},
@@ -352,7 +352,7 @@ export const ChangeRequestHandler = {
 	parameters: {
 		docs: {
 			description: {
-				story: 'The request handler can be changed at any time. When changed, options are automatically re-fetched.'
+				story: 'The request handler can be replaced at runtime. When it changes, options are fetched again automatically.'
 			},
 		},
 	},
@@ -386,7 +386,7 @@ export const ChangeRequestHandler = {
 				return { args: newArgs, useAlternativFunction };
 			},
 			template: `
-<p><FControlLabel><FSwitch v-model="useAlternativFunction" />Use an alternative function for fetching options</FControlLabel></p>
+<p><FControlLabel><FSwitch v-model="useAlternativFunction" />Use an alternative request handler</FControlLabel></p>
 <p><FInputAutocomplete v-bind="args" /></p>`,
 		};
 	},

@@ -8,7 +8,8 @@ import { COMPONENT_TYPES, SIZE_CHOICES, COLOR_CHOICES, DESIGN_CHOICES, ICON_STYL
 
 
 const usage = `
-A standard button component used for form actions and general interactions. Supports different states, sizes, and variants to fit common UI patterns.
+A button component for form actions and general UI interactions. It supports multiple sizes,
+visual variants, and states for common interface patterns.
 
 ### Usage
 
@@ -35,16 +36,16 @@ const ending = `
 
 - FButton includes \`aria-busy\` when \`busy\` is set
 - Adds \`aria-disabled\` for non-button types
-- When using \`icon\` mode, ensure your SVG has appropriate \`aria-label\` or \`title\`
+- When using \`icon\` mode, make sure the icon has an appropriate accessible name, such as an \`aria-label\` or \`title\`
 
 
 ### Roadmap
 
 Planned enhancements:
 
-- Support for \`full-width\` layout, not sure this is necessary
-- Accessibility audits, maybe someday...
-- Customising spinner (need it?)
+- Support for a \`full-width\` layout
+- Accessibility review and polish
+- More control over the busy-state spinner
 
 
 ### Color behavior in dark mode
@@ -55,7 +56,7 @@ In dark mode, I believe gray and white should invert:
 * \`white\` should become darker
 
 This helps preserve visual accents and maintain a clear hierarchy.
-I plan to revisit this behavior once Flowbite updates their theme — they mentioned a Figma refresh around **Q2 2025**, which should include revised button styles.
+I plan to revisit this behavior once Flowbite updates their theme - they mentioned a Figma refresh around **Q2 2025**, which should include revised button styles.
 `;
 
 export default {
@@ -116,7 +117,7 @@ export default {
 		// SLOTS
 		default: {
 			control: 'text',
-			description: 'The text is placed in the default slot.',
+			description: 'Content rendered in the default slot.',
 			table: {
 				category: 'slots',
 				type: { summary: 'vnode' },
@@ -125,7 +126,7 @@ export default {
 		},
 		iconName: {
 			name: 'icon',
-			description: 'Icon for use inside the icon button. (not real slot, just for presentation)',
+			description: 'Icon used in the preview for icon buttons. This is a Storybook-only helper, not a real slot.',
 			control: { type: 'select' },
 			options: [ ...ICON_LIST_SOLID, ...ICON_LIST_OUTLINE, ...ICON_LIST_OTHER ],
 			table: {
@@ -138,7 +139,7 @@ export default {
 		// EVENTS
 		onClick: {
 			action: 'click',
-			description: 'Click event.',
+			description: 'Emitted when the button is clicked.',
 			table: {
 				category: 'events',
 				type: { summary: null },
@@ -181,7 +182,7 @@ export const Types = {
 	parameters: {
 		docs: {
 			description: {
-				story: `The \`type\` attribute defines the button type — either a regular button or a link.
+				story: `The \`type\` attribute defines the button type - either a regular button or a link.
 
 \`\`\`html
 <FButton type="<type>" >Button text</FButton>
@@ -230,7 +231,7 @@ export const Design = {
 	parameters: {
 		docs: {
 			description: {
-				story: `There are several design variants available for the button
+				story: `The button supports several visual design variants.
 
 \`\`\`html
 <FButton design="<design>" >Button text</FButton>
@@ -333,7 +334,7 @@ export const Icon = {
 	parameters: {
 		docs: {
 			description: {
-				story: `Use the \`icon\` prop for a icon-only button.
+				story: `Use the \`icon\` prop to render an icon-only button.
 
 \`\`\`html
 <FButton icon="<icon_style>" >Button text</FButton>
@@ -435,7 +436,7 @@ export const Colors = {
 	parameters: {
 		docs: {
 			description: {
-				story: `Predefined color values include:
+				story: `Use the \`color\` prop to select one of the predefined color variants:
 
 \`\`\`html
 <FButton color="<color>" >Button text</FButton>

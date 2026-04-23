@@ -17,7 +17,7 @@ function parseOptions(value) {
 
 
 /**
- * `v-tooltip` directive — mounts FTooltip programmatically on the target element.
+ * `v-tooltip` directive - mounts FTooltip programmatically on the target element.
  *
  * Simple:
  * ```html

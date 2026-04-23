@@ -85,7 +85,7 @@ export default {
 		},
 		// Slots
 		label: {
-			description: 'Slot for the form row label text',
+			description: 'Slot for the row label.',
 			control: { type: 'text' },
 			table: {
 				category: 'slots',
@@ -94,7 +94,7 @@ export default {
 			},
 		},
 		default: {
-			description: 'Slot for placing form fields and widgets',
+			description: 'Slot for form fields or custom widgets.',
 			control: { type: null },
 			table: {
 				category: 'slots',
@@ -103,7 +103,7 @@ export default {
 			},
 		},
 		help: {
-			description: 'Slot for hint/help text shown below the input',
+			description: 'Slot for hint or help text shown below the field.',
 			control: { type: 'text' },
 			table: {
 				category: 'slots',
@@ -142,7 +142,7 @@ export default {
 		size: 'm',
 		errorHighlight: false,
 		label: 'Label',
-		help: 'Description for the form line',
+		help: 'Helper text for this field',
 	},
 };
 
@@ -154,7 +154,7 @@ export const Default = {
 };
 
 const ERROR_DESCRIPTION = `
-Use \`errorHighlight\` to highlight the label in red and \`errorText\` to show a tooltip icon next
+Use \`errorHighlight\` to highlight the label in red, and \`errorText\` to show a tooltip icon next
 to the input. Both props are independent and can be used separately or together.
 `;
 
@@ -185,7 +185,7 @@ export const layoutOneColumn = {
 				story: `Label is placed above the input. Suitable for narrow containers or mobile
 layouts.
 
-The \`layout\` prop is a free string — built-in values are \`one_column\` and \`two_columns\`, but
+The \`layout\` prop is a free string - built-in values are \`one_column\` and \`two_columns\`, but
 you can pass any custom value and target it with a \`.fui-fr-layout-{value}\` CSS class.`,
 			},
 		},
@@ -318,7 +318,7 @@ export const Sizes = {
 				story: `The \`size\` prop adjusts the label's top padding so it aligns with the
 input's text baseline in \`two_columns\` layout. Built-in values are \`s\`, \`m\`, and \`xl\`.
 
-The \`size\` prop is a free string — you can pass any custom value and define label alignment with
+The \`size\` prop is a free string - you can pass any custom value and define label alignment with
 a \`.fui-fr-size-{value}\` CSS class inside \`.fui-fr-layout-two_columns\`.`,
 			},
 		},
