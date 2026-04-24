@@ -17,13 +17,14 @@
 </template>
 
 <script setup>
-import { ref, computed } from 'vue';
+import { computed, ref, shallowRef, watch } from 'vue';
 import { useElementBounding } from '@vueuse/core';
 import { DEFAULT_WIDGETS } from './constants';
 
 defineOptions({ name: 'FGenericForm' });
 
 const model = defineModel({ type: Object, default: () => ({}) });
+const localModel = shallowRef({});
 
 const props = defineProps({
 	/** Array of field metadata objects describing the form structure. */
@@ -100,13 +101,15 @@ function entryKey(entry) {
 function extractData(entry) {
 	const data = {};
 	for (const field of entry.fields) {
-		data[field.field_name] = model.value?.[field.field_name];
+		data[field.field_name] = localModel.value?.[field.field_name];
 	}
 	return data;
 }
 
 function updateData(widgetData) {
-	model.value = { ...model.value, ...widgetData };
+	const nextModel = { ...localModel.value, ...widgetData };
+	localModel.value = nextModel;
+	model.value = nextModel;
 }
 
 function extractErrors(entry) {
@@ -125,6 +128,12 @@ function extractErrors(entry) {
 
 const formRoot = ref(null);
 const { width: containerWidth } = useElementBounding(formRoot);
+
+watch(
+	model,
+	(value) => { localModel.value = { ...(value ?? {}) }; },
+	{ immediate: true, deep: true },
+);
 
 const effectiveLayout = computed(() => {
 	if (props.layout !== 'auto') return props.layout;
