@@ -4,22 +4,17 @@
 code needed for standard forms.
 
 
-### Installation
-
-```js
-import { FGenericForm } from 'futility-ui';
-// or
-import FGenericForm from 'futility-ui/forms/FGenericForm';
-```
-
-
 ### Basic usage
 
 Each entry in `meta` is dispatched to the matching widget from the `widgets` map.
 
 ```js
-import { FGenericForm, getFormDefaults } from 'futility-ui';
 import { ref } from 'vue';
+import { FGenericForm } from 'futility-ui';
+// or
+// import FGenericForm from 'futility-ui/forms/FGenericForm';
+import { getFormDefaults } from 'futility-ui/forms/FGenericForm/utils';
+
 
 const meta = [
 	{
@@ -43,18 +38,15 @@ const formData = ref(getFormDefaults(meta));
 
 At minimum, each item in `meta` should define:
 
-- `type` — the widget type to render
-- `fields` — an array of field definitions
-- `label` — optional label shown through `FFormRow`
-- `help_text` — optional helper text shown below the field
-
-Typical field entries include:
-
-- `field_name` — unique field key used in `modelValue` and `errors`
-- `default` — initial value used by `getFormDefaults`
-- `disabled` — disables interaction with the field
-- `readonly` — keeps the field visible but prevents editing
-- `required` — marks the field as required for validation and UI purposes
+- `type` - the widget type to render
+- `label` - optional label shown through `FFormRow`
+- `help_text` - optional helper text shown below the field
+- `fields` - an array of field definitions:
+	* `field_name` - unique field key used in `modelValue` and `errors`
+	* `default` - initial value used by `getFormDefaults`
+	* `disabled` - disables interaction with the field
+	* `readonly` - keeps the field visible but prevents editing
+	* `required` - marks the field as required for validation and UI purposes
 
 Some widgets also accept additional fields. For example, select-like widgets need an option list.
 Check each widget's individual story for the full list of supported field parameters.

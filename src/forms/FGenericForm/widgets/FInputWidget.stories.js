@@ -7,35 +7,49 @@ import { getFormDefaults } from '../utils';
 import { INPUT_WIDGET_TYPES } from '../constants.js';
 
 
+const _types = INPUT_WIDGET_TYPES.map(t => `\`${t}\``);
+const _typeList = _types.slice(0, -1).join(', ') + ', and ' + _types.at(-1);
+
+const DESCRIPTION = `\`FInputWidget\` handles all text-like input types registered in
+\`DEFAULT_WIDGETS\`: ${_typeList}.
+
+The meta type \`'string'\` is normalised to \`'text'\` internally - use \`type: 'text'\` in your
+field meta. Field-level flags \`disabled\`, \`readonly\`, \`required\`, and per-field \`errors\`
+are all passed through field meta and routed automatically to each widget.`;
+
+
+const DEFAULT_TEMPLATE = `<FGenericForm
+	v-model="modelValue"
+	:meta="meta"
+	:layout="layout"
+	:widget-size="widgetSize"
+	:errors="errors"
+/>`;
+
+
 export default {
 	title: 'Forms/FGenericForm/Widgets/Built-in/FInputWidget',
 	component: FInputWidgetComponent,
 	parameters: {
 		layout: 'centered',
+		docs: { description: { component: DESCRIPTION }},
 	},
 	tags: [ 'autodocs' ],
 	argTypes: WIDGET_BASE_ARG_TYPES,
 	render: (args) => {
 		return {
-			name: 'FInputWidgetStory',
 			components: { FGenericForm },
 			setup() {
 				const modelValue = ref(getFormDefaults(FINPUTWIDGET_META));
 				return {
 					modelValue,
-					FINPUTWIDGET_META,
+					meta: FINPUTWIDGET_META,
 					layout: computed(() => args.layout),
 					widgetSize: computed(() => args.size),
 					errors: computed(() => args.fieldErrors),
 				};
 			},
-			template: `<FGenericForm
-				v-model="modelValue"
-				:meta="FINPUTWIDGET_META"
-				:layout="layout"
-				:widget-size="widgetSize"
-				:errors="errors"
-			/>`,
+			template: DEFAULT_TEMPLATE,
 		};
 	},
 	args: {
@@ -46,23 +60,7 @@ export default {
 };
 
 
-const _types = INPUT_WIDGET_TYPES.map(t => `\`${t}\``);
-const _typeList = _types.slice(0, -1).join(', ') + ', and ' + _types.at(-1);
-
-const FINPUTWIDGET_DESCRIPTION = `\`FInputWidget\` handles all text-like input types registered in
-\`DEFAULT_WIDGETS\`: ${_typeList}.
-
-The meta type \`'string'\` is normalised to \`'text'\` internally — use \`type: 'text'\` in your
-field meta. Field-level flags \`disabled\`, \`readonly\`, \`required\`, and per-field \`errors\`
-are all passed through field meta and routed automatically to each widget.`;
-
-
-export const FInputWidget = {
-	name: 'FInputWidget',
-	parameters: {
-		docs: { description: { story: FINPUTWIDGET_DESCRIPTION }},
-	},
-};
+export const Default = {};
 
 
 const STATES_DESCRIPTION = `Field-level \`disabled\` and \`readonly\` flags come from the
@@ -78,11 +76,27 @@ export const States = {
 			name: 'FInputWidgetStatesStory',
 			components: { FGenericForm },
 			setup() {
-				const meta = [ ...FINPUTWIDGET_META ];
-				meta[1].fields[0].disabled = true;
-				meta[2].fields[0].readonly = true;
+				const meta = [
+					{
+						label: "text",
+						type: "text",
+						fields: [{ field_name: 'f_text', default: '' }],
+						help_text: 'Default field',
+					},
+					{
+						label: "search",
+						type: "search",
+						fields: [{ field_name: 'f_search', default: '', disabled: true }],
+						help_text: 'Disabled field',
+					},
+					{
+						label: "url",
+						type: "url",
+						fields: [{ field_name: 'f_url', default: '', readonly: true }],
+						help_text: 'Read-only field',
+					},
+				];
 				const modelValue = ref({
-					...getFormDefaults(meta),
 					f_text: "Some text",
 					f_search: "Search query",
 					f_url: "https://github.com",
@@ -95,13 +109,7 @@ export const States = {
 					errors: computed(() => args.fieldErrors),
 				};
 			},
-			template: `<FGenericForm
-				v-model="modelValue"
-				:meta="meta"
-				:layout="layout"
-				:widget-size="widgetSize"
-				:errors="errors"
-			/>`,
+			template: DEFAULT_TEMPLATE,
 		};
 	},
 };
@@ -111,13 +119,46 @@ const ERRORS_DESCRIPTION = `Pass a \`fieldErrors\` object keyed by \`field_name\
 validation messages. The input highlights in red, the label turns red, and the message appears
 in a tooltip on the error icon.`;
 
+
 export const Errors = {
 	parameters: {
 		docs: { description: { story: ERRORS_DESCRIPTION }},
 	},
+	render: (args) => {
+		return {
+			name: 'FInputWidgetStatesStory',
+			components: { FGenericForm },
+			setup() {
+				const meta = [
+					{
+						label: "Username",
+						type: "text",
+						fields: [{ field_name: 'f_username', default: '' }],
+					},
+					{
+						label: "Email",
+						type: "email",
+						fields: [{ field_name: 'f_email', default: '' }],
+					},
+				];
+				const modelValue = ref({
+					f_username: "dd",
+					f_email: "user@@example.com",
+				});
+				return {
+					modelValue,
+					meta,
+					layout: computed(() => args.layout),
+					widgetSize: computed(() => args.size),
+					errors: computed(() => args.fieldErrors),
+				};
+			},
+			template: DEFAULT_TEMPLATE,
+		};
+	},
 	args: {
 		fieldErrors: {
-			f_text: 'Username must be at least 3 characters.',
+			f_username: 'Username must be at least 3 characters.',
 			f_email: 'Enter a valid email address.',
 		},
 	},

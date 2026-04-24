@@ -4,7 +4,7 @@ import { useArgs } from 'storybook/preview-api';
 import { makeRenderer, makeUpdateArg } from '@/.storybook/utils.js';
 
 import Readme from './README.md?raw';
-import { META_BASIC, META_STATES, META_ERRORS } from './constants.sb.js';
+import { META_BASIC } from './constants.sb.js';
 import FGenericForm from '.';
 import { getFormDefaults, getDiff, getDataForQuery } from './utils';
 import { DEFAULT_WIDGETS, LAYOUT_CHOICES, SIZE_CHOICES } from './constants.js';
@@ -29,7 +29,7 @@ export default {
 			action: 'update:modelValue',
 			description: 'Emitted when any field value changes.',
 			control: false,
-			table: { category: 'events', type: { summary: null } },
+			table: { category: 'events', type: { summary: null }},
 		},
 		widgetSize: {
 			options: SIZE_CHOICES,
@@ -56,44 +56,25 @@ export default {
 export const Default = {};
 
 
-const STATES_DESCRIPTION = `Field-level \`disabled\` and \`readonly\` flags come from the
-metadata and are forwarded to widgets automatically.`;
-
-
-export const States = {
-	parameters: {
-		docs: { description: { story: STATES_DESCRIPTION } },
-	},
-	args: {
-		meta: META_STATES,
-		modelValue: getFormDefaults(META_STATES),
-	},
-};
-
-
-const SIZES_DESCRIPTION = `The \`widgetSize\` prop is forwarded to each widget's \`FFormRow\` as the \`size\` prop.
-Available values come from \`SIZE_CHOICES\`: \`'s'\`, \`'m'\` (default), \`'xl'\`.`;
+const SIZES_DESCRIPTION = `The \`widgetSize\` prop is forwarded to each widget's \`FFormRow\` as the
+\`size\` prop. The value is free-form - just make sure every widget in use supports the
+corresponding size index. All built-in widgets support \`'s'\`, \`'m'\` (default), and \`'xl'\`.`;
 
 
 const SIZES_TEMPLATE = `<div class="sbfui-preview-flex-y sbfui-fgenericform-sizes" >
-	<div>
-		<p class="sbfui-fgenericform-label" >s</p>
-		<FGenericForm v-bind="args" widget-size="s" />
-	</div>
-	<div>
-		<p class="sbfui-fgenericform-label" >m</p>
-		<FGenericForm v-bind="args" widget-size="m" />
-	</div>
-	<div>
-		<p class="sbfui-fgenericform-label" >xl</p>
-		<FGenericForm v-bind="args" widget-size="xl" />
+	<div
+		v-for="size in SIZE_CHOICES"
+		:key="size"
+	>
+		<p class="sbfui-fgenericform-label" >{{ size }}</p>
+		<FGenericForm v-bind="args" :widget-size="size" />
 	</div>
 </div>`;
 
 
 export const Sizes = {
 	parameters: {
-		docs: { description: { story: SIZES_DESCRIPTION } },
+		docs: { description: { story: SIZES_DESCRIPTION }},
 	},
 	render: (args, { argTypes, component }) => {
 		const [ , updateArgs ] = useArgs();
@@ -116,36 +97,8 @@ export const Sizes = {
 	argTypes: {
 		widgetSize: { control: false },
 	},
-};
-
-
-const ERRORS_DESCRIPTION = `Pass an \`errors\` object keyed by field name.
-FGenericForm routes each message to the right widget: the input highlights in red, the label turns
-red, and the message appears in a tooltip on the error icon. This works reactively: update \`errors\`
-and the form re-renders.
-
-\`\`\`js
-const errors = {
-	email: 'This email is already registered.',
-	username: 'Username is too short.',
-};
-\`\`\`
-
-\`\`\`html
-<FGenericForm v-model="formData" :meta="meta" :errors="errors" />
-\`\`\``;
-
-
-export const Errors = {
-	parameters: {
-		docs: { description: { story: ERRORS_DESCRIPTION } },
-	},
 	args: {
-		meta: META_ERRORS,
-		errors: {
-			username: 'Username must be at least 3 characters.',
-			email: 'Enter a valid email address.',
-		},
+		widgetSize: '<size>',
 	},
 };
 
@@ -153,7 +106,7 @@ export const Errors = {
 const UTILITIES_DESCRIPTION = `Three utility functions ship alongside the component.
 
 \`\`\`js
-import { getFormDefaults, getDiff, getDataForQuery } from 'futility-ui';
+import { getFormDefaults, getDiff, getDataForQuery } from 'futility-ui/forms/FGenericForm/utils';
 \`\`\`
 
 **\`getFormDefaults(meta)\`** extracts the \`default\` value from every field in the meta array.
@@ -168,7 +121,8 @@ values differ from \`originalData\`. It is designed for PATCH requests: pass the
 
 Both diff functions are form-aware: for text-like fields \`null\`, \`undefined\`, and \`''\` are
 treated as equivalent, so clearing a field that was already empty won't appear in the output.
-Pass \`DEFAULT_WIDGETS\` (or your merged widget map) for type-aware normalisation.`;
+Pass \`DEFAULT_WIDGETS\` from \`futility-ui/forms/FGenericForm/constants\` (or your merged widget
+map) for type-aware normalisation.`;
 
 
 const UTILITIES_TEMPLATE = `<div class="sbfui-fgenericform-utils" >
@@ -204,7 +158,7 @@ const UTILITIES_TEMPLATE = `<div class="sbfui-fgenericform-utils" >
 
 export const Utilities = {
 	parameters: {
-		docs: { description: { story: UTILITIES_DESCRIPTION } },
+		docs: { description: { story: UTILITIES_DESCRIPTION }},
 	},
 	render: (args, { argTypes, component }) => {
 		const [ , updateArgs ] = useArgs();
@@ -251,10 +205,10 @@ layouts are documented in [FFormRow](?path=/docs/forms-fformrow--docs).
 and switches between \`two_columns\` and \`one_column\` at the \`autoLayoutBreakpoint\` threshold.
 
 \`\`\`html
-<FGenericForm layout="auto" :meta="meta" v-model="formData" />
+<FGenericForm v-model="formData" :meta="meta" layout="auto" />
 
 <!-- custom breakpoint -->
-<FGenericForm layout="auto" :auto-layout-breakpoint="600" :meta="meta" v-model="formData" />
+<FGenericForm v-model="formData" :meta="meta" layout="auto" :auto-layout-breakpoint="400" />
 \`\`\``;
 
 
@@ -273,7 +227,7 @@ const LAYOUT_TEMPLATE = `<div class="sbfui-fgenericform-layouts" >
 
 export const Layouts = {
 	parameters: {
-		docs: { description: { story: LAYOUT_DESCRIPTION } },
+		docs: { description: { story: LAYOUT_DESCRIPTION }},
 	},
 	render: (args, { argTypes, component }) => {
 		const [ , updateArgs ] = useArgs();

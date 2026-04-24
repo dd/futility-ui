@@ -36,7 +36,7 @@ Provide \`meta\`, \`layout\`, \`size\`, and \`fieldErrors\` to the widget.
 
 For example your custom widget may be like this:
 
-\`\`\`vue
+\`\`\`html
 <!-- DemoColorWidget.vue -->
 <template>
 	<FFormRow
@@ -80,7 +80,7 @@ const { id, name, value, disabled, readonly, required, error, errorText } = useW
 \`\`\`
 
 
-### Usage custom widget in FGenericForm
+### Usage
 
 \`\`\`js
 import { DEFAULT_WIDGETS } from 'futility-ui';
@@ -88,15 +88,18 @@ import MyColorWidget from './MyColorWidget.vue';
 
 const widgets = {
 	...DEFAULT_WIDGETS,
-	color: { component: MyColorWidget, normalize: (v) => v ?? null },
+	color: {
+		component: MyColorWidget,
+		normalize: (v) => v ?? null,
+	},
 };
 \`\`\`
 
-**normalize** is a optional; coerces values for \`getDiff\` / \`getDataForQuery\`.
+**normalize** - is a optional; coerces values for \`getDiff\` / \`getDataForQuery\`.
 
 
 \`\`\`html
-<FGenericForm :widgets="widgets" :meta="meta" v-model="formData" />
+<FGenericForm :widgets="widgets" :meta="meta" />
 \`\`\`
 
 The live example below registers a minimal \`color\` widget - a native \`<input type="color">\`.`;
@@ -142,7 +145,7 @@ export default {
 };
 
 
-const DEFAULT_TEMPLATE = `<div class="sbfui-fgenericform-utils" >
+const SINGLE_FIELD_TEMPLATE = `<div class="sbfui-fgenericform-utils" >
 	<div>
 		<p class="sbfui-fgenericform-label" >Custom color widget</p>
 		<FGenericForm v-bind="args" />
@@ -161,7 +164,7 @@ const DEFAULT_TEMPLATE = `<div class="sbfui-fgenericform-utils" >
 </div>`;
 
 
-const DEFAULT_META = [
+const SINGLE_FIELD_META = [
 	{
 		type: 'color',
 		label: 'Background',
@@ -175,11 +178,12 @@ const DEFAULT_META = [
 ];
 
 
-export const Default = {
+export const SingleFieldWidget = {
+	name: 'Single-field Widget',
 	render: (args, { argTypes, component }) => {
 		const [ , updateArgs ] = useArgs();
 		return {
-			name: 'FGenericFormCustomWidgetStory',
+			name: 'FGenericFormSingleFieldWidgetStory',
 			components: { FGenericForm },
 			setup() {
 				const modelValueArg = makeUpdateArg('modelValue', args, updateArgs);
@@ -200,18 +204,18 @@ export const Default = {
 				});
 				return { args: newArgs };
 			},
-			template: DEFAULT_TEMPLATE,
+			template: SINGLE_FIELD_TEMPLATE,
 		};
 	},
 	args: {
-		meta: DEFAULT_META,
-		modelValue: getFormDefaults(DEFAULT_META),
+		meta: SINGLE_FIELD_META,
+		modelValue: getFormDefaults(SINGLE_FIELD_META),
 		widgetSize: 's',
 	},
 };
 
 
-const MULTIFIELD_DESCRIPTION = `
+const MULTI_FIELD_DESCRIPTION = `
 When a meta entry has multiple fields (e.g. a \`range\` widget with \`from\` and \`to\`),
 call \`useWidgetField\` once per rendered input.
 
@@ -219,7 +223,7 @@ The widget-level \`error\` from \`useWidget\` aggregates across all fields - pas
 FFormRow \`:error-highlight\`. Because \`useWidget\` does not aggregate \`errorText\`, collect
 it from whichever field has a message:
 
-\`\`\`vue
+\`\`\`html
 <!-- DemoRangeWidget.vue -->
 <template>
 	<FFormRow
@@ -281,7 +285,7 @@ const rowErrorText = computed(() => from.errorText.value ?? to.errorText.value ?
 The live example below registers a \`range\` widget with two number inputs.`;
 
 
-const MULTIFIELD_META = [
+const MULTI_FIELD_META = [
 	{
 		type: 'range',
 		label: 'Age range',
@@ -301,7 +305,7 @@ const MULTIFIELD_META = [
 	},
 ];
 
-const MULTIFIELD_TEMPLATE = `<div class="sbfui-fgenericform-utils" >
+const MULTI_FIELD_TEMPLATE = `<div class="sbfui-fgenericform-utils" >
 	<div>
 		<p class="sbfui-fgenericform-label" >Multi-field range widget</p>
 		<FGenericForm v-bind="args" />
@@ -313,10 +317,10 @@ const MULTIFIELD_TEMPLATE = `<div class="sbfui-fgenericform-utils" >
 </div>`;
 
 
-export const CustomWidgetMultiField = {
+export const MultiFieldWidget = {
 	name: 'Multi-field Widget',
 	parameters: {
-		docs: { description: { story: MULTIFIELD_DESCRIPTION }},
+		docs: { description: { story: MULTI_FIELD_DESCRIPTION }},
 	},
 	render: (args, { argTypes, component }) => {
 		const [ , updateArgs ] = useArgs();
@@ -339,11 +343,11 @@ export const CustomWidgetMultiField = {
 				});
 				return { args: newArgs };
 			},
-			template: MULTIFIELD_TEMPLATE,
+			template: MULTI_FIELD_TEMPLATE,
 		};
 	},
 	args: {
-		meta: MULTIFIELD_META,
-		modelValue: getFormDefaults(MULTIFIELD_META),
+		meta: MULTI_FIELD_META,
+		modelValue: getFormDefaults(MULTI_FIELD_META),
 	},
 };
