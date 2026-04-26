@@ -1,4 +1,5 @@
 @theme {
+	--color-fr-help-d: light-dark(var(--fui-color-gray-300), var(--fui-color-gray-600));
 	--spacing-formrow-label: 150px;
 }
 
@@ -50,6 +51,17 @@
 	&.has-error {
 		.fui-fr-label {
 			@apply fui:text-error;
+		}
+	}
+
+	/* Disabled */
+	&.is-disabled {
+		.fui-fr-help_text {
+			@apply fui:text-fr-help-d;
+
+			a {
+				opacity: 0.4;
+			}
 		}
 	}
 
