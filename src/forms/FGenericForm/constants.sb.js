@@ -44,6 +44,12 @@ export const META_BASIC = [
 			},
 		],
 	},
+	{
+		type: 'checkbox',
+		label: 'Email notifications',
+		help_text: 'Receive product and billing updates.',
+		fields: [{ field_name: 'notifications', default: false }],
+	},
 ];
 
 
@@ -90,3 +96,16 @@ export const FINPUTWIDGET_META = INPUT_WIDGET_TYPES.map(type => ({
 		default: type === 'number' ? null : '',
 	}],
 }));
+
+export const FCHECKBOXWIDGET_META = [
+	{
+		type: 'checkbox',
+		label: 'Accept terms',
+		help_text: 'Required to continue.',
+		fields: [{
+			field_name: 'accept_terms',
+			default: false,
+			required: true,
+		}],
+	},
+];

@@ -61,7 +61,7 @@ const SIZES_DESCRIPTION = `The \`widgetSize\` prop is forwarded to each widget's
 corresponding size index. All built-in widgets support \`'s'\`, \`'m'\` (default), and \`'xl'\`.`;
 
 
-const SIZES_TEMPLATE = `<div class="sbfui-preview-flex-y sbfui-fgenericform-sizes" >
+const SIZES_TEMPLATE = `<div class="sbfui-preview-flex-y sbfui-fgenericform-sizes" style="gap:64px;" >
 	<div
 		v-for="size in SIZE_CHOICES"
 		:key="size"

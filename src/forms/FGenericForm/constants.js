@@ -1,6 +1,7 @@
 import { defineAsyncComponent } from 'vue';
 
 const FInputWidget = defineAsyncComponent(() => import('./widgets/FInputWidget.vue'));
+const FCheckboxWidget = defineAsyncComponent(() => import('./widgets/FCheckboxWidget.vue'));
 
 
 export const LAYOUT_CHOICES = [
@@ -47,6 +48,13 @@ const INPUT_WIDGETS = INPUT_WIDGET_TYPES.reduce((acc, type) => {
 	return acc;
 }, {});
 
+const CHECKBOX_WIDGETS = {
+	checkbox: {
+		component: FCheckboxWidget,
+		normalize: (value) => value ?? false,
+	},
+};
+
 /**
  * Built-in widget registry.
  * type → { component, normalize? }
@@ -54,4 +62,7 @@ const INPUT_WIDGETS = INPUT_WIDGET_TYPES.reduce((acc, type) => {
  * All text/date/number inputs share FInputWidget.
  * The widget reads meta.type to set the correct HTML input type.
  */
-export const DEFAULT_WIDGETS = INPUT_WIDGETS;
+export const DEFAULT_WIDGETS = {
+	...INPUT_WIDGETS,
+	...CHECKBOX_WIDGETS,
+};

@@ -1,42 +1,44 @@
 <template>
 	<FFormRow
-		:id="id"
-		:layout="layout"
-		:size="size"
 		:error-text="errorText"
 		:error-highlight="error"
+		:layout="layout"
+		:size="size"
 		:disabled="disabled"
 	>
-		<template v-if="meta.label" #label>{{ meta.label }}</template>
-		<FInput
-			v-model="value"
-			:id="id"
-			:name="name"
-			:type="props.meta.type"
+		<FControlLabel
+			:label="meta.label"
 			:error="error"
-			:disabled="disabled"
-			:readonly="readonly"
-			:required="required"
 			:size="size"
-		/>
+			:disabled="disabled"
+		>
+			<FCheckbox
+				v-model="value"
+				:id="id"
+				:name="name"
+				:disabled="disabled"
+				:required="required"
+			/>
+		</FControlLabel>
 		<template v-if="meta.help_text" #help>{{ meta.help_text }}</template>
 	</FFormRow>
 </template>
 
-<script setup>
+<script setup >
 import { computed } from 'vue';
 
-import FInput from '@/forms/FInput';
+import FCheckbox from '@/forms/FCheckbox';
+import FControlLabel from '@/forms/FControlLabel';
 import FFormRow from '@/forms/FFormRow';
 import { useWidget, useWidgetField, WIDGET_PROPS, WIDGET_EMITS } from '../useWidget';
 
-defineOptions({ name: 'FInputWidget' });
+defineOptions({ name: 'FCheckboxWidget' });
 const model = defineModel({ type: Object });
 const props = defineProps({ ...WIDGET_PROPS });
 defineEmits(WIDGET_EMITS);
 
-const { fields } = useWidget(model, props);
-const { id, name, value, disabled, readonly, required, error, errorText } = useWidgetField(
+const { fields, error } = useWidget(model, props);
+const { id, name, value, disabled, required, errorText } = useWidgetField(
 	model, props, computed(() => fields.value[0])
 );
 </script>
