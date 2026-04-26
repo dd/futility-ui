@@ -200,6 +200,15 @@ h1 {
 /* End of FSelect */
 
 
+/* FControlLabel */
+.sbfui-fcontrollabel-layouts {
+	width: 350px;
+	align-items: stretch;
+	align-content: stretch;
+}
+/* End of FControlLabel */
+
+
 /* FFormRow */
 .sbfui-fformrow {
 	--fui-spacing-formrow-label: 70px;
