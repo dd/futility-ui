@@ -6,6 +6,8 @@ import VitePluginSvgSpritemap from '@spiriit/vite-plugin-svg-spritemap';
 import { version } from './package.json';
 import { readdirSync } from 'node:fs';
 import tailwindcss from "@tailwindcss/vite";
+import fs from 'node:fs';
+import { basename } from 'node:path';
 
 
 /**
@@ -127,6 +129,57 @@ function findVueEntries(dir) {
 }
 
 
+/**
+ * Vite plugin that copies all `*.tailwind.css` files found under `src/` into the `dist/` directory,
+ * preserving their relative paths.
+ *
+ * Scans `src/` recursively for files matching the `*.tailwind.css` pattern and, after the bundle
+ * is written, copies each one to the corresponding path under `dist/`. The destination directory
+ * is created automatically if it does not exist.
+ *
+ * For example:
+ *   src/styles/theme.tailwind.css  →  dist/styles/theme.tailwind.css
+ *   src/forms/FButton/style.tailwind.css  →  dist/forms/FButton/style.tailwind.css
+ */
+function copyTailwindPlugin() {
+	const srcDir = resolve(__dirname, 'src');
+	const distDir = resolve(__dirname, 'dist');
+
+	function findTailwindFiles(dir) {
+		const results = [];
+		for (const item of readdirSync(dir, { withFileTypes: true })) {
+			const fullPath = join(dir, item.name);
+			if (item.isDirectory()) {
+				results.push(...findTailwindFiles(fullPath));
+			} else if (item.isFile() && item.name.endsWith('.tailwind.css')) {
+				results.push(fullPath);
+			}
+		}
+		return results;
+	}
+
+	return {
+		name: 'copy-tailwind-css',
+
+		writeBundle() {
+			const files = findTailwindFiles(srcDir);
+
+			for (const src of files) {
+				const rel = relative(srcDir, src);
+				const dest = join(distDir, rel);
+
+				fs.mkdirSync(resolve(dest, '..'), { recursive: true });
+				fs.copyFileSync(src, dest);
+
+				const size = fs.statSync(dest).size / 1024;
+
+				this.info(`${rel} → dist/${rel} ${size.toFixed(2)} kB`);
+			}
+		},
+	};
+}
+
+
 export default defineConfig({
 	base: process.env.BASE_URL || '/',
 	plugins: [
@@ -145,6 +198,7 @@ export default defineConfig({
 			},
 		),
 		FixFIconSpriteImport(),
+		copyTailwindPlugin(),
 	],
 	define: {
 		__VERSION__: JSON.stringify(version),
@@ -159,8 +213,8 @@ export default defineConfig({
 				'forms/FInput/ShowPasswordButton': resolve(__dirname, 'src/forms/FInput/ShowPasswordButton.vue'),
 				'forms/FGenericForm/useWidget': resolve(__dirname, 'src/forms/FGenericForm/useWidget.js'),
 				'forms/FGenericForm/widgets/FInputWidget': resolve(__dirname, 'src/forms/FGenericForm/widgets/FInputWidget.vue'),
-				'styles.base.css': resolve(__dirname, 'src/styles.base.css'),
-				'styles.tailwind.css': resolve(__dirname, 'src/styles.tailwind.css'),
+				'styles/base.css': resolve(__dirname, 'src/styles/base.tailwind.css'),
+				'styles/components.css': resolve(__dirname, 'src/styles/components.tailwind.css'),
 			},
 			fileName: (format, entryName) =>`${entryName}.${format}.js`,
 			formats: [ 'es', 'cjs' ],

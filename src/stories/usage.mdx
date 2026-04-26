@@ -4,7 +4,7 @@ import { Meta } from '@storybook/addon-docs/blocks';
 
 # Usage
 
-Install the package, then choose how you want to include the stylesheet.
+Install the package, then pick a stylesheet that fits your setup.
 
 ```bash
 pnpm add futility-ui
@@ -15,32 +15,39 @@ pnpm add futility-ui
 You can import the stylesheet from JavaScript:
 
 ```javascript
-import 'futility-ui/styles.tailwind.css'; // or styles.base.css
+import 'futility-ui/styles/components.tailwind.css'; // or styles/components.css
 ```
 
 Or import it from your main CSS file:
 
 ```css
-@import 'futility-ui/styles.tailwind.css'; /* or styles.base.css */
+@import 'futility-ui/styles/components.tailwind.css'; /* or styles/components.css */
 ```
 
 ### Choosing a stylesheet
 
-The library provides two stylesheet options:
+The library provides several stylesheet options:
 
-- `styles.base.css` – Base stylesheet containing only the core Futility UI component styles.
-- `styles.tailwind.css` – Extended stylesheet that includes both the component styles and Tailwind CSS utilities.
+- `styles/components.css` – Component styles
+- `styles/base.css` – Base design system styles (typography, page defaults, and everything not tied
+ to a specific component)
+
+A separate set of files is available for use with Tailwind CSS, allowing you to override styles:
+
+- `styles/theme.tailwind.css` – Theme
+- `styles/components.tailwind.css` – Styles for all components
+- `styles/base.tailwind.css` – Base styles, equivalent to `styles/base.css`
 
 
 ## Configuring component styles
 
-You can override styling parameters using standard Tailwind CSS techniques in your own stylesheets:
+You can customize the design tokens using standard Tailwind CSS techniques in your own stylesheets:
 
 ```css
-@import 'futility-ui/styles.base.css';
+@import 'futility-ui/styles/base.css';
 /* or */
 @import 'tailwindcss';
-@import 'futility-ui/styles.tailwind.css';
+@import 'futility-ui/styles/theme.tailwind.css';
 
 @theme {
 	--color-primary-50: var(--fui-color-red-50);
@@ -83,4 +90,4 @@ import FButton from 'futility-ui/FButton';
 import FInput from 'futility-ui/FInput';
 ```
 
-You can now use the imported components in your templates.
+Tree-shaking is supported — only the components you import will be included in your bundle.

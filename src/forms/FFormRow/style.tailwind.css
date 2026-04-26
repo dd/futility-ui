@@ -11,10 +11,8 @@
 	@apply fui:gap-2;
 
 	.fui-fr-label {
-		@apply fui:text-sm;
 		@apply fui:text-header;
 		font-weight: 400;
-		line-height: 150%;
 	}
 
 	.fui-fr-content {
@@ -62,6 +60,7 @@
 	&.fui-fr-layout-two_columns {
 		flex-direction: row;
 
+		/* Sizes */
 		&.fui-fr-size-s .fui-fr-label {
 			@apply fui:w-formrow-label;
 			padding-top: 8px;

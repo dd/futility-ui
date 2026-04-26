@@ -2,7 +2,8 @@
 
 /*@import '@/styles.tailwind.css';*/
 @import 'tailwindcss';
-@import '@/styles.base.css';
+@import '@/styles/components.tailwind.css';
+@import '@/styles/base.tailwind.css';
 
 
 h1,

@@ -146,8 +146,11 @@
       "require": "./dist/forms/FGenericForm/useWidget.cjs.js",
       "import": "./dist/forms/FGenericForm/useWidget.es.js"
     },
-    "./styles.base.css": "./dist/styles.base.css",
-    "./styles.tailwind.css": "./dist/styles.tailwind.css",
+    "./styles/theme.tailwind.css": "./dist/styles/theme.tailwind.css",
+    "./styles/components.css": "./dist/styles/components.css",
+    "./styles/components.tailwind.css": "./dist/styles/components.tailwind.css",
+    "./styles/base.css": "./dist/styles/base.css",
+    "./styles/base.tailwind.css": "./dist/styles/base.tailwind.css",
     "./assets/sprite.svg": "./dist/assets/sprite.svg"
   },
   "sideEffects": false,
