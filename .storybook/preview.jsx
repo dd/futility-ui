@@ -25,7 +25,7 @@ setup((app) => {
 /** @type { import('@storybook/vue3-vite').Preview } */
 const preview = {
 	parameters: {
-		backgrounds: { disable: true },
+		backgrounds: { disabled: true },
 		previewSchemeToggler: {
 			darkColor: 'var(--pst-dark-color)',
 			lightColor: 'var(--pst-light-color)',
