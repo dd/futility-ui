@@ -203,6 +203,9 @@
     },
     "tailwindcss": {
       "optional": false
+    },
+    "@floating-ui": {
+      "optional": false
     }
   },
   "engines": {
