@@ -5,10 +5,10 @@ export const META_BASIC = [
 	{
 		type: 'text',
 		label: 'First name',
-		// help_text: null,
+		// helpText: null,
 		fields: [
 			{
-				field_name: 'first_name',
+				fieldName: 'first_name',
 				default: '',
 				// required: true,
 				// disabled: false,
@@ -19,10 +19,10 @@ export const META_BASIC = [
 	{
 		type: 'text',
 		label: 'Last name',
-		help_text: null,
+		helpText: null,
 		fields: [
 			{
-				field_name: 'last_name',
+				fieldName: 'last_name',
 				default: '',
 				required: false,
 				disabled: false,
@@ -33,10 +33,10 @@ export const META_BASIC = [
 	{
 		type: 'email',
 		label: 'Email',
-		help_text: 'Used for account notifications',
+		helpText: 'Used for account notifications',
 		fields: [
 			{
-				field_name: 'email',
+				fieldName: 'email',
 				default: '',
 				required: true,
 				disabled: false,
@@ -47,8 +47,8 @@ export const META_BASIC = [
 	{
 		type: 'checkbox',
 		label: 'Email notifications',
-		help_text: 'Receive product and billing updates.',
-		fields: [{ field_name: 'notifications', default: false }],
+		helpText: 'Receive product and billing updates.',
+		fields: [{ fieldName: 'notifications', default: false }],
 	},
 ];
 
@@ -82,7 +82,7 @@ export const WIDGET_BASE_ARG_TYPES = {
 	},
 	fieldErrors: {
 		description: `Error messages for this widget's fields. Shape:
-\`{ field_name: 'Error message string' }\` Passed by FGenericForm from its \`errors\` prop.`,
+\`{ fieldName: 'Error message string' }\` Passed by FGenericForm from its \`errors\` prop.`,
 		table: { category: 'props' },
 	},
 };
@@ -92,7 +92,7 @@ export const FINPUTWIDGET_META = INPUT_WIDGET_TYPES.map(type => ({
 	type,
 	label: type,
 	fields: [{
-		field_name: `f_${type.replace(/-/g, '_')}`,
+		fieldName: `f_${type.replace(/-/g, '_')}`,
 		default: type === 'number' ? null : '',
 	}],
 }));
@@ -101,9 +101,9 @@ export const FCHECKBOXWIDGET_META = [
 	{
 		type: 'checkbox',
 		label: 'Accept terms',
-		help_text: 'Required to continue.',
+		helpText: 'Required to continue.',
 		fields: [{
-			field_name: 'accept_terms',
+			fieldName: 'accept_terms',
 			default: false,
 			required: true,
 		}],

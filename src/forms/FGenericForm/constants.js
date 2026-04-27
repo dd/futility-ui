@@ -43,7 +43,7 @@ export const INPUT_WIDGET_TYPES = Object.freeze([
 const INPUT_WIDGETS = INPUT_WIDGET_TYPES.reduce((acc, type) => {
 	acc[type] = {
 		component: FInputWidget,
-		normalize: (value) => value ?? '',
+		normalize: (value, field) => field?.allowNull ? (value ?? null) : (value ?? ''),
 	};
 	return acc;
 }, {});
@@ -51,7 +51,7 @@ const INPUT_WIDGETS = INPUT_WIDGET_TYPES.reduce((acc, type) => {
 const CHECKBOX_WIDGETS = {
 	checkbox: {
 		component: FCheckboxWidget,
-		normalize: (value) => value ?? false,
+		normalize: (value, field) => field?.allowNull ? (value ?? null) : (value ?? false),
 	},
 };
 

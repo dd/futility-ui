@@ -27,7 +27,7 @@ Provide \`meta\`, \`layout\`, \`size\`, and \`fieldErrors\` to the widget.
 **\`useWidgetField(model, props, meta)\`** - field-level state. Call once per rendered input.
 \`meta\` is a computed ref to a field meta object.
 
-- \`id\`, \`name\` - equal to \`field_name\`; pass to FFormRow \`:id\` and the input's \`:id\`/\`:name\`
+- \`id\`, \`name\` - equal to \`fieldName\`; pass to FFormRow \`:id\` and the input's \`:id\`/\`:name\`
 - \`value\` - writable computed; bind with \`v-model\`
 - \`disabled\`, \`readonly\`, \`required\` - from field meta
 - \`error\` - this field has an error; pass to the input's \`:error\`
@@ -57,7 +57,7 @@ For example your custom widget may be like this:
 			:required="required"
 			class="demo-color-widget"
 		/>
-		<template v-if="meta.help_text" #help>{{ meta.help_text }}</template>
+		<template v-if="meta.helpText" #help>{{ meta.helpText }}</template>
 	</FFormRow>
 </template>
 
@@ -168,12 +168,12 @@ const SINGLE_FIELD_META = [
 	{
 		type: 'color',
 		label: 'Background',
-		fields: [{ field_name: 'bg_color', default: '#4f46e5' }],
+		fields: [{ fieldName: 'bg_color', default: '#4f46e5' }],
 	},
 	{
 		type: 'color',
 		label: 'Text color',
-		fields: [{ field_name: 'fg_color', default: '#ffffff' }],
+		fields: [{ fieldName: 'fg_color', default: '#ffffff' }],
 	},
 ];
 
@@ -256,7 +256,7 @@ it from whichever field has a message:
 				:class="{ 'has-error': to.error.value }"
 			/>
 		</div>
-		<template v-if="meta.help_text" #help>{{ meta.help_text }}</template>
+		<template v-if="meta.helpText" #help>{{ meta.helpText }}</template>
 	</FFormRow>
 </template>
 
@@ -289,18 +289,18 @@ const MULTI_FIELD_META = [
 	{
 		type: 'range',
 		label: 'Age range',
-		help_text: 'Min and max age in years',
+		helpText: 'Min and max age in years',
 		fields: [
-			{ field_name: 'age_min', default: 18 },
-			{ field_name: 'age_max', default: 65 },
+			{ fieldName: 'age_min', default: 18 },
+			{ fieldName: 'age_max', default: 65 },
 		],
 	},
 	{
 		type: 'range',
 		label: 'Price range',
 		fields: [
-			{ field_name: 'price_min', default: 0 },
-			{ field_name: 'price_max', default: 1000 },
+			{ fieldName: 'price_min', default: 0 },
+			{ fieldName: 'price_max', default: 1000 },
 		],
 	},
 ];

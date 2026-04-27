@@ -35,7 +35,7 @@ const props = defineProps({
 
 	/**
 	 * Field-level error messages.
-	 * Shape: `{ field_name: 'Error message string' }`
+	 * Shape: `{ fieldName: 'Error message string' }`
 	 * Each widget receives only the errors for its own fields.
 	 */
 	errors: {
@@ -95,13 +95,13 @@ function resolveWidget(type) {
 /* Data helpers ********************************/
 
 function entryKey(entry) {
-	return entry.fields.map(f => f.field_name).join('_');
+	return entry.fields.map(f => f.fieldName).join('_');
 }
 
 function extractData(entry) {
 	const data = {};
 	for (const field of entry.fields) {
-		data[field.field_name] = localModel.value?.[field.field_name];
+		data[field.fieldName] = localModel.value?.[field.fieldName];
 	}
 	return data;
 }
@@ -116,8 +116,8 @@ function extractErrors(entry) {
 	const errs = props.errors ?? {};
 	const result = {};
 	for (const field of entry.fields) {
-		if (field.field_name in errs) {
-			result[field.field_name] = errs[field.field_name];
+		if (field.fieldName in errs) {
+			result[field.fieldName] = errs[field.fieldName];
 		}
 	}
 	return result;

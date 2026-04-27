@@ -28,7 +28,7 @@ export const WIDGET_PROPS = {
 
 	/**
 	 * Error messages for this widget's fields.
-	 * Shape: { field_name: 'Error message string' }
+	 * Shape: { fieldName: 'Error message string' }
 	 * Passed by FGenericForm from its `errors` prop.
 	 */
 	fieldErrors: {
@@ -58,7 +58,7 @@ export function useWidget(model, props) {
 	const fields = computed(() => props.meta.fields);
 
 	function getFieldMeta(fieldName) {
-		return computed(() => fields.value.find(f => f.field_name === fieldName));
+		return computed(() => fields.value.find(f => f.fieldName === fieldName));
 	}
 
 	const error = computed(() => {
@@ -80,19 +80,20 @@ export function useWidget(model, props) {
  *                                          or `getFieldMeta(name)` from useWidget for multi-field ones.
  *
  * Returns:
- *  - `id`        - field_name; pass to FFormRow :id and the input's :id
- *  - `name`      - field_name; pass to the input's :name
+ *  - `id`        - fieldName; pass to FFormRow :id and the input's :id
+ *  - `name`      - fieldName; pass to the input's :name
  *  - `value`     - writable computed; bind with v-model on the input element
  *  - `disabled`  - from field meta
  *  - `readonly`  - from field meta
  *  - `required`  - from field meta
+ *  - `allowNull` - from field meta
  *  - `error`     - true when this specific field has an error; pass to the input's :error
  *  - `errorText` - this field's error message
  */
 export function useWidgetField(model, props, meta) {
-	const fieldName = computed(() => meta.value?.field_name);
+	const fieldName = computed(() => meta.value?.fieldName);
 
-	// Convenient aliases - both equal field_name.
+	// Convenient aliases - both equal fieldName.
 	const id = fieldName;
 	const name = fieldName;
 
@@ -104,6 +105,7 @@ export function useWidgetField(model, props, meta) {
 	const disabled = computed(() => meta.value?.disabled ?? false);
 	const readonly = computed(() => meta.value?.readonly ?? false);
 	const required = computed(() => meta.value?.required ?? false);
+	const allowNull = computed(() => meta.value?.allowNull ?? false);
 
 	const errorMsg = computed(() => {
 		const msg = (props.fieldErrors ?? {})[fieldName.value];
@@ -112,5 +114,5 @@ export function useWidgetField(model, props, meta) {
 	const error = computed(() => errorMsg.value !== null);
 	const errorText = computed(() => errorMsg.value);
 
-	return { id, name, value, disabled, readonly, required, error, errorText };
+	return { id, name, value, disabled, readonly, required, allowNull, error, errorText };
 }

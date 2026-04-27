@@ -21,7 +21,7 @@ const meta = [
 		type: 'email',
 		label: 'Email',
 		fields: [
-			{ field_name: 'email' },
+			{ fieldName: 'email' },
 		],
 	},
 ];
@@ -40,13 +40,14 @@ At minimum, each item in `meta` should define:
 
 - `type` - the widget type to render
 - `label` - optional label shown through `FFormRow`
-- `help_text` - optional helper text shown below the field
+- `helpText` - optional helper text shown below the field
 - `fields` - an array of field definitions:
-	* `field_name` - unique field key used in `modelValue` and `errors`
+	* `fieldName` - unique field key used in `modelValue` and `errors`
 	* `default` - initial value used by `getFormDefaults`
 	* `disabled` - disables interaction with the field
 	* `readonly` - keeps the field visible but prevents editing
 	* `required` - marks the field as required for validation and UI purposes
+	* `allowNull` - when `true`, normalization preserves `null` instead of converting it to `''` or `false`; useful when the API field accepts `null` as a meaningful value
 
 Some widgets also accept additional fields. For example, select-like widgets need an option list.
 Check each widget's individual story for the full list of supported field parameters.

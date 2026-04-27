@@ -19,7 +19,7 @@
 			:required="required"
 			:size="size"
 		/>
-		<template v-if="meta.help_text" #help>{{ meta.help_text }}</template>
+		<template v-if="meta.helpText" #help>{{ meta.helpText }}</template>
 	</FFormRow>
 </template>
 

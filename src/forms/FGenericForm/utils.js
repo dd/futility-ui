@@ -14,13 +14,13 @@ function getNormalize(widgets, type) {
 /**
  * Extract default values from form meta.
  * @param {Array} meta - Form field metadata array
- * @returns {Object} Object with field_name: default_value pairs
+ * @returns {Object} Object with fieldName: default_value pairs
  */
 export function getFormDefaults(meta) {
 	const defaults = {};
 	for (const entry of meta) {
 		for (const field of entry.fields) {
-			defaults[field.field_name] = 'default' in field ? field.default : null;
+			defaults[field.fieldName] = 'default' in field ? field.default : null;
 		}
 	}
 	return defaults;
@@ -33,17 +33,17 @@ export function getFormDefaults(meta) {
  * @param {Object} currentData - Current form data
  * @param {Object} originalData - Original/reference form data
  * @param {Object} [widgets] - Widget config with optional normalize functions per type
- * @returns {Object} Object containing only changed field_name: value pairs
+ * @returns {Object} Object containing only changed fieldName: value pairs
  */
 export function getDiff(meta, currentData, originalData, widgets) {
 	const diff = {};
 	for (const entry of meta) {
 		const normalize = getNormalize(widgets, entry.type);
 		for (const field of entry.fields) {
-			const current = normalize(currentData?.[field.field_name], field);
-			const original = normalize(originalData?.[field.field_name], field);
+			const current = normalize(currentData?.[field.fieldName], field);
+			const original = normalize(originalData?.[field.fieldName], field);
 			if (current !== original) {
-				diff[field.field_name] = currentData?.[field.field_name];
+				diff[field.fieldName] = currentData?.[field.fieldName];
 			}
 		}
 	}
@@ -55,7 +55,7 @@ export function getDiff(meta, currentData, originalData, widgets) {
  * @param {Array} meta - Form field metadata array
  * @param {Object} currentData - Current form data
  * @param {Object} [widgets] - Widget config with optional normalize functions per type
- * @returns {Object} Object containing only non-default field_name: value pairs
+ * @returns {Object} Object containing only non-default fieldName: value pairs
  */
 export function getDataForQuery(meta, currentData, widgets) {
 	return getDiff(meta, currentData, getFormDefaults(meta), widgets);

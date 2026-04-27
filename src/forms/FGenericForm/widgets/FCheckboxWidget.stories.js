@@ -62,14 +62,14 @@ export const States = {
 				{
 					type: 'checkbox',
 					label: 'Email notifications',
-					help_text: 'Receive product and billing updates.',
-					fields: [{ field_name: 'notifications', default: false }],
+					helpText: 'Receive product and billing updates.',
+					fields: [{ fieldName: 'notifications', default: false }],
 				},
 				{
 					type: 'checkbox',
 					label: 'Team access',
-					help_text: 'Disabled checkbox example.',
-					fields: [{ field_name: 'team_access', default: true, disabled: true }],
+					helpText: 'Disabled checkbox example.',
+					fields: [{ fieldName: 'team_access', default: true, disabled: true }],
 				},
 			];
 			const modelValue = ref(getFormDefaults(meta));
@@ -94,7 +94,7 @@ export const Errors = {
 				{
 					type: 'checkbox',
 					label: 'Accept terms',
-					fields: [{ field_name: 'accept_terms', default: false, required: true }],
+					fields: [{ fieldName: 'accept_terms', default: false, required: true }],
 				},
 			];
 			const modelValue = ref(getFormDefaults(meta));

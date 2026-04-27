@@ -80,20 +80,20 @@ export const States = {
 					{
 						label: "text",
 						type: "text",
-						fields: [{ field_name: 'f_text', default: '' }],
-						help_text: 'Default field',
+						fields: [{ fieldName: 'f_text', default: '' }],
+						helpText: 'Default field',
 					},
 					{
 						label: "search",
 						type: "search",
-						fields: [{ field_name: 'f_search', default: '', disabled: true }],
-						help_text: 'Disabled field',
+						fields: [{ fieldName: 'f_search', default: '', disabled: true }],
+						helpText: 'Disabled field',
 					},
 					{
 						label: "url",
 						type: "url",
-						fields: [{ field_name: 'f_url', default: '', readonly: true }],
-						help_text: 'Read-only field',
+						fields: [{ fieldName: 'f_url', default: '', readonly: true }],
+						helpText: 'Read-only field',
 					},
 				];
 				const modelValue = ref({
@@ -115,7 +115,7 @@ export const States = {
 };
 
 
-const ERRORS_DESCRIPTION = `Pass a \`fieldErrors\` object keyed by \`field_name\` to surface
+const ERRORS_DESCRIPTION = `Pass a \`fieldErrors\` object keyed by \`fieldName\` to surface
 validation messages. The input highlights in red, the label turns red, and the message appears
 in a tooltip on the error icon.`;
 
@@ -133,12 +133,12 @@ export const Errors = {
 					{
 						label: "Username",
 						type: "text",
-						fields: [{ field_name: 'f_username', default: '' }],
+						fields: [{ fieldName: 'f_username', default: '' }],
 					},
 					{
 						label: "Email",
 						type: "email",
-						fields: [{ field_name: 'f_email', default: '' }],
+						fields: [{ fieldName: 'f_email', default: '' }],
 					},
 				];
 				const modelValue = ref({
