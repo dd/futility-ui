@@ -79,64 +79,67 @@ For more details about stylesheet selection and integration options, see the
 [Usage page](https://dd.github.io/futility-ui/?path=/docs/usage--docs) in the documentation.
 
 
-## Available Components
-
-- Icons
-- Loader
-- Buttons
-- Text buttons
-- Tooltip
-- Stack
-- Switch
-- Checkbox
-- Radio button
-- Input
-- Input autocomplete
-- Select
-- Form row
-- Control label
-- Generic form
-
-
 ## Roadmap
 
-### Planned Components
+* [x] Icons
+* [x] Loader
+* [x] Buttons
+* [x] Text button
+* [x] Switch
+* [x] Checkbox
+* [x] Input
+* [x] Widgets group (A component that visually merges widgets without spacing, such as an input
+field immediately followed by a button.)
+* [x] Radio button
+* [x] Input Autocomplete (with loading options)
+	- [ ] Ability to group options when needed
+* [x] Select
+	- [ ] Custom dropdown for desktop screen and native for mobile [???]
+* [x] Tooltip
+* [x] Form row (A component that renders a form row with a label, widget, help text, and error text.)
+* [x] Control label (A component that adds a label for widgets such as checkbox, radio button, etc.)
+* [x] Generic Form
+	- [ ] radio button widget **`<- you are here`**
+	- [ ] switch widget
+	- [ ] select widget
+	- [ ] autocomplete widget
+	- [ ] utils for make meta from DRF metadata
+* [ ] FileSelect
+* [ ] FileSelectArea
+* [ ] Textarea
+* [ ] Number picker
+* [ ] Modal
+* [ ] Tree Editor
+* [ ] MultiSelect
+* [ ] Tag Select
+* [ ] Tabs
+* [ ] Paginator
+* [ ] Dropdown
+* [ ] Popover
+* etc.
 
-- [ ] FileSelect
-- [ ] FileSelectArea
-- [ ] Textarea
-- [ ] Number picker
-- [ ] Modal
-- [ ] Tree Editor
-- [ ] MultiSelect
-- [ ] Tag Select
-- [ ] Tabs
-- [ ] Paginator
-- [ ] Dropdown
-- [ ] Popover
-- [ ] More components as needed
+### Refactor
 
-### Improvements
+* [x] Split styles into base styles and theme-specific styles
+* [ ] Add support for scaling icons inside buttons
+* [ ] Update button focus styles (especially for the dark theme)
 
-- [ ] Support grouped options in input autocomplete
-- [ ] Consider a custom desktop select dropdown while preserving the native picker on mobile
-- [ ] Split styles into base styles and theme-specific styles
-- [ ] Add support for scaling icons inside buttons
-- [ ] Update button focus styles
-- [ ] Integrate Tailwind configuration and theming
-- [ ] Tag panel
-- [ ] Multi-select autocomplete
-- [ ] Select with custom dropdown, search, and loading states
-- [ ] Select Autocomplete (likely not needed if Input Autocomplete exists)
-- [ ] Custom DatePicker
-- [ ] Custom TimePicker
-- [ ] Custom MultiSelect with filters
+### Extended
 
-### Tooling
+* [x] Integrate Tailwind configuration and theming (seems implemented, but needs verification)
+* [ ] Tag panel
+* [ ] Multi-select autocomplete
+* [ ] Select with custom dropdown (search, loading, etc...)
+* [ ] Select Autocomplete (likely not needed if Input Autocomplete exists)
+* [ ] Custom DatePicker [???]
+* [ ] Custom TimePicker [???]
+* [ ] Custom MultiSelect with filters
 
-- [x] Storybook on GitHub Pages
-- [x] npm publishing
-- [ ] Web interface for customizing styles
+### Dev
+
+* [x] Storybook on GitHub Pages
+* [x] npm publishing
+* [ ] Web interface for customizing styles
 
 
 ## Oh great, another UI library.
