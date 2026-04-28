@@ -20,6 +20,7 @@ are all passed through field meta and routed automatically to each widget.`;
 const DEFAULT_META = {
 	label: "text",
 	type: "text",
+	placeholder: 'Enter text...',
 	fields: [{ fieldName: 'f_text', default: '' }],
 	helpText: 'Regular input field',
 };

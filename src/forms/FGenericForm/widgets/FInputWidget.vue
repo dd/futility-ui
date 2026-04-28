@@ -13,6 +13,7 @@
 			:id="id"
 			:name="name"
 			:type="props.meta.type"
+			:placeholder="meta.placeholder"
 			:error="error"
 			:disabled="disabled"
 			:readonly="readonly"

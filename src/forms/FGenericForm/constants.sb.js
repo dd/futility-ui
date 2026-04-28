@@ -6,6 +6,7 @@ export const META_BASIC = [
 	{
 		type: 'text',
 		label: 'First name',
+		placeholder: 'e.g. John',
 		// helpText: null,
 		fields: [
 			{
