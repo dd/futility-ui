@@ -1,23 +1,26 @@
-import { computed, ref } from 'vue';
-
-import { WIDGET_BASE_ARG_TYPES, FCHECKBOXWIDGET_META } from '../constants.sb.js';
+import { makeFGFWidgetRenderer, makeFGFWidgetManyRenderer } from '@/.storybook/utils.js';
+import { WIDGET_BASE_ARG_TYPES } from '../constants.sb.js';
+import { DEFAULT_WIDGETS } from '../constants.js';
 import FCheckboxWidgetComponent from './FCheckboxWidget.vue';
 import FGenericForm from '..';
 import { getFormDefaults } from '../utils';
 
 
-const DESCRIPTION = `\`FCheckboxWidget\` is the built-in widget for \`type: 'checkbox'\`.
+const DEFAULT_DESCRIPTION = `\`FCheckboxWidget\` is the built-in widget for \`type: 'checkbox'\`.
 It renders \`FCheckbox\` with \`FControlLabel\`, and forwards field-level \`disabled\`,
 \`required\`, and validation state from generic form metadata.`;
 
 
-const DEFAULT_TEMPLATE = `<FGenericForm
-	v-model="modelValue"
-	:meta="meta"
-	:layout="layout"
-	:widget-size="widgetSize"
-	:errors="errors"
-/>`;
+const DEFAULT_META = {
+	type: 'checkbox',
+	label: 'Accept terms',
+	helpText: 'Required to continue.',
+	fields: [{
+		fieldName: 'accept_terms',
+		default: false,
+		required: true,
+	}],
+};
 
 
 export default {
@@ -25,25 +28,14 @@ export default {
 	component: FCheckboxWidgetComponent,
 	parameters: {
 		layout: 'centered',
-		docs: { description: { component: DESCRIPTION } },
+		docs: { description: { component: DEFAULT_DESCRIPTION }},
 	},
 	tags: [ 'autodocs' ],
 	argTypes: WIDGET_BASE_ARG_TYPES,
-	render: (args) => ({
-		components: { FGenericForm },
-		setup() {
-			const modelValue = ref(getFormDefaults(FCHECKBOXWIDGET_META, DEFAULT_WIDGETS));
-			return {
-				modelValue,
-				meta: FCHECKBOXWIDGET_META,
-				layout: computed(() => args.layout),
-				widgetSize: computed(() => args.size),
-				errors: computed(() => args.fieldErrors),
-			};
-		},
-		template: DEFAULT_TEMPLATE,
-	}),
+	render: makeFGFWidgetRenderer(),
 	args: {
+		meta: DEFAULT_META,
+		modelValue: getFormDefaults([DEFAULT_META], DEFAULT_WIDGETS),
 		layout: 'two_columns',
 		size: 'm',
 		fieldErrors: {},
@@ -53,61 +45,37 @@ export default {
 
 export const Default = {};
 
+
+const STATES_META = [
+	{
+		type: 'checkbox',
+		label: 'Email notifications',
+		helpText: 'Receive product and billing updates.',
+		fields: [{ fieldName: 'notifications', default: false }],
+	},
+	{
+		type: 'checkbox',
+		label: 'Team access',
+		helpText: 'Disabled checkbox example.',
+		fields: [{ fieldName: 'team_access', default: true, disabled: true }],
+	},
+];
+
+
 export const States = {
-	render: (args) => ({
-		name: 'FCheckboxWidgetStatesStory',
-		components: { FGenericForm },
-		setup() {
-			const meta = [
-				{
-					type: 'checkbox',
-					label: 'Email notifications',
-					helpText: 'Receive product and billing updates.',
-					fields: [{ fieldName: 'notifications', default: false }],
-				},
-				{
-					type: 'checkbox',
-					label: 'Team access',
-					helpText: 'Disabled checkbox example.',
-					fields: [{ fieldName: 'team_access', default: true, disabled: true }],
-				},
-			];
-			const modelValue = ref(getFormDefaults(meta, DEFAULT_WIDGETS));
-			return {
-				modelValue,
-				meta,
-				layout: computed(() => args.layout),
-				widgetSize: computed(() => args.size),
-				errors: computed(() => args.fieldErrors),
-			};
-		},
-		template: DEFAULT_TEMPLATE,
-	}),
+	render: makeFGFWidgetManyRenderer(),
+	argTypes: {
+		meta: { control: false },
+		modelValue: { control: false },
+	},
+	args: {
+		meta: STATES_META,
+		modelValue: getFormDefaults(STATES_META, DEFAULT_WIDGETS),
+	},
 };
 
+
 export const Errors = {
-	render: (args) => ({
-		name: 'FCheckboxWidgetErrorsStory',
-		components: { FGenericForm },
-		setup() {
-			const meta = [
-				{
-					type: 'checkbox',
-					label: 'Accept terms',
-					fields: [{ fieldName: 'accept_terms', default: false, required: true }],
-				},
-			];
-			const modelValue = ref(getFormDefaults(meta, DEFAULT_WIDGETS));
-			return {
-				modelValue,
-				meta,
-				layout: computed(() => args.layout),
-				widgetSize: computed(() => args.size),
-				errors: computed(() => args.fieldErrors),
-			};
-		},
-		template: DEFAULT_TEMPLATE,
-	}),
 	args: {
 		fieldErrors: {
 			accept_terms: 'You must accept the terms to continue.',

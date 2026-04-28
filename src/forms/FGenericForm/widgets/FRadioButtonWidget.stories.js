@@ -1,7 +1,4 @@
-import { computed, ref } from 'vue';
-import { useArgs } from 'storybook/preview-api';
-
-import { makeRenderer, makeUpdateArg } from '@/.storybook/utils.js';
+import { makeFGFWidgetRenderer, makeFGFWidgetManyRenderer } from '@/.storybook/utils.js';
 import { WIDGET_BASE_ARG_TYPES } from '../constants.sb.js';
 import FRadioButtonWidgetComponent from './FRadioButtonWidget.vue';
 import FGenericForm from '..';
@@ -40,36 +37,13 @@ export default {
 	},
 	tags: [ 'autodocs' ],
 	argTypes: WIDGET_BASE_ARG_TYPES,
-	render: (args) => {
-		const [ , updateArgs ] = useArgs();
-		return {
-			name: 'FRadioButtonWidgetStory',
-			components: { FGenericForm },
-			setup() {
-				const modelValueArg = makeUpdateArg('modelValue', args, updateArgs);
-				const formArgs = computed(() => {
-					const result = {
-						'modelValue': args.modelValue,
-						[modelValueArg[0]]: modelValueArg[2],
-						'meta': [args.meta],
-						'layout': args.layout,
-						'widgetSize': args.size,
-						'errors': args.fieldErrors,
-					};
-					return result;
-				});
-
-				return { formArgs };
-			},
-			template: '<FGenericForm v-bind="formArgs" />',
-		};
-	},
+	render: makeFGFWidgetRenderer(),
 	args: {
+		meta: DEFAULT_META,
+		modelValue: getFormDefaults([DEFAULT_META], DEFAULT_WIDGETS),
 		layout: 'two_columns',
 		size: 'm',
 		fieldErrors: {},
-		meta: DEFAULT_META,
-		modelValue: getFormDefaults([DEFAULT_META], DEFAULT_WIDGETS),
 	},
 };
 
@@ -103,24 +77,7 @@ const STATES_META = [
 
 
 export const States = {
-	render: (args) => ({
-		name: 'FRadioButtonWidgetStatesStory',
-		components: { FGenericForm },
-		setup() {
-			const modelValue = ref(args.modelValue);
-			const formArgs = computed(() => {
-				const result = {
-					'meta': args.meta,
-					'layout': args.layout,
-					'widgetSize': args.size,
-					'errors': args.fieldErrors,
-				};
-				return result;
-			});
-			return { modelValue, formArgs };
-		},
-		template: '<FGenericForm v-model="modelValue" v-bind="formArgs" />',
-	}),
+	render: makeFGFWidgetManyRenderer(),
 	argTypes: {
 		meta: { control: false },
 		modelValue: { control: false },

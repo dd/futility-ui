@@ -87,26 +87,3 @@ export const WIDGET_BASE_ARG_TYPES = {
 		table: { category: 'props' },
 	},
 };
-
-
-export const FINPUTWIDGET_META = INPUT_WIDGET_TYPES.map(type => ({
-	type,
-	label: type,
-	fields: [{
-		fieldName: `f_${type.replace(/-/g, '_')}`,
-		default: type === 'number' ? null : '',
-	}],
-}));
-
-export const FCHECKBOXWIDGET_META = [
-	{
-		type: 'checkbox',
-		label: 'Accept terms',
-		helpText: 'Required to continue.',
-		fields: [{
-			fieldName: 'accept_terms',
-			default: false,
-			required: true,
-		}],
-	},
-];

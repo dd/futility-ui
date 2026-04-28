@@ -1,7 +1,8 @@
-import { computed } from 'vue';
+import { computed, ref } from 'vue';
 import { action } from 'storybook/actions';
 import { useArgs } from 'storybook/preview-api';
 import throttle from 'lodash/throttle';
+import FGenericForm from '@/forms/FGenericForm';
 
 
 /**
@@ -75,4 +76,73 @@ export const makeRenderer = (updatableArgs) => {
 			template: `<${component.name} v-bind="args" />`,
 		};
 	};
+};
+
+
+/**
+ * Render function for single-widget stories inside FGenericForm.
+ *
+ * Wraps the story's `meta` arg (a single entry object) in an array and mounts
+ * `FGenericForm`, forwarding `layout`, `size → widgetSize`, `fieldErrors → errors`,
+ * and `widgets`. The `modelValue` arg is kept in sync with Storybook controls via
+ * `makeUpdateArg`.
+ *
+ * Use for Default / Errors stories where a single widget instance is shown
+ * and the user can interact with the form via Storybook controls.
+ */
+export const makeFGFWidgetRenderer = () => {
+	return (args) => {
+		const [ , updateArgs ] = useArgs();
+		return {
+			components: { FGenericForm },
+			setup() {
+				const modelValueArg = makeUpdateArg('modelValue', args, updateArgs);
+				const formArgs = computed(() => ({
+					'modelValue': args.modelValue,
+					[modelValueArg[0]]: modelValueArg[2],
+					'meta': [args.meta],
+					'layout': args.layout,
+					'widgetSize': args.size,
+					'errors': args.fieldErrors,
+					'widgets': args.widgets,
+				}));
+
+				return { formArgs };
+			},
+			template: '<FGenericForm v-bind="formArgs" />',
+		};
+	};
+};
+
+
+/**
+ * Render function for multi-widget stories inside FGenericForm.
+ *
+ * Expects `meta` to already be an array of entries and mounts a single
+ * `FGenericForm` with all of them. Forwards `layout`, `size → widgetSize`,
+ * `fieldErrors → errors`, and `widgets`.
+ *
+ * Unlike `makeFGFWidgetRenderer`, `modelValue` is held in a local `ref` and is
+ * NOT synced back to Storybook controls — intentional for static demo stories
+ * (States, Types) where field controls are disabled and the initial values are
+ * all that matter.
+ *
+ * Use when showing multiple field variants side by side with fixed initial values.
+ */
+export const makeFGFWidgetManyRenderer = () => {
+	return (args) => ({
+		components: { FGenericForm },
+		setup() {
+			const modelValue = ref(args.modelValue);
+			const formArgs = computed(() => ({
+				'meta': args.meta,
+				'layout': args.layout,
+				'widgetSize': args.size,
+				'errors': args.fieldErrors,
+				'widgets': args.widgets,
+			}));
+			return { modelValue, formArgs };
+		},
+		template: '<FGenericForm v-model="modelValue" v-bind="formArgs" />',
+	});
 };
