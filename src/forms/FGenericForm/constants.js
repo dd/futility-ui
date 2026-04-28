@@ -2,6 +2,7 @@ import { defineAsyncComponent } from 'vue';
 
 const FInputWidget = defineAsyncComponent(() => import('./widgets/FInputWidget.vue'));
 const FCheckboxWidget = defineAsyncComponent(() => import('./widgets/FCheckboxWidget.vue'));
+const FRadioButtonWidget = defineAsyncComponent(() => import('./widgets/FRadioButtonWidget.vue'));
 
 
 export const LAYOUT_CHOICES = [
@@ -55,6 +56,13 @@ const CHECKBOX_WIDGETS = {
 	},
 };
 
+const RADIO_WIDGETS = {
+	radio: {
+		component: FRadioButtonWidget,
+		normalize: (value, field) => field?.allowNull ? (value ?? null) : (value ?? null),
+	},
+};
+
 /**
  * Built-in widget registry.
  * type → { component, normalize? }
@@ -65,4 +73,5 @@ const CHECKBOX_WIDGETS = {
 export const DEFAULT_WIDGETS = {
 	...INPUT_WIDGETS,
 	...CHECKBOX_WIDGETS,
+	...RADIO_WIDGETS,
 };

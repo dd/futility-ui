@@ -1,4 +1,5 @@
-import { INPUT_WIDGET_TYPES, LAYOUT_CHOICES, SIZE_CHOICES } from './constants.js';
+import { LAYOUT_CHOICES } from '@/forms/FFormRow/constants.js';
+import { INPUT_WIDGET_TYPES, SIZE_CHOICES } from './constants.js';
 
 
 export const META_BASIC = [
