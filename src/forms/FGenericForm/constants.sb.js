@@ -7,21 +7,17 @@ export const META_BASIC = [
 		type: 'text',
 		label: 'First name',
 		placeholder: 'e.g. John',
-		// helpText: null,
 		fields: [
 			{
 				fieldName: 'first_name',
 				default: '',
-				// required: true,
-				// disabled: false,
-				// readonly: false,
 			},
 		],
 	},
 	{
 		type: 'text',
 		label: 'Last name',
-		helpText: null,
+		helpText: 'Not required',
 		fields: [
 			{
 				fieldName: 'last_name',
@@ -51,6 +47,21 @@ export const META_BASIC = [
 		label: 'Email notifications',
 		helpText: 'Receive product and billing updates.',
 		fields: [{ fieldName: 'notifications', default: false }],
+	},
+	{
+		type: 'switch',
+		label: 'Push notifications',
+		helpText: 'Receive push notifications.',
+		fields: [{ fieldName: 'push_notifications', default: false }],
+	},
+	{
+		type: 'radio',
+		label: 'User type',
+		choices: [
+			{ value: 'admin', label: 'Admin' },
+			{ value: 'user', label: 'User' },
+		],
+		fields: [{ fieldName: 'user_type', default: 'user', required: true }],
 	},
 ];
 

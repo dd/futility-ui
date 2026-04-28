@@ -106,7 +106,12 @@ const LAYOUTS_DESCRIPTION = `By default (\`labelLayout\` not set) the label is p
 \`FFormRow\`'s \`#label\` slot — the checkbox sits in the right column alongside text inputs.
 
 Set \`meta.labelLayout\` to \`"control_first"\` or \`"label_first"\` to render the label
-inline via \`FControlLabel\`, with the checkbox and label side by side.`;
+inline via \`FControlLabel\`, with the checkbox and label side by side.
+
+> **Note:** when \`labelLayout: "label_first"\` is used inside a two-column \`FFormRow\`,
+> the inline label width is governed by the same \`--spacing-formrow-label\` CSS custom property
+> that [FFormRow](?path=/docs/forms-fformrow--docs) uses for its own label column — so the two
+> stay visually aligned.`;
 
 const LAYOUTS_META = [
 	{

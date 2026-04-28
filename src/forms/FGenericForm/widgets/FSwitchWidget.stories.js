@@ -113,7 +113,12 @@ const LAYOUTS_DESCRIPTION = `By default (\`labelLayout\` not set) the label is p
 \`FFormRow\`'s \`#label\` slot — the switch sits in the right column alongside text inputs.
 
 Set \`meta.labelLayout\` to \`"label_first"\` or \`"control_first"\` to render the label
-inline via \`FControlLabel\`, with the switch and label side by side.`;
+inline via \`FControlLabel\`, with the switch and label side by side.
+
+> **Note:** when \`labelLayout: "label_first"\` is used inside a two-column \`FFormRow\`,
+> the inline label width is governed by the same \`--spacing-formrow-label\` CSS custom property
+> that [FFormRow](?path=/docs/forms-fformrow--docs) uses for its own label column — so the two
+> stay visually aligned.`;
 
 const LAYOUTS_META = [
 	{
