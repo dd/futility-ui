@@ -1,36 +1,37 @@
 import { makeFGFWidgetRenderer, makeFGFWidgetManyRenderer } from '@/.storybook/utils.js';
 import { WIDGET_BASE_ARG_TYPES } from '../constants.sb.js';
 import { DEFAULT_WIDGETS } from '../constants.js';
-import FCheckboxWidgetComponent from './FCheckboxWidget.vue';
-import FGenericForm from '..';
+import FSwitchWidgetComponent from './FSwitchWidget.vue';
 import { getFormDefaults } from '../utils';
 
 
-const DEFAULT_DESCRIPTION = `\`FCheckboxWidget\` is the built-in widget for \`type: 'checkbox'\`.
+const DEFAULT_DESCRIPTION = `\`FSwitchWidget\` is the built-in widget for \`type: 'switch'\`.
 
-By default the label is rendered in \`FFormRow\`'s \`#label\` slot, aligning the checkbox
-with other form fields in a two-column layout. Set \`meta.labelLayout\` to \`"control_first"\`
-or \`"label_first"\` to switch to an inline \`FControlLabel\` instead.
+It renders \`FSwitch\`, supporting both binary (boolean) and ternary (true/false/null) modes —
+set \`allowNull: true\` on the field to enable the ternary variant.
+
+By default the label is rendered in \`FFormRow\`'s \`#label\` slot, aligning the switch with
+other form fields in a two-column layout. Set \`meta.labelLayout\` to \`"label_first"\` or
+\`"control_first"\` to switch to an inline \`FControlLabel\` instead.
 
 Field-level flags \`disabled\`, \`required\`, and per-field \`fieldErrors\` are forwarded
 automatically from the meta.`;
 
 
 const DEFAULT_META = {
-	type: 'checkbox',
-	label: 'Accept terms',
-	helpText: 'Required to continue.',
+	type: 'switch',
+	label: 'Enable feature',
+	helpText: 'Toggle this feature on or off.',
 	fields: [{
-		fieldName: 'accept_terms',
+		fieldName: 'feature_enabled',
 		default: false,
-		required: true,
 	}],
 };
 
 
 export default {
-	title: 'Forms/FGenericForm/Widgets/Built-in/FCheckboxWidget',
-	component: FCheckboxWidgetComponent,
+	title: 'Forms/FGenericForm/Widgets/Built-in/FSwitchWidget',
+	component: FSwitchWidgetComponent,
 	parameters: {
 		layout: 'centered',
 		docs: { description: { component: DEFAULT_DESCRIPTION }},
@@ -51,21 +52,27 @@ export default {
 export const Default = {};
 
 
-const STATES_DESCRIPTION = `Field-level \`disabled\` flag comes from the field meta and is
-forwarded to the checkbox automatically.`;
+const STATES_DESCRIPTION = `The widget supports three visual states: default (binary boolean),
+disabled, and ternary (three-way true/false/null toggle via \`allowNull: true\` on the field).`;
 
 const STATES_META = [
 	{
-		type: 'checkbox',
-		label: 'Email notifications',
+		type: 'switch',
+		label: 'Notifications',
 		helpText: 'Receive product and billing updates.',
 		fields: [{ fieldName: 'notifications', default: false }],
 	},
 	{
-		type: 'checkbox',
-		label: 'Team access',
-		helpText: 'Disabled checkbox example.',
-		fields: [{ fieldName: 'team_access', default: true, disabled: true }],
+		type: 'switch',
+		label: 'Dark mode',
+		helpText: 'Disabled switch example.',
+		fields: [{ fieldName: 'dark_mode', default: true, disabled: true }],
+	},
+	{
+		type: 'switch',
+		label: 'Auto-save',
+		helpText: 'Ternary switch — allows null state.',
+		fields: [{ fieldName: 'auto_save', default: null, allowNull: true }],
 	},
 ];
 
@@ -96,38 +103,38 @@ export const Errors = {
 	},
 	args: {
 		fieldErrors: {
-			accept_terms: 'You must accept the terms to continue.',
+			feature_enabled: 'This field is required.',
 		},
 	},
 };
 
 
 const LAYOUTS_DESCRIPTION = `By default (\`labelLayout\` not set) the label is placed in
-\`FFormRow\`'s \`#label\` slot — the checkbox sits in the right column alongside text inputs.
+\`FFormRow\`'s \`#label\` slot — the switch sits in the right column alongside text inputs.
 
-Set \`meta.labelLayout\` to \`"control_first"\` or \`"label_first"\` to render the label
-inline via \`FControlLabel\`, with the checkbox and label side by side.`;
+Set \`meta.labelLayout\` to \`"label_first"\` or \`"control_first"\` to render the label
+inline via \`FControlLabel\`, with the switch and label side by side.`;
 
 const LAYOUTS_META = [
 	{
-		type: 'checkbox',
+		type: 'switch',
 		label: 'Row label',
 		helpText: 'Default — label in FFormRow slot.',
 		fields: [{ fieldName: 'row_label', default: false }],
 	},
 	{
-		type: 'checkbox',
-		label: 'Control first',
-		helpText: 'labelLayout: "control_first" — label inline via FControlLabel.',
-		labelLayout: 'control_first',
-		fields: [{ fieldName: 'control_first', default: false }],
-	},
-	{
-		type: 'checkbox',
+		type: 'switch',
 		label: 'Label first',
 		helpText: 'labelLayout: "label_first" — label inline via FControlLabel.',
 		labelLayout: 'label_first',
 		fields: [{ fieldName: 'label_first', default: false }],
+	},
+	{
+		type: 'switch',
+		label: 'Control first',
+		helpText: 'labelLayout: "control_first" — label inline via FControlLabel.',
+		labelLayout: 'control_first',
+		fields: [{ fieldName: 'control_first', default: false }],
 	},
 ];
 

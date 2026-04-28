@@ -16,21 +16,21 @@
 			:size="size"
 			:disabled="disabled"
 		>
-			<FCheckbox
+			<FSwitch
 				v-model="value"
 				:id="id"
 				:name="name"
+				:nullable="allowNull"
 				:disabled="disabled"
-				:required="required"
 			/>
 		</FControlLabel>
-		<FCheckbox
+		<FSwitch
 			v-else
 			v-model="value"
 			:id="id"
 			:name="name"
+			:nullable="allowNull"
 			:disabled="disabled"
-			:required="required"
 		/>
 		<template v-if="meta.helpText" #help>{{ meta.helpText }}</template>
 	</FFormRow>
@@ -39,18 +39,18 @@
 <script setup >
 import { computed } from 'vue';
 
-import FCheckbox from '@/forms/FCheckbox';
+import FSwitch from '@/forms/FSwitch';
 import FControlLabel from '@/forms/FControlLabel';
 import FFormRow from '@/forms/FFormRow';
 import { useWidget, useWidgetField, WIDGET_PROPS, WIDGET_EMITS } from '../useWidget';
 
-defineOptions({ name: 'FCheckboxWidget' });
+defineOptions({ name: 'FSwitchWidget' });
 const model = defineModel({ type: Object });
 const props = defineProps({ ...WIDGET_PROPS });
 defineEmits(WIDGET_EMITS);
 
 const { fields, error } = useWidget(model, props);
-const { id, name, value, disabled, required, errorText } = useWidgetField(
+const { id, name, value, disabled, allowNull, errorText } = useWidgetField(
 	model, props, computed(() => fields.value[0])
 );
 </script>
