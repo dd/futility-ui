@@ -1,6 +1,5 @@
 import { computed } from 'vue';
 
-export { getFormDefaults, getDiff, getDataForQuery } from './utils';
 export { DEFAULT_WIDGETS } from './constants';
 
 /**

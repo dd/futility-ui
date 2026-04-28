@@ -13,14 +13,27 @@ function getNormalize(widgets, type) {
 
 /**
  * Extract default values from form meta.
+ *
+ * If a field has an explicit `default` key, that value is used as-is.
+ * If `default` is absent, the widget's normalize function is called with
+ * `undefined` to derive a type-appropriate empty value (e.g. '' for text,
+ * false for checkbox). This way a text field without an explicit default
+ * never starts as null unless allowNull is true.
+ *
  * @param {Array} meta - Form field metadata array
+ * @param {Object} [widgets] - Widget config with optional normalize functions per type
  * @returns {Object} Object with fieldName: default_value pairs
  */
-export function getFormDefaults(meta) {
+export function getFormDefaults(meta, widgets) {
 	const defaults = {};
 	for (const entry of meta) {
 		for (const field of entry.fields) {
-			defaults[field.fieldName] = 'default' in field ? field.default : null;
+			if ('default' in field) {
+				defaults[field.fieldName] = field.default;
+			} else {
+				const normalize = getNormalize(widgets, entry.type);
+				defaults[field.fieldName] = normalize(undefined, field);
+			}
 		}
 	}
 	return defaults;
@@ -58,5 +71,5 @@ export function getDiff(meta, currentData, originalData, widgets) {
  * @returns {Object} Object containing only non-default fieldName: value pairs
  */
 export function getDataForQuery(meta, currentData, widgets) {
-	return getDiff(meta, currentData, getFormDefaults(meta), widgets);
+	return getDiff(meta, currentData, getFormDefaults(meta, widgets), widgets);
 }

@@ -4,7 +4,7 @@ import { WIDGET_BASE_ARG_TYPES, FINPUTWIDGET_META } from '../constants.sb.js';
 import FInputWidgetComponent from './FInputWidget.vue';
 import FGenericForm from '..';
 import { getFormDefaults } from '../utils';
-import { INPUT_WIDGET_TYPES } from '../constants.js';
+import { INPUT_WIDGET_TYPES, DEFAULT_WIDGETS } from '../constants.js';
 
 
 const _types = INPUT_WIDGET_TYPES.map(t => `\`${t}\``);
@@ -40,7 +40,7 @@ export default {
 		return {
 			components: { FGenericForm },
 			setup() {
-				const modelValue = ref(getFormDefaults(FINPUTWIDGET_META));
+				const modelValue = ref(getFormDefaults(FINPUTWIDGET_META, DEFAULT_WIDGETS));
 				return {
 					modelValue,
 					meta: FINPUTWIDGET_META,

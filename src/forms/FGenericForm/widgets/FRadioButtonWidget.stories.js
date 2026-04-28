@@ -6,6 +6,7 @@ import { WIDGET_BASE_ARG_TYPES } from '../constants.sb.js';
 import FRadioButtonWidgetComponent from './FRadioButtonWidget.vue';
 import FGenericForm from '..';
 import { getFormDefaults } from '../utils';
+import { DEFAULT_WIDGETS } from '../constants.js';
 
 
 const DESCRIPTION = `\`FRadioButtonWidget\` is the built-in widget for \`type: 'radio'\`.
@@ -68,7 +69,7 @@ export default {
 		size: 'm',
 		fieldErrors: {},
 		meta: DEFAULT_META,
-		modelValue: getFormDefaults([DEFAULT_META]),
+		modelValue: getFormDefaults([DEFAULT_META], DEFAULT_WIDGETS),
 	},
 };
 
@@ -126,7 +127,7 @@ export const States = {
 	},
 	args: {
 		meta: STATES_META,
-		modelValue: getFormDefaults(STATES_META),
+		modelValue: getFormDefaults(STATES_META, DEFAULT_WIDGETS),
 	},
 };
 
@@ -148,6 +149,6 @@ export const Errors = {
 			plan: 'Please select a plan to continue.',
 		},
 		meta: ERRORS_META,
-		modelValue: getFormDefaults([ERRORS_META]),
+		modelValue: getFormDefaults([ERRORS_META], DEFAULT_WIDGETS),
 	},
 };

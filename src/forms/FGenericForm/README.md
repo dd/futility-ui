@@ -14,6 +14,7 @@ import { FGenericForm } from 'futility-ui';
 // or
 // import FGenericForm from 'futility-ui/forms/FGenericForm';
 import { getFormDefaults } from 'futility-ui/forms/FGenericForm/utils';
+import { DEFAULT_WIDGETS } from 'futility-ui/forms/FGenericForm/constants';
 
 
 const meta = [
@@ -26,7 +27,7 @@ const meta = [
 	},
 ];
 
-const formData = ref(getFormDefaults(meta));
+const formData = ref(getFormDefaults(meta, DEFAULT_WIDGETS));
 ```
 
 ```html
@@ -43,11 +44,17 @@ At minimum, each item in `meta` should define:
 - `helpText` - optional helper text shown below the field
 - `fields` - an array of field definitions:
 	* `fieldName` - unique field key used in `modelValue` and `errors`
-	* `default` - initial value used by `getFormDefaults`
+	* `default` - explicit initial value; used as-is by `getFormDefaults` when present
 	* `disabled` - disables interaction with the field
 	* `readonly` - keeps the field visible but prevents editing
 	* `required` - marks the field as required for validation and UI purposes
-	* `allowNull` - when `true`, normalization preserves `null` instead of converting it to `''` or `false`; useful when the API field accepts `null` as a meaningful value
+	* `allowNull` - when `true`, `null` is treated as a valid submitted value rather than "empty"; affects both default resolution (when `default` is absent) and widget behaviour
+
+**Default resolution rules** (`getFormDefaults`):
+- `default` key present → that value is used exactly as written, no normalisation
+- `default` key absent → the widget's `normalize` function is called with `undefined` to produce a type-appropriate empty value (e.g. `''` for text, `false` for checkbox, `null` for text with `allowNull: true`)
+
+This means `allowNull` affects the starting value of a field only when no explicit `default` is provided.
 
 Some widgets also accept additional fields. For example, select-like widgets need an option list.
 Check each widget's individual story for the full list of supported field parameters.

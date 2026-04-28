@@ -59,7 +59,7 @@ const CHECKBOX_WIDGETS = {
 const RADIO_WIDGETS = {
 	radio: {
 		component: FRadioButtonWidget,
-		normalize: (value, field) => field?.allowNull ? (value ?? null) : (value ?? null),
+		normalize: (value, field) => value ?? null,
 	},
 };
 

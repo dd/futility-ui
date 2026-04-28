@@ -209,7 +209,7 @@ export const SingleFieldWidget = {
 	},
 	args: {
 		meta: SINGLE_FIELD_META,
-		modelValue: getFormDefaults(SINGLE_FIELD_META),
+		modelValue: getFormDefaults(SINGLE_FIELD_META, DEFAULT_WIDGETS),
 		widgetSize: 's',
 	},
 };
@@ -348,6 +348,6 @@ export const MultiFieldWidget = {
 	},
 	args: {
 		meta: MULTI_FIELD_META,
-		modelValue: getFormDefaults(MULTI_FIELD_META),
+		modelValue: getFormDefaults(MULTI_FIELD_META, DEFAULT_WIDGETS),
 	},
 };

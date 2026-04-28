@@ -32,7 +32,7 @@ export default {
 	render: (args) => ({
 		components: { FGenericForm },
 		setup() {
-			const modelValue = ref(getFormDefaults(FCHECKBOXWIDGET_META));
+			const modelValue = ref(getFormDefaults(FCHECKBOXWIDGET_META, DEFAULT_WIDGETS));
 			return {
 				modelValue,
 				meta: FCHECKBOXWIDGET_META,
@@ -72,7 +72,7 @@ export const States = {
 					fields: [{ fieldName: 'team_access', default: true, disabled: true }],
 				},
 			];
-			const modelValue = ref(getFormDefaults(meta));
+			const modelValue = ref(getFormDefaults(meta, DEFAULT_WIDGETS));
 			return {
 				modelValue,
 				meta,
@@ -97,7 +97,7 @@ export const Errors = {
 					fields: [{ fieldName: 'accept_terms', default: false, required: true }],
 				},
 			];
-			const modelValue = ref(getFormDefaults(meta));
+			const modelValue = ref(getFormDefaults(meta, DEFAULT_WIDGETS));
 			return {
 				modelValue,
 				meta,

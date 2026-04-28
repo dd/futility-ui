@@ -43,7 +43,7 @@ export default {
 	render: makeRenderer(['modelValue']),
 	args: {
 		meta: META_BASIC,
-		modelValue: getFormDefaults(META_BASIC),
+		modelValue: getFormDefaults(META_BASIC, DEFAULT_WIDGETS),
 		errors: {},
 		widgets: {},
 		layout: 'two_columns',
@@ -109,15 +109,19 @@ const UTILITIES_DESCRIPTION = `Three utility functions ship alongside the compon
 import { getFormDefaults, getDiff, getDataForQuery } from 'futility-ui/forms/FGenericForm/utils';
 \`\`\`
 
-**\`getFormDefaults(meta)\`** extracts the \`default\` value from every field in the meta array.
-Use it to initialise the form and to serve as the comparison baseline for query params.
+**\`getFormDefaults(meta, widgets?)\`** produces initial form data from the meta array.
+If a field has an explicit \`default\` key, that value is used as-is.
+If \`default\` is absent, the widget's \`normalize\` function is called with \`undefined\` to derive
+a type-appropriate empty value — e.g. \`''\` for text, \`false\` for checkbox, or \`null\` for text
+with \`allowNull: true\`. Pass \`DEFAULT_WIDGETS\` (or your merged widget map) so the correct
+per-type normaliser is used.
 
 **\`getDiff(meta, currentData, originalData, widgets?)\`** returns only the fields whose normalised
 values differ from \`originalData\`. It is designed for PATCH requests: pass the server response as
 \`originalData\` and you get exactly what changed.
 
 **\`getDataForQuery(meta, currentData, widgets?)\`** is shorthand for diffing against
-\`getFormDefaults(meta)\`. Returns only non-default values, keeping the URL short.
+\`getFormDefaults(meta, widgets)\`. Returns only non-default values, keeping the URL short.
 
 Both diff functions are form-aware: for text-like fields \`null\`, \`undefined\`, and \`''\` are
 treated as equivalent, so clearing a field that was already empty won't appear in the output.
@@ -175,7 +179,7 @@ export const Utilities = {
 				});
 				const initialData = { last_name: 'Doe' };
 
-				const defaultData = computed(() => getFormDefaults(args.meta));
+				const defaultData = computed(() => getFormDefaults(args.meta, DEFAULT_WIDGETS));
 				const diff = computed(() => getDiff(
 					args.meta, args.modelValue, initialData, DEFAULT_WIDGETS
 				));
