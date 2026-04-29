@@ -1,7 +1,6 @@
 import { makeFGFWidgetRenderer, makeFGFWidgetManyRenderer } from '@/.storybook/utils.js';
 import { WIDGET_BASE_ARG_TYPES } from '../constants.sb.js';
 import FRadioButtonWidgetComponent from './FRadioButtonWidget.vue';
-import FGenericForm from '..';
 import { getFormDefaults } from '../utils';
 import { DEFAULT_WIDGETS } from '../constants.js';
 
@@ -11,21 +10,11 @@ It renders a group of \`FRadioButton\` inputs with \`FControlLabel\`, driven by 
 The field value is the selected choice's \`value\`.`;
 
 
-const DEFAULT_META = {
-	type: 'radio',
-	label: 'Plan',
-	helpText: 'Choose your subscription plan.',
-	choices: [
-		{ value: 'free', label: 'Free' },
-		{ value: 'pro', label: 'Pro' },
-		{ value: 'enterprise', label: 'Enterprise' },
-	],
-	fields: [{
-		fieldName: 'plan',
-		default: null,
-		required: true,
-	}],
-};
+const PLAN_CHOICES = [
+	{ value: 'free', label: 'Free' },
+	{ value: 'pro', label: 'Pro' },
+	{ value: 'enterprise', label: 'Enterprise' },
+];
 
 
 export default {
@@ -36,11 +25,22 @@ export default {
 		docs: { description: { component: DESCRIPTION }},
 	},
 	tags: [ 'autodocs' ],
-	argTypes: WIDGET_BASE_ARG_TYPES,
+	argTypes: {
+		...WIDGET_BASE_ARG_TYPES,
+		choices: {
+			description: 'List of options: `[{ value, label, disabled? }]`.',
+			control: 'object',
+			table: { category: 'props', subcategory: 'meta' },
+		},
+	},
 	render: makeFGFWidgetRenderer(),
 	args: {
-		meta: DEFAULT_META,
-		modelValue: getFormDefaults([DEFAULT_META], DEFAULT_WIDGETS),
+		type: 'radio',
+		label: 'Plan',
+		helpText: 'Choose your subscription plan.',
+		choices: PLAN_CHOICES,
+		fields: [{ fieldName: 'plan', default: null, required: true }],
+		modelValue: { plan: null },
 		layout: 'two_columns',
 		size: 'm',
 		fieldErrors: {},
@@ -89,23 +89,17 @@ export const States = {
 };
 
 
-const ERRORS_META = {
-	type: 'radio',
-	label: 'Plan',
-	choices: [
-		{ value: 'free', label: 'Free' },
-		{ value: 'pro', label: 'Pro' },
-	],
-	fields: [{ fieldName: 'plan', default: null, required: true }],
-};
-
+const ERRORS_DESCRIPTION = `Pass a \`fieldErrors\` object keyed by \`fieldName\` to surface
+validation messages. The label highlights in red and the message appears in a tooltip on the
+error icon.`;
 
 export const Errors = {
+	parameters: {
+		docs: { description: { story: ERRORS_DESCRIPTION }},
+	},
 	args: {
 		fieldErrors: {
 			plan: 'Please select a plan to continue.',
 		},
-		meta: ERRORS_META,
-		modelValue: getFormDefaults([ERRORS_META], DEFAULT_WIDGETS),
 	},
 };

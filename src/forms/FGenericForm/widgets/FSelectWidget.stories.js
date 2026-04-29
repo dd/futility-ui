@@ -23,18 +23,6 @@ const PLAN_CHOICES = [
 	{ value: 'enterprise', label: 'Enterprise' },
 ];
 
-const DEFAULT_META = {
-	type: 'select',
-	label: 'Plan',
-	helpText: 'Choose your subscription plan.',
-	emptyOptionLabel: '---',
-	choices: PLAN_CHOICES,
-	fields: [{
-		fieldName: 'plan',
-		default: null,
-	}],
-};
-
 
 export default {
 	title: 'Forms/FGenericForm/Widgets/Built-in/FSelectWidget',
@@ -44,11 +32,32 @@ export default {
 		docs: { description: { component: DEFAULT_DESCRIPTION }},
 	},
 	tags: [ 'autodocs' ],
-	argTypes: WIDGET_BASE_ARG_TYPES,
+	argTypes: {
+		...WIDGET_BASE_ARG_TYPES,
+		choices: {
+			description: 'List of options: `[{ value, label, disabled? }]`.',
+			control: 'object',
+			table: { category: 'props', subcategory: 'meta' },
+		},
+		emptyOptionLabel: {
+			description: 'Label for the blank placeholder option at the top of the list.',
+			control: 'text',
+			table: { category: 'props', subcategory: 'meta' },
+		},
+		emptyOptionValue: {
+			description: 'Value emitted when the blank option is selected (defaults to `null`).',
+			table: { category: 'props', subcategory: 'meta' },
+		},
+	},
 	render: makeFGFWidgetRenderer(),
 	args: {
-		meta: DEFAULT_META,
-		modelValue: getFormDefaults([DEFAULT_META], DEFAULT_WIDGETS),
+		type: 'select',
+		label: 'Plan',
+		helpText: 'Choose your subscription plan.',
+		emptyOptionLabel: '---',
+		choices: PLAN_CHOICES,
+		fields: [{ fieldName: 'plan', default: null }],
+		modelValue: { plan: null },
 		layout: 'two_columns',
 		size: 'm',
 		fieldErrors: {},

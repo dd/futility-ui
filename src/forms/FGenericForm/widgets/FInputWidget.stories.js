@@ -1,7 +1,6 @@
 import { makeFGFWidgetRenderer, makeFGFWidgetManyRenderer } from '@/.storybook/utils.js';
 import { WIDGET_BASE_ARG_TYPES } from '../constants.sb.js';
 import FInputWidgetComponent from './FInputWidget.vue';
-import FGenericForm from '..';
 import { getFormDefaults } from '../utils';
 import { INPUT_WIDGET_TYPES, DEFAULT_WIDGETS } from '../constants.js';
 
@@ -17,14 +16,6 @@ field meta. Field-level flags \`disabled\`, \`readonly\`, \`required\`, and per-
 are all passed through field meta and routed automatically to each widget.`;
 
 
-const DEFAULT_META = {
-	label: "text",
-	type: "text",
-	fields: [{ fieldName: 'f_text', default: '', attrs: { placeholder: 'Enter text...' }}],
-	helpText: 'Regular input field',
-};
-
-
 export default {
 	title: 'Forms/FGenericForm/Widgets/Built-in/FInputWidget',
 	component: FInputWidgetComponent,
@@ -33,11 +24,22 @@ export default {
 		docs: { description: { component: DEFAULT_DESCRIPTION }},
 	},
 	tags: [ 'autodocs' ],
-	argTypes: WIDGET_BASE_ARG_TYPES,
+	argTypes: {
+		...WIDGET_BASE_ARG_TYPES,
+		type: {
+			description: 'Input type.',
+			options: INPUT_WIDGET_TYPES,
+			control: 'select',
+			table: { category: 'props', subcategory: 'meta' },
+		},
+	},
 	render: makeFGFWidgetRenderer(),
 	args: {
-		meta: DEFAULT_META,
-		modelValue: getFormDefaults([DEFAULT_META], DEFAULT_WIDGETS),
+		type: 'text',
+		label: 'Text',
+		helpText: 'Regular input field',
+		fields: [{ fieldName: 'f_text', default: '', attrs: { placeholder: 'Enter text...' } }],
+		modelValue: { f_text: '' },
 		layout: 'two_columns',
 		size: 'm',
 		fieldErrors: {},
@@ -50,7 +52,6 @@ export const Default = {};
 
 const STATES_DESCRIPTION = `Field-level \`disabled\` and \`readonly\` flags come from the
 metadata and are forwarded to the widget automatically.`;
-
 
 const STATES_META = [
 	{

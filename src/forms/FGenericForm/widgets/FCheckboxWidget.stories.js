@@ -2,7 +2,6 @@ import { makeFGFWidgetRenderer, makeFGFWidgetManyRenderer } from '@/.storybook/u
 import { WIDGET_BASE_ARG_TYPES } from '../constants.sb.js';
 import { DEFAULT_WIDGETS } from '../constants.js';
 import FCheckboxWidgetComponent from './FCheckboxWidget.vue';
-import FGenericForm from '..';
 import { getFormDefaults } from '../utils';
 
 
@@ -16,18 +15,6 @@ Field-level flags \`disabled\`, \`required\`, and per-field \`fieldErrors\` are 
 automatically from the meta.`;
 
 
-const DEFAULT_META = {
-	type: 'checkbox',
-	label: 'Accept terms',
-	helpText: 'Required to continue.',
-	fields: [{
-		fieldName: 'accept_terms',
-		default: false,
-		required: true,
-	}],
-};
-
-
 export default {
 	title: 'Forms/FGenericForm/Widgets/Built-in/FCheckboxWidget',
 	component: FCheckboxWidgetComponent,
@@ -36,11 +23,22 @@ export default {
 		docs: { description: { component: DEFAULT_DESCRIPTION }},
 	},
 	tags: [ 'autodocs' ],
-	argTypes: WIDGET_BASE_ARG_TYPES,
+	argTypes: {
+		...WIDGET_BASE_ARG_TYPES,
+		labelLayout: {
+			description: 'Inline label layout via `FControlLabel`. Omit to use `FFormRow`\'s label slot.',
+			options: [undefined, 'control_first', 'label_first'],
+			control: 'select',
+			table: { category: 'props', subcategory: 'meta' },
+		},
+	},
 	render: makeFGFWidgetRenderer(),
 	args: {
-		meta: DEFAULT_META,
-		modelValue: getFormDefaults([DEFAULT_META], DEFAULT_WIDGETS),
+		type: 'checkbox',
+		label: 'Accept terms',
+		helpText: 'Required to continue.',
+		fields: [{ fieldName: 'accept_terms', default: false, required: true }],
+		modelValue: { accept_terms: false },
 		layout: 'two_columns',
 		size: 'm',
 		fieldErrors: {},

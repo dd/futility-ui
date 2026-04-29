@@ -57,21 +57,6 @@ const mockRequestCurrentHandler = (value) => {
 };
 
 
-const DEFAULT_META = {
-	type: 'autocomplete',
-	label: 'City',
-	helpText: 'Start typing to search.',
-	placeholderLabel: 'Select a city',
-	placeholderFilter: 'Type to filter…',
-	requestHandler: mockRequestHandler,
-	requestCurrentHandler: mockRequestCurrentHandler,
-	fields: [{
-		fieldName: 'city_id',
-		default: null,
-	}],
-};
-
-
 export default {
 	title: 'Forms/FGenericForm/Widgets/Built-in/FAutocompleteWidget',
 	component: FAutocompleteWidgetComponent,
@@ -80,11 +65,45 @@ export default {
 		docs: { description: { component: DEFAULT_DESCRIPTION }},
 	},
 	tags: [ 'autodocs' ],
-	argTypes: WIDGET_BASE_ARG_TYPES,
+	argTypes: {
+		...WIDGET_BASE_ARG_TYPES,
+		requestHandler: {
+			description: '`(query, page, { signal }) => Promise<{ options, hasNext }>` — fetches option pages.',
+			control: false,
+			table: { category: 'props', subcategory: 'meta' },
+		},
+		requestCurrentHandler: {
+			description: '`(value) => Promise<{ value, label }>` — resolves display label for an existing value.',
+			control: false,
+			table: { category: 'props', subcategory: 'meta' },
+		},
+		placeholderLabel: {
+			description: 'Placeholder text shown in the value display area when nothing is selected.',
+			control: 'text',
+			table: { category: 'props', subcategory: 'meta' },
+		},
+		placeholderFilter: {
+			description: 'Placeholder text shown inside the filter input.',
+			control: 'text',
+			table: { category: 'props', subcategory: 'meta' },
+		},
+		texts: {
+			description: 'Override UI text strings (loading, empty, error messages).',
+			control: 'object',
+			table: { category: 'props', subcategory: 'meta' },
+		},
+	},
 	render: makeFGFWidgetRenderer(),
 	args: {
-		meta: DEFAULT_META,
-		modelValue: getFormDefaults([DEFAULT_META], DEFAULT_WIDGETS),
+		type: 'autocomplete',
+		label: 'City',
+		helpText: 'Start typing to search.',
+		placeholderLabel: 'Select a city',
+		placeholderFilter: 'Type to filter…',
+		requestHandler: mockRequestHandler,
+		requestCurrentHandler: mockRequestCurrentHandler,
+		fields: [{ fieldName: 'city_id', default: null }],
+		modelValue: { city_id: null },
 		layout: 'two_columns',
 		size: 'm',
 		fieldErrors: {},
