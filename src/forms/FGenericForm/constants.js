@@ -5,6 +5,7 @@ const FCheckboxWidget = defineAsyncComponent(() => import('./widgets/FCheckboxWi
 const FRadioButtonWidget = defineAsyncComponent(() => import('./widgets/FRadioButtonWidget.vue'));
 const FSwitchWidget = defineAsyncComponent(() => import('./widgets/FSwitchWidget.vue'));
 const FSelectWidget = defineAsyncComponent(() => import('./widgets/FSelectWidget.vue'));
+const FAutocompleteWidget = defineAsyncComponent(() => import('./widgets/FAutocompleteWidget.vue'));
 
 
 export const LAYOUT_CHOICES = [
@@ -79,6 +80,13 @@ const SELECT_WIDGETS = {
 	},
 };
 
+const AUTOCOMPLETE_WIDGETS = {
+	autocomplete: {
+		component: FAutocompleteWidget,
+		normalize: (value) => value ?? null,
+	},
+};
+
 /**
  * Built-in widget registry.
  * type → { component, normalize? }
@@ -92,4 +100,5 @@ export const DEFAULT_WIDGETS = {
 	...RADIO_WIDGETS,
 	...SWITCH_WIDGETS,
 	...SELECT_WIDGETS,
+	...AUTOCOMPLETE_WIDGETS,
 };
