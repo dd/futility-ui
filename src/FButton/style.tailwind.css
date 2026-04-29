@@ -109,7 +109,7 @@
 
 /* Busy ****************************************/
 
-.fui-b-busy-indicator {
+.fui-button .fui-b-busy-indicator {
 	position: absolute;
 	top: calc((var(--fui-b-height) - var(--fui-b-bheight)) / 2 - var(--fui-b-bordersize));
 	left: var(--fui-b-busy-i-left);

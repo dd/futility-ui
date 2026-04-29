@@ -99,22 +99,18 @@ field immediately followed by a button.)
 * [x] Form row (A component that renders a form row with a label, widget, help text, and error text.)
 * [x] Control label (A component that adds a label for widgets such as checkbox, radio button, etc.)
 * [x] Generic Form
-	- [ ] radio button widget **`<- you are here`**
-	- [ ] switch widget
-	- [ ] select widget
-	- [ ] autocomplete widget
 	- [ ] utils for make meta from DRF metadata
+* [ ] Modal **`<- you are here`**
+* [ ] Dropdown
 * [ ] FileSelect
 * [ ] FileSelectArea
 * [ ] Textarea
 * [ ] Number picker
-* [ ] Modal
 * [ ] Tree Editor
 * [ ] MultiSelect
 * [ ] Tag Select
 * [ ] Tabs
 * [ ] Paginator
-* [ ] Dropdown
 * [ ] Popover
 * etc.
 
