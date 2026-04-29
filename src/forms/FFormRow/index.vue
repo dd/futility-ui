@@ -24,6 +24,7 @@
 					v-if="errorText"
 					v-tooltip="errorText"
 					name="exclamation_circle_solid"
+					class="fui-fr-error_icon"
 				/>
 			</div>
 			<p v-if="!helpSlotIsEmpty" class="fui-fr-help_text" ><slot name="help" /></p>

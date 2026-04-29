@@ -36,7 +36,7 @@
 		flex-shrink: 1;
 	}
 
-	.fui-icon {
+	.fui-fr-error_icon {
 		@apply fui:text-error;
 	}
 
@@ -85,7 +85,7 @@
 			line-height: 150%;
 		}
 
-		.fui-icon  {
+		.fui-fr-error_icon  {
 			margin-top: 6.5px;
 		}
 	}
@@ -97,7 +97,7 @@
 			line-height: 150%;
 		}
 
-		.fui-icon  {
+		.fui-fr-error_icon  {
 			margin-top: 9px;
 		}
 	}
@@ -109,7 +109,7 @@
 			line-height: 150%;
 		}
 
-		.fui-icon  {
+		.fui-fr-error_icon  {
 			margin-top: 14px;
 		}
 	}
@@ -127,14 +127,14 @@
 	}
 
 	&:has(.fui-checkbox) {
-		.fui-icon  {
+		.fui-fr-error_icon  {
 			margin-top: -4px;
 			margin-bottom: -4px;
 		}
 	}
 
 	&:has(.fui-switch) {
-		.fui-icon  {
+		.fui-fr-error_icon  {
 			margin-top: -2px;
 			margin-bottom: -2px;
 		}
