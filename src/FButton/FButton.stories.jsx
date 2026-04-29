@@ -1,34 +1,11 @@
 import React from 'react';
 import { Title, Primary, Controls, Stories, Markdown, Subtitle, Description } from '@storybook/addon-docs/blocks';
 
+import Readme from './README.md?raw';
 import FIcon from '@/FIcon';
 import { ICON_LIST_SOLID, ICON_LIST_OUTLINE, ICON_LIST_OTHER } from '@/FIcon/constants';
 import FButton from '.';
 import { COMPONENT_TYPES, SIZE_CHOICES, COLOR_CHOICES, DESIGN_CHOICES, ICON_STYLE_CHOICES } from './constants';
-
-
-const usage = `
-A button component for form actions and general UI interactions. It supports multiple sizes,
-visual variants, and states for common interface patterns.
-
-### Usage
-
-Import the component:
-
-\`\`\`js
-import { FButton } from 'futility-ui'
-// or
-import FButton from 'futility-ui/FButton'
-\`\`\`
-
-Use it in your template:
-
-\`\`\`html
-<FButton>Button</FButton>
-\`\`\`
-
-That's it!
-`;
 
 
 const ending = `
@@ -59,6 +36,7 @@ This helps preserve visual accents and maintain a clear hierarchy.
 I plan to revisit this behavior once Flowbite updates their theme - they mentioned a Figma refresh around **Q2 2025**, which should include revised button styles.
 `;
 
+
 export default {
 	title: 'FButton',
 	component: FButton,
@@ -66,9 +44,7 @@ export default {
 	parameters: {
 		layout: 'centered',
 		docs: {
-			description: {
-				component: usage,
-			},
+			description: { component: Readme.replace(/^# .+\n?/m, '') },
 			page: () => (
 				<>
 					<Title />
@@ -329,18 +305,19 @@ export const Sizes = {
 };
 
 
+const ICON_DESCRIPTION = `Use the \`icon\` prop to render an icon-only button.
+
+\`\`\`html
+<FButton icon="<icon_style>" ><FIcon name="archive_solid" /></FButton>
+\`\`\`
+`;
+
+
 export const Icon = {
 	name: 'Icon-only mode',
 	parameters: {
 		docs: {
-			description: {
-				story: `Use the \`icon\` prop to render an icon-only button.
-
-\`\`\`html
-<FButton icon="<icon_style>" >Button text</FButton>
-\`\`\`
-`,
-			},
+			description: { story: ICON_DESCRIPTION },
 		},
 	},
 	render: (args, { argTypes }) => ({
