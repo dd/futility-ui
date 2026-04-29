@@ -6,7 +6,8 @@
 		:class="[
 			`fui-input-size-${size}`,
 			{
-				// 'with-clear-btn': clearButton,
+				'has-slot_start': !startSlotIsEmpty,
+				'has-slot_end': !endSlotIsEmpty,
 				'has-error': error,
 			},
 		]"
@@ -21,7 +22,9 @@
 </template>
 
 <script setup >
-import { computed, defineAsyncComponent, provide } from 'vue';
+import { computed, defineAsyncComponent, provide, useSlots } from 'vue';
+
+import useSlotUtils from '@/composables/slot';
 const FIcon = defineAsyncComponent(() => import('@/FIcon'));
 import FInputText from './FInputText';
 import FInputPassword from './FInputPassword';
@@ -47,6 +50,10 @@ const props = defineProps({
 	/** Whether to display the input in an error state. */
 	error: Boolean,
 });
+
+const slots = useSlots();
+const startSlotIsEmpty = useSlotUtils(slots.start).slotIsEmpty;
+const endSlotIsEmpty = useSlotUtils(slots.end).slotIsEmpty;
 
 const clearValue = () => {
 	model.value = '';
