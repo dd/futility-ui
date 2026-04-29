@@ -29,7 +29,7 @@
 </template>
 
 <script setup >
-import { computed, defineModel, useAttrs } from 'vue';
+import { computed, useAttrs } from 'vue';
 
 defineOptions({
 	name: 'FSelect',

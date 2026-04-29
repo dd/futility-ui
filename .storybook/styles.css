@@ -2,8 +2,8 @@
 
 /*@import '@/styles.tailwind.css';*/
 @import 'tailwindcss';
-@import '@/styles.base.css';
-@import 'flowbite/src/themes/default';
+@import '@/styles/components.tailwind.css';
+@import '@/styles/base.tailwind.css';
 
 
 h1,
@@ -88,6 +88,28 @@ h1 {
 }
 /* End Of Previews */
 
+
+.sbfui-label {
+	@apply fui:font-sans;
+	@apply fui:text-xs;
+	font-weight: 600;
+	text-transform: uppercase;
+	letter-spacing: 0.06em;
+	@apply fui:text-text;
+}
+
+.sbfui-pre {
+	@apply fui:text-xs fui:font-mono;
+	@apply fui:bg-gray-100 fui:dark:bg-gray-800;
+	@apply fui:text-gray-700 fui:dark:text-gray-300;
+	padding: 10px 12px;
+	border-radius: 6px;
+	margin: 0;
+	white-space: pre;
+}
+
+
+/* Stories *************************************/
 
 /* FIcons */
 #story--ficon--default--primary,
@@ -178,6 +200,15 @@ h1 {
 /* End of FSelect */
 
 
+/* FControlLabel */
+.sbfui-fcontrollabel-layouts {
+	width: 350px;
+	align-items: stretch;
+	align-content: stretch;
+}
+/* End of FControlLabel */
+
+
 /* FFormRow */
 .sbfui-fformrow {
 	--fui-spacing-formrow-label: 70px;
@@ -192,3 +223,61 @@ h1 {
 	}
 }
 /* End of FFormRow */
+
+
+/* FGenericForm */
+.sbfui-fgenericform-label {
+	@apply fui:font-sans;
+	@apply fui:text-xs;
+	font-weight: 600;
+	text-transform: uppercase;
+	letter-spacing: 0.06em;
+	@apply fui:text-text;
+	@apply fui:pb-4;
+}
+
+.sbfui-fgenericform-layouts {
+	display: flex;
+	flex-direction: row;
+	align-items: flex-start;
+	@apply fui:gap-10;
+}
+
+.sbfui-fgenericform-sizes {
+	align-items: flex-start;
+}
+
+.sbfui-fgenericform-utils {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	align-items: flex-start;
+	@apply fui:gap-10;
+
+	.sbfui-fgf-utils-label-second {
+		@apply fui:font-sans;
+		@apply fui:text-xs;
+		font-weight: 600;
+		letter-spacing: 0.06em;
+		@apply fui:text-text;
+		@apply fui:pt-4;
+		@apply fui:pb-1;
+	}
+}
+/* End of FGenericForm */
+
+
+/* Custom Widget story */
+.sbfui-color-swatch {
+	margin-top: 12px;
+	padding: 10px 14px;
+	border-radius: 8px;
+	@apply fui:font-sans;
+	@apply fui:text-sm;
+	font-weight: 500;
+}
+/* End of Custom Widget story */
+
+
+/* Multi-field range widget demo */
+/* End of Multi-field range widget demo */

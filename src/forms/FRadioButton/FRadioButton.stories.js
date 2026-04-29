@@ -42,7 +42,7 @@ export default {
 	tags: [ 'autodocs' ],
 	argTypes: {
 		modelValue: {
-			description: 'The value of radio buttons group.',
+			description: 'Current value of the radio group.',
 			type: 'string',
 			table: {
 				category: 'props',
@@ -50,7 +50,7 @@ export default {
 			},
 		},
 		disabled: {
-			description: 'Disabled flag.',
+			description: 'Whether the radio button is disabled.',
 			control: 'boolean',
 			table: {
 				category: 'props',
@@ -65,7 +65,7 @@ export default {
 		// EVENTS
 		'update:modelValue': {
 			action: 'update:modelValue',
-			description: 'Event on update value',
+			description: 'Emitted when the selected value changes.',
 			control: false,
 			table: {
 				category: 'events',

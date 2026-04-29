@@ -9,13 +9,22 @@
 	</a>
 </p>
 
-
-A set of ready-to-use UI components for Vue 3, styled according to the [Flowbite](https://flowbite.com/) design system, providing a fast start and a consistent visual style for your application.
+Futility UI is a Vue 3 component library inspired by the [Flowbite](https://flowbite.com/) design
+language. It focuses on practical, ready-to-use UI building blocks with a consistent visual style
+and straightforward integration.
 
 [Live Demo](https://dd.github.io/futility-ui/)
 
 
-## Usage
+## Why Futility UI
+
+- Vue 3 components with a consistent look and feel
+- Storybook documentation with interactive examples
+- Multiple style distribution options for different integration strategies
+- A pragmatic component set built from real project needs
+
+
+## Installation
 
 Install the library:
 
@@ -23,19 +32,32 @@ Install the library:
 pnpm add futility-ui
 ```
 
-Import the styles in JavaScript:
+
+## Styles
+
+Choose how you want to include styles in your project.
+
+Import the stylesheet from JavaScript:
 
 ```js
 import 'futility-ui/styles.tailwind.css'; // or styles.base.css
 ```
 
-Or from your main CSS file:
+Or import it from your main CSS file:
 
 ```css
 @import 'futility-ui/styles.tailwind.css'; /* or styles.base.css */
 ```
 
-You can either register the plugin globally:
+Available stylesheets:
+
+- `styles.base.css` includes only Futility UI component styles
+- `styles.tailwind.css` includes component styles together with Tailwind CSS utilities
+
+
+## Usage
+
+You can register the library globally:
 
 ```js
 import { createApp } from 'vue';
@@ -47,13 +69,14 @@ createApp(App)
 ;
 ```
 
-...or import only the components you need:
+Or import only the components you need:
 
 ```js
 import { FButton, FInput } from 'futility-ui';
 ```
 
-For more information about choosing a stylesheet and other options, see the [Usage page](https://dd.github.io/futility-ui/?path=/docs/usage--docs) in the documentation.
+For more details about stylesheet selection and integration options, see the
+[Usage page](https://dd.github.io/futility-ui/?path=/docs/usage--docs) in the documentation.
 
 
 ## Roadmap
@@ -65,7 +88,8 @@ For more information about choosing a stylesheet and other options, see the [Usa
 * [x] Switch
 * [x] Checkbox
 * [x] Input
-* [x] Widgets group (A component that visually merges widgets without spacing, such as an input field immediately followed by a button.)
+* [x] Widgets group (A component that visually merges widgets without spacing, such as an input
+field immediately followed by a button.)
 * [x] Radio button
 * [x] Input Autocomplete (with loading options)
 	- [ ] Ability to group options when needed
@@ -73,7 +97,13 @@ For more information about choosing a stylesheet and other options, see the [Usa
 	- [ ] Custom dropdown for desktop screen and native for mobile [???]
 * [x] Tooltip
 * [x] Form row (A component that renders a form row with a label, widget, help text, and error text.)
-* [ ] Generic Form **`<- you are here`**
+* [x] Control label (A component that adds a label for widgets such as checkbox, radio button, etc.)
+* [x] Generic Form
+	- [ ] radio button widget **`<- you are here`**
+	- [ ] switch widget
+	- [ ] select widget
+	- [ ] autocomplete widget
+	- [ ] utils for make meta from DRF metadata
 * [ ] FileSelect
 * [ ] FileSelectArea
 * [ ] Textarea
@@ -88,52 +118,60 @@ For more information about choosing a stylesheet and other options, see the [Usa
 * [ ] Popover
 * etc.
 
-#### Refactor
+### Refactor
 
-* [ ] Split styles into base styles and theme-specific styles
-* [ ] Add support for scaling the icon inside the button
-* [ ] Update button focus styles
+* [x] Split styles into base styles and theme-specific styles
+* [ ] Add support for scaling icons inside buttons
+* [ ] Update button focus styles (especially for the dark theme)
 
-#### Extended
+### Extended
 
-* [ ] Integrate Tailwind configuration and theming
+* [x] Integrate Tailwind configuration and theming (seems implemented, but needs verification)
 * [ ] Tag panel
-* [ ] Multi Select Autocomplete
+* [ ] Multi-select autocomplete
 * [ ] Select with custom dropdown (search, loading, etc...)
 * [ ] Select Autocomplete (likely not needed if Input Autocomplete exists)
-* [ ] Custom DatePicker
-* [ ] Custom TimePicker
+* [ ] Custom DatePicker [???]
+* [ ] Custom TimePicker [???]
 * [ ] Custom MultiSelect with filters
 
-#### Dev
+### Dev
 
-* [x] Storybook at github pages
-* [x] Deploy to npm
-* [ ] Web interface for customize styles
+* [x] Storybook on GitHub Pages
+* [x] npm publishing
+* [ ] Web interface for customizing styles
 
 
 ## Oh great, another UI library.
 
-You might be wondering: why the heck do we need yet another UI library? The short answer is: just because.
+You might be wondering: why the heck do we need yet another UI library? The short answer is:
+just because.
 
-This library isn\`t necessarily better than others. It has a much smaller community, it evolves more slowly, and it doesn\`t really have any unique killer feature. It exists simply because none of the existing options fully work for me. Either there aren\`t enough components, or they\`re incredibly complicated, or not truly native to Vue, or they\`re paid, or… they just look ugly. So, I decided to build my own.
+This library isn\`t necessarily better than others. It has a much smaller community, it evolves
+more slowly, and it doesn\`t really have any unique killer feature. It exists simply because none of
+the existing options fully work for me. Either there aren\`t enough components, or they\`re
+incredibly complicated, or not truly native to Vue, or they\`re paid, or… they just look ugly. So,
+I decided to build my own.
 
-This library grew out of components I use at work. And my colleagues are probably asking themselves: why bother extracting the UI into a separate repo? Here are a few reasons:
+This library grew out of components I use at work. And my colleagues are probably asking themselves:
+why bother extracting the UI into a separate repo? Here are a few reasons:
 
-* I don\`t like monorepos.
+- I don\`t like monorepos.
 
-* It\`s easier to isolate components, code style, and dependencies.
+- It\`s easier to isolate components, code style, and dependencies.
 
-* Components are simpler to organize and structure.
+- Components are simpler to organize and structure.
 
-* Writing documentation is easier when you build components outside the context of the main project.
+- Writing documentation is easier when you build components outside the context of the main project.
 
-* A separate repo makes it simpler to set up tests, build processes, and all that stuff. (Yeah, yeah - I know there are no tests yet, but eventually I\`ll add some, at least out of curiosity.)
+- A separate repo makes it simpler to set up tests, build processes, and all that stuff. (Yeah,
+yeah - I know there are no tests yet, but eventually I\`ll add some, at least out of curiosity.)
 
-* You can improve the UI independently from the main project.
+- You can improve the UI independently from the main project.
 
-* It helps keep the main project\`s codebase cleaner - less clutter unrelated to business logic.
+- It helps keep the main project\`s codebase cleaner - less clutter unrelated to business logic.
 
-* Reusability? That\`s a cliche argument, and it\`s not really the main goal here (But who knows - maybe I\`ll use this library in other projects too. I already have a few ideas).
+- Reusability? That\`s a cliche argument, and it\`s not really the main goal here (But who knows -
+maybe I\`ll use this library in other projects too. I already have a few ideas).
 
-* An attempt to turn legacy code into a documented library that anyone can use.
+- An attempt to turn legacy code into a documented library that anyone can use.

@@ -1,0 +1,21 @@
+@layer theme, components, utilities;
+
+@import "tailwindcss/theme.css" layer(theme) prefix(fui);
+@import "./theme.tailwind.css";
+
+@layer base {
+	h1,
+	h2,
+	h3,
+	h4,
+	h5,
+	h6 {
+		font-weight: 700;
+	}
+
+	a {
+		text-decoration: underline;
+		text-underline-offset: 4px;
+		color: light-dark(var(--fui-color-primary-600), var(--fui-color-primary-500));
+	}
+}

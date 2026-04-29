@@ -5,7 +5,7 @@ import ClearButton from './ClearButton.vue';
 const usage = `
 ### Usage
 
-The \`FInputClearButton\` component provides a convenient way to add a clear (reset) button to any
+The \`FInputClearButton\` component provides a convenient way to add a clear button to any
 \`FInput\` field.
 
 \`\`\`js
@@ -15,7 +15,7 @@ import FInputClearButton from 'futility-ui/forms/FInput/ClearButton'
 Example:
 
 \`\`\`html
-<FInput type="password" >
+<FInput type="text" >
 	<template #end ><FInputClearButton /></template>
 </FInput>
 \`\`\`

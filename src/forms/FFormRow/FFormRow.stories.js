@@ -1,30 +1,23 @@
 import { computed } from 'vue';
 
+import Readme from './README.md?raw';
 import FInput from '@/forms/FInput';
 import FFormRow from '.';
 import { SIZE_CHOICES, LAYOUT_CHOICES } from './constants';
 
 
-const usage = `
-\`FFormRow\` is a layout wrapper that pairs a label with one or more form fields.
-It handles label alignment, help text, and error states in a consistent way across the form.
-
-### Usage
-
-\`\`\`js
-import { FFormRow } from 'futility-ui'
-// or
-import FFormRow from 'futility-ui/forms/FFormRow'
-\`\`\`
-
-\`\`\`html
-<FFormRow id="name" >
-  <template #label>Full name</template>
-  <FInput id="name" v-model="value" placeholder="Enter name" />
-  <template #help>As it appears on your ID</template>
-</FFormRow>
-\`\`\`
-`;
+const DEFAULT_TEMPLATE = `<div class="sbfui-fformrow" >
+	<FFormRow v-bind="clearArgs" >
+		<template #label ><span v-html="args.label" /></template>
+		<FInput
+			:id="args.id"
+			:error="args.errorHighlight"
+			:disabled="args.disabled"
+			placeholder="Placeholder"
+		/>
+		<template #help ><span v-html="args.help" /></template>
+	</FFormRow>
+</div>`;
 
 
 export default {
@@ -34,58 +27,27 @@ export default {
 	parameters: {
 		layout: 'centered',
 		docs: {
-			description: {
-				component: usage,
-			},
+			description: { component: Readme.replace(/^# .+\n?/m, '') },
 		},
 	},
 	argTypes: {
 		id: {
-			description: 'The `id` passed to the `for` attribute of the label element. Should match the `id` of the input inside the default slot.',
 			control: { type: 'text' },
 			table: {
-				category: 'props',
 				type: { summary: 'string | number' },
 			},
 		},
 		layout: {
-			description: 'Controls the label/input arrangement. Built-in values: `one_column` (stacked) and `two_columns` (side by side). You can pass any custom string and define the corresponding CSS class.',
 			options: LAYOUT_CHOICES,
 			control: { type: 'select' },
-			table: {
-				category: 'props',
-				type: { summary: 'string' },
-				defaultValue: { summary: 'two_columns' },
-			},
 		},
 		size: {
-			description: 'Controls the vertical alignment of the label relative to the input. Should match the `size` used on the input inside the slot. You can pass any custom string and define the corresponding CSS class.',
 			options: SIZE_CHOICES,
 			control: 'select',
-			table: {
-				category: 'props',
-				type: { summary: 'string' },
-				defaultValue: { summary: 'm' },
-			},
-		},
-		errorText: {
-			description: 'Error message shown as a tooltip on an icon next to the input.',
-			table: {
-				category: 'props',
-				type: { summary: 'string' },
-			},
-		},
-		errorHighlight: {
-			description: 'When `true`, highlights the label text in the error color.',
-			table: {
-				category: 'props',
-				type: { summary: 'boolean' },
-				defaultValue: { summary: 'false' },
-			},
 		},
 		// Slots
 		label: {
-			description: 'Slot for the form row label text',
+			description: 'Slot for the row label.',
 			control: { type: 'text' },
 			table: {
 				category: 'slots',
@@ -94,7 +56,7 @@ export default {
 			},
 		},
 		default: {
-			description: 'Slot for placing form fields and widgets',
+			description: 'Slot for form fields or custom widgets.',
 			control: { type: null },
 			table: {
 				category: 'slots',
@@ -103,7 +65,7 @@ export default {
 			},
 		},
 		help: {
-			description: 'Slot for hint/help text shown below the input',
+			description: 'Slot for hint or help text shown below the field.',
 			control: { type: 'text' },
 			table: {
 				category: 'slots',
@@ -118,31 +80,21 @@ export default {
 		components: { FFormRow, FInput },
 		setup() {
 			const clearArgs = computed(() => {
-				const {
-					'label': _a,
-					'help': _b,
-					...filteredArgs
-				} = args;
+				const { 'default': _a, 'label': _b, 'help': _c, ...filteredArgs } = args;
 				return filteredArgs;
 			});
 			return { args, clearArgs };
 		},
-		template: `
-<div class="sbfui-fformrow" >
-	<FFormRow v-bind="clearArgs" >
-		<template #label >{{ args.label }}</template>
-		<FInput :id="args.id" :error="args.errorHighlight" placeholder="Placeholder" />
-		<template #help >{{ args.help }}</template>
-	</FFormRow>
-</div>`,
+		template: DEFAULT_TEMPLATE,
 	}),
 	args: {
 		id: 'test-row',
 		layout: 'one_column',
 		size: 'm',
 		errorHighlight: false,
+		disabled: false,
 		label: 'Label',
-		help: 'Description for the form line',
+		help: 'Helper text with a <a href="#" target=_blank >link</a>',
 	},
 };
 
@@ -153,10 +105,12 @@ export const Default = {
 	},
 };
 
+
 const ERROR_DESCRIPTION = `
-Use \`errorHighlight\` to highlight the label in red and \`errorText\` to show a tooltip icon next
+Use \`errorHighlight\` to highlight the label in red, and \`errorText\` to show a tooltip icon next
 to the input. Both props are independent and can be used separately or together.
 `;
+
 
 export const errorHighlight = {
 	parameters: {
@@ -177,43 +131,28 @@ export const errorText = {
 };
 
 
-export const layoutOneColumn = {
-	name: 'Layout: One Column',
-	parameters: {
-		docs: {
-			description: {
-				story: `Label is placed above the input. Suitable for narrow containers or mobile
+export const Disabled = {
+	args: {
+		id: 'disabled-preview-row',
+		disabled: true,
+	},
+};
+
+
+const LAYOUT_ONE_DESCRIPTION = `Label is placed above the input. Suitable for narrow containers or mobile
 layouts.
 
-The \`layout\` prop is a free string — built-in values are \`one_column\` and \`two_columns\`, but
-you can pass any custom value and target it with a \`.fui-fr-layout-{value}\` CSS class.`,
-			},
-		},
-	},
-	render: (args, { argTypes }) => ({
-		name: 'FFormRowLayoutOneColumnStory',
-		props: Object.keys(argTypes),
-		components: { FFormRow, FInput },
-		setup() {
-			const clearArgs = computed(() => {
-				const {
-					'label': _a,
-					'help': _b,
-					'id': _c,
-					'layout': _d,
-					...filteredArgs
-				} = args;
-				return filteredArgs;
-			});
-			return { args, clearArgs };
-		},
-		template: `
-<div class="sbfui-preview-flex-y sbfui-fformrow" style="gap:20px;" >
+The \`layout\` prop is a free string - built-in values are \`one_column\` and \`two_columns\`, but
+you can pass any custom value and target it with a \`.fui-fr-layout-{value}\` CSS class.`;
+
+
+const LAYOUT_ONE_TEMPLATE = `<div class="sbfui-preview-flex-y sbfui-fformrow" style="gap:20px;" >
 	<FFormRow v-bind="clearArgs" id="layout_one_column-input-1" layout="one_column" >
 		<template #label >Field 1</template>
 		<FInput
 			id="layout_one_column-input-1"
 			:error="args.errorHighlight"
+			:disabled="args.disabled"
 			placeholder="Placeholder"
 		/>
 		<template #help >Help text for field 1</template>
@@ -223,12 +162,33 @@ you can pass any custom value and target it with a \`.fui-fr-layout-{value}\` CS
 		<FInput
 			id="layout_one_column-input-2"
 			:error="args.errorHighlight"
+			:disabled="args.disabled"
 			placeholder="Placeholder"
 		/>
 		<template #help >Help text for field 2</template>
 	</FFormRow>
-</div>
-		`,
+</div>`;
+
+
+export const layoutOneColumn = {
+	name: 'Layout: One Column',
+	parameters: {
+		docs: {
+			description: { story: LAYOUT_ONE_DESCRIPTION },
+		},
+	},
+	render: (args, { argTypes }) => ({
+		name: 'FFormRowLayoutOneColumnStory',
+		props: Object.keys(argTypes),
+		components: { FFormRow, FInput },
+		setup() {
+			const clearArgs = computed(() => {
+				const { 'label': _a, 'help': _b, 'id': _c, 'layout': _d, ...filteredArgs } = args;
+				return filteredArgs;
+			});
+			return { args, clearArgs };
+		},
+		template: LAYOUT_ONE_TEMPLATE,
 	}),
 	argTypes: {
 		label: { control: { type: null }},
@@ -245,41 +205,18 @@ you can pass any custom value and target it with a \`.fui-fr-layout-{value}\` CS
 };
 
 
-export const layoutTwoColumns = {
-	name: 'Layout: Two Columns',
-	parameters: {
-		docs: {
-			description: {
-				story: `Label is placed to the left of the input at a fixed width
+const LAYOUT_TWO_DESCRIPTION = `Label is placed to the left of the input at a fixed width
 (\`--spacing-formrow-label\`, default \`150px\`). The label is vertically aligned to the input
-baseline based on the \`size\` prop.`,
-			},
-		},
-	},
-	render: (args, { argTypes }) => ({
-		name: 'FFormRowLayoutTwoColumnsStory',
-		props: Object.keys(argTypes),
-		components: { FFormRow, FInput },
-		setup() {
-			const clearArgs = computed(() => {
-				const {
-					'label': _a,
-					'help': _b,
-					'id': _c,
-					'layout': _d,
-					...filteredArgs
-				} = args;
-				return filteredArgs;
-			});
-			return { args, clearArgs };
-		},
-		template: `
-<div class="sbfui-preview-flex-y sbfui-fformrow" style="gap:20px;" >
+baseline based on the \`size\` prop.`;
+
+
+const LAYOUT_TWO_TEMPLATE = `<div class="sbfui-preview-flex-y sbfui-fformrow" style="gap:20px;" >
 	<FFormRow v-bind="clearArgs" id="layout_two_columns-input-1" layout="two_columns" >
 		<template #label >Field 1</template>
 		<FInput
 			id="layout_two_columns-input-1"
 			:error="args.errorHighlight"
+			:disabled="args.disabled"
 			placeholder="Placeholder"
 		/>
 		<template #help >Help text for field 1</template>
@@ -289,12 +226,33 @@ baseline based on the \`size\` prop.`,
 		<FInput
 			id="layout_two_columns-input-2"
 			:error="args.errorHighlight"
+			:disabled="args.disabled"
 			placeholder="Placeholder"
 		/>
 		<template #help >Help text for field 2</template>
 	</FFormRow>
-</div>
-		`,
+</div>`;
+
+
+export const layoutTwoColumns = {
+	name: 'Layout: Two Columns',
+	parameters: {
+		docs: {
+			description: { story: LAYOUT_TWO_DESCRIPTION },
+		},
+	},
+	render: (args, { argTypes }) => ({
+		name: 'FFormRowLayoutTwoColumnsStory',
+		props: Object.keys(argTypes),
+		components: { FFormRow, FInput },
+		setup() {
+			const clearArgs = computed(() => {
+				const { 'label': _a, 'help': _b, 'id': _c, 'layout': _d, ...filteredArgs } = args;
+				return filteredArgs;
+			});
+			return { args, clearArgs };
+		},
+		template: LAYOUT_TWO_TEMPLATE,
 	}),
 	argTypes: {
 		label: { control: { type: null }},
@@ -311,37 +269,14 @@ baseline based on the \`size\` prop.`,
 };
 
 
-export const Sizes = {
-	parameters: {
-		docs: {
-			description: {
-				story: `The \`size\` prop adjusts the label's top padding so it aligns with the
+const SIZES_DESCRIPTION = `The \`size\` prop adjusts the label's top padding so it aligns with the
 input's text baseline in \`two_columns\` layout. Built-in values are \`s\`, \`m\`, and \`xl\`.
 
-The \`size\` prop is a free string — you can pass any custom value and define label alignment with
-a \`.fui-fr-size-{value}\` CSS class inside \`.fui-fr-layout-two_columns\`.`,
-			},
-		},
-	},
-	render: (args, { argTypes }) => ({
-		name: 'FFormRowSizesStory',
-		props: Object.keys(argTypes),
-		components: { FFormRow, FInput },
-		setup() {
-			const clearArgs = computed(() => {
-				const {
-					'label': _a,
-					'help': _b,
-					'id': _c,
-					'size': _d,
-					...filteredArgs
-				} = args;
-				return filteredArgs;
-			});
-			return { args, clearArgs, SIZE_CHOICES };
-		},
-		template: `
-<div class="sbfui-preview-flex-y sbfui-fformrow-size" >
+The \`size\` prop is a free string - you can pass any custom value and define label alignment with
+a \`.fui-fr-size-{value}\` CSS class inside \`.fui-fr-layout-two_columns\`.`;
+
+
+const SIZES_TEMPLATE = `<div class="sbfui-preview-flex-y sbfui-fformrow-size" >
 	<FFormRow
 		v-for="size in SIZE_CHOICES"
 		:key="size[0]"
@@ -354,11 +289,32 @@ a \`.fui-fr-size-{value}\` CSS class inside \`.fui-fr-layout-two_columns\`.`,
 			:id="\`size-input-\${size}\`"
 			:size="size"
 			:error="args.errorHighlight"
+			:disabled="args.disabled"
 			placeholder="Placeholder"
 		/>
 		<template #help >Form row with size: '{{ size }}'</template>
 	</FFormRow>
-</div>`,
+</div>`;
+
+
+export const Sizes = {
+	parameters: {
+		docs: {
+			description: { story: SIZES_DESCRIPTION },
+		},
+	},
+	render: (args, { argTypes }) => ({
+		name: 'FFormRowSizesStory',
+		props: Object.keys(argTypes),
+		components: { FFormRow, FInput },
+		setup() {
+			const clearArgs = computed(() => {
+				const { 'label': _a, 'help': _b, 'id': _c, 'size': _d, ...filteredArgs } = args;
+				return filteredArgs;
+			});
+			return { args, clearArgs, SIZE_CHOICES };
+		},
+		template: SIZES_TEMPLATE,
 	}),
 	argTypes: {
 		label: { control: { type: null }},
@@ -374,6 +330,130 @@ a \`.fui-fr-size-{value}\` CSS class inside \`.fui-fr-layout-two_columns\`.`,
 		size: '<size>',
 	},
 };
+
+
+const SCHEME_TEMPLATE = `<div class="sbpst-scheme_preview sbpst-row" >
+	<div class="sbpst-light" >
+		<table class="sbfui-preview-table" ><tbody>
+			<tr>
+				<td>
+					<FFormRow v-bind="clearArgs" id="scheme-input_def-1" >
+						<template #label >Default field</template>
+						<FInput
+							id="scheme-input_def-1"
+							:size="args.size"
+							placeholder="Placeholder"
+						/>
+						<template #help >
+							Helper text with a <a href="#" target=_blank >link</a>
+						</template>
+					</FFormRow>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<FFormRow
+						v-bind="clearArgs"
+						id="scheme-input_error-1"
+						errorHighlight
+						errorText="Error text example"
+					>
+						<template #label >Field with Error</template>
+						<FInput
+							id="scheme-input_error-1"
+							:size="args.size"
+							placeholder="Placeholder"
+							error
+						/>
+						<template #help >
+							Helper text with a <a href="#" target=_blank >link</a>
+						</template>
+					</FFormRow>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<FFormRow
+						v-bind="clearArgs"
+						id="scheme-input_disabled-1"
+						disabled
+					>
+						<template #label >Field with Error</template>
+						<FInput
+							id="scheme-input_disabled-1"
+							:size="args.size"
+							placeholder="Placeholder"
+							disabled
+						/>
+						<template #help >
+							Helper text with a <a href="#" target=_blank >link</a>
+						</template>
+					</FFormRow>
+				</td>
+			</tr>
+		</tbody></table>
+	</div>
+	<div class="sbpst-dark" >
+		<table class="sbfui-preview-table" ><tbody>
+			<tr>
+				<td>
+					<FFormRow v-bind="clearArgs" id="scheme-input_def-2" >
+						<template #label >Default field</template>
+						<FInput
+							id="scheme-input_def-2"
+							:size="args.size"
+							placeholder="Placeholder"
+						/>
+						<template #help >
+							Helper text with a <a href="#" target=_blank >link</a>
+						</template>
+					</FFormRow>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<FFormRow
+						v-bind="clearArgs"
+						id="scheme-input_error-2"
+						errorHighlight
+						errorText="Error text example"
+					>
+						<template #label >Field with Error</template>
+						<FInput
+							id="scheme-input_error-2"
+							:size="args.size"
+							placeholder="Placeholder"
+							error
+						/>
+						<template #help >
+							Helper text with a <a href="#" target=_blank >link</a>
+						</template>
+					</FFormRow>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<FFormRow
+						v-bind="clearArgs"
+						id="scheme-input_disabled-1"
+						disabled
+					>
+						<template #label >Field with Error</template>
+						<FInput
+							id="scheme-input_disabled-1"
+							:size="args.size"
+							placeholder="Placeholder"
+							disabled
+						/>
+						<template #help >
+							Helper text with a <a href="#" target=_blank >link</a>
+						</template>
+					</FFormRow>
+				</td>
+			</tr>
+		</tbody></table>
+	</div>
+</div>`;
 
 
 export const Scheme = {
@@ -393,86 +473,14 @@ export const Scheme = {
 					'id': _c,
 					'errorHighlight': _d,
 					'errorText': _e,
+					'disabled': _f,
 					...filteredArgs
 				} = args;
 				return filteredArgs;
 			});
 			return { args, clearArgs };
 		},
-		template: `<div class="sbpst-scheme_preview sbpst-row" >
-	<div class="sbpst-light" >
-		<table class="sbfui-preview-table" ><tbody>
-			<tr>
-				<td>
-					<FFormRow v-bind="clearArgs" id="scheme-input_def-1" >
-						<template #label >Default field</template>
-						<FInput
-							id="scheme-input_def-1"
-							:size="args.size"
-							placeholder="Placeholder"
-						/>
-						<template #help >Help text for default field</template>
-					</FFormRow>
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<FFormRow
-						v-bind="clearArgs"
-						id="scheme-input_error-1"
-						errorHighlight
-						errorText="Error text example"
-					>
-						<template #label >Field with Error</template>
-						<FInput
-							id="scheme-input_error-1"
-							:size="args.size"
-							placeholder="Placeholder"
-							error
-						/>
-						<template #help >Help text for default field</template>
-					</FFormRow>
-				</td>
-			</tr>
-		</tbody></table>
-	</div>
-	<div class="sbpst-dark" >
-		<table class="sbfui-preview-table" ><tbody>
-			<tr>
-				<td>
-					<FFormRow v-bind="clearArgs" id="scheme-input_def-2" >
-						<template #label >Default field</template>
-						<FInput
-							id="scheme-input_def-2"
-							:size="args.size"
-							placeholder="Placeholder"
-						/>
-						<template #help >Help text for default field</template>
-					</FFormRow>
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<FFormRow
-						v-bind="clearArgs"
-						id="scheme-input_error-2"
-						errorHighlight
-						errorText="Error text example"
-					>
-						<template #label >Field with Error</template>
-						<FInput
-							id="scheme-input_error-2"
-							:size="args.size"
-							placeholder="Placeholder"
-							error
-						/>
-						<template #help >Help text for default field</template>
-					</FFormRow>
-				</td>
-			</tr>
-		</tbody></table>
-	</div>
-</div>`,
+		template: SCHEME_TEMPLATE,
 	}),
 	argTypes: {
 		label: { control: { type: null }},
@@ -480,6 +488,7 @@ export const Scheme = {
 		id: { control: { type: null }},
 		errorHighlight: { control: { type: null }},
 		errorText: { control: { type: null }},
+		disabled: { control: { type: null }},
 	},
 	args: {
 		label: '<label>',
@@ -487,5 +496,6 @@ export const Scheme = {
 		id: '<id>',
 		errorHighlight: '<bool>',
 		errorText: '<error text>',
+		disabled: '<disabled>',
 	},
 };

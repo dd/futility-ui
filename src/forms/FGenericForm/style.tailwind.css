@@ -1,0 +1,15 @@
+.fui-generic-form {
+	display: flex;
+	flex-direction: column;
+	@apply fui:gap-4;
+}
+
+
+.fui-gf-radio_widget {
+	display: flex;
+	flex-direction: column;
+	flex-wrap: nowrap;
+	align-items: flex-start;
+
+	@apply fui:gap-2;
+}

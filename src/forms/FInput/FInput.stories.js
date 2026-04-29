@@ -47,7 +47,7 @@ export default {
 	tags: [ 'autodocs' ],
 	argTypes: {
 		modelValue: {
-			description: 'The input value. The type depends on the input type.',
+			description: 'Current input value. The exact type depends on the selected input type.',
 			control: 'text',
 			table: {
 				category: 'props',
@@ -79,7 +79,7 @@ export default {
 		},
 		// SLOTS
 		start: {
-			description: 'Slot content rendered at the start of the input.',
+			description: 'Content rendered at the start of the input.',
 			control: 'text',
 			table: {
 				category: 'slots',
@@ -88,7 +88,7 @@ export default {
 			},
 		},
 		end: {
-			description: 'Slot content rendered at the end of the input.',
+			description: 'Content rendered at the end of the input.',
 			control: 'text',
 			table: {
 				category: 'slots',
@@ -339,7 +339,7 @@ export const Sizes = {
 \`\`\`
 
 You can also specify any custom size value.
-In that case, the input automatically receives the class: \`fui-input-size-<size>\`
+In that case, the input automatically receives the class \`fui-input-size-<size>\`,
 which you can use to apply your own styles.
 `,
 			},
@@ -389,8 +389,8 @@ The component provides two slots, \`start\` and \`end\`, which can be used to di
 content inside the input, such as units of measurement or any other contextual information.
 
 These slots are intended primarily for supplementary elements that do not take over input control.
-If you need to create a compound field (for example, combining a select dropdown for currency with
-a text input for the amount), consider using the \`FWidgetsGroup\` component (in progress).
+If you need to create a compound field (for example, combining a currency select with an amount
+input), consider wrapping multiple controls in a dedicated layout component.
 
 \`\`\`html
 <FInput>
@@ -445,7 +445,7 @@ export const AttributesPassthrough = {
 				story: `All attributes passed to the component will be forwarded to the underlying
 \`<input>\`	 element, except for \`class\`, which is applied to the wrapper element.
 
-This allows you to use any standard input attributes, such as: \`id\`, \`name\`, \`placeholder\`,
+This allows you to use standard input attributes such as \`id\`, \`name\`, \`placeholder\`,
 \`maxlength\`, \`disabled\`, \`aria-*\` etc.`,
 			},
 		},
@@ -467,28 +467,28 @@ This allows you to use any standard input attributes, such as: \`id\`, \`name\`,
 		id: {
 			control: 'text',
 			table: {
-				category: 'Standart Props',
+				category: 'Standard Props',
 				type: { summary: 'text' },
 			},
 		},
 		name: {
 			control: 'text',
 			table: {
-				category: 'Standart Props',
+				category: 'Standard Props',
 				type: { summary: 'text' },
 			},
 		},
 		placeholder: {
 			control: 'text',
 			table: {
-				category: 'Standart Props',
+				category: 'Standard Props',
 				type: { summary: 'text' },
 			},
 		},
 		disabled: {
 			control: 'boolean',
 			table: {
-				category: 'Standart Props',
+				category: 'Standard Props',
 				type: { summary: 'boolean' },
 			},
 		},

@@ -1,43 +1,17 @@
 import { useClipboard } from '@vueuse/core';
 import { useToast } from 'vue-toastification';
 
+import Readme from './README.md?raw';
 import FIcon from '.';
 import { ICON_LIST_SOLID, ICON_LIST_OUTLINE, ICON_LIST_OTHER } from './constants';
 
-
-const usage = `
-A set of icons for use across the interface. Provides a consistent way to display and manage icons in your application.
-
-
-### Usage
-
-Import the component:
-
-\`\`\`js
-import { FIcon } from 'futility-ui'
-// or
-import FIcon from 'futility-ui/FIcon'
-\`\`\`
-
-Use it in your template:
-
-\`\`\`html
-<FIcon name="archive_solid" />
-\`\`\`
-
-That's it!
-`;
 
 export default {
 	title: 'FIcon',
 	component: FIcon,
 	parameters: {
 		layout: 'centered',
-		docs: {
-			description: {
-				component: usage,
-			},
-		}
+		docs: { description: { component: Readme.replace(/^# .+\n?/m, '') }},
 	},
 	tags: [ 'autodocs' ],
 	argTypes: {
@@ -63,7 +37,7 @@ export const Diversity = {
 	parameters: {
 		docs: {
 			description: {
-				story: 'The complete set of icons can be found [here](https://flowbite.com/icons/). They will gradually be migrated to this component — feel free to contribute to the process if you\'d like.',
+				story: 'The source icon set is available [here](https://flowbite.com/icons/). Icons are being migrated into this component incrementally.',
 			},
 		},
 	},

@@ -12,6 +12,7 @@ import FRadioButton from './forms/FRadioButton';
 import FControlLabel from './forms/FControlLabel';
 import FTooltip from './FTooltip';
 import { vTooltip } from './FTooltip/directive';
+import FGenericForm from './forms/FGenericForm';
 
 
 export {
@@ -29,6 +30,7 @@ export {
 	FControlLabel,
 	FTooltip,
 	vTooltip,
+	FGenericForm,
 };
 
 export const version = __VERSION__;
@@ -48,6 +50,7 @@ const components = {
 	FStack,
 	FControlLabel,
 	FTooltip,
+	FGenericForm,
 };
 
 export const install = (app) => {

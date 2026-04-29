@@ -11,7 +11,7 @@ import { PLACEMENT_CHOICES, TRIGGER_CHOICES, THEME_CHOICES } from './constants';
 
 const usage = `
 \`FTooltip\` wraps a trigger element and shows a floating tooltip on interaction.
-Positioning is handled by [@floating-ui](https://floating-ui.com/) - it automatically
+Positioning is handled by [@floating-ui](https://floating-ui.com/); it automatically
 flips and shifts to stay within the viewport.
 
 
@@ -55,7 +55,7 @@ export default {
 	argTypes: {
 		open: {
 			control: 'boolean',
-			description: 'Open/closed state of the tooltip (`v-model`). Works bidirectionally - triggers update the parent, parent can control visibility programmatically.',
+			description: 'Open state of the tooltip (`v-model`). The trigger can update it, and the parent can control it programmatically.',
 			table: {
 				category: 'props',
 				type: { summary: 'boolean' },
@@ -100,7 +100,7 @@ export default {
 		// Events
 		'update:open': {
 			action: 'update:open',
-			description: 'Emitted when open/closed state changes.',
+			description: 'Emitted when the open state changes.',
 			table: { category: 'events', type: { summary: 'boolean' } },
 		},
 		show: {
@@ -154,7 +154,7 @@ export const Default = {};
 
 
 const THEME_DESCRIPTION = `
-Built-in themes. The \`theme\` prop is a free string - it becomes a CSS class
+Built-in themes. The \`theme\` prop accepts any string and becomes a CSS class:
 \`fui-tooltip-theme-<theme>\`, so you can define your own themes alongside the built-in ones.
 
 |       Theme      |             Use case               |
@@ -214,7 +214,7 @@ export const Placements = {
 	parameters: {
 		docs: {
 			description: {
-				story: `All 12 placement options. The tooltip flips automatically when it hits the
+				story: `All 12 placement options are supported. The tooltip flips automatically when it reaches the
 				viewport edge.`,
 			},
 		},
@@ -285,10 +285,10 @@ export const NonInteractive = {
 	parameters: {
 		docs: {
 			description: {
-				story: `By default the tooltip is **interactive** - the cursor can move inside it
+				story: `By default the tooltip is **interactive**: the cursor can move inside it
 without closing it.
 
-The \`non-interactive\` flag disables this: the tooltip ignores the cursor and does not
+The \`non-interactive\` flag disables this behaviour: the tooltip ignores the cursor and does not
 intercept mouse events. Use it for plain text hints that should only be read, not interacted with.`,
 			},
 		},
@@ -467,7 +467,7 @@ With \`trigger="manual"\` the tooltip is controlled **exclusively** via \`v-mode
 
 
 const DIRECTIVE_DESCRIPTION = `
-The \`v-tooltip\` directive for simple use cases - no wrapper component needed.
+The \`v-tooltip\` directive is convenient for simple use cases when you do not need a wrapper component.
 
 All the main props are available through the directive as well.
 

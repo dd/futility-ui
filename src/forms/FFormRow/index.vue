@@ -6,6 +6,7 @@
 			`fui-fr-size-${size}`,
 			{
 				'has-error': errorHighlight,
+				'is-disabled': disabled,
 			},
 		]"
 	>
@@ -38,31 +39,41 @@ import { vTooltip } from '@/FTooltip/directive';
 
 
 defineOptions({ name: 'FFormRow' });
-
 defineProps({
 	/** Input id for label */
 	id: [ String, Number ],
 
-	/** Layout */
+	/**
+	 * Controls the label/input arrangement. Built-in values: `one_column` (stacked) and
+	 * `two_columns` (side by side). You can pass any custom string and define the corresponding CSS
+	 * class.
+	 */
 	layout: {
 		type: String,
 		default: 'two_columns',
 	},
 
-	/** Widget size. */
+	/**
+	 * Controls the vertical alignment of the label relative to the input. Should match the `size`
+	 * used on the input inside the slot. You can pass any custom string and define the
+	 * corresponding CSS class.
+	 * */
 	size: {
 		type: String,
 		default: 'm',
 	},
 
-	/** Error text shown in a tooltip next to the input. */
+	/** Error message shown as a tooltip on an icon next to the input. */
 	errorText: String,
 
-	/** Highlight label with red color. */
+	/** When `true`, highlights the label text in the error color. */
 	errorHighlight: Boolean,
-});
-const slots = useSlots();
 
+	/** Visually mutes the help text to indicate a disabled state. */
+	disabled: Boolean,
+});
+
+const slots = useSlots();
 const labelSlotIsEmpty = useSlotUtils(slots.label).slotIsEmpty;
 const helpSlotIsEmpty = useSlotUtils(slots.help).slotIsEmpty;
 </script>

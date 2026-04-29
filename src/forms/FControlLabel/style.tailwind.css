@@ -1,0 +1,65 @@
+@theme {
+	--color-cl: theme(color.header);
+	--color-cl-d: light-dark(var(--fui-color-gray-400), var(--fui-color-gray-400));
+	--color-cl-e: theme(color.error);
+	--color-cl-ed: light-dark(var(--fui-color-red-300), var(--fui-color-red-900));
+}
+
+.fui-control_label {
+	display: inline-flex;
+	/*align-items: flex-start;*/
+    flex-direction: row;
+	align-items: center;
+	@apply fui:gap-2;
+
+	font-weight: 400;
+	@apply fui:text-cl;
+
+	&:has(.fui-switch) {
+		/*@apply fui:leading-5;*/
+		/*line-height: theme(spacing.5);*/
+		line-height: var(--fui-spacing-5);
+	}
+
+	.fui-checkbox,
+	.fui-radiobutton {
+		margin: 0;
+	}
+
+	&.has-error {
+		@apply fui:text-cl-e;
+	}
+
+	&.is-disabled {
+		@apply fui:text-cl-d;
+
+		&.has-error {
+			@apply fui:text-cl-ed;
+		}
+	}
+
+	/* Layout */
+	&.fui-cl-layout-control_first {
+		justify-content: flex-start;
+	}
+
+	&.fui-cl-layout-label_first {
+		justify-content: space-between;
+	}
+
+	/* Sizes */
+	&.fui-cl-size-s {
+		@apply fui:text-sm;
+		line-height: 150%;
+	}
+
+	&.fui-cl-size-m {
+		@apply fui:text-sm;
+		line-height: 150%;
+	}
+
+	&.fui-cl-size-xl {
+		@apply fui:text-base;
+		line-height: 150%;
+	}
+}

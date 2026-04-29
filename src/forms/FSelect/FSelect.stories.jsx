@@ -9,7 +9,7 @@ import { SIZE_CHOICES } from './constants';
 
 
 const usage = `
-\`FSelect\` is a styled native select element with wrapper.
+\`FSelect\` is a styled wrapper around the native \`<select>\` element.
 
 ### Usage
 
@@ -40,7 +40,7 @@ That's it!
 const ending = `
 ### TODO
 
-* Custom dropdown for desktop screen and native for mobile [???]
+* Consider a custom desktop dropdown while preserving the native picker on mobile
 `;
 
 
@@ -116,7 +116,7 @@ export default {
 	argTypes: {
 		modelValue: {
 			type: 'string',
-			description: 'Field value.',
+			description: 'Current selected value.',
 			table: {
 				category: 'props',
 				type: { summary: 'text | number | boolean' },
@@ -124,7 +124,7 @@ export default {
 		},
 		disabled: {
 			control: 'boolean',
-			description: 'Disabled flag.',
+			description: 'Whether the select is disabled.',
 			table: {
 				category: 'props',
 				type: { summary: 'boolean' },
@@ -141,7 +141,7 @@ export default {
 		// EVENTS
 		'update:modelValue': {
 			action: 'update:modelValue',
-			description: 'Event on update value.',
+			description: 'Emitted when the selected value changes.',
 			control: false,
 			table: {
 				category: 'events',

@@ -2,7 +2,9 @@ import React from 'react';
 import { Title, Primary, Controls, Stories, Markdown, Subtitle, Description } from '@storybook/addon-docs/blocks';
 import { computed, ref, watch } from 'vue';
 import { useArgs } from 'storybook/preview-api';
+import { fn } from 'storybook/test';
 
+import Readme from './README.md?raw';
 import FInputAutocomplete from '.';
 import FSwitch from '@/forms/FSwitch';
 import FControlLabel from '@/forms/FControlLabel';
@@ -10,37 +12,10 @@ import { makeUpdateArg } from '@/utils/storybook';
 import { SIZE_CHOICES } from './constants';
 
 
-const usage = `
-\`FInputAutocomplete\` is an input component with built-in autocomplete, fetching and displaying
-suggestions as the user types.
-
-### Usage
-
-Import the component:
-
-\`\`\`js
-import { FInputAutocomplete } from 'futility-ui'
-// or
-import FInputAutocomplete from 'futility-ui/forms/FInputAutocomplete'
-\`\`\`
-
-Use it in your template:
-
-\`\`\`html
-<FInputAutocomplete
-	v-model="value"
-	name="finputauto-1"
-	:requestHandler="requestHandler"
-/>
-\`\`\`
-
-That's it!
-`;
-
 const ending = `
 ### TODO
 
-* Ability to group options when needed
+* Support grouping options when needed
 `;
 
 const OPTIONS_EXAMPLE = [
@@ -89,15 +64,15 @@ const OPTIONS_EXAMPLE = [
 ];
 
 
-const requestHandler = (query, page, options) => {
+const requestHandler = fn((query, page) => {
 	return new Promise((resolve) => {
-		let options = [ ...OPTIONS_EXAMPLE ];
-		if (query) options = options.filter(o => o.label.startsWith(query));
-		const hasNext = options.length > 10 * page;
-		options = options.slice(10 * (page - 1), 10 * page);
-		resolve({ options, hasNext });
+		let opts = [ ...OPTIONS_EXAMPLE ];
+		if (query) opts = opts.filter(o => o.label.startsWith(query));
+		const hasNext = opts.length > 10 * page;
+		opts = opts.slice(10 * (page - 1), 10 * page);
+		resolve({ options: opts, hasNext });
 	});
-};
+});
 
 
 export default {
@@ -106,9 +81,7 @@ export default {
 	parameters: {
 		layout: 'centered',
 		docs: {
-			description: {
-				component: usage,
-			},
+			description: { component: Readme.replace(/^# .+\n?/m, '') },
 			page: () => (
 				<>
 					<Title />
@@ -124,28 +97,58 @@ export default {
 	},
 	tags: [ 'autodocs' ],
 	argTypes: {
+		// PROPS
 		modelValue: {
-			type: 'string',
-			description: 'Input value.',
+			control: 'text',
 			table: {
 				category: 'props',
-				type: { summary: 'text | number | boolean' },
+				type: { summary: 'string | number | boolean' },
+				defaultValue: { summary: 'null' },
 			},
 		},
 		query: {
-			type: 'string',
-			description: 'Filter value.',
+			control: 'text',
 			table: {
 				category: 'props',
-				type: { summary: 'text' },
+				type: { summary: 'string' },
+			},
+		},
+		requestHandler: {
+			control: false,
+			table: {
+				category: 'props',
+				type: { summary: 'fn' },
+			},
+		},
+		requestCurrentHandler: {
+			control: false,
+			table: {
+				category: 'props',
+				type: { summary: 'fn' },
+			},
+		},
+		required: {
+			control: 'boolean',
+			table: {
+				category: 'props',
+				type: { summary: 'boolean' },
+				defaultValue: { summary: 'false' },
 			},
 		},
 		disabled: {
 			control: 'boolean',
-			description: 'Disabled flag.',
 			table: {
 				category: 'props',
 				type: { summary: 'boolean' },
+				defaultValue: { summary: 'false' },
+			},
+		},
+		error: {
+			control: 'boolean',
+			table: {
+				category: 'props',
+				type: { summary: 'boolean' },
+				defaultValue: { summary: 'false' },
 			},
 		},
 		size: {
@@ -153,13 +156,52 @@ export default {
 			control: 'select',
 			table: {
 				category: 'props',
-				type: { summary: 'text' },
+				type: { summary: 'string' },
+				defaultValue: { summary: 'm' },
+			},
+		},
+		placeholderLabel: {
+			control: 'text',
+			table: {
+				category: 'props',
+				type: { summary: 'string' },
+			},
+		},
+		placeholderFilter: {
+			control: 'text',
+			table: {
+				category: 'props',
+				type: { summary: 'string' },
+			},
+		},
+		filterInputID: {
+			control: 'text',
+			table: {
+				category: 'props',
+				type: { summary: 'string' },
+			},
+		},
+		texts: {
+			control: 'object',
+			table: {
+				category: 'props',
+				type: { summary: 'object' },
+				// defaultValue: { summary: '{}' },
+			},
+		},
+		// SLOTS
+		'option-label': {
+			control: false,
+			description: 'Scoped slot for custom option rendering. Receives `{ option, value }` where `value` is the currently selected value.',
+			table: {
+				category: 'slots',
+				type: { summary: 'VNode' },
 			},
 		},
 		// EVENTS
 		'update:modelValue': {
 			action: 'update:modelValue',
-			description: 'Event on update value.',
+			description: 'Emitted when the selected value changes.',
 			control: false,
 			table: {
 				category: 'events',
@@ -169,7 +211,7 @@ export default {
 		},
 		'update:query': {
 			action: 'update:query',
-			description: 'Event on update query.',
+			description: 'Emitted when the search query changes.',
 			control: false,
 			table: {
 				category: 'events',
@@ -179,7 +221,7 @@ export default {
 		},
 		'update:option': {
 			action: 'update:option',
-			description: 'Event on update option.',
+			description: 'Emitted when the selected option object changes. Carries the full `{ value, label }` object - useful when you need the label without an extra lookup.',
 			control: false,
 			table: {
 				category: 'events',
@@ -191,11 +233,11 @@ export default {
 	args: {
 		modelValue: null,
 		requestHandler,
-		requestCurrentHandler: (value) => {
+		requestCurrentHandler: fn((value) => {
 			return new Promise((resolve) => {
 				resolve(OPTIONS_EXAMPLE.find(o => o.value === value));
 			});
-		},
+		}),
 		required: false,
 		disabled: false,
 		error: false,
@@ -223,7 +265,15 @@ export default {
 };
 
 
-export const Default = {};
+export const Default = {
+	parameters: {
+		docs: {
+			description: {
+				story: 'Basic usage with an instant in-memory request handler. Open the dropdown, type to filter, scroll to load more pages.',
+			},
+		},
+	},
+};
 
 
 let responseTime;
@@ -233,7 +283,11 @@ export const RequestOptions = {
 	parameters: {
 		docs: {
 			description: {
-				story: 'Displays a preloader while options are being loaded.'
+				story: `Demonstrates the loading states during async requests. Use the controls below to simulate slow networks.
+
+- **Response time** - spinner shown while the first page loads
+- **Response next time** - spinner shown at the bottom of the list while the next page is being fetched (infinite scroll)
+- **Response current time** - the raw value is shown as a temporary label until this resolves`,
 			},
 		},
 	},
@@ -241,50 +295,50 @@ export const RequestOptions = {
 		// Story config
 		responseTime: {
 			control: { type: 'number' },
-			description: 'Response time for the first page of options.',
+			description: 'Simulated delay (ms) for the first page of options.',
 			table: {
-				category: 'story configurations',
+				category: 'story configuration',
 			},
 		},
 		responseNextTime: {
 			control: { type: 'number' },
-			description: 'Response time for subsequent pages of options.',
+			description: 'Simulated delay (ms) for subsequent pages (infinite scroll).',
 			table: {
-				category: 'story configurations',
+				category: 'story configuration',
 			},
 		},
 		responseCurrentTime: {
 			control: { type: 'number' },
-			description: 'Response time for fetching the current option.',
+			description: 'Simulated delay (ms) for resolving the label of the initially selected value.',
 			table: {
-				category: 'story configurations',
+				category: 'story configuration',
 			},
 		},
 	},
 	args: {
-		requestHandler: (query, page, options) => {
+		requestHandler: fn((query, page, options) => {
 			return new Promise((resolve, reject) => {
 				const _time = page == 1 ? responseTime : responseNextTime;
 				setTimeout(() => {
 					if (options.signal.aborted) {
 						reject(new DOMException('Request aborted', 'AbortError'));
 					} else {
-						let options = [ ...OPTIONS_EXAMPLE ];
-						if (query) options = options.filter(o => o.label.startsWith(query));
-						const hasNext = options.length > 10 * page;
-						options = options.slice(10 * (page - 1), 10 * page);
-						resolve({ options, hasNext });
+						let opts = [ ...OPTIONS_EXAMPLE ];
+						if (query) opts = opts.filter(o => o.label.startsWith(query));
+						const hasNext = opts.length > 10 * page;
+						opts = opts.slice(10 * (page - 1), 10 * page);
+						resolve({ options: opts, hasNext });
 					}
 				}, _time);
 			});
-		},
-		requestCurrentHandler: (value) => {
+		}),
+		requestCurrentHandler: fn((value) => {
 			return new Promise((resolve) => {
 				setTimeout(() => {
 					resolve(OPTIONS_EXAMPLE.find(o => o.value === value));
 				}, responseCurrentTime);
 			});
-		},
+		}),
 		responseTime: 400,
 		responseNextTime: 400,
 		responseCurrentTime: 400,
@@ -321,7 +375,7 @@ export const CustomOptions = {
 	parameters: {
 		docs: {
 			description: {
-				story: 'Provides a slot to customize option rendering.'
+				story: 'Use the `#option-label` scoped slot to render each option with custom markup - avatars, badges, secondary text, etc. The slot receives `{ option, value }` where `value` is the currently selected value.',
 			},
 		},
 	},
@@ -348,11 +402,19 @@ export const CustomOptions = {
 };
 
 
+const CHANGE_REQUEST_TEMPLATE = `<p>
+	<FControlLabel label="Use an alternative request handler" >
+		<FSwitch v-model="useAlternativFunction" />
+	</FControlLabel>
+</p>
+<p><FInputAutocomplete v-bind="args" /></p>`;
+
+
 export const ChangeRequestHandler = {
 	parameters: {
 		docs: {
 			description: {
-				story: 'The request handler can be changed at any time. When changed, options are automatically re-fetched.'
+				story: 'The `requestHandler` prop is reactive - swapping it at runtime (e.g. when the user switches a filter or a parent context changes) immediately re-fetches options with the new handler.',
 			},
 		},
 	},
@@ -385,15 +447,49 @@ export const ChangeRequestHandler = {
 
 				return { args: newArgs, useAlternativFunction };
 			},
-			template: `
-<p><FControlLabel><FSwitch v-model="useAlternativFunction" />Use an alternative function for fetching options</FControlLabel></p>
-<p><FInputAutocomplete v-bind="args" /></p>`,
+			template: CHANGE_REQUEST_TEMPLATE,
 		};
 	},
 };
 
 
+const STATES_TEMPLATE = `<table class="sbfui-preview-table" ><tbody>
+	<tr>
+		<td></td>
+		<td style="text-align:center;" class="sbfui-pt-label" >default</td>
+		<td style="text-align:center;" class="sbfui-pt-label" >error</td>
+	</tr>
+	<tr>
+		<td class="sbfui-pt-label" >default</td>
+		<td><FInputAutocomplete v-model="modelValue1" v-bind="args" v-on="promisedArgs" /></td>
+		<td><FInputAutocomplete v-model="modelValue1" v-bind="args" v-on="promisedArgs" error /></td>
+	</tr>
+	<tr>
+		<td class="sbfui-pt-label" >with value</td>
+		<td><FInputAutocomplete v-model="modelValue2" v-bind="args" v-on="promisedArgs" /></td>
+		<td><FInputAutocomplete v-model="modelValue2" v-bind="args" v-on="promisedArgs" error /></td>
+	</tr>
+	<tr>
+		<td class="sbfui-pt-label" >disabled</td>
+		<td><FInputAutocomplete v-model="modelValue1" v-bind="args" v-on="promisedArgs" disabled /></td>
+		<td><FInputAutocomplete v-model="modelValue1" v-bind="args" v-on="promisedArgs" error disabled /></td>
+	</tr>
+	<tr>
+		<td class="sbfui-pt-label" >disabled<br />+ value</td>
+		<td><FInputAutocomplete v-model="modelValue2" v-bind="args" v-on="promisedArgs" disabled /></td>
+		<td><FInputAutocomplete v-model="modelValue2" v-bind="args" v-on="promisedArgs" error disabled /></td>
+	</tr>
+</tbody></table>`;
+
+
 export const States = {
+	parameters: {
+		docs: {
+			description: {
+				story: 'All visual states: empty / with value × default / error / disabled.',
+			},
+		},
+	},
 	argTypes: {
 		modelValue: { control: { type: null }},
 		disabled: { control: { type: null }},
@@ -425,33 +521,7 @@ export const States = {
 				const modelValue2 = ref('opt1');
 				return { args: newArgs, promisedArgs, modelValue1, modelValue2 };
 			},
-			template: `<table class="sbfui-preview-table" ><tbody>
-	<tr>
-		<td></td>
-		<td style="text-align:center;" class="sbfui-pt-label" >default</td>
-		<td style="text-align:center;" class="sbfui-pt-label" >error</td>
-	</tr>
-	<tr>
-		<td class="sbfui-pt-label" >default</td>
-		<td><FInputAutocomplete v-model="modelValue1" v-bind="args" v-on="promisedArgs" /></td>
-		<td><FInputAutocomplete v-model="modelValue1" v-bind="args" v-on="promisedArgs" error /></td>
-	</tr>
-	<tr>
-		<td class="sbfui-pt-label" >with value</td>
-		<td><FInputAutocomplete v-model="modelValue2" v-bind="args" v-on="promisedArgs" /></td>
-		<td><FInputAutocomplete v-model="modelValue2" v-bind="args" v-on="promisedArgs" error /></td>
-	</tr>
-	<tr>
-		<td class="sbfui-pt-label" >disabled</td>
-		<td><FInputAutocomplete v-model="modelValue1" v-bind="args" v-on="promisedArgs" disabled /></td>
-		<td><FInputAutocomplete v-model="modelValue1" v-bind="args" v-on="promisedArgs" error disabled /></td>
-	</tr>
-	<tr>
-		<td class="sbfui-pt-label" >disabled<br />+ value</td>
-		<td><FInputAutocomplete v-model="modelValue2" v-bind="args" v-on="promisedArgs" disabled /></td>
-		<td><FInputAutocomplete v-model="modelValue2" v-bind="args" v-on="promisedArgs" error disabled /></td>
-	</tr>
-</tbody></table>`,
+			template: STATES_TEMPLATE,
 		};
 	},
 	args: {
@@ -463,6 +533,13 @@ export const States = {
 
 
 export const Sizes = {
+	parameters: {
+		docs: {
+			description: {
+				story: 'Available sizes. Pixel heights are approximate and may vary with the surrounding design system tokens.',
+			},
+		},
+	},
 	argTypes: {
 		size: { control: { type: null }},
 	},
@@ -503,7 +580,14 @@ export const Sizes = {
 
 export const Scheme = {
 	name: 'Scheme (Light/Dark)',
-	parameters: { layout: 'fullscreen' },
+	parameters: {
+		layout: 'fullscreen',
+		docs: {
+			description: {
+				story: 'Component appearance in light and dark color schemes.',
+			},
+		},
+	},
 	render: (args, { argTypes, component }) => {
 		const [ , updateArgs ] = useArgs();
 		return {

@@ -5,7 +5,7 @@ import FIcon from '@/FIcon';
 
 
 const usage = `
-A layout component for grouping and aligning elements such as buttons, inputs, and selects into a single horizontal or vertical stack.
+A layout component for grouping related controls, such as buttons and inputs, into a single stack.
 
 ### Usage
 

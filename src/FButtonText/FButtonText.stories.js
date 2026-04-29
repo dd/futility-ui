@@ -8,7 +8,7 @@ import { COMPONENT_TYPES, COLOR_CHOICES } from './constants';
 
 
 const usage = `
-A text-style button component. Functionally identical to FButton, but visually appears as plain text.
+A text-style button component. It behaves like \`FButton\`, but is visually presented as inline text.
 
 ### Usage
 
@@ -56,7 +56,7 @@ export default {
 		// SLOTS
 		default: {
 			control: 'text',
-			description: 'The text is placed in the default slot.',
+			description: 'Content rendered in the default slot.',
 			table: {
 				category: 'slots',
 				type: { summary: 'vnode' },
@@ -76,7 +76,7 @@ export default {
 				},
 			},
 			options: [ undefined, ...ICON_LIST_SOLID, ...ICON_LIST_OUTLINE, ...ICON_LIST_OTHER ],
-			description: 'Icon for use inside the icon button.',
+			description: 'Icon rendered inside the button content in the preview.',
 			table: {
 				category: 'slots',
 				type: { summary: 'text' },
@@ -87,7 +87,7 @@ export default {
 		// EVENTS
 		onClick: {
 			action: 'click',
-			description: 'Click event.',
+			description: 'Emitted when the button is clicked.',
 			table: {
 				category: 'events',
 				type: { summary: null },
@@ -120,7 +120,7 @@ export const Types = {
 	parameters: {
 		docs: {
 			description: {
-				story: `The \`type\` attribute defines the button type — either a regular button or a link.
+				story: `The \`type\` prop controls which underlying element is rendered.
 
 \`\`\`html
 <FButtonText type="<type>" >Button text</FButtonText>
@@ -134,11 +134,11 @@ export const Types = {
 		props: Object.keys(argTypes),
 		components: { FButtonText },
 		setup() { return { args }},
-		template: `<p>The button supports multiple types:
-	<FButtonText v-bind="args" type="button" >regular button</FButtonText>,
+		template: `<p>The component supports several rendering modes:
+	<FButtonText v-bind="args" type="button" >button</FButtonText>,
 	<FButtonText v-bind="args" type="a" >link</FButtonText>,
 	<FButtonText v-bind="args" type="router-link" >&#x3C;router-link&#x3E;</FButtonText>
-	или <FButtonText v-bind="args" type="nuxt-link" >&#x3C;nuxt-link&#x3E;</FButtonText>
+	or <FButtonText v-bind="args" type="nuxt-link" >&#x3C;nuxt-link&#x3E;</FButtonText>
 </p>`,
 	}),
 	argTypes: {
@@ -182,7 +182,7 @@ export const Colors = {
 	parameters: {
 		docs: {
 			description: {
-				story: `The \`color\` prop defines the visual style of the button.:
+				story: `The \`color\` prop controls the button's visual style:
 
 \`\`\`html
 <FButtonText color="<color>" >Button text</FButtonText>
@@ -198,7 +198,7 @@ export const Colors = {
 		setup() {
 			return { args, COLOR_CHOICES };
 		},
-		template: `<p>Available color options:
+		template: `<p>Available color variants:
 	<template v-for="color, i in COLOR_CHOICES" :key="color" >
 		<template v-if="i > 0" >, </template>
 		<FButtonText v-bind="args" :color="color" >

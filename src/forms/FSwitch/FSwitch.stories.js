@@ -41,7 +41,7 @@ export default {
 	tags: [ 'autodocs' ],
 	argTypes: {
 		modelValue: {
-			description: 'Switch flag.',
+			description: 'Current switch value.',
 			table: {
 				category: 'props',
 				type: { summary: 'boolean' },
@@ -49,7 +49,7 @@ export default {
 		},
 		disabled: {
 			control: 'boolean',
-			description: 'Disabled flag.',
+			description: 'Whether the switch is disabled.',
 			table: {
 				category: 'props',
 				type: { summary: 'boolean' },
@@ -69,7 +69,7 @@ export default {
 			action: 'update:modelValue',
 			name: 'update:modelValue',
 			control: false,
-			description: 'Event on update value',
+			description: 'Emitted when the value changes.',
 			table: {
 				category: 'events',
 				type: { summary: null },
@@ -94,7 +94,7 @@ export const Types = {
 	parameters: {
 		docs: {
 			description: {
-				story: `The standard switch works like a checkbox - it toggles between \`true\` and \`false\` values.
+				story: `The standard switch behaves like a checkbox: it toggles between \`true\` and \`false\`.
 However, by enabling the \`nullable\` flag, you can make the switch three-state, adding a \`null\` value.`,
 			},
 		},
