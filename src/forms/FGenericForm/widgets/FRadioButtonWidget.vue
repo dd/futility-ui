@@ -22,6 +22,7 @@
 					:value="choice.value"
 					:disabled="disabled || !!choice.disabled"
 					:required="required"
+					v-bind="attrs"
 				/>
 			</FControlLabel>
 		</div>
@@ -43,7 +44,7 @@ const props = defineProps({ ...WIDGET_PROPS });
 defineEmits(WIDGET_EMITS);
 
 const { fields, error } = useWidget(model, props);
-const { name, value, disabled, required, errorText } = useWidgetField(
+const { name, value, attrs, disabled, required, errorText } = useWidgetField(
 	model, props, computed(() => fields.value[0])
 );
 </script>

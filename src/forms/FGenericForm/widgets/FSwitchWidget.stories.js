@@ -18,17 +18,6 @@ Field-level flags \`disabled\`, \`required\`, and per-field \`fieldErrors\` are 
 automatically from the meta.`;
 
 
-const DEFAULT_META = {
-	type: 'switch',
-	label: 'Enable feature',
-	helpText: 'Toggle this feature on or off.',
-	fields: [{
-		fieldName: 'feature_enabled',
-		default: false,
-	}],
-};
-
-
 export default {
 	title: 'Forms/FGenericForm/Widgets/Built-in/FSwitchWidget',
 	component: FSwitchWidgetComponent,
@@ -37,11 +26,22 @@ export default {
 		docs: { description: { component: DEFAULT_DESCRIPTION }},
 	},
 	tags: [ 'autodocs' ],
-	argTypes: WIDGET_BASE_ARG_TYPES,
+	argTypes: {
+		...WIDGET_BASE_ARG_TYPES,
+		labelLayout: {
+			description: 'Inline label layout via `FControlLabel`. Omit to use `FFormRow`\'s label slot.',
+			options: [undefined, 'label_first', 'control_first'],
+			control: 'select',
+			table: { category: 'props', subcategory: 'meta' },
+		},
+	},
 	render: makeFGFWidgetRenderer(),
 	args: {
-		meta: DEFAULT_META,
-		modelValue: getFormDefaults([DEFAULT_META], DEFAULT_WIDGETS),
+		type: 'switch',
+		label: 'Enable feature',
+		helpText: 'Toggle this feature on or off.',
+		fields: [{ fieldName: 'feature_enabled', default: false }],
+		modelValue: { feature_enabled: false },
 		layout: 'two_columns',
 		size: 'm',
 		fieldErrors: {},

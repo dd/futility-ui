@@ -82,30 +82,38 @@ export const makeRenderer = (updatableArgs) => {
 /**
  * Render function for single-widget stories inside FGenericForm.
  *
- * Wraps the story's `meta` arg (a single entry object) in an array and mounts
- * `FGenericForm`, forwarding `layout`, `size → widgetSize`, `fieldErrors → errors`,
- * and `widgets`. The `modelValue` arg is kept in sync with Storybook controls via
- * `makeUpdateArg`.
+ * Collects all args whose argType has `table.category === 'meta'` and assembles them
+ * into the single meta entry object, then wraps it in an array for FGenericForm.
+ * Forwards `layout`, `size → widgetSize`, `fieldErrors → errors`, and `widgets`.
+ * The `modelValue` arg is kept in sync with Storybook controls via `makeUpdateArg`.
  *
  * Use for Default / Errors stories where a single widget instance is shown
  * and the user can interact with the form via Storybook controls.
  */
 export const makeFGFWidgetRenderer = () => {
-	return (args) => {
+	return (args, { argTypes }) => {
 		const [ , updateArgs ] = useArgs();
+		const metaKeys = Object.keys(argTypes).filter((k) => {
+			const categoryOk = argTypes[k]?.table?.category === 'props';
+			const subcategoryOk = argTypes[k]?.table?.subcategory === 'meta';
+			return categoryOk && subcategoryOk;
+		});
 		return {
 			components: { FGenericForm },
 			setup() {
 				const modelValueArg = makeUpdateArg('modelValue', args, updateArgs);
-				const formArgs = computed(() => ({
-					'modelValue': args.modelValue,
-					[modelValueArg[0]]: modelValueArg[2],
-					'meta': [args.meta],
-					'layout': args.layout,
-					'widgetSize': args.size,
-					'errors': args.fieldErrors,
-					'widgets': args.widgets,
-				}));
+				const formArgs = computed(() => {
+					const meta = Object.fromEntries(metaKeys.map(k => [k, args[k]]));
+					return {
+						'modelValue': args.modelValue,
+						[modelValueArg[0]]: modelValueArg[2],
+						'meta': [meta],
+						'layout': args.layout,
+						'widgetSize': args.size,
+						'errors': args.fieldErrors,
+						'widgets': args.widgets,
+					};
+				});
 
 				return { formArgs };
 			},

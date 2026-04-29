@@ -13,12 +13,12 @@
 			:id="id"
 			:name="name"
 			:type="props.meta.type"
-			:placeholder="meta.placeholder"
 			:error="error"
 			:disabled="disabled"
 			:readonly="readonly"
 			:required="required"
 			:size="size"
+			v-bind="attrs"
 		/>
 		<template v-if="meta.helpText" #help>{{ meta.helpText }}</template>
 	</FFormRow>
@@ -37,7 +37,7 @@ const props = defineProps({ ...WIDGET_PROPS });
 defineEmits(WIDGET_EMITS);
 
 const { fields } = useWidget(model, props);
-const { id, name, value, disabled, readonly, required, error, errorText } = useWidgetField(
+const { id, name, value, attrs, disabled, readonly, required, error, errorText } = useWidgetField(
 	model, props, computed(() => fields.value[0])
 );
 </script>
