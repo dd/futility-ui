@@ -86,6 +86,7 @@ export function useWidget(model, props) {
  *  - `readonly`  - from field meta
  *  - `required`  - from field meta
  *  - `allowNull` - from field meta
+ *  - `attrs`     - extra HTML attributes from field meta (aria-*, data-*, placeholder, etc.)
  *  - `error`     - true when this specific field has an error; pass to the input's :error
  *  - `errorText` - this field's error message
  */
@@ -106,6 +107,8 @@ export function useWidgetField(model, props, meta) {
 	const required = computed(() => meta.value?.required ?? false);
 	const allowNull = computed(() => meta.value?.allowNull ?? false);
 
+	const attrs = computed(() => meta.value?.attrs ?? {});
+
 	const errorMsg = computed(() => {
 		const msg = (props.fieldErrors ?? {})[fieldName.value];
 		return (msg != null && msg !== '') ? msg : null;
@@ -113,5 +116,5 @@ export function useWidgetField(model, props, meta) {
 	const error = computed(() => errorMsg.value !== null);
 	const errorText = computed(() => errorMsg.value);
 
-	return { id, name, value, disabled, readonly, required, allowNull, error, errorText };
+	return { id, name, value, attrs, disabled, readonly, required, allowNull, error, errorText };
 }

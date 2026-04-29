@@ -22,6 +22,7 @@
 				:name="name"
 				:nullable="allowNull"
 				:disabled="disabled"
+				v-bind="attrs"
 			/>
 		</FControlLabel>
 		<FSwitch
@@ -31,6 +32,7 @@
 			:name="name"
 			:nullable="allowNull"
 			:disabled="disabled"
+			v-bind="attrs"
 		/>
 		<template v-if="meta.helpText" #help>{{ meta.helpText }}</template>
 	</FFormRow>
@@ -50,7 +52,7 @@ const props = defineProps({ ...WIDGET_PROPS });
 defineEmits(WIDGET_EMITS);
 
 const { fields, error } = useWidget(model, props);
-const { id, name, value, disabled, allowNull, errorText } = useWidgetField(
+const { id, name, value, attrs, disabled, allowNull, errorText } = useWidgetField(
 	model, props, computed(() => fields.value[0])
 );
 </script>
