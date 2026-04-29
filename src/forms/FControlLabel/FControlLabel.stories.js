@@ -272,7 +272,7 @@ export const Controls = {
 	parameters: {
 		docs: {
 			description: {
-				story: '`FControlLabel` is control-agnostic — it works with `FCheckbox`, `FRadioButton`, `FSwitch`, '
+				story: '`FControlLabel` is control-agnostic - it works with `FCheckbox`, `FRadioButton`, `FSwitch`, '
 					+ 'or any other element placed in the default slot.',
 			},
 		},

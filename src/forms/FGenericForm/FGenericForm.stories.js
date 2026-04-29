@@ -112,7 +112,7 @@ import { getFormDefaults, getDiff, getDataForQuery } from 'futility-ui/forms/FGe
 **\`getFormDefaults(meta, widgets?)\`** produces initial form data from the meta array.
 If a field has an explicit \`default\` key, that value is used as-is.
 If \`default\` is absent, the widget's \`normalize\` function is called with \`undefined\` to derive
-a type-appropriate empty value — e.g. \`''\` for text, \`false\` for checkbox, or \`null\` for text
+a type-appropriate empty value - e.g. \`''\` for text, \`false\` for checkbox, or \`null\` for text
 with \`allowNull: true\`. Pass \`DEFAULT_WIDGETS\` (or your merged widget map) so the correct
 per-type normaliser is used.
 

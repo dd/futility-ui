@@ -7,7 +7,7 @@ import { getFormDefaults } from '../utils';
 
 const DEFAULT_DESCRIPTION = `\`FSelectWidget\` is the built-in widget for \`type: 'select'\`.
 
-It renders \`FSelect\` inside \`FFormRow\`, driven by \`meta.choices\` — the same shape used by
+It renders \`FSelect\` inside \`FFormRow\`, driven by \`meta.choices\` - the same shape used by
 \`FRadioButtonWidget\`: \`[{ value, label, disabled? }]\`.
 
 Set \`meta.emptyOptionLabel\` to add a blank placeholder option at the top of the list
@@ -60,7 +60,7 @@ export const Default = {};
 
 
 const STATES_DESCRIPTION = `Field-level \`disabled\` flag and the \`emptyOptionLabel\` placeholder
-are both driven by meta — no extra props needed on the widget.`;
+are both driven by meta - no extra props needed on the widget.`;
 
 const STATES_META = [
 	{

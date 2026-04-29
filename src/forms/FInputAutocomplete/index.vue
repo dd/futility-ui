@@ -120,38 +120,36 @@ defineOptions({
 	name: 'FInputAutocomplete',
 	inheritAttrs: false,
 });
+/**
+ * The currently selected value (`v-model`).
+ * Changing this externally triggers `requestCurrentHandler` to resolve the matching label.
+ */
 const model = defineModel({
 	type: [ Number, String, Boolean ],
 });
+
+/**
+ * The current search query typed in the filter input (`v-model:query`).
+ * Can be bound externally to read or pre-fill the search string.
+ */
 const filterValue = defineModel('query', {
 	type: String,
 });
 const props = defineProps({
 	/**
-	 * Search handler.
+	 * Called whenever the query changes or the handler itself is replaced.
+	 * Receives `(query, page, { signal })` and must return a Promise resolving to:
 	 *
-	 * A function that receives the input query string and page number for pagination,
-	 * and returns a promise resolving to a list of options and a flag indicating if more pages are available:
-	 *
-	 * ```
+	 * ```ts
 	 * {
-	 *     options: [
-	 *         {
-	 *             value: <value>,
-	 *             label: '<label>',
-	 *             disabled: <bool>
-	 *         },
-	 *         ...
-	 *     ],
-	 *     hasNext: false
+	 *   options: { value, label, disabled? }[],
+	 *   hasNext: boolean,
 	 * }
 	 * ```
 	 *
-	 * If `null` is returned, the dropdown will not be displayed.
-	 *
-	 * If an empty array is returned, a "no options found" message will be shown.
-	 *
-	 * When the handler changes, options will be re-fetched.
+	 * Return `null` to suppress the dropdown entirely.
+	 * The `signal` is an `AbortSignal` - pass it to `fetch` to cancel the request when a newer one arrives.
+	 * When the handler prop itself changes, options are re-fetched automatically.
 	 */
 	requestHandler: {
 		type: Function,
@@ -159,42 +157,50 @@ const props = defineProps({
 	},
 
 	/**
-	 * Handler for retrieving the initially set (or externally updated) option.
-	 *
-	 * Receives the current value and should return a promise resolving to the corresponding option.
+	 * Called when a value is set externally (on mount or via `v-model`) to resolve its display label.
+	 * Receives the current value and must return a Promise resolving to the matching option `{ value, label }`.
+	 * Until the promise resolves, the raw value is shown as a fallback label.
 	 */
 	requestCurrentHandler: Function,
 
-	/** Widget size. */
+	/** Controls the height of the input. */
 	size: {
 		type: String,
 		default: 'm',
 		// validator: (type) => ['small', 'regular', 'large'].includes(type),
 	},
 
-	/** Required flag. */
+	/**
+	 * When `true`, the clear button is hidden and re-clicking the selected option does not deselect it.
+	 * Also skips the selected option during keyboard navigation.
+	 */
 	required: Boolean,
 
-	/** Disabled flag. */
+	/** Disables the input and the clear button. */
 	disabled: Boolean,
 
-	/** Error flag. */
+	/** Applies the error visual state to the input border. */
 	error: Boolean,
 
-	/** Filter input ID. */
+	/**
+	 * ID attribute for the search input.
+	 * Automatically generated via `useId()` if not provided.
+	 * Use when you need to associate an external `<label>` with the input.
+	 */
 	filterInputID: {
 		type: String,
 		default: () => { return useId(); },
 	},
 
-	/** Label shown when no value is selected. */
+	/** Text shown in the label area when no value is selected. */
 	placeholderLabel: String,
 
-	/** Placeholder text for the options filter input. */
+	/** Placeholder text for the search input inside the label area. */
 	placeholderFilter: String,
 
 	/**
-	 * Widget text labels
+	 * Overrides for UI text labels - useful for localisation.
+	 *
 	 * - `noOptions` - message shown when the options list is empty
 	 * - `clearButtonAriaLabel` - accessible label for the clear button
 	 * - `clearButtonTitle` - tooltip text for the clear button

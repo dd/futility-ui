@@ -7,7 +7,7 @@ import { getFormDefaults } from '../utils';
 
 const DEFAULT_DESCRIPTION = `\`FSwitchWidget\` is the built-in widget for \`type: 'switch'\`.
 
-It renders \`FSwitch\`, supporting both binary (boolean) and ternary (true/false/null) modes —
+It renders \`FSwitch\`, supporting both binary (boolean) and ternary (true/false/null) modes -
 set \`allowNull: true\` on the field to enable the ternary variant.
 
 By default the label is rendered in \`FFormRow\`'s \`#label\` slot, aligning the switch with
@@ -71,7 +71,7 @@ const STATES_META = [
 	{
 		type: 'switch',
 		label: 'Auto-save',
-		helpText: 'Ternary switch — allows null state.',
+		helpText: 'Ternary switch - allows null state.',
 		fields: [{ fieldName: 'auto_save', default: null, allowNull: true }],
 	},
 ];
@@ -110,34 +110,34 @@ export const Errors = {
 
 
 const LAYOUTS_DESCRIPTION = `By default (\`labelLayout\` not set) the label is placed in
-\`FFormRow\`'s \`#label\` slot — the switch sits in the right column alongside text inputs.
+\`FFormRow\`'s \`#label\` slot - the switch sits in the right column alongside text inputs.
 
 Set \`meta.labelLayout\` to \`"label_first"\` or \`"control_first"\` to render the label
 inline via \`FControlLabel\`, with the switch and label side by side.
 
 > **Note:** when \`labelLayout: "label_first"\` is used inside a two-column \`FFormRow\`,
 > the inline label width is governed by the same \`--spacing-formrow-label\` CSS custom property
-> that [FFormRow](?path=/docs/forms-fformrow--docs) uses for its own label column — so the two
+> that [FFormRow](?path=/docs/forms-fformrow--docs) uses for its own label column - so the two
 > stay visually aligned.`;
 
 const LAYOUTS_META = [
 	{
 		type: 'switch',
 		label: 'Row label',
-		helpText: 'Default — label in FFormRow slot.',
+		helpText: 'Default - label in FFormRow slot.',
 		fields: [{ fieldName: 'row_label', default: false }],
 	},
 	{
 		type: 'switch',
 		label: 'Label first',
-		helpText: 'labelLayout: "label_first" — label inline via FControlLabel.',
+		helpText: 'labelLayout: "label_first" - label inline via FControlLabel.',
 		labelLayout: 'label_first',
 		fields: [{ fieldName: 'label_first', default: false }],
 	},
 	{
 		type: 'switch',
 		label: 'Control first',
-		helpText: 'labelLayout: "control_first" — label inline via FControlLabel.',
+		helpText: 'labelLayout: "control_first" - label inline via FControlLabel.',
 		labelLayout: 'control_first',
 		fields: [{ fieldName: 'control_first', default: false }],
 	},
