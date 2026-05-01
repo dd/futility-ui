@@ -76,13 +76,13 @@ export const Sizes = {
 	parameters: {
 		docs: { description: { story: SIZES_DESCRIPTION }},
 	},
-	render: (args, { argTypes, component }) => {
+	render: (args) => {
 		const [ , updateArgs ] = useArgs();
+		const modelValueArg = makeUpdateArg('modelValue', updateArgs);
 		return {
 			name: 'FGenericFormSizesStory',
 			components: { FGenericForm },
 			setup() {
-				const modelValueArg = makeUpdateArg('modelValue', updateArgs);
 				const newArgs = computed(() => {
 					const result = { ...args };
 					delete result[modelValueArg[1]];
@@ -164,13 +164,13 @@ export const Utilities = {
 	parameters: {
 		docs: { description: { story: UTILITIES_DESCRIPTION }},
 	},
-	render: (args, { argTypes, component }) => {
+	render: (args) => {
 		const [ , updateArgs ] = useArgs();
+		const modelValueArg = makeUpdateArg('modelValue', updateArgs);
 		return {
 			name: 'FGenericFormUtilitiesStory',
 			components: { FGenericForm },
 			setup() {
-				const modelValueArg = makeUpdateArg('modelValue', updateArgs);
 				const newArgs = computed(() => {
 					const result = { ...args };
 					delete result[modelValueArg[1]];
@@ -233,13 +233,13 @@ export const Layouts = {
 	parameters: {
 		docs: { description: { story: LAYOUT_DESCRIPTION }},
 	},
-	render: (args, { argTypes, component }) => {
+	render: (args) => {
 		const [ , updateArgs ] = useArgs();
+		const modelValueArg = makeUpdateArg('modelValue', updateArgs);
 		return {
 			name: 'FGenericFormLayoutStory',
 			components: { FGenericForm },
 			setup() {
-				const modelValueArg = makeUpdateArg('modelValue', updateArgs);
 				const newArgs = computed(() => {
 					const result = { ...args };
 					delete result[modelValueArg[1]];
@@ -275,13 +275,13 @@ const SCHEME_TEMPLATE = `<div class="sbpst-scheme_preview sbpst-row" >
 export const Scheme = {
 	name: 'Scheme (Light/Dark)',
 	parameters: { layout: 'fullscreen' },
-	render: (args, { argTypes, component }) => {
+	render: (args) => {
 		const [ , updateArgs ] = useArgs();
+		const modelValueArg = makeUpdateArg('modelValue', updateArgs);
 		return {
 			name: 'FGenericFormSchemeStory',
 			components: { FGenericForm },
 			setup() {
-				const modelValueArg = makeUpdateArg('modelValue', updateArgs);
 				const newArgs = computed(() => {
 					const result = { ...args };
 					delete result[modelValueArg[1]];

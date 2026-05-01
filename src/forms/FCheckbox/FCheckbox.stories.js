@@ -1,7 +1,7 @@
 import { useArgs } from 'storybook/preview-api';
 
 import FCheckbox from '.';
-import { makeRenderer, makeUpdateArg } from '@/utils/storybook';
+import { makeRenderer, makeUpdateArg } from '@/.storybook/utils.js';
 
 
 const usage = `
@@ -79,13 +79,12 @@ export default {
 export const Default = {};
 
 export const CheckboxGroup = {
-	render: (args, { argTypes, component }) => {
+	render: (args, { component }) => {
 		const [ , updateArgs ] = useArgs();
+		const updateValue = makeUpdateArg('modelValue', updateArgs);
 		return {
 			components: { [component.name]: component },
-			props: Object.keys(argTypes),
 			setup() {
-				const updateValue = makeUpdateArg('modelValue', args, updateArgs);
 				const promisedArgs = { [updateValue[0]]: updateValue[1] };
 				return { args, promisedArgs };
 			},

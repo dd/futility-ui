@@ -1,9 +1,9 @@
 import { computed, ref } from 'vue';
 import { useArgs } from 'storybook/preview-api';
 
-import Readme from './README.md?raw';
-import { makeRenderer, makeUpdateArg } from '@/.storybook/utils.js';
+import { makeUpdateArg } from '@/.storybook/utils.js';
 import FIcon from '@/FIcon';
+import Readme from './README.md?raw';
 import FInput from './index.vue';
 import { TEXT_ALLOWED_TYPES, SIZE_CHOICES } from './constants';
 
@@ -83,13 +83,12 @@ export default {
 			},
 		},
 	},
-	render: (args, { argTypes }) => {
+	render: (args) => {
 		const [ , updateArgs ] = useArgs();
+		const modelValueArg = makeUpdateArg('modelValue', updateArgs);
 		return {
-			props: Object.keys(argTypes),
 			components: { FInput },
 			setup() {
-				const modelValueArg = makeUpdateArg('modelValue', updateArgs);
 				const newArgs = computed(() => {
 					const result = { ...args };
 					delete result['start'];
@@ -148,14 +147,13 @@ export const Types = {
 			description: { story: TYPES_DESCRIPTION },
 		},
 	},
-	render: (args, { argTypes }) => {
+	render: (args) => {
 		const [ , updateArgs ] = useArgs();
+		const modelValueArg = makeUpdateArg('modelValue', updateArgs);
 		return {
 			name: 'FInputTypesStory',
-			props: Object.keys(argTypes),
 			components: { FInput },
 			setup() {
-				const modelValueArg = makeUpdateArg('modelValue', updateArgs);
 				const newArgs = computed(() => {
 					const result = { ...args };
 					delete result['type'];
@@ -358,15 +356,14 @@ export const Sizes = {
 			description: { story: SIZES_DESCRIPTION },
 		},
 	},
-	render: (args, { argTypes }) => {
+	render: (args) => {
 		const [ , updateArgs ] = useArgs();
+		const modelValueArg = makeUpdateArg('modelValue', updateArgs);
 		return {
 			name: 'FInputSizesStory',
-			props: Object.keys(argTypes),
 			components: { FInput },
 			setup() {
 				const LABELS = [ '37px', '42px', '52px' ];
-				const modelValueArg = makeUpdateArg('modelValue', updateArgs);
 				const newArgs = computed(() => {
 					const result = { ...args };
 					delete result['size'];
@@ -432,13 +429,12 @@ export const Slots = {
 			description: { story: SLOTS_DESCRIPTION },
 		},
 	},
-	render: (args, { argTypes, component }) => {
+	render: (args) => {
 		const [ , updateArgs ] = useArgs();
+		const modelValueArg = makeUpdateArg('modelValue', updateArgs);
 		return {
-			props: Object.keys(argTypes),
 			components: { FInput, FIcon },
 			setup() {
-				const modelValueArg = makeUpdateArg('modelValue', updateArgs);
 				const newArgs = computed(() => {
 					const result = { ...args };
 					delete result['start'];
@@ -472,13 +468,12 @@ export const AttributesPassthrough = {
 			description: { story: ATTRS_DESCRIPTION },
 		},
 	},
-	render: (args, { argTypes, component }) => {
+	render: (args) => {
 		const [ , updateArgs ] = useArgs();
+		const modelValueArg = makeUpdateArg('modelValue', updateArgs);
 		return {
-			props: Object.keys(argTypes),
 			components: { FInput },
 			setup() {
-				const modelValueArg = makeUpdateArg('modelValue', updateArgs);
 				const newArgs = computed(() => {
 					const result = { ...args };
 					delete result['start'];
@@ -578,14 +573,13 @@ const SCHEME_TEMPLATE = `<div class="sbpst-scheme_preview sbpst-row" >
 export const Scheme = {
 	name: 'Scheme (Light/Dark)',
 	parameters: { layout: 'fullscreen' },
-	render: (args, { argTypes, component }) => {
+	render: (args) => {
 		const [ , updateArgs ] = useArgs();
+		const modelValueArg = makeUpdateArg('modelValue', updateArgs);
 		return {
 			name: 'FInputSchemeStory',
-			props: Object.keys(argTypes),
 			components: { FInput },
 			setup() {
-				const modelValueArg = makeUpdateArg('modelValue', updateArgs);
 				const newArgs = computed(() => {
 					const result = { ...args };
 					delete result['disabled'];

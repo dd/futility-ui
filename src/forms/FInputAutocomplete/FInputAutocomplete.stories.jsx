@@ -4,11 +4,11 @@ import { computed, ref, watch } from 'vue';
 import { useArgs } from 'storybook/preview-api';
 import { fn } from 'storybook/test';
 
-import Readme from './README.md?raw';
-import FInputAutocomplete from '.';
+import { makeUpdateArg } from '@/.storybook/utils.js';
 import FSwitch from '@/forms/FSwitch';
 import FControlLabel from '@/forms/FControlLabel';
-import { makeUpdateArg } from '@/utils/storybook';
+import Readme from './README.md?raw';
+import FInputAutocomplete from '.';
 import { SIZE_CHOICES } from './constants';
 
 
@@ -245,14 +245,13 @@ export default {
 		placeholderLabel: 'Label',
 		size: 'm',
 	},
-	render: (args, { argTypes, component }) => {
+	render: (args) => {
 		const [ , updateArgs ] = useArgs();
+		const updateValue = makeUpdateArg('modelValue', updateArgs);
+		const updateQuery = makeUpdateArg('query', updateArgs);
 		return {
-			props: Object.keys(argTypes),
 			components: { FInputAutocomplete },
 			setup() {
-				const updateValue = makeUpdateArg('modelValue', args, updateArgs);
-				const updateQuery = makeUpdateArg('query', args, updateArgs);
 				const promisedArgs = {
 					[updateValue[0]]: updateValue[1],
 					[updateQuery[0]]: updateQuery[1],
@@ -343,11 +342,12 @@ export const RequestOptions = {
 		responseNextTime: 400,
 		responseCurrentTime: 400,
 	},
-	render: (args, { argTypes, component }) => {
+	render: (args) => {
 		const [ , updateArgs ] = useArgs();
+		const updateValue = makeUpdateArg('modelValue', args, updateArgs);
+		const updateQuery = makeUpdateArg('query', args, updateArgs);
 		return {
 			name: 'FInputAutocompleteRequestOptionsStory',
-			props: Object.keys(argTypes),
 			components: { FInputAutocomplete },
 			setup() {
 				responseTime = args.responseTime;
@@ -357,8 +357,6 @@ export const RequestOptions = {
 				responseCurrentTime = args.responseCurrentTime;
 				watch(() => args.responseCurrentTime, (newValue) => { responseCurrentTime = newValue; });
 
-				const updateValue = makeUpdateArg('modelValue', args, updateArgs);
-				const updateQuery = makeUpdateArg('query', args, updateArgs);
 				const promisedArgs = {
 					[updateValue[0]]: updateValue[1],
 					[updateQuery[0]]: updateQuery[1],
@@ -379,15 +377,14 @@ export const CustomOptions = {
 			},
 		},
 	},
-	render: (args, { argTypes, component }) => {
+	render: (args) => {
 		const [ , updateArgs ] = useArgs();
+		const updateValue = makeUpdateArg('modelValue', args, updateArgs);
+		const updateQuery = makeUpdateArg('query', args, updateArgs);
 		return {
 			name: 'FInputAutocompleteCustomOptionsStory',
-			props: Object.keys(argTypes),
 			components: { FInputAutocomplete },
 			setup() {
-				const updateValue = makeUpdateArg('modelValue', args, updateArgs);
-				const updateQuery = makeUpdateArg('query', args, updateArgs);
 				const promisedArgs = {
 					[updateValue[0]]: updateValue[1],
 					[updateQuery[0]]: updateQuery[1],
@@ -418,16 +415,14 @@ export const ChangeRequestHandler = {
 			},
 		},
 	},
-	render: (args, { argTypes, component }) => {
+	render: (args) => {
 		const [ , updateArgs ] = useArgs();
+		const updateValue = makeUpdateArg('modelValue', args, updateArgs);
+		const updateQuery = makeUpdateArg('query', args, updateArgs);
 		return {
 			name: 'FInputAutocompleteChangeRequestHandlerStory',
-			props: Object.keys(argTypes),
 			components: { FInputAutocomplete, FSwitch, FControlLabel },
 			setup() {
-				const updateValue = makeUpdateArg('modelValue', args, updateArgs);
-				const updateQuery = makeUpdateArg('query', args, updateArgs);
-
 				const useAlternativFunction = ref(false);
 				const alternativeRequestHandler = (query, page, options) => {
 					return new Promise((resolve) => {
@@ -495,11 +490,11 @@ export const States = {
 		disabled: { control: { type: null }},
 		error: { control: { type: null }},
 	},
-	render: (args, { argTypes, component }) => {
+	render: (args) => {
 		const [ , updateArgs ] = useArgs();
+		const updateQuery = makeUpdateArg('query', args, updateArgs);
 		return {
 			name: 'FInputAutocompleteStatesStory',
-			props: Object.keys(argTypes),
 			components: { FInputAutocomplete },
 			setup() {
 				const newArgs = computed(() => {
@@ -512,7 +507,6 @@ export const States = {
 					} = args;  // eslint-disable-line no-unused-vars
 					return filteredArgs;
 				});
-				const updateQuery = makeUpdateArg('query', args, updateArgs);
 				const promisedArgs = {
 					[updateQuery[0]]: updateQuery[1],
 				};
@@ -543,16 +537,15 @@ export const Sizes = {
 	argTypes: {
 		size: { control: { type: null }},
 	},
-	render: (args, { argTypes, component }) => {
+	render: (args) => {
 		const [ , updateArgs ] = useArgs();
+		const updateValue = makeUpdateArg('modelValue', args, updateArgs);
+		const updateQuery = makeUpdateArg('query', args, updateArgs);
 		return {
 			name: 'FInputAutocompleteSizesStory',
-			props: Object.keys(argTypes),
 			components: { FInputAutocomplete },
 			setup() {
 				const LABELS = [ '37px', '42px', '52px' ];
-				const updateValue = makeUpdateArg('modelValue', args, updateArgs);
-				const updateQuery = makeUpdateArg('query', args, updateArgs);
 				const newArgs = computed(() => {
 					const { 'size': _, ...filteredArgs } = args;  // eslint-disable-line no-unused-vars
 					return {
@@ -588,15 +581,14 @@ export const Scheme = {
 			},
 		},
 	},
-	render: (args, { argTypes, component }) => {
+	render: (args) => {
 		const [ , updateArgs ] = useArgs();
+		const updateValue = makeUpdateArg('modelValue', args, updateArgs);
+		const updateQuery = makeUpdateArg('query', args, updateArgs);
 		return {
 			name: 'FInputAutocompleteSchemeStory',
-			props: Object.keys(argTypes),
 			components: { FInputAutocomplete },
 			setup() {
-				const updateValue = makeUpdateArg('modelValue', args, updateArgs);
-				const updateQuery = makeUpdateArg('query', args, updateArgs);
 				const promisedArgs = {
 					[updateValue[0]]: updateValue[1],
 					[updateQuery[0]]: updateQuery[1],

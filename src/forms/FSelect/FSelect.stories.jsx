@@ -3,7 +3,7 @@ import { Title, Primary, Controls, Stories, Markdown, Subtitle, Description } fr
 import { computed, ref } from 'vue';
 import { useArgs } from 'storybook/preview-api';
 
-import { makeRenderer, makeUpdateArg } from '@/utils/storybook';
+import { makeRenderer, makeUpdateArg } from '@/.storybook/utils.js';
 import FSelect from '.';
 import { SIZE_CHOICES } from './constants';
 
@@ -173,11 +173,11 @@ export const States = {
 		disabled: { control: { type: null }},
 		error: { control: { type: null }},
 	},
-	render: (args, { argTypes }) => {
+	render: (args) => {
 		const [ , updateArgs ] = useArgs();
+		const updateValue = makeUpdateArg('modelValue', updateArgs);
 		return {
 			name: 'FSelectStatesStory',
-			props: Object.keys(argTypes),
 			components: { FSelect },
 			setup() {
 				const {
@@ -187,7 +187,6 @@ export const States = {
 					'error': _c,
 					...filteredArgs
 				} = args;
-				const updateValue = makeUpdateArg('modelValue', args, updateArgs);
 				const promisedArgs = {
 					[updateValue[0]]: updateValue[1],
 				};
@@ -239,15 +238,14 @@ export const Sizes = {
 	argTypes: {
 		size: { control: { type: null }},
 	},
-	render: (args, { argTypes }) => {
+	render: (args) => {
 		const [ , updateArgs ] = useArgs();
+		const updateValue = makeUpdateArg('modelValue', updateArgs);
 		return {
 			name: 'FSelectSizesStory',
-			props: Object.keys(argTypes),
 			components: { FSelect },
 			setup() {
 				const LABELS = [ '37px', '42px', '52px' ];
-				const updateValue = makeUpdateArg('modelValue', args, updateArgs);
 				const newArgs = computed(() => {
 					const { 'size': _, ...filteredArgs } = args;  // eslint-disable-line no-unused-vars
 					return {
@@ -275,21 +273,15 @@ export const Sizes = {
 export const Scheme = {
 	name: 'Scheme (Light/Dark)',
 	parameters: { layout: 'fullscreen' },
-	render: (args, { argTypes }) => {
+	render: (args) => {
 		const [ , updateArgs ] = useArgs();
+		const updateValue = makeUpdateArg('modelValue', updateArgs);
 		return {
 			name: 'FSelectSchemeStory',
-			props: Object.keys(argTypes),
 			components: { FSelect },
 			setup() {
-				// let modelValue = makeUpdateArg('modelValue', args, updateArgs);
-				// let newArgs = computed(() => ({ ...args, 'onUpdate:modelValue': modelValue[1] }));
-				// return { args: newArgs };
-				const updateValue = makeUpdateArg('modelValue', args, updateArgs);
-				// const updateQuery = makeUpdateArg('query', args, updateArgs);
 				const promisedArgs = {
 					[updateValue[0]]: updateValue[1],
-					// [updateQuery[0]]: updateQuery[1],
 				};
 				return { args, promisedArgs };
 			},

@@ -1,7 +1,7 @@
 import { ref } from 'vue';
 import { useArgs } from 'storybook/preview-api';
 import FSwitch from '.';
-import { makeRenderer } from '@/utils/storybook';
+import { makeRenderer } from '@/.storybook/utils.js';
 
 
 const usage = `
