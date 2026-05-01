@@ -82,7 +82,7 @@ export const Sizes = {
 			name: 'FGenericFormSizesStory',
 			components: { FGenericForm },
 			setup() {
-				const modelValueArg = makeUpdateArg('modelValue', args, updateArgs);
+				const modelValueArg = makeUpdateArg('modelValue', updateArgs);
 				const newArgs = computed(() => {
 					const result = { ...args };
 					delete result[modelValueArg[1]];
@@ -170,7 +170,7 @@ export const Utilities = {
 			name: 'FGenericFormUtilitiesStory',
 			components: { FGenericForm },
 			setup() {
-				const modelValueArg = makeUpdateArg('modelValue', args, updateArgs);
+				const modelValueArg = makeUpdateArg('modelValue', updateArgs);
 				const newArgs = computed(() => {
 					const result = { ...args };
 					delete result[modelValueArg[1]];
@@ -239,7 +239,7 @@ export const Layouts = {
 			name: 'FGenericFormLayoutStory',
 			components: { FGenericForm },
 			setup() {
-				const modelValueArg = makeUpdateArg('modelValue', args, updateArgs);
+				const modelValueArg = makeUpdateArg('modelValue', updateArgs);
 				const newArgs = computed(() => {
 					const result = { ...args };
 					delete result[modelValueArg[1]];
@@ -281,7 +281,7 @@ export const Scheme = {
 			name: 'FGenericFormSchemeStory',
 			components: { FGenericForm },
 			setup() {
-				const modelValueArg = makeUpdateArg('modelValue', args, updateArgs);
+				const modelValueArg = makeUpdateArg('modelValue', updateArgs);
 				const newArgs = computed(() => {
 					const result = { ...args };
 					delete result[modelValueArg[1]];

@@ -23,7 +23,7 @@ import FGenericForm from '@/forms/FGenericForm';
  *   - the event name that emits value changes
  *   - a throttled function that updates the Storybook arg
  */
-export const makeUpdateArg = (argOption, args, updateArgs) => {
+export const makeUpdateArg = (argOption, updateArgs) => {
 	const arg = Array.isArray(argOption) ? argOption[0] : argOption;
 	const updateArg = Array.isArray(argOption) ? argOption[1] : `onUpdate:${arg}`;
 	const updateEvent = Array.isArray(argOption) ? argOption[2] : `update:${arg}`;
@@ -56,7 +56,7 @@ export const makeRenderer = (updatableArgs) => {
 			props: Object.keys(argTypes),
 			setup() {
 				const tmpUpdatableArgs = updatableArgs.map(item => {
-					return makeUpdateArg(item, args, updateArgs);
+					return makeUpdateArg(item, updateArgs);
 				});
 
 				const newArgs = computed(() => {
@@ -101,7 +101,7 @@ export const makeFGFWidgetRenderer = () => {
 		return {
 			components: { FGenericForm },
 			setup() {
-				const modelValueArg = makeUpdateArg('modelValue', args, updateArgs);
+				const modelValueArg = makeUpdateArg('modelValue', updateArgs);
 				const formArgs = computed(() => {
 					const meta = Object.fromEntries(metaKeys.map(k => [k, args[k]]));
 					return {

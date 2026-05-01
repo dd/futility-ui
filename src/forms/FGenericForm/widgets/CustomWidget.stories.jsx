@@ -186,7 +186,7 @@ export const SingleFieldWidget = {
 			name: 'FGenericFormSingleFieldWidgetStory',
 			components: { FGenericForm },
 			setup() {
-				const modelValueArg = makeUpdateArg('modelValue', args, updateArgs);
+				const modelValueArg = makeUpdateArg('modelValue', updateArgs);
 				const newArgs = computed(() => {
 					const result = {
 						...args,
@@ -328,7 +328,7 @@ export const MultiFieldWidget = {
 			name: 'FGenericFormMultiFieldStory',
 			components: { FGenericForm },
 			setup() {
-				const modelValueArg = makeUpdateArg('modelValue', args, updateArgs);
+				const modelValueArg = makeUpdateArg('modelValue', updateArgs);
 				const newArgs = computed(() => {
 					const result = {
 						...args,

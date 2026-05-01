@@ -89,7 +89,7 @@ export default {
 			props: Object.keys(argTypes),
 			components: { FInput },
 			setup() {
-				const modelValueArg = makeUpdateArg('modelValue', args, updateArgs);
+				const modelValueArg = makeUpdateArg('modelValue', updateArgs);
 				const newArgs = computed(() => {
 					const result = { ...args };
 					delete result['start'];
@@ -155,7 +155,7 @@ export const Types = {
 			props: Object.keys(argTypes),
 			components: { FInput },
 			setup() {
-				const modelValueArg = makeUpdateArg('modelValue', args, updateArgs);
+				const modelValueArg = makeUpdateArg('modelValue', updateArgs);
 				const newArgs = computed(() => {
 					const result = { ...args };
 					delete result['type'];
@@ -366,7 +366,7 @@ export const Sizes = {
 			components: { FInput },
 			setup() {
 				const LABELS = [ '37px', '42px', '52px' ];
-				const modelValueArg = makeUpdateArg('modelValue', args, updateArgs);
+				const modelValueArg = makeUpdateArg('modelValue', updateArgs);
 				const newArgs = computed(() => {
 					const result = { ...args };
 					delete result['size'];
@@ -438,7 +438,7 @@ export const Slots = {
 			props: Object.keys(argTypes),
 			components: { FInput, FIcon },
 			setup() {
-				const modelValueArg = makeUpdateArg('modelValue', args, updateArgs);
+				const modelValueArg = makeUpdateArg('modelValue', updateArgs);
 				const newArgs = computed(() => {
 					const result = { ...args };
 					delete result['start'];
@@ -478,7 +478,7 @@ export const AttributesPassthrough = {
 			props: Object.keys(argTypes),
 			components: { FInput },
 			setup() {
-				const modelValueArg = makeUpdateArg('modelValue', args, updateArgs);
+				const modelValueArg = makeUpdateArg('modelValue', updateArgs);
 				const newArgs = computed(() => {
 					const result = { ...args };
 					delete result['start'];
@@ -585,7 +585,7 @@ export const Scheme = {
 			props: Object.keys(argTypes),
 			components: { FInput },
 			setup() {
-				const modelValueArg = makeUpdateArg('modelValue', args, updateArgs);
+				const modelValueArg = makeUpdateArg('modelValue', updateArgs);
 				const newArgs = computed(() => {
 					const result = { ...args };
 					delete result['disabled'];
