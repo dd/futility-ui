@@ -17,8 +17,8 @@
 				v-if="isOpen"
 				:id="tooltipId"
 				ref="floatingRef"
-				class="fui-tooltip"
 				:class="[
+					'fui-tooltip',
 					`fui-tooltip-theme-${theme}`,
 					{ 'fui-tooltip-non_interactive': nonInteractive },
 				]"

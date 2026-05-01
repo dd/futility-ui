@@ -2,7 +2,6 @@
 	--color-tooltip-bg: light-dark(var(--fui-color-white), var(--fui-color-gray-800));
 	/*--color-tooltip-title-c: var(--fui-color-header);*/
 	/*--color-tooltip-text-c: var(--fui-color-text);*/
-	--tooltip-z: 1000;
 	--tooltip-arrow-width: 17px;
 	--tooltip-arrow-height: 8px;
 	--tooltip-offset: 8px;
@@ -16,7 +15,7 @@
 	top: 0;
 	left: 0;
 	width: max-content;
-	z-index: var(--fui-tooltip-z);
+	z-index: 1000;
 
 	&.fui-tooltip-non_interactive {
 		pointer-events: none;
