@@ -100,8 +100,8 @@ field immediately followed by a button.)
 * [x] Control label (A component that adds a label for widgets such as checkbox, radio button, etc.)
 * [x] Generic Form
 	- [ ] utils for make meta from DRF metadata
-* [ ] Modal **`<- you are here`**
-* [ ] Dropdown
+* [ ] Dropdown **`<- you are here`**
+* [ ] Modal
 * [ ] FileSelect
 * [ ] FileSelectArea
 * [ ] Textarea

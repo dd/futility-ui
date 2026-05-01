@@ -200,6 +200,24 @@ h1 {
 /* End of FSelect */
 
 
+
+/* Dropdown */
+.sbfui-dropdown-placement-preview {
+	display: grid;
+	grid-template-columns: repeat(3, auto);
+	gap: 8px;
+	padding: 60px;
+}
+
+.sbfui-dropdown-vmodel-preview {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	width: 300px;
+}
+/* End of Dropdown */
+
+
 /* FControlLabel */
 .sbfui-fcontrollabel-layouts {
 	width: 350px;
