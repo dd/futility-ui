@@ -4,6 +4,12 @@
 Positioning is handled by [@floating-ui](https://floating-ui.com/); it automatically
 flips and shifts to stay within the viewport.
 
+> **Requires [`@floating-ui/vue`](https://floating-ui.com/docs/vue) and
+> [`@vueuse/core`](https://vueuse.org/)** — install them alongside `futility-ui`:
+> ```sh
+> pnpm add @floating-ui/vue @vueuse/core
+> ```
+
 ```js
 import { FDropdown } from 'futility-ui';
 // or
