@@ -84,7 +84,7 @@
 				tabindex="-1"
 				:class="[
 					'fui-dropdown-select_option',
-					{ 'fui-iauto-option-current': option.value === model },
+					{ 'is-current': option.value === model },
 				]"
 				:disabled="option.disabled || false"
 				@click="selectOption(option)"
@@ -344,12 +344,14 @@ const selectOption = (newValue) => {
 	if (model.value != newValue.value) {
 		currentOption.value = newValue;
 		model.value = newValue.value;
-		closeDropDown();
 	} else if (!props.required) {
 		model.value = null;
 		currentOption.value = null;
-		closeDropDown();
+	} else {
+		return;
 	}
+	closeDropDown();
+	filterInputRef.value?.blur();
 };
 
 // Scroll
