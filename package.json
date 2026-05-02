@@ -31,8 +31,8 @@
       "import": "./dist/index.es.js"
     },
     "./FLoader": {
-      "require": "./dist/FLoader.cjs.js",
-      "import": "./dist/FLoader.es.js"
+      "require": "./dist/FLoader/index.cjs.js",
+      "import": "./dist/FLoader/index.es.js"
     },
     "./FIcon": {
       "require": "./dist/FIcon/index.cjs.js",
