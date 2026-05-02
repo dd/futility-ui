@@ -229,7 +229,12 @@ export default defineConfig({
 					vue: 'Vue',
 				},
 				assetFileNames: (assetInfo) => {
-					if (assetInfo.name.endsWith('.css')) {
+					const name = assetInfo.name
+						?? assetInfo.names?.[0]
+						?? assetInfo.originalFileNames?.[0]
+						?? '';
+
+					if (name.endsWith('.css')) {
 						return '[name][extname]';
 					}
 
