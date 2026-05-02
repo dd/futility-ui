@@ -1,13 +1,10 @@
 @theme {
 	--iauto-dd-minheight: 40px;
 	--iauto-dd-maxheight: 197px;
-	--color-iauto-dd-o-h: light-dark(var(--fui-color-gray-100), var(--fui-color-gray-600));
-	--color-iauto-dd-o-c: light-dark(var(--fui-color-gray-500), var(--fui-color-gray-400));
-	--color-iauto-dd-o-d: light-dark(var(--fui-color-gray-300), var(--fui-color-gray-600));
-	--color-iauto-dd-oc-c: light-dark(var(--fui-color-primary-700), var(--fui-color-primary-500));
 	--color-iauto-dd-empty: var(--fui-color-gray-400);
 }
 
+/* Input ****************************************/
 .fui-input-autocomplete {
 	position: relative;
 
@@ -165,118 +162,6 @@
 		}
 	}
 
-	/* Drop Down ********************************/
-	.fui-iauto-dropdown {
-		z-index: 1;
-		position: absolute;
-		/* to flip on other side look FDropDown */
-		top: calc(100% + var(--fui-spacing) * 2);
-
-		box-sizing: border-box;
-		width: 100%;
-		max-height: var(--fui-iauto-dd-maxheight);
-		min-height: var(--fui-iauto-dd-minheight);
-		padding: calc(var(--fui-spacing) * 2);
-		overflow-y: auto;
-
-		@apply fui:dropdown-wrapper;
-
-		> *:not(:first-child) {
-			margin-top: calc(var(--fui-spacing) * 2);
-		}
-	}
-
-	/* Loaders */
-
-	/* Loader next */
-	.fui-iauto-option-loader {
-		height: 30px;
-		text-align: center;
-		padding: 0;
-
-		.fui-loader {
-			display: inline;
-			height: 100%;
-		}
-	}
-
-	/* Loader options */
-	.fui-iauto-options_loading {
-		min-height: 120px;
-
-		.fui-iauto-option-loader {
-			position: absolute;
-			top: calc(50% - 20px);
-			left: calc(50% - 20px);
-			height: 40px;
-		}
-
-		.fui-iauto-option {
-			opacity: .5;
-			pointer-events: none;
-		}
-	}
-
-	/* Options */
-	.fui-iauto-option {
-		box-sizing: border-box;
-		display: block;
-		max-width: 100%;
-		width: 100%;
-		padding: calc(var(--fui-spacing) * 1) calc(var(--fui-spacing) * 2);
-
-		border: none;
-		background-color: transparent;
-		@apply fui:rounded-sm;
-
-		@apply fui:text-sm;
-		@apply fui:text-iauto-dd-o-c;
-		font-weight: normal;
-		text-align: left;
-		line-height: 100%;
-		letter-spacing: 0.015em;
-		text-overflow: ellipsis;
-		white-space: nowrap;
-		overflow: hidden;
-
-		@apply fui:outline-focus-prepear;
-		cursor: pointer;
-
-		/* Focus */
-		&:not(:disabled):hover {
-			@apply fui:bg-iauto-dd-o-h;
-		}
-
-		&[aria-selected="true"],
-		&:focus-visible {
-			@apply fui:outline-focus;
-		}
-
-		/* Current  */
-		&.fui-iauto-option-current {
-			@apply fui:text-iauto-dd-oc-c;
-		}
-
-		/* Disabled option */
-		&:disabled {
-			@apply fui:text-iauto-dd-o-d;
-			cursor: default;
-		}
-	}
-
-	/* Empty text */
-	.fui-iauto-option-empty {
-		margin-top: calc(var(--fui-spacing) * 3);
-		margin-bottom: calc(var(--fui-spacing) * 3);
-
-		text-align: center;
-		@apply fui:text-sm;
-		line-height: 100%;
-		font-weight: normal;
-		letter-spacing: 0.015em;
-		@apply fui:text-iauto-dd-empty;
-	}
-
 	/* States ***********************************/
 
 	/* Disabled */
@@ -331,6 +216,65 @@
 		&.has-value {
 			@apply fui:text-input-ced;
 		}
+	}
+}
+
+
+/* Drop Down ************************************/
+.fui-iauto-dropdown {
+	max-height: var(--fui-iauto-dd-maxheight);
+	min-height: var(--fui-iauto-dd-minheight);
+	overflow-y: auto;
+	gap: calc(var(--fui-spacing) * 2);
+
+	/* Loaders */
+
+	/* Loader next */
+	.fui-iauto-option-loader {
+		height: 30px;
+		text-align: center;
+		padding: 0;
+
+		.fui-loader {
+			display: inline;
+			height: 100%;
+		}
+	}
+
+	/* Loader options */
+	&.fui-iauto-options_loading {
+		min-height: 120px;
+
+		.fui-iauto-option-loader {
+			position: absolute;
+			top: calc(50% - 20px);
+			left: calc(50% - 20px);
+			height: 40px;
+		}
+
+		.fui-dropdown-select_option {
+			opacity: .5;
+			pointer-events: none;
+		}
+	}
+
+	/* Options */
+	.fui-dropdown-select_option {
+		padding: calc(var(--fui-spacing) * 1) calc(var(--fui-spacing) * 2);
+		flex-shrink: 0;
+	}
+
+	/* Empty text */
+	.fui-iauto-option-empty {
+		margin-top: calc(var(--fui-spacing) * 3);
+		margin-bottom: calc(var(--fui-spacing) * 3);
+
+		text-align: center;
+		@apply fui:text-sm;
+		line-height: 100%;
+		font-weight: normal;
+		letter-spacing: 0.015em;
+		@apply fui:text-iauto-dd-empty;
 	}
 }
 
