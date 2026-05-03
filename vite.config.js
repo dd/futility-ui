@@ -204,6 +204,7 @@ export default defineConfig({
 		__VERSION__: JSON.stringify(version),
 	},
 	build: {
+		cssTarget: ['chrome123', 'firefox120', 'safari17.5'],
 		lib: {
 			name: 'Futility UI',
 			entry: {
