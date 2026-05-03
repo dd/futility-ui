@@ -1,0 +1,122 @@
+@theme {
+	--color-textarea-c: light-dark(var(--fui-color-gray-900), var(--fui-color-white));
+	--color-textarea-b: light-dark(var(--fui-color-gray-300), var(--fui-color-gray-600));
+	--color-textarea-bg: light-dark(var(--fui-color-gray-50), var(--fui-color-gray-700));
+	--color-textarea-p: light-dark(var(--fui-color-gray-500), var(--fui-color-gray-400));
+	/* focus */
+	--color-textarea-bf: var(--fui-color-primary-600);
+	/* disabled */
+	--color-textarea-cd: light-dark(var(--fui-color-gray-400), var(--fui-color-gray-500));
+	--color-textarea-bd: light-dark(var(--fui-color-gray-200), var(--fui-color-gray-700));
+	--color-textarea-bgd: light-dark(var(--fui-color-gray-50), var(--fui-color-gray-800));
+	--color-textarea-pd: light-dark(var(--fui-color-gray-200), var(--fui-color-gray-600));
+
+	/* error */
+	--color-textarea-ce: light-dark(var(--fui-color-red-700), var(--fui-color-red-500));
+	--color-textarea-be: var(--fui-color-red-500);
+	--color-textarea-bge: light-dark(var(--fui-color-red-50), var(--fui-color-gray-800));
+	--color-textarea-pe: light-dark(var(--fui-color-red-400), var(--fui-color-red-700));
+
+	/* error + disabled */
+	--color-textarea-ced: light-dark(var(--fui-color-red-400), var(--fui-color-red-900));
+	--color-textarea-bed: light-dark(var(--fui-color-red-200), var(--fui-color-red-950));
+	--color-textarea-bged: light-dark(var(--fui-color-red-50), var(--fui-color-gray-900));
+	--color-textarea-ped: light-dark(var(--fui-color-red-200), var(--fui-color-red-950));
+}
+
+
+.fui-textarea {
+	box-sizing: border-box;
+	resize: vertical;
+
+	border: 1px solid;
+	@apply fui:border-textarea-b;
+	@apply fui:rounded-lg;
+	@apply fui:bg-textarea-bg;
+
+	@apply fui:font-sans;
+	font-weight: 400;
+	letter-spacing: 0.015em;
+	@apply fui:text-textarea-c;
+
+	@apply fui:outline-focus-prepear;
+	transition-property: outline-color, border-color;
+	transition-duration: var(--fui-transition-duration-default);
+	will-change: outline-color, border-color;
+
+	&::placeholder {
+		@apply fui:text-textarea-p;
+	}
+
+	/* Focus */
+	&:focus {
+		@apply fui:border-textarea-bf;
+	}
+
+	&:focus-visible {
+		@apply fui:outline-focus;
+	}
+
+	/* Disabled */
+	&:disabled {
+		@apply fui:text-textarea-cd;
+		@apply fui:border-textarea-bd;
+		@apply fui:bg-textarea-bgd;
+	}
+
+	&:disabled::placeholder {
+		@apply fui:text-textarea-pd;
+	}
+
+	/* Error */
+	&.has-error {
+		@apply fui:text-textarea-ce;
+		@apply fui:border-textarea-be;
+		@apply fui:bg-textarea-bge;
+
+		&::placeholder {
+			@apply fui:text-textarea-pe;
+		}
+
+		/* Error + Focus */
+		&:focus {
+			@apply fui:border-textarea-be;
+		}
+
+		&:focus-visible {
+			@apply fui:outline-focus-error;
+		}
+
+		/* Error + Disabled */
+		&:disabled {
+			@apply fui:text-textarea-ced;
+			@apply fui:border-textarea-bed;
+			@apply fui:bg-textarea-bged;
+		}
+
+		&:disabled::placeholder {
+			@apply fui:text-textarea-ped;
+		}
+	}
+}
+
+
+/* Sizes ****************************************/
+
+.fui-textarea-size-s {
+	font-size: theme(text.sm);
+	line-height: 150%;
+	padding: 7px 16px;
+}
+
+.fui-textarea-size-m {
+	font-size: theme(text.sm);
+	line-height: 150%;
+	padding: 9.5px 16px;
+}
+
+.fui-textarea-size-xl {
+	font-size: theme(text.base);
+	line-height: 150%;
+	padding: 13px 16px;
+}

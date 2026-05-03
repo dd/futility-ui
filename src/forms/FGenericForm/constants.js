@@ -6,6 +6,7 @@ const FRadioButtonWidget = defineAsyncComponent(() => import('./widgets/FRadioBu
 const FSwitchWidget = defineAsyncComponent(() => import('./widgets/FSwitchWidget.vue'));
 const FSelectWidget = defineAsyncComponent(() => import('./widgets/FSelectWidget.vue'));
 const FAutocompleteWidget = defineAsyncComponent(() => import('./widgets/FAutocompleteWidget.vue'));
+const FTextareaWidget = defineAsyncComponent(() => import('./widgets/FTextareaWidget.vue'));
 
 
 export const LAYOUT_CHOICES = [
@@ -87,6 +88,13 @@ const AUTOCOMPLETE_WIDGETS = {
 	},
 };
 
+const TEXTAREA_WIDGETS = {
+	textarea: {
+		component: FTextareaWidget,
+		normalize: (value, field) => field?.allowNull ? (value ?? null) : (value ?? ''),
+	},
+};
+
 /**
  * Built-in widget registry.
  * type → { component, normalize? }
@@ -101,4 +109,5 @@ export const DEFAULT_WIDGETS = {
 	...SWITCH_WIDGETS,
 	...SELECT_WIDGETS,
 	...AUTOCOMPLETE_WIDGETS,
+	...TEXTAREA_WIDGETS,
 };

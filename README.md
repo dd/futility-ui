@@ -101,10 +101,10 @@ field immediately followed by a button.)
 * [x] Generic Form
 	- [ ] utils for make meta from DRF metadata
 * [x] Dropdown
+* [x] Textarea
 * [ ] Modal **`<- you are here`**
 * [ ] FileSelect
 * [ ] FileSelectArea
-* [ ] Textarea
 * [ ] Number picker
 * [ ] Tree Editor
 * [ ] MultiSelect
