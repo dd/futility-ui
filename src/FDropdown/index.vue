@@ -1,5 +1,6 @@
 <template>
 	<span
+		v-if="!props.triggerRef"
 		ref="triggerWrapperRef"
 		style="display: contents;"
 	>
@@ -98,13 +99,34 @@ const props = defineProps({
 		type: [ String, Object ],
 		default: 'body',
 	},
+
+	/**
+	 * External trigger element. When provided, the `trigger` slot is not rendered
+	 * and this element is used as the anchor instead.
+	 * Accepts an `HTMLElement`, a Vue component instance, or a template ref object.
+	 */
+	triggerRef: {
+		type: Object,
+		default: null,
+	},
 });
 const emit = defineEmits([ 'show', 'hide' ]);
 
 const triggerWrapperRef = ref(null);
 const floatingRef = ref(null);
 
-const triggerEl = computed(() => triggerWrapperRef.value?.firstElementChild ?? null);
+const resolveEl = (value) => {
+	if (!value) return null;
+	if (value.$el) return value.$el; // component instance
+	if ('value' in value) return value.value?.$el ?? value.value; // template ref
+	return value; // raw HTMLElement
+};
+
+const triggerEl = computed(() =>
+	props.triggerRef
+		? resolveEl(props.triggerRef)
+		: (triggerWrapperRef.value?.firstElementChild ?? null),
+);
 
 const { floatingStyles, placement: currentPlacement } = useFloating(
 	triggerEl,
