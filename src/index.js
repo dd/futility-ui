@@ -13,6 +13,7 @@ import FControlLabel from './forms/FControlLabel';
 import FDropdown from './FDropdown';
 import FTooltip from './FTooltip';
 import { vTooltip } from './FTooltip/directive';
+import FTextarea from './forms/FTextarea';
 import FGenericForm from './forms/FGenericForm';
 
 
@@ -29,6 +30,7 @@ export {
 	FSelect,
 	FStack,
 	FControlLabel,
+	FTextarea,
 	FDropdown,
 	FTooltip,
 	vTooltip,
@@ -51,6 +53,7 @@ const components = {
 	FSelect,
 	FStack,
 	FControlLabel,
+	FTextarea,
 	FDropdown,
 	FTooltip,
 	FGenericForm,

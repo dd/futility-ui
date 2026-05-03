@@ -154,6 +154,14 @@
       "require": "./dist/forms/FGenericForm/useWidget.cjs.js",
       "import": "./dist/forms/FGenericForm/useWidget.es.js"
     },
+    "./forms/FTextarea": {
+      "require": "./dist/forms/FTextarea/index.cjs.js",
+      "import": "./dist/forms/FTextarea/index.es.js"
+    },
+    "./forms/FTextarea/constants": {
+      "require": "./dist/forms/FTextarea/constants.cjs.js",
+      "import": "./dist/forms/FTextarea/constants.es.js"
+    },
     "./styles/theme.tailwind.css": "./dist/styles/theme.tailwind.css",
     "./styles/components.css": "./dist/styles/components.css",
     "./styles/components.tailwind.css": "./dist/styles/components.tailwind.css",
