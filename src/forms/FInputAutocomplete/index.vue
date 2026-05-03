@@ -58,6 +58,7 @@
 			:class="[
 				'fui-iauto-dropdown',
 				{ 'fui-iauto-options_loading': loadingPage == 1 },
+				dropdownClass,
 			]"
 			role="listbox"
 			tabindex="-1"
@@ -212,6 +213,15 @@ const props = defineProps({
 	texts: {
 		type: Object,
 		default: () => ({}),
+	},
+
+	/**
+	 * Extra class(es) applied to the dropdown panel. Accepts any value valid for Vue's `:class`
+	 * binding.
+	 */
+	dropdownClass: {
+		type: [ String, Array, Object ],
+		default: null,
 	},
 });
 const attrs = useAttrs();
