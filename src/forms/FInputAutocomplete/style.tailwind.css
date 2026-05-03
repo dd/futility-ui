@@ -8,39 +8,35 @@
 .fui-input-autocomplete {
 	position: relative;
 
-	.fui-iauto-label_wrapper {
-		position: relative;
+	display: block;
+	box-sizing: border-box;
 
-		display: block;
-		box-sizing: border-box;
+	border: 1px solid;
+	@apply fui:border-input-b;
+	@apply fui:rounded-lg;
+	@apply fui:bg-input-bg;
 
-		border: 1px solid;
-		@apply fui:border-input-b;
-		@apply fui:rounded-lg;
-		@apply fui:bg-input-bg;
+	@apply fui:font-sans;
+	font-weight: 400;
+	letter-spacing: 0.015em;
+	@apply fui:text-input-p;
+	@apply fui:outline-focus-prepear;
 
-		@apply fui:font-sans;
-		font-weight: 400;
-		letter-spacing: 0.015em;
-		@apply fui:text-input-p;
-		@apply fui:outline-focus-prepear;
+	transition-property: outline-color, border-color;
+	transition-duration: var(--fui-transition-duration-default);
+	will-change: outline-color, border-color;
 
-		transition-property: outline-color, border-color;
-		transition-duration: var(--fui-transition-duration-default);
-		will-change: outline-color, border-color;
+	&.has-value {
+		@apply fui:text-input-c;
+	}
 
-		&.has-value {
-			@apply fui:text-input-c;
-		}
+	/* Focus */
+	&:has(.fui-iauto-query_input:focus) {
+		@apply fui:border-input-bf;
+	}
 
-		/* Focus */
-		&:has(.fui-iauto-query_input:focus) {
-			@apply fui:border-input-bf;
-		}
-
-		&:has(.fui-iauto-query_input:focus-visible) {
-			@apply fui:outline-focus;
-		}
+	&:has(.fui-iauto-query_input:focus-visible) {
+		@apply fui:outline-focus;
 	}
 
 	.fui-iauto-query_input {
@@ -165,7 +161,7 @@
 	/* States ***********************************/
 
 	/* Disabled */
-	&:has(.fui-iauto-input:disabled) .fui-iauto-label_wrapper {
+	&:has(.fui-iauto-input:disabled) {
 		@apply fui:text-input-pd;
 		@apply fui:border-input-bd;
 		@apply fui:bg-input-bgd;
@@ -180,7 +176,7 @@
 	}
 
 	/* Errors */
-	.fui-iauto-label_wrapper.has-error {
+	&.has-error {
 		@apply fui:text-input-pe;
 		@apply fui:border-input-be;
 		@apply fui:bg-input-bge;
@@ -208,7 +204,7 @@
 	}
 
 	/* Error + Disabled */
-	&:has(.fui-iauto-input:disabled) .fui-iauto-label_wrapper.has-error {
+	&:has(.fui-iauto-input:disabled).has-error {
 		@apply fui:text-input-ped;
 		@apply fui:border-input-bed;
 		@apply fui:bg-input-bged;
