@@ -4,11 +4,7 @@
 Positioning is handled by [@floating-ui](https://floating-ui.com/); it automatically
 flips and shifts to stay within the viewport.
 
-> **Requires [`@floating-ui/vue`](https://floating-ui.com/docs/vue)** — install it
-> alongside `futility-ui`:
-> ```sh
-> pnpm add @floating-ui/vue
-> ```
+> **Requires [@floating-ui/vue](https://floating-ui.com/docs/vue)**
 
 
 ### Component (simple)

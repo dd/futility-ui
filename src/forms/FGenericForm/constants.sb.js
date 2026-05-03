@@ -10,7 +10,7 @@ import { INPUT_WIDGET_TYPES, SIZE_CHOICES } from './constants.js';
  */
 export const META_BASE_ARG_TYPES = {
 	type: {
-		description: 'Widget type identifier — used by FGenericForm to route to the correct widget.',
+		description: 'Widget type identifier - used by FGenericForm to route to the correct widget.',
 		control: false,
 		table: { category: 'props', subcategory: 'meta' },
 	},
