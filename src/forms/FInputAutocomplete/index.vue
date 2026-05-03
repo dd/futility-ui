@@ -5,8 +5,49 @@
 			attrs.class,
 			'fui-input-autocomplete',
 			`fui-iauto-size-${size}`,
+			{
+				'has-error': error,
+				'has-value': model,
+			},
 		]"
 	>
+		<input
+			v-model="filterValue"
+			ref="filterInputRef"
+			:id="filterInputID"
+			type="text"
+			class="fui-iauto-query_input"
+			:disabled="disabled"
+			role="searchbox"
+			:aria-expanded="showOptions.toString()"
+			aria-haspopup="listbox"
+			:aria-controls="`listbox-${filterInputID}`"
+			:aria-activedescendant="highlightedOptionValue"
+			:placeholder="placeholderFilter"
+			@focus="openDropDown"
+			@keydown="handleKeydown"
+			@blur="handleBlur"
+		>
+		<div class="fui-iauto-label" >
+			<label
+				class="fui-iauto-label_text"
+				:for="filterInputID"
+			>
+				{{ (currentOption && currentOption.label) || model || placeholderLabel }}
+			</label>
+			<button
+				v-if="model && !required"
+				type="button"
+				class="fui-iauto-label_remove"
+				:aria-label="resolvedTexts.clearButtonAriaLabel"
+				:title="resolvedTexts.clearButtonTitle"
+				:disabled="disabled"
+				@click.stop="clearSelect"
+			>
+				<FIcon name="close" />
+			</button>
+		</div>
+
 		<FDropdown
 			v-model:open="showOptions"
 			:id="`listbox-${filterInputID}`"
@@ -20,58 +61,10 @@
 			]"
 			role="listbox"
 			tabindex="-1"
+			:triggerRef="fInputWidget"
 			@mousedown.prevent
 			@scroll="handleScroll"
 		>
-			<template #trigger>
-				<div
-					:class="[
-						'fui-iauto-label_wrapper',
-						{
-							'has-error': error,
-							'has-value': model,
-						},
-					]"
-				>
-					<input
-						v-model="filterValue"
-						ref="filterInputRef"
-						:id="filterInputID"
-						type="text"
-						class="fui-iauto-query_input"
-						:disabled="disabled"
-						role="searchbox"
-						:aria-expanded="showOptions.toString()"
-						aria-haspopup="listbox"
-						:aria-controls="`listbox-${filterInputID}`"
-						:aria-activedescendant="highlightedOptionValue"
-						:placeholder="placeholderFilter"
-						@focus="openDropDown"
-						@keydown="handleKeydown"
-						@blur="handleBlur"
-					>
-					<div class="fui-iauto-label" >
-						<label
-							class="fui-iauto-label_text"
-							:for="filterInputID"
-						>
-							{{ (currentOption && currentOption.label) || model || placeholderLabel }}
-						</label>
-						<button
-							v-if="model && !required"
-							type="button"
-							class="fui-iauto-label_remove"
-							:aria-label="resolvedTexts.clearButtonAriaLabel"
-							:title="resolvedTexts.clearButtonTitle"
-							:disabled="disabled"
-							@click.stop="clearSelect"
-						>
-							<FIcon name="close" />
-						</button>
-					</div>
-				</div>
-			</template>
-
 			<button
 				v-for="(option, index) in optionList"
 				:key="option.value"
