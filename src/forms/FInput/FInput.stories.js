@@ -1,36 +1,13 @@
 import { computed, ref } from 'vue';
 import { useArgs } from 'storybook/preview-api';
 
-import { makeUpdateArg } from '@/utils/storybook';
+import { makeUpdateArg } from '@/.storybook/utils.js';
 import FIcon from '@/FIcon';
+import Readme from './README.md?raw';
 import FInput from './index.vue';
 import { TEXT_ALLOWED_TYPES, SIZE_CHOICES } from './constants';
 
 const ALL_ALLOWED_TYPES = TEXT_ALLOWED_TYPES.concat([ 'password' ]);
-
-
-const usage = `
-\`FInput\` is a versatile input component with built-in styling, validation states, and slot support
-for icons and actions.
-
-### Usage
-
-Import the component:
-
-\`\`\`js
-import { FInput } from 'futility-ui'
-// or
-import FInput from 'futility-ui/forms/FInput'
-\`\`\`
-
-Use it in your template:
-
-\`\`\`html
-<FInput v-model="value" name="finput-1" />
-\`\`\`
-
-That's it!
-`;
 
 
 export default {
@@ -39,9 +16,7 @@ export default {
 	parameters: {
 		layout: 'centered',
 		docs: {
-			description: {
-				component: usage,
-			},
+			description: { component: Readme.replace(/^# .+\n?/m, '') },
 		},
 	},
 	tags: [ 'autodocs' ],
@@ -108,6 +83,28 @@ export default {
 			},
 		},
 	},
+	render: (args) => {
+		const [ , updateArgs ] = useArgs();
+		const modelValueArg = makeUpdateArg('modelValue', updateArgs);
+		return {
+			components: { FInput },
+			setup() {
+				const newArgs = computed(() => {
+					const result = { ...args };
+					delete result['start'];
+					delete result['end'];
+					delete result[modelValueArg[1]];
+					result[modelValueArg[0]] = modelValueArg[2];
+					return result;
+				});
+				return { args: newArgs };
+			},
+			template: `<FInput v-bind="args" placeholder="Placeholder" >
+		<template v-if="args.start" v-slot:start >{{ args.start }}</template>
+		<template v-if="args.end" v-slot:end >{{ args.end }}</template>
+	</FInput>`,
+		};
+	},
 	args: {
 		modelValue: '',
 		type: 'text',
@@ -116,64 +113,59 @@ export default {
 		start: '',
 		end: '',
 	},
-	render: (args, { argTypes, component }) => {
-		const [ , updateArgs ] = useArgs();
-		return {
-			props: Object.keys(argTypes),
-			components: { FInput },
-			setup() {
-				const updateValue = makeUpdateArg('modelValue', args, updateArgs);
-				const promisedArgs = { [updateValue[0]]: updateValue[1] };
-				return { args, promisedArgs };
-			},
-			template: `<FInput v-bind="args" v-on="promisedArgs" placeholder="Placeholder" >
-		<template v-if="args.start" v-slot:start >{{ args.start }}</template>
-		<template v-if="args.end" v-slot:end >{{ args.end }}</template>
-	</FInput>`,
-		};
-	},
 };
 
 
 export const Default = {};
 
 
-export const Types = {
-	parameters: {
-		docs: {
-			description: {
-				story: `The \`type\` prop defines the input’s behavior, validation, and appearance.
+const TYPES_DESCRIPTION = `The \`type\` prop defines the input’s behavior, validation, and appearance.
 
 \`FInput\` supports the following types: _${ALL_ALLOWED_TYPES.join('_, _')}_.
 
 \`\`\`html
 <FInput type="<type>" />
-\`\`\``,
-			},
-		},
-	},
-	render: (args, { argTypes, component }) => {
-		const [ , updateArgs ] = useArgs();
-		return {
-			name: 'FInputTypesStory',
-			props: Object.keys(argTypes),
-			components: { FInput },
-			setup() {
-				const updateValue = makeUpdateArg('modelValue', args, updateArgs);
-				const promisedArgs = { [updateValue[0]]: updateValue[1] };
-				return { args, promisedArgs, ALL_ALLOWED_TYPES };
-			},
-			template: `<table class="sbfui-preview-table" ><tbody>
+\`\`\``;
+
+
+const TYPES_TEMPLATE = `<table class="sbfui-preview-table" ><tbody>
 	<tr v-for="type in ALL_ALLOWED_TYPES" :key="type" >
 		<td class="sbfui-pt-label" >{{ type }}</td>
 		<td>
-			<FInput v-bind="args" v-on="promisedArgs" :type="type" placeholder="Placeholder" >
+			<FInput v-bind="args" :type="type" placeholder="Placeholder" >
 				<template v-if="args.start" v-slot:start >{{ args.start }}</template>
 				<template v-if="args.end" v-slot:end >{{ args.end }}</template>
 			</FInput>
 		</td>
 	</tr>
-</tbody></table>`,
+</tbody></table>`;
+
+
+export const Types = {
+	parameters: {
+		docs: {
+			description: { story: TYPES_DESCRIPTION },
+		},
+	},
+	render: (args) => {
+		const [ , updateArgs ] = useArgs();
+		const modelValueArg = makeUpdateArg('modelValue', updateArgs);
+		return {
+			name: 'FInputTypesStory',
+			components: { FInput },
+			setup() {
+				const newArgs = computed(() => {
+					const result = { ...args };
+					delete result['type'];
+					delete result['start'];
+					delete result['end'];
+					delete result[modelValueArg[1]];
+					result[modelValueArg[0]] = modelValueArg[2];
+					return result;
+				});
+				return { args: newArgs, ALL_ALLOWED_TYPES };
+			},
+			template: TYPES_TEMPLATE,
 		};
 	},
 	argTypes: {
@@ -185,32 +177,7 @@ export const Types = {
 };
 
 
-export const States = {
-	argTypes: {
-		modelValue: { control: { type: null }},
-		disabled: { control: { type: null }},
-		error: { control: { type: null }},
-		type: { control: { type: null }},
-	},
-	render: (args, { argTypes, component }) => {
-		const [ , updateArgs ] = useArgs();
-		return {
-			name: 'FInputStatesStory',
-			props: Object.keys(argTypes),
-			components: { FInput },
-			setup() {
-				const {
-					modelValue,
-					'update:modelValue': _a,
-					'disabled': _b,
-					'error': _c,
-					...filteredArgs
-				} = args;  // eslint-disable-line no-unused-vars
-				const modelValue1 = ref();
-				const modelValue2 = ref('Brown fox');
-				return { args: filteredArgs, modelValue1, modelValue2 };
-			},
-			template: `<table class="sbfui-preview-table" ><tbody>
+const STATES_TEMPLATE = `<table class="sbfui-preview-table" ><tbody>
 	<tr>
 		<td></td>
 		<td style="text-align:center;" class="sbfui-pt-label" >default</td>
@@ -316,7 +283,37 @@ export const States = {
 			</FInput>
 		</td>
 	</tr>
-</tbody></table>`,
+</tbody></table>`;
+
+
+export const States = {
+	argTypes: {
+		modelValue: { control: { type: null }},
+		disabled: { control: { type: null }},
+		error: { control: { type: null }},
+		type: { control: { type: null }},
+	},
+	render: (args, { argTypes }) => {
+		const [ , updateArgs ] = useArgs();
+		return {
+			name: 'FInputStatesStory',
+			props: Object.keys(argTypes),
+			components: { FInput },
+			setup() {
+				const {
+					modelValue,
+					'update:modelValue': _a,
+					'disabled': _b,
+					'error': _c,
+					'start': _d,
+					'end': _e,
+					...filteredArgs
+				} = args;  // eslint-disable-line no-unused-vars
+				const modelValue1 = ref();
+				const modelValue2 = ref('Brown fox');
+				return { args: filteredArgs, modelValue1, modelValue2 };
+			},
+			template: STATES_TEMPLATE,
 		};
 	},
 	args: {
@@ -328,11 +325,7 @@ export const States = {
 };
 
 
-export const Sizes = {
-	parameters: {
-		docs: {
-			description: {
-				story: `The \`size\` prop defines the input height and padding:
+const SIZES_DESCRIPTION = `The \`size\` prop defines the input height and padding:
 
 \`\`\`html
 <FInput size="<size>" />
@@ -341,34 +334,48 @@ export const Sizes = {
 You can also specify any custom size value.
 In that case, the input automatically receives the class \`fui-input-size-<size>\`,
 which you can use to apply your own styles.
-`,
-			},
-		},
-	},
-	render: (args, { argTypes, component }) => {
-		const [ , updateArgs ] = useArgs();
-		return {
-			name: 'FInputSizesStory',
-			props: Object.keys(argTypes),
-			components: { FInput },
-			setup() {
-				const LABELS = [ '37px', '42px', '52px' ];
-				const updateValue = makeUpdateArg('modelValue', args, updateArgs);
-				const promisedArgs = { [updateValue[0]]: updateValue[1] };
-				return { args, promisedArgs, LABELS, SIZE_CHOICES };
-			},
-			template: `<table class="sbfui-preview-table" ><tbody>
+`;
+
+const SIZES_TEMPLATE = `<table class="sbfui-preview-table" ><tbody>
 	<tr v-for="size, i in SIZE_CHOICES" :key="size[0]" >
 		<td class="sbfui-pt-label" >{{ LABELS[i] }}</td>
 		<td class="sbfui-pt-label" >{{ size }}</td>
 		<td>
-			<FInput v-bind="args" v-on="promisedArgs" :size="size" placeholder="Placeholder" >
+			<FInput v-bind="args" :size="size" placeholder="Placeholder" >
 				<template v-if="args.start" v-slot:start >{{ args.start }}</template>
 				<template v-if="args.end" v-slot:end >{{ args.end }}</template>
 			</FInput>
 		</td>
 	</tr>
-</tbody></table>`,
+</tbody></table>`;
+
+
+export const Sizes = {
+	parameters: {
+		docs: {
+			description: { story: SIZES_DESCRIPTION },
+		},
+	},
+	render: (args) => {
+		const [ , updateArgs ] = useArgs();
+		const modelValueArg = makeUpdateArg('modelValue', updateArgs);
+		return {
+			name: 'FInputSizesStory',
+			components: { FInput },
+			setup() {
+				const LABELS = [ '37px', '42px', '52px' ];
+				const newArgs = computed(() => {
+					const result = { ...args };
+					delete result['size'];
+					delete result['start'];
+					delete result['end'];
+					delete result[modelValueArg[1]];
+					result[modelValueArg[0]] = modelValueArg[2];
+					return result;
+				});
+				return { args: newArgs, LABELS, SIZE_CHOICES };
+			},
+			template: SIZES_TEMPLATE,
 		};
 	},
 	argTypes: {
@@ -380,13 +387,9 @@ which you can use to apply your own styles.
 };
 
 
-export const Slots = {
-	parameters: {
-		docs: {
-			description: {
-				story: `
-The component provides two slots, \`start\` and \`end\`, which can be used to display additional
-content inside the input, such as units of measurement or any other contextual information.
+const SLOTS_DESCRIPTION = `The component provides two slots, \`start\` and \`end\`, which can be
+used to display additional content inside the input, such as units of measurement or any other
+contextual information.
 
 These slots are intended primarily for supplementary elements that do not take over input control.
 If you need to create a compound field (for example, combining a currency select with an amount
@@ -411,24 +414,38 @@ For inputs with \`type="password"\`, the following properties are available in t
 
 Using these props, you can implement your own custom password visibility toggle button, or simply
 use the built-in [FInputShowPasswordButton](?path=/docs/forms-finput-showpasswordbutton--docs)
-component.`,
-			},
-		},
-	},
-	render: (args, { argTypes, component }) => {
-		const [ , updateArgs ] = useArgs();
-		return {
-			props: Object.keys(argTypes),
-			components: { FInput, FIcon },
-			setup() {
-				const updateValue = makeUpdateArg('modelValue', args, updateArgs);
-				const promisedArgs = { [updateValue[0]]: updateValue[1] };
-				return { args, promisedArgs };
-			},
-			template: `<FInput v-bind="args" v-on="promisedArgs" placeholder="Placeholder" >
+component.`;
+
+
+const SLOTS_TEMPLATE = `<FInput v-bind="args" placeholder="Placeholder" >
 	<template v-slot:start ><FIcon name="ruler_combined_outline" /></template>
 	<template v-slot:end >mm</template>
-</FInput>`,
+</FInput>`;
+
+
+export const Slots = {
+	parameters: {
+		docs: {
+			description: { story: SLOTS_DESCRIPTION },
+		},
+	},
+	render: (args) => {
+		const [ , updateArgs ] = useArgs();
+		const modelValueArg = makeUpdateArg('modelValue', updateArgs);
+		return {
+			components: { FInput, FIcon },
+			setup() {
+				const newArgs = computed(() => {
+					const result = { ...args };
+					delete result['start'];
+					delete result['end'];
+					delete result[modelValueArg[1]];
+					result[modelValueArg[0]] = modelValueArg[2];
+					return result;
+				});
+				return { args: newArgs };
+			},
+			template: SLOTS_TEMPLATE,
 		};
 	},
 	argTypes: {
@@ -438,29 +455,36 @@ component.`,
 };
 
 
-export const AttributesPassthrough = {
-	parameters: {
-		docs: {
-			description: {
-				story: `All attributes passed to the component will be forwarded to the underlying
+const ATTRS_DESCRIPTION = `All attributes passed to the component will be forwarded to the underlying
 \`<input>\`	 element, except for \`class\`, which is applied to the wrapper element.
 
 This allows you to use standard input attributes such as \`id\`, \`name\`, \`placeholder\`,
-\`maxlength\`, \`disabled\`, \`aria-*\` etc.`,
-			},
+\`maxlength\`, \`disabled\`, \`aria-*\` etc.`;
+
+
+export const AttributesPassthrough = {
+	parameters: {
+		docs: {
+			description: { story: ATTRS_DESCRIPTION },
 		},
 	},
-	render: (args, { argTypes, component }) => {
+	render: (args) => {
 		const [ , updateArgs ] = useArgs();
+		const modelValueArg = makeUpdateArg('modelValue', updateArgs);
 		return {
-			props: Object.keys(argTypes),
 			components: { FInput },
 			setup() {
-				const updateValue = makeUpdateArg('modelValue', args, updateArgs);
-				const promisedArgs = { [updateValue[0]]: updateValue[1] };
-				return { args, promisedArgs };
+				const newArgs = computed(() => {
+					const result = { ...args };
+					delete result['start'];
+					delete result['end'];
+					delete result[modelValueArg[1]];
+					result[modelValueArg[0]] = modelValueArg[2];
+					return result;
+				});
+				return { args: newArgs };
 			},
-			template: `<FInput v-bind="args" v-on="promisedArgs" />`,
+			template: `<FInput v-bind="args" />`,
 		};
 	},
 	argTypes: {
@@ -502,30 +526,12 @@ This allows you to use standard input attributes such as \`id\`, \`name\`, \`pla
 };
 
 
-export const Scheme = {
-	name: 'Scheme (Light/Dark)',
-	parameters: { layout: 'fullscreen' },
-	render: (args, { argTypes, component }) => {
-		const [ , updateArgs ] = useArgs();
-		return {
-			name: 'FInputSchemeStory',
-			props: Object.keys(argTypes),
-			components: { FInput },
-			setup() {
-				const clearArgs = computed(() => {
-					const { 'disabled': _, ...filteredArgs } = args;
-					return filteredArgs;
-				});
-				const updateValue = makeUpdateArg('modelValue', args, updateArgs);
-				const promisedArgs = { [updateValue[0]]: updateValue[1] };
-				return { args: clearArgs, promisedArgs };
-			},
-			template: `<div class="sbpst-scheme_preview sbpst-row" >
+const SCHEME_TEMPLATE = `<div class="sbpst-scheme_preview sbpst-row" >
 	<div class="sbpst-light" >
 		<table class="sbfui-preview-table" ><tbody>
 			<tr>
 				<td>
-					<FInput v-bind="args" v-on="promisedArgs" placeholder="Placeholder" >
+					<FInput v-bind="args" placeholder="Placeholder" >
 						<template v-if="args.start" v-slot:start >{{ args.start }}</template>
 						<template v-if="args.end" v-slot:end >{{ args.end }}</template>
 					</FInput>
@@ -533,7 +539,7 @@ export const Scheme = {
 			</tr>
 			<tr>
 				<td>
-					<FInput v-bind="args" v-on="promisedArgs" disabled placeholder="Placeholder" >
+					<FInput v-bind="args" disabled placeholder="Placeholder" >
 						<template v-if="args.start" v-slot:start >{{ args.start }}</template>
 						<template v-if="args.end" v-slot:end >{{ args.end }}</template>
 					</FInput>
@@ -545,7 +551,7 @@ export const Scheme = {
 		<table class="sbfui-preview-table" ><tbody>
 			<tr>
 				<td>
-					<FInput v-bind="args" v-on="promisedArgs" placeholder="Placeholder" >
+					<FInput v-bind="args" placeholder="Placeholder" >
 						<template v-if="args.start" v-slot:start >{{ args.start }}</template>
 						<template v-if="args.end" v-slot:end >{{ args.end }}</template>
 					</FInput>
@@ -553,7 +559,7 @@ export const Scheme = {
 			</tr>
 			<tr>
 				<td>
-					<FInput v-bind="args" v-on="promisedArgs" disabled placeholder="Placeholder" >
+					<FInput v-bind="args" disabled placeholder="Placeholder" >
 						<template v-if="args.start" v-slot:start >{{ args.start }}</template>
 						<template v-if="args.end" v-slot:end >{{ args.end }}</template>
 					</FInput>
@@ -561,7 +567,32 @@ export const Scheme = {
 			</tr>
 		</tbody></table>
 	</div>
-</div>`,
+</div>`;
+
+
+export const Scheme = {
+	name: 'Scheme (Light/Dark)',
+	parameters: { layout: 'fullscreen' },
+	render: (args) => {
+		const [ , updateArgs ] = useArgs();
+		const modelValueArg = makeUpdateArg('modelValue', updateArgs);
+		return {
+			name: 'FInputSchemeStory',
+			components: { FInput },
+			setup() {
+				const newArgs = computed(() => {
+					const result = { ...args };
+					delete result['disabled'];
+					delete result['start'];
+					delete result['end'];
+					delete result[modelValueArg[1]];
+					result[modelValueArg[0]] = modelValueArg[2];
+					return result;
+				});
+
+				return { args: newArgs };
+			},
+			template: SCHEME_TEMPLATE,
 		};
 	},
 	argTypes: {

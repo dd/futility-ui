@@ -10,6 +10,7 @@
 @import "../FIcon/style.tailwind.css" layer(components);
 @import "../FLoader/style.tailwind.css" layer(components);
 @import "../FStack/style.tailwind.css" layer(components);
+@import "../FDropdown/style.tailwind.css" layer(components);
 @import "../FTooltip/style.tailwind.css" layer(components);
 @import "../forms/FCheckbox/style.tailwind.css" layer(components);
 @import "../forms/FControlLabel/style.tailwind.css" layer(components);

@@ -1,12 +1,11 @@
 import { computed } from 'vue';
 import { useArgs } from 'storybook/preview-api';
 
-import Readme from './README.md?raw';
-import FControlLabel from '.';
 import FCheckbox from '@/forms/FCheckbox';
 import FSwitch from '@/forms/FSwitch';
 import FRadioButton from '@/forms/FRadioButton';
-import { makeRenderer, makeUpdateArg } from '@/utils/storybook';
+import Readme from './README.md?raw';
+import FControlLabel from '.';
 import { SIZE_CHOICES, LAYOUT_CONTROL_FIRST, LAYOUT_CHOICES } from './constants';
 
 

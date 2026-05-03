@@ -10,6 +10,7 @@ import FInputAutocomplete from './forms/FInputAutocomplete';
 import FSelect from './forms/FSelect';
 import FRadioButton from './forms/FRadioButton';
 import FControlLabel from './forms/FControlLabel';
+import FDropdown from './FDropdown';
 import FTooltip from './FTooltip';
 import { vTooltip } from './FTooltip/directive';
 import FGenericForm from './forms/FGenericForm';
@@ -28,6 +29,7 @@ export {
 	FSelect,
 	FStack,
 	FControlLabel,
+	FDropdown,
 	FTooltip,
 	vTooltip,
 	FGenericForm,
@@ -49,6 +51,7 @@ const components = {
 	FSelect,
 	FStack,
 	FControlLabel,
+	FDropdown,
 	FTooltip,
 	FGenericForm,
 };

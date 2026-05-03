@@ -23,6 +23,8 @@
 	--color-input-bed: light-dark(var(--fui-color-red-200), var(--fui-color-red-950));
 	--color-input-bged: light-dark(var(--fui-color-red-50), var(--fui-color-gray-900));
 	--color-input-ped: light-dark(var(--fui-color-red-200), var(--fui-color-red-950));
+
+	--spacing-input-x-padding: 16px;
 }
 
 
@@ -33,7 +35,7 @@
 	align-items: center;
 	gap: 10px;
 
-	padding: 0 16px;
+	padding: 0;
 	box-sizing: border-box;
 
 	border: 1px solid;
@@ -55,6 +57,7 @@
 		flex-grow: 1;
 		flex-shrink: 1;
 		min-width: 0;
+		@apply fui:px-input-x-padding;
 
 		border: none;
 		background: none;
@@ -75,6 +78,22 @@
 
 		&::placeholder {
 			@apply fui:text-input-p;
+		}
+	}
+
+	&.has-slot_start {
+		@apply fui:pl-input-x-padding;
+
+		.fui-input-input {
+			padding-left: 0;
+		}
+	}
+
+	&.has-slot_end {
+		@apply fui:pr-input-x-padding;
+
+		.fui-input-input {
+			padding-right: 0;
 		}
 	}
 
@@ -157,13 +176,25 @@
 	.fui-input-input[type="week"] + .fui-input-date_icon,
 	.fui-input-input[type="time"] + .fui-input-time_icon {
 		position: relative;
-		margin-left: -10px;  /* - gap */
+		margin-left: -10px; /* - gap */
 
 		.fui-icon {
 			position: absolute;
 			top: calc(var(--fui-icon-size) / -2);
-			right: 0;
+			@apply fui:right-input-x-padding;
 			pointer-events: none;
+		}
+	}
+
+	&.has-slot_end {
+		.fui-input-input[type="date"] + .fui-input-date_icon,
+		.fui-input-input[type="datetime-local"] + .fui-input-date_icon,
+		.fui-input-input[type="month"] + .fui-input-date_icon,
+		.fui-input-input[type="week"] + .fui-input-date_icon,
+		.fui-input-input[type="time"] + .fui-input-time_icon {
+			.fui-icon {
+				right: 0;
+			}
 		}
 	}
 
@@ -237,7 +268,8 @@
 	line-height: 150%;
 
 	.fui-input-input {
-		padding: 7px 0;
+		padding-top: 7px;
+		padding-bottom: 7px;
 	}
 
 	.fui-input-extra_btn {
@@ -268,7 +300,8 @@
 	line-height: 150%;
 
 	.fui-input-input {
-		padding: 9.5px 0;
+		padding-top: 9.5px;
+		padding-bottom: 9.5px;
 	}
 
 	.fui-input-extra_btn {
@@ -298,7 +331,8 @@
 	line-height: 150%;
 
 	.fui-input-input {
-		padding: 13px 0;
+		padding-top: 13px;
+		padding-bottom: 13px;
 	}
 
 	.fui-input-extra_btn {

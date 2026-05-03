@@ -7,75 +7,86 @@
 			`fui-iauto-size-${size}`,
 		]"
 	>
-		<div
-			class="fui-iauto-label_wrapper"
-			:class="{
-				'has-error': error,
-				'has-value': model,
-			}"
-		>
-			<input
-				v-model="filterValue"
-				:id="filterInputID"
-				type="text"
-				class="fui-iauto-query_input"
-				:disabled="disabled"
-				role="searchbox"
-				:aria-expanded="showOptions.toString()"
-				aria-haspopup="listbox"
-				:aria-controls="`listbox-${filterInputID}`"
-				:aria-activedescendant="highlightedOptionValue"
-				:placeholder="placeholderFilter"
-				@focus="toggleDropDown(true)"
-				@keydown="handleKeydown"
-			>
-			<div class="fui-iauto-label" >
-				<label
-					class="fui-iauto-label_text"
-					:for="filterInputID"
-				>
-					{{ (currentOption && currentOption.label) || model || placeholderLabel }}
-				</label>
-				<button
-					v-if="model && !required"
-					type="button"
-					class="fui-iauto-label_remove"
-					:aria-label="resolvedTexts.clearButtonAriaLabel"
-					:title="resolvedTexts.clearButtonTitle"
-					:disabled="disabled"
-					@click.stop="clearSelect"
-				>
-					<FIcon name="close" />
-				</button>
-			</div>
-		</div>
-
-		<div
-			v-if="showOptions"
-			class="fui-iauto-dropdown"
-			:class="{
-				'fui-iauto-options_loading': loadingPage == 1,
-			}"
-			role="listbox"
+		<FDropdown
+			v-model:open="showOptions"
 			:id="`listbox-${filterInputID}`"
+			trigger="manual"
+			appearance="select"
+			:disabled="disabled"
+			:style="dropdownStyle"
+			:class="[
+				'fui-iauto-dropdown',
+				{ 'fui-iauto-options_loading': loadingPage == 1 },
+			]"
+			role="listbox"
 			tabindex="-1"
+			@mousedown.prevent
 			@scroll="handleScroll"
 		>
+			<template #trigger>
+				<div
+					:class="[
+						'fui-iauto-label_wrapper',
+						{
+							'has-error': error,
+							'has-value': model,
+						},
+					]"
+				>
+					<input
+						v-model="filterValue"
+						ref="filterInputRef"
+						:id="filterInputID"
+						type="text"
+						class="fui-iauto-query_input"
+						:disabled="disabled"
+						role="searchbox"
+						:aria-expanded="showOptions.toString()"
+						aria-haspopup="listbox"
+						:aria-controls="`listbox-${filterInputID}`"
+						:aria-activedescendant="highlightedOptionValue"
+						:placeholder="placeholderFilter"
+						@focus="openDropDown"
+						@keydown="handleKeydown"
+						@blur="handleBlur"
+					>
+					<div class="fui-iauto-label" >
+						<label
+							class="fui-iauto-label_text"
+							:for="filterInputID"
+						>
+							{{ (currentOption && currentOption.label) || model || placeholderLabel }}
+						</label>
+						<button
+							v-if="model && !required"
+							type="button"
+							class="fui-iauto-label_remove"
+							:aria-label="resolvedTexts.clearButtonAriaLabel"
+							:title="resolvedTexts.clearButtonTitle"
+							:disabled="disabled"
+							@click.stop="clearSelect"
+						>
+							<FIcon name="close" />
+						</button>
+					</div>
+				</div>
+			</template>
+
 			<button
 				v-for="(option, index) in optionList"
 				:key="option.value"
 
-				type="button"
-				:disabled="option.disabled || false"
-				class="fui-iauto-option"
-				:class="{
-					'fui-iauto-option-current': option.value === model,
-				}"
-				role="option"
-				:aria-selected="index === highlightedIndex"
 				:id="`option-${option.value}`"
 				ref="optionListRefs"
+				type="button"
+				role="option"
+				:aria-selected="index === highlightedIndex"
 				tabindex="-1"
+				:class="[
+					'fui-dropdown-select_option',
+					{ 'is-current': option.value === model },
+				]"
+				:disabled="option.disabled || false"
 				@click="selectOption(option)"
 			>
 				<slot
@@ -92,7 +103,7 @@
 				class="fui-iauto-option-empty"
 				role="status"
 			>{{ resolvedTexts.noOptions }}</div>
-		</div>
+		</FDropdown>
 
 		<input
 			v-model="model"
@@ -107,12 +118,12 @@
 
 
 <script setup >
-import { computed, onMounted, ref, useAttrs, useId, watch, nextTick } from 'vue';
-import { onClickOutside } from '@vueuse/core';
+import { computed, ref, useAttrs, useId, watch, nextTick } from 'vue';
+import { useElementSize } from '@vueuse/core';
 import FLoader from '@/FLoader';
 import FIcon from '@/FIcon';
+import FDropdown from '@/FDropdown';
 
-import { useFocusWithin } from './utils';
 import { DEFAULT_TEXTS } from './constants';
 
 
@@ -274,7 +285,12 @@ const requestOptions = (query, page=1) => {
 		})
 	;
 };
-watch(filterValue, (newValue) => { requestOptions(newValue); });
+watch(filterValue, (newValue) => {
+	requestOptions(newValue);
+	if (filterInputRef.value === document.activeElement && !showOptions.value) {
+		showOptions.value = true;
+	}
+});
 watch(() => props.requestHandler, () => { requestOptions(filterValue.value); });
 requestOptions(filterValue.value);
 
@@ -328,12 +344,14 @@ const selectOption = (newValue) => {
 	if (model.value != newValue.value) {
 		currentOption.value = newValue;
 		model.value = newValue.value;
-		toggleDropDown(false);
 	} else if (!props.required) {
 		model.value = null;
 		currentOption.value = null;
-		toggleDropDown(false);
+	} else {
+		return;
 	}
+	closeDropDown();
+	filterInputRef.value?.blur();
 };
 
 // Scroll
@@ -350,23 +368,26 @@ const handleScroll = (event) => {
 
 // Dropdown
 const fInputWidget = ref();
+const filterInputRef = ref();
 const showOptions = ref(false);
-const toggleDropDown = (newState) => {
-	showOptions.value = newState;
-	if (!newState) {
-		highlightedIndex.value = -1;
-	}
+
+const { width: rootWidth } = useElementSize(fInputWidget);
+const dropdownStyle = computed(() => ({
+	width: `${rootWidth.value}px`,
+}));
+
+const openDropDown = () => {
+	showOptions.value = true;
 };
-const { focused } = useFocusWithin(fInputWidget, {}, optionListRefs.value);
-watch(focused, (value) => {
-	if (!value) toggleDropDown(false);
-});
-onMounted(() => {
-	onClickOutside(
-		fInputWidget,
-		() => { toggleDropDown(false); },
-	);
-});
+
+const closeDropDown = () => {
+	showOptions.value = false;
+	highlightedIndex.value = -1;
+};
+
+const handleBlur = () => {
+	setTimeout(() => closeDropDown(), 0);
+};
 
 // Navigation through the options list
 const highlightedIndex = ref(-1);
@@ -436,6 +457,10 @@ const handleKeydown = (event) => {
 			const option = optionList.value[highlightedIndex.value];
 			selectOption(option);
 		}
+	} else if (event.key === 'Escape') {
+		event.preventDefault();
+		closeDropDown();
+		filterInputRef.value?.blur();
 	}
 };
 

@@ -40,10 +40,14 @@
 	}
 
 	& > .fui-input,
+	& > .fui-input-autocomplete,
+	& > .fui-select,
 	& > .fui-b-color-white,
 	& > .fui-b-color-gray-100,
 	& > .fui-b-color-gray-200 {
 		& + .fui-input,
+		& + .fui-input-autocomplete,
+		& + .fui-select,
 		& + .fui-b-color-white,
 		& + .fui-b-color-gray-100,
 		& + .fui-b-color-gray-200 {

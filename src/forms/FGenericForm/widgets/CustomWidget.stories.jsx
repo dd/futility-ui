@@ -3,7 +3,6 @@ import { useArgs } from 'storybook/preview-api';
 import React from 'react';
 
 import { makeUpdateArg } from '@/.storybook/utils.js';
-
 import DemoColorWidget from './DemoColorWidget';
 import DemoRangeWidget from './DemoRangeWidget';
 import FGenericForm from '..';
@@ -180,13 +179,13 @@ const SINGLE_FIELD_META = [
 
 export const SingleFieldWidget = {
 	name: 'Single-field Widget',
-	render: (args, { argTypes, component }) => {
+	render: (args) => {
 		const [ , updateArgs ] = useArgs();
+		const modelValueArg = makeUpdateArg('modelValue', updateArgs);
 		return {
 			name: 'FGenericFormSingleFieldWidgetStory',
 			components: { FGenericForm },
 			setup() {
-				const modelValueArg = makeUpdateArg('modelValue', args, updateArgs);
 				const newArgs = computed(() => {
 					const result = {
 						...args,
@@ -322,13 +321,13 @@ export const MultiFieldWidget = {
 	parameters: {
 		docs: { description: { story: MULTI_FIELD_DESCRIPTION }},
 	},
-	render: (args, { argTypes, component }) => {
+	render: (args) => {
 		const [ , updateArgs ] = useArgs();
+		const modelValueArg = makeUpdateArg('modelValue', updateArgs);
 		return {
 			name: 'FGenericFormMultiFieldStory',
 			components: { FGenericForm },
 			setup() {
-				const modelValueArg = makeUpdateArg('modelValue', args, updateArgs);
 				const newArgs = computed(() => {
 					const result = {
 						...args,

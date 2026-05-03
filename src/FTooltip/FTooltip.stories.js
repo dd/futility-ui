@@ -1,45 +1,18 @@
 import { computed, ref } from 'vue';
 import { useArgs } from 'storybook/preview-api';
 
-import { makeUpdateArg } from '@/utils/storybook';
+import { makeUpdateArg } from '@/.storybook/utils.js';
 import FIcon from '@/FIcon';
 import FButton from '@/FButton';
+import Readme from './README.md?raw';
 import FTooltip from './index.vue';
 import { vTooltip } from './directive';
 import { PLACEMENT_CHOICES, TRIGGER_CHOICES, THEME_CHOICES } from './constants';
 
 
-const usage = `
-\`FTooltip\` wraps a trigger element and shows a floating tooltip on interaction.
-Positioning is handled by [@floating-ui](https://floating-ui.com/); it automatically
-flips and shifts to stay within the viewport.
-
-
-### Component (simple)
-
-\`\`\`js
-import { FTooltip } from 'futility-ui'
-// or
-import FTooltip from 'futility-ui/FTooltip'
-\`\`\`
-
-\`\`\`html
-<FTooltip text="Hello world">
-	<FButton>Hover me</FButton>
-</FTooltip>
-\`\`\`
-
-
-### Component (rich content)
-
-\`\`\`html
-<FTooltip theme="dropdown" trigger="click" >
-	<FButton>Open menu</FButton>
-	<template #content>
-		<div>Any <strong>rich</strong> content here</div>
-	</template>
-</FTooltip>
-\`\`\``;
+const DEFAULT_TEMPLATE = `<FTooltip v-bind="args" >
+	<div class="sbfui-ftooltip-trigger_example">Hover me</div>
+</FTooltip>`;
 
 
 export default {
@@ -49,7 +22,7 @@ export default {
 	parameters: {
 		layout: 'centered',
 		docs: {
-			description: { component: usage },
+			description: { component: Readme.replace(/^# .+\n?/m, '') },
 		},
 	},
 	argTypes: {
@@ -114,6 +87,25 @@ export default {
 			table: { category: 'events' },
 		},
 	},
+	render: (args) => {
+		const [ , updateArgs ] = useArgs();
+		const openArg = makeUpdateArg('open', updateArgs);
+		return {
+			components: { FTooltip },
+			setup() {
+				const newArgs = computed(() => {
+					const { show, hide, ...result } = args;
+					result['onShow'] = show;
+					result['onHide'] = hide;
+					delete result[openArg[1]];
+					result[openArg[0]] = openArg[2];
+					return result;
+				});
+				return { args: newArgs };
+			},
+			template: DEFAULT_TEMPLATE,
+		};
+	},
 	args: {
 		open: false,
 		text: 'Tooltip text',
@@ -122,40 +114,15 @@ export default {
 		delay: 0,
 		trigger: 'hover',
 	},
-	render: (args, { argTypes, component }) => {
-		const [ , updateArgs ] = useArgs();
-		return {
-			props: Object.keys(argTypes),
-			components: { FTooltip },
-			setup() {
-				const newArgs = computed(() => {
-					const { show, hide, ...filteredArgs } = args;
-					return {
-						...filteredArgs,
-						'onShow': show,
-						'onHide': hide,
-					};
-				});
-				const updateOption = makeUpdateArg('open', null, updateArgs);
-				const promisedArgs = { [updateOption[0]]: updateOption[1] };
-				return { args: newArgs, promisedArgs };
-			},
-			template: `
-<FTooltip v-bind="args" v-on="promisedArgs" >
-	<div class="sbfui-ftooltip-trigger_example">Hover me</div>
-</FTooltip>
-			`,
-		};
-	},
 };
 
 
 export const Default = {};
 
 
-const THEME_DESCRIPTION = `
-Built-in themes. The \`theme\` prop accepts any string and becomes a CSS class:
-\`fui-tooltip-theme-<theme>\`, so you can define your own themes alongside the built-in ones.
+const THEME_DESCRIPTION = `Built-in themes. The \`theme\` prop accepts any string and becomes a
+CSS class: \`fui-tooltip-theme-<theme>\`, so you can define your own themes alongside the built-in
+ones.
 
 |       Theme      |             Use case               |
 |------------------|------------------------------------|
@@ -164,39 +131,48 @@ Built-in themes. The \`theme\` prop accepts any string and becomes a CSS class:
 `;
 
 
-export const Themes = {
-	parameters: {
-		docs: { description: { story: THEME_DESCRIPTION }},
-	},
-	render: (args) => ({
-		components: { FTooltip, FButton },
-		setup() {
-			const newArgs = computed(() => {
-				const { 'theme': _a, 'open': _b, show, hide, ...filteredArgs } = args;
-				return {
-					...filteredArgs,
-					'onShow': show,
-					'onHide': hide,
-				};
-			});
-			const updateOption = makeUpdateArg('open');
-			const promisedArgs = { [updateOption[0]]: updateOption[1] };
-			return { args: newArgs, promisedArgs };
-		},
-		template: `<div class="sbfui-preview-flex-x" >
-	<FTooltip v-bind="args" v-on="promisedArgs" theme="tooltip" text="Short hint" >
+const THEME_TEMPLATE = `<div class="sbfui-preview-flex-x" >
+	<FTooltip v-bind="args" theme="tooltip" text="Short hint" >
 		<div class="sbfui-ftooltip-trigger_example" >tooltip</div>
 	</FTooltip>
 
-	<FTooltip v-bind="args" v-on="promisedArgs" theme="tooltip-rich" >
+	<FTooltip v-bind="args" theme="tooltip-rich" >
 		<div class="sbfui-ftooltip-trigger_example" >tooltip-rich</div>
 		<template #content >
 			<p class="fui-tooltip-header" >Tooltip title</p>
 			<p>Additional text explaining what is going on here.</p>
 		</template>
 	</FTooltip>
-</div>`,
-	}),
+</div>`;
+
+
+export const Themes = {
+	parameters: {
+		docs: { description: { story: THEME_DESCRIPTION }},
+	},
+	render: (args, { argTypes }) => {
+		const [ , updateArgs ] = useArgs();
+		return {
+			props: Object.keys(argTypes),
+			components: { FTooltip, FButton },
+			setup() {
+				const newArgs = computed(() => {
+					const result = { ...args };
+					delete result['theme'];
+					delete result['open'];
+					delete result['update:open'];
+					delete result['text'];
+					result['onShow'] = result.show;
+					delete result['show'];
+					result['onHide'] = result.hide;
+					delete result['hide'];
+					return result;
+				});
+				return { args: newArgs };
+			},
+			template: THEME_TEMPLATE,
+		};
+	},
 	argTypes: {
 		theme: { control: { type: null }},
 		text: { control: { type: null }},
@@ -210,28 +186,47 @@ export const Themes = {
 };
 
 
+const PLACEMENT_DESCRIPTION = `All 12 placement options are supported. The tooltip flips
+automatically when it reaches the viewport edge.`;
+
+
+const PLACEMENT_TEMPLATE = `<div class="sbfui-ftooltip-placement-preview" >
+	<template v-for="p, i in PLACEMENT_CHOICES" >
+		<FTooltip
+			v-if="p"
+			:key="i"
+			v-bind="args"
+			:placement="p"
+			:text="\`placement: \${p}\`"
+		>
+			<div class="sbfui-ftooltip-trigger_example" >{{ p }}</div>
+		</FTooltip>
+		<div v-else :key="\`div-\${i}\`" />
+	</template>
+</div>`;
+
+
 export const Placements = {
 	parameters: {
 		docs: {
-			description: {
-				story: `All 12 placement options are supported. The tooltip flips automatically when it reaches the
-				viewport edge.`,
-			},
+			description: { story: PLACEMENT_DESCRIPTION },
 		},
 	},
 	render: (args) => ({
 		components: { FTooltip },
 		setup() {
 			const newArgs = computed(() => {
-				const { 'placement': _a, 'text': _b, 'open': _c, show, hide, ...filteredArgs } = args;  // eslint-disable-line no-unused-vars
-				return {
-					...filteredArgs,
-					'onShow': show,
-					'onHide': hide,
-				};
+				const result = { ...args };
+				delete result['placement'];
+				delete result['text'];
+				delete result['open'];
+				delete result['update:open'];
+				result['onShow'] = result.show;
+				delete result['show'];
+				result['onHide'] = result.hide;
+				delete result['hide'];
+				return result;
 			});
-			const updateOption = makeUpdateArg('open');
-			const promisedArgs = { [updateOption[0]]: updateOption[1] };
 			return {
 				args: newArgs,
 				PLACEMENT_CHOICES: [
@@ -241,24 +236,9 @@ export const Placements = {
 					'left-end',   null,           null,     null,        'right-end',
 					 null,        'bottom-start', 'bottom', 'bottom-end', null,
 				],
-				promisedArgs,
 			};
 		},
-		template: `<div class="sbfui-ftooltip-placement-preview" >
-	<template v-for="p, i in PLACEMENT_CHOICES" >
-		<FTooltip
-			v-if="p"
-			:key="i"
-			v-bind="args"
-			v-on="promisedArgs"
-			:placement="p"
-			:text="\`placement: \${p}\`"
-		>
-			<div class="sbfui-ftooltip-trigger_example" >{{ p }}</div>
-		</FTooltip>
-		<div v-else :key="\`div-\${i}\`" />
-	</template>
-</div>`,
+		template: PLACEMENT_TEMPLATE,
 	}),
 	argTypes: {
 		placement: { control: { type: null }},
@@ -274,6 +254,25 @@ export const Placements = {
 
 
 export const Delay = {
+	render: (args, { argTypes }) => {
+		const [ , updateArgs ] = useArgs();
+		return {
+			props: Object.keys(argTypes),
+			components: { FTooltip },
+			setup() {
+				const newArgs = computed(() => {
+					const result = { ...args };
+					result['onShow'] = result.show;
+					delete result['show'];
+					result['onHide'] = result.hide;
+					delete result['hide'];
+					return result;
+				});
+				return { args: newArgs };
+			},
+			template: DEFAULT_TEMPLATE,
+		};
+	},
 	args: {
 		text: 'Appears after 400ms, hides after 200ms',
 		delay: [ 400, 200 ],
@@ -281,43 +280,48 @@ export const Delay = {
 };
 
 
+const NON_INT_DESCRIPTION = `By default the tooltip is **interactive**: the cursor can move inside
+it without closing it.
+
+The \`non-interactive\` flag disables this behaviour: the tooltip ignores the cursor and does not
+intercept mouse events. Use it for plain text hints that should only be read, not interacted with.`;
+
+
+const NON_INT_TEMPLATE = `<div class="sbfui-preview-flex-x" >
+	<FTooltip v-bind="args" text="You can hover inside me" >
+		<div class="sbfui-ftooltip-trigger_example" >Default (interactive)</div>
+	</FTooltip>
+
+	<FTooltip v-bind="args" text="You cannot hover inside me" non-interactive >
+		<div class="sbfui-ftooltip-trigger_example" >Non-interactive</div>
+	</FTooltip>
+</div>`;
+
+
 export const NonInteractive = {
 	parameters: {
 		docs: {
-			description: {
-				story: `By default the tooltip is **interactive**: the cursor can move inside it
-without closing it.
-
-The \`non-interactive\` flag disables this behaviour: the tooltip ignores the cursor and does not
-intercept mouse events. Use it for plain text hints that should only be read, not interacted with.`,
-			},
+			description: { story: NON_INT_DESCRIPTION },
 		},
 	},
 	render: (args) => ({
 		components: { FTooltip },
 		setup() {
 			const newArgs = computed(() => {
-				const { 'nonInteractive': _a, 'text': _b, 'open': _c, show, hide, ...filteredArgs } = args;
-				return {
-					...filteredArgs,
-					'onShow': show,
-					'onHide': hide,
-				};
+				const result = { ...args };
+				delete result['nonInteractive'];
+				delete result['text'];
+				delete result['open'];
+				delete result['update:open'];
+				result['onShow'] = result.show;
+				delete result['show'];
+				result['onHide'] = result.hide;
+				delete result['hide'];
+				return result;
 			});
-			const updateOption = makeUpdateArg('open');
-			const promisedArgs = { [updateOption[0]]: updateOption[1] };
-			return { args: newArgs, promisedArgs };
+			return { args: newArgs };
 		},
-		template: `
-<div class="sbfui-preview-flex-x" >
-	<FTooltip v-bind="args" v-on="promisedArgs" text="You can hover inside me" >
-		<div class="sbfui-ftooltip-trigger_example" >Default (interactive)</div>
-	</FTooltip>
-
-	<FTooltip v-bind="args" v-on="promisedArgs" text="You cannot hover inside me" non-interactive >
-		<div class="sbfui-ftooltip-trigger_example" >Non-interactive</div>
-	</FTooltip>
-</div>`,
+		template: NON_INT_TEMPLATE,
 	}),
 	argTypes: {
 		text: { control: { type: null }},
@@ -332,11 +336,7 @@ intercept mouse events. Use it for plain text hints that should only be read, no
 };
 
 
-export const Triggers = {
-	parameters: {
-		docs: {
-			description: {
-				story: `
+const TRIGGERS_DESC = `
 | Trigger | Behaviour |
 |---|---|
 | \`hover\` | Shows on mouseenter and focus |
@@ -344,23 +344,43 @@ export const Triggers = {
 | \`hover&click\` | Shows on hover; click pins it open so it stays visible after the cursor leaves |
 | \`focus\` | Shows on focus only |
 | \`manual\` | Controlled entirely via \`v-model:open\`. See the [v-model:open](?path=/docs/ftooltip--docs#v-modelopen) section |
-`,
-			},
+`;
+
+
+const TRIGGERS_TEMP = `<div class="sbfui-preview-flex-x">
+	<FTooltip
+		v-for="trigger, i in TRIGGER_CHOICES"
+		:key="i"
+		v-bind="args"
+		:trigger="trigger"
+		:text="LABELS[i]"
+	>
+		<FButton>{{ trigger }}</FButton>
+	</FTooltip>
+</div>`;
+
+
+export const Triggers = {
+	parameters: {
+		docs: {
+			description: { story: TRIGGERS_DESC },
 		},
 	},
 	render: (args) => ({
 		components: { FTooltip, FButton },
 		setup() {
 			const newArgs = computed(() => {
-				const { 'trigger': _a, 'text': _b, 'open': _c, show, hide, ...filteredArgs } = args;  // eslint-disable-line no-unused-vars
-				return {
-					...filteredArgs,
-					'onShow': show,
-					'onHide': hide,
-				};
+				const result = { ...args };
+				delete result['trigger'];
+				delete result['text'];
+				delete result['open'];
+				delete result['update:open'];
+				result['onShow'] = result.show;
+				delete result['show'];
+				result['onHide'] = result.hide;
+				delete result['hide'];
+				return result;
 			});
-			const updateOption = makeUpdateArg('open');
-			const promisedArgs = { [updateOption[0]]: updateOption[1] };
 			return {
 				args: newArgs,
 				TRIGGER_CHOICES: TRIGGER_CHOICES.filter(t => t !== 'manual'),
@@ -370,21 +390,9 @@ export const Triggers = {
 					'Hover and click trigger',
 					'Focus trigger',
 				],
-				promisedArgs,
 			};
 		},
-		template: `<div class="sbfui-preview-flex-x">
-	<FTooltip
-		v-for="trigger, i in TRIGGER_CHOICES"
-		:key="i"
-		v-bind="args"
-		v-on="promisedArgs"
-		:trigger="trigger"
-		:text="LABELS[i]"
-	>
-		<FButton>{{ trigger }}</FButton>
-	</FTooltip>
-</div>`,
+		template: TRIGGERS_TEMP,
 	}),
 	argTypes: {
 		trigger: { control: { type: null } },
@@ -399,12 +407,7 @@ export const Triggers = {
 };
 
 
-export const VModelOpen = {
-	name: 'v-model:open',
-	parameters: {
-		docs: {
-			description: {
-				story: `\`v-model:open\` syncs the open/closed state bidirectionally.
+const VMODEL_DESC = `\`v-model:open\` syncs the open/closed state bidirectionally.
 
 Triggers (hover, click, focus) update the bound value in the parent.
 The parent can also open or close the tooltip programmatically by setting the value.
@@ -418,26 +421,10 @@ With \`trigger="manual"\` the tooltip is controlled **exclusively** via \`v-mode
 \`\`\`
 
 > **Note:** when controlling visibility via \`v-model:open\`, the \`show\` and \`hide\` events are not emitted.
-`,
-			},
-		},
-	},
-	render: (args) => ({
-		components: { FTooltip, FButton, FIcon },
-		setup() {
-			const isOpen = ref(false);
-			const newArgs = computed(() => {
-				const { 'trigger': _a, 'text': _b, 'open': _c, show, hide, ...filteredArgs } = args;  // eslint-disable-line no-unused-vars
-				return {
-					...filteredArgs,
-					'onShow': show,
-					'onHide': hide,
-				};
-			});
-			return { args: newArgs, isOpen };
-		},
-		template: `
-<div class="sbfui-ftooltip-vmodel" >
+`;
+
+
+const VMODEL_TEMPLATE = `<div class="sbfui-ftooltip-vmodel" >
 	<FTooltip
 		v-model:open="isOpen"
 		v-bind="args"
@@ -451,23 +438,47 @@ With \`trigger="manual"\` the tooltip is controlled **exclusively** via \`v-mode
 		<FButton @click="isOpen = true" >Show</FButton>
 		<FButton @click="isOpen = false" >Hide</FButton>
 	</div>
-</div>`,
+</div>`;
+
+
+export const VModelOpen = {
+	name: 'v-model:open',
+	parameters: {
+		docs: {
+			description: { story: VMODEL_DESC },
+		},
+	},
+	render: (args) => ({
+		components: { FTooltip, FButton, FIcon },
+		setup() {
+			const newArgs = computed(() => {
+				const result = { ...args };
+				delete result['text'];
+				delete result['open'];
+				delete result['update:open'];
+				result['onShow'] = result.show;
+				delete result['show'];
+				result['onHide'] = result.hide;
+				delete result['hide'];
+				return result;
+			});
+
+			const isOpen = ref(false);
+			return { args: newArgs, isOpen };
+		},
+		template: VMODEL_TEMPLATE,
 	}),
 	argTypes: {
-		trigger: { control: { type: null } },
-		text: { control: { type: null } },
 		open: { control: { type: null } },
 	},
 	args: {
-		trigger: '<trigger>',
-		text: '<text>',
 		open: '<bool>',
 	},
 };
 
 
-const DIRECTIVE_DESCRIPTION = `
-The \`v-tooltip\` directive is convenient for simple use cases when you do not need a wrapper component.
+const DIRECTIVE_DESCRIPTION = `The \`v-tooltip\` directive is convenient for simple use cases when
+you do not need a wrapper component.
 
 All the main props are available through the directive as well.
 
@@ -484,27 +495,7 @@ import { vTooltip } from 'futility-ui'
 `;
 
 
-export const Directive = {
-	parameters: {
-		docs: { description: { story: DIRECTIVE_DESCRIPTION }},
-	},
-	render: (args) => ({
-		directives: { tooltip: vTooltip },
-		setup() {
-			const updateOption = makeUpdateArg('open');
-			const newArgs = computed(() => {
-				const { 'text': _a, 'update:open': _b, 'open': _c, show, hide, ...filteredArgs } = args;
-				return {
-					...filteredArgs,
-					'onShow': show,
-					'onHide': hide,
-					'onUpdate:open': updateOption[1],
-				};
-			});
-			return { args: newArgs };
-		},
-		template: `
-<p>
+const DIRECTIVE_TEMPLATE = `<p>
 	The directive lets you add a quick hint directly inside
 	<span class="sbfui-ftooltip-text_example" v-tooltip="'Simple string'" >text</span> without
 	wrapping anything in a component.
@@ -514,8 +505,30 @@ export const Directive = {
 		class="sbfui-ftooltip-text_example"
 		v-tooltip="{ text: 'Bottom placement', ...args }"
 	>just pass an object</span>.
-</p>
-		`,
+</p>`;
+
+
+export const Directive = {
+	parameters: {
+		docs: { description: { story: DIRECTIVE_DESCRIPTION }},
+	},
+	render: (args) => ({
+		directives: { tooltip: vTooltip },
+		setup() {
+			const newArgs = computed(() => {
+				const result = { ...args };
+				delete result['text'];
+				delete result['open'];
+				delete result['update:open'];
+				result['onShow'] = result.show;
+				delete result['show'];
+				result['onHide'] = result.hide;
+				delete result['hide'];
+				return result;
+			});
+			return { args: newArgs };
+		},
+		template: DIRECTIVE_TEMPLATE,
 	}),
 	argTypes: {
 		text: { control: { type: null } },
