@@ -11,6 +11,11 @@ import FSelect from './forms/FSelect';
 import FRadioButton from './forms/FRadioButton';
 import FControlLabel from './forms/FControlLabel';
 import FDropdown from './FDropdown';
+import FModal from './FModal';
+import { useFModal } from './FModal/useFModal';
+import FMLayoutDefault from './FModal/layouts/FMLayoutDefault';
+import FMLayoutForm from './FModal/layouts/FMLayoutForm';
+import FMLayoutDialog from './FModal/layouts/FMLayoutDialog';
 import FTooltip from './FTooltip';
 import { vTooltip } from './FTooltip/directive';
 import FTextarea from './forms/FTextarea';
@@ -32,6 +37,11 @@ export {
 	FControlLabel,
 	FTextarea,
 	FDropdown,
+	FModal,
+	useFModal,
+	FMLayoutDefault,
+	FMLayoutForm,
+	FMLayoutDialog,
 	FTooltip,
 	vTooltip,
 	FGenericForm,
@@ -55,6 +65,10 @@ const components = {
 	FControlLabel,
 	FTextarea,
 	FDropdown,
+	FModal,
+	FMLayoutDefault,
+	FMLayoutForm,
+	FMLayoutDialog,
 	FTooltip,
 	FGenericForm,
 };

@@ -102,14 +102,14 @@ field immediately followed by a button.)
 	- [ ] utils for make meta from DRF metadata
 * [x] Dropdown
 * [x] Textarea
-* [ ] Modal **`<- you are here`**
+* [x] Modal
+* [ ] Tabs **`<- you are here`**
+* [ ] MultiSelect
+* [ ] Tag Select
+* [ ] Tree Editor
 * [ ] FileSelect
 * [ ] FileSelectArea
 * [ ] Number picker
-* [ ] Tree Editor
-* [ ] MultiSelect
-* [ ] Tag Select
-* [ ] Tabs
 * [ ] Paginator
 * [ ] Popover
 * etc.

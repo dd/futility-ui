@@ -1,13 +1,14 @@
 import React from 'react';
 import { setup } from '@storybook/vue3-vite';
 import Toast, { TYPE } from 'vue-toastification';
+import { createVfm, ModalsContainer } from 'vue-final-modal';
 import { Title, Primary, Controls, Stories, Description, Subtitle } from '@storybook/addon-docs/blocks';
 
-import 'vue-toastification/dist/index.css';
 import './styles.css';
 
 
 setup((app) => {
+	app.use(createVfm());
 	app.use(Toast, {
 		position: 'bottom-left',
 		newestOnTop: false,
@@ -24,6 +25,12 @@ setup((app) => {
 
 /** @type { import('@storybook/vue3-vite').Preview } */
 const preview = {
+	decorators: [
+		(story) => ({
+			components: { story, ModalsContainer },
+			template: '<story /><ModalsContainer />',
+		}),
+	],
 	parameters: {
 		backgrounds: { disabled: true },
 		previewSchemeToggler: {
