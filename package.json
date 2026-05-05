@@ -94,6 +94,10 @@
       "require": "./dist/FModal/useFModal.cjs.js",
       "import": "./dist/FModal/useFModal.es.js"
     },
+    "./FModal/useFModalDialog": {
+      "require": "./dist/FModal/useFModalDialog.cjs.js",
+      "import": "./dist/FModal/useFModalDialog.es.js"
+    },
     "./FTooltip": {
       "require": "./dist/FTooltip/index.cjs.js",
       "import": "./dist/FTooltip/index.es.js"

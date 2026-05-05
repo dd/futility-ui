@@ -13,6 +13,7 @@ import FControlLabel from './forms/FControlLabel';
 import FDropdown from './FDropdown';
 import FModal from './FModal';
 import { useFModal } from './FModal/useFModal';
+import { useFModalDialog } from './FModal/useFModalDialog';
 import FMLayoutDefault from './FModal/layouts/FMLayoutDefault';
 import FMLayoutForm from './FModal/layouts/FMLayoutForm';
 import FMLayoutDialog from './FModal/layouts/FMLayoutDialog';
@@ -39,6 +40,7 @@ export {
 	FDropdown,
 	FModal,
 	useFModal,
+	useFModalDialog,
 	FMLayoutDefault,
 	FMLayoutForm,
 	FMLayoutDialog,

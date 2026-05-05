@@ -12,6 +12,12 @@ export default {
 	tags: [ 'autodocs' ],
 	parameters: {
 		layout: 'centered',
+		docs: {
+			description: {
+				component: `Default layout for general-purpose modals. It provides a standard panel with an optional title/header, content area, footer actions, and a close button.
+Use it when the modal content does not need form semantics or a compact confirmation dialog layout.`,
+			},
+		},
 	},
 	argTypes: {
 		// props
