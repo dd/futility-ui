@@ -1,6 +1,9 @@
+@layer vendors, base, theme, components, utilities;
+
 @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
 
-/*@import '@/styles.tailwind.css';*/
+@import 'vue-toastification/dist/index.css' layer(vendors);
+@import 'vue-final-modal/style.css' layer(vendors);
 @import 'tailwindcss';
 @import '@/styles/components.tailwind.css';
 @import '@/styles/base.tailwind.css';
@@ -216,6 +219,17 @@ h1 {
 	width: 300px;
 }
 /* End of Dropdown */
+
+
+
+/* Modals */
+.sbfui-layoutdialog-icons-preview {
+	display: grid;
+	grid-template-columns: repeat(4, auto);
+	gap: 8px;
+	padding: 60px;
+}
+/* End of Modals */
 
 
 /* FControlLabel */

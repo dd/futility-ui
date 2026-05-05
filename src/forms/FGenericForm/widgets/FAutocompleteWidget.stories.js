@@ -68,12 +68,12 @@ export default {
 	argTypes: {
 		...WIDGET_BASE_ARG_TYPES,
 		requestHandler: {
-			description: '`(query, page, { signal }) => Promise<{ options, hasNext }>` — fetches option pages.',
+			description: '`(query, page, { signal }) => Promise<{ options, hasNext }>` - fetches option pages.',
 			control: false,
 			table: { category: 'props', subcategory: 'meta' },
 		},
 		requestCurrentHandler: {
-			description: '`(value) => Promise<{ value, label }>` — resolves display label for an existing value.',
+			description: '`(value) => Promise<{ value, label }>` - resolves display label for an existing value.',
 			control: false,
 			table: { category: 'props', subcategory: 'meta' },
 		},

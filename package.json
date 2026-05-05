@@ -70,6 +70,34 @@
       "require": "./dist/FDropdown/constants.cjs.js",
       "import": "./dist/FDropdown/constants.es.js"
     },
+    "./FModal": {
+      "require": "./dist/FModal/index.cjs.js",
+      "import": "./dist/FModal/index.es.js"
+    },
+    "./FModal/constants": {
+      "require": "./dist/FModal/constants.cjs.js",
+      "import": "./dist/FModal/constants.es.js"
+    },
+    "./FModal/layouts/FMLayoutDefault": {
+      "require": "./dist/FModal/layouts/FMLayoutDefault/index.cjs.js",
+      "import": "./dist/FModal/layouts/FMLayoutDefault/index.es.js"
+    },
+    "./FModal/layouts/FMLayoutForm": {
+      "require": "./dist/FModal/layouts/FMLayoutForm/index.cjs.js",
+      "import": "./dist/FModal/layouts/FMLayoutForm/index.es.js"
+    },
+    "./FModal/layouts/FMLayoutDialog": {
+      "require": "./dist/FModal/layouts/FMLayoutDialog/index.cjs.js",
+      "import": "./dist/FModal/layouts/FMLayoutDialog/index.es.js"
+    },
+    "./FModal/useFModal": {
+      "require": "./dist/FModal/useFModal.cjs.js",
+      "import": "./dist/FModal/useFModal.es.js"
+    },
+    "./FModal/useFModalDialog": {
+      "require": "./dist/FModal/useFModalDialog.cjs.js",
+      "import": "./dist/FModal/useFModalDialog.es.js"
+    },
     "./FTooltip": {
       "require": "./dist/FTooltip/index.cjs.js",
       "import": "./dist/FTooltip/index.es.js"
@@ -207,7 +235,8 @@
   "peerDependencies": {
     "@floating-ui/vue": "^1.1.11",
     "tailwindcss": "^4.2.4",
-    "vue": "^3.5.13"
+    "vue": "^3.5.13",
+    "vue-final-modal": "^4.5.5"
   },
   "peerDependenciesMeta": {
     "vue": {
@@ -217,6 +246,9 @@
       "optional": true
     },
     "@floating-ui/vue": {
+      "optional": true
+    },
+    "vue-final-modal": {
       "optional": true
     }
   },

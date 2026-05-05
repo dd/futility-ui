@@ -3,11 +3,7 @@
 `FGenericForm` renders a form from a metadata array, reducing the amount of repetitive template
 code needed for standard forms.
 
-> **Requires [`@vueuse/core`](https://vueuse.org/)** — used for responsive layout detection.
-> Install it alongside `futility-ui`:
-> ```sh
-> pnpm add @vueuse/core
-> ```
+> **Requires [@vueuse/core](https://vueuse.org/)** - used for responsive layout detection.
 
 Some widgets from `DEFAULT_WIDGETS` have their own dependencies:
 

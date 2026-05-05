@@ -213,6 +213,7 @@ export default defineConfig({
 				'forms/FInput/ClearButton': resolve(__dirname, 'src/forms/FInput/ClearButton.vue'),
 				'forms/FInput/ShowPasswordButton': resolve(__dirname, 'src/forms/FInput/ShowPasswordButton.vue'),
 				'forms/FGenericForm/useWidget': resolve(__dirname, 'src/forms/FGenericForm/useWidget.js'),
+				'FModal/useFModal': resolve(__dirname, 'src/FModal/useFModal.js'),
 				'forms/FGenericForm/widgets/FInputWidget': resolve(__dirname, 'src/forms/FGenericForm/widgets/FInputWidget.vue'),
 				'styles/base.css': resolve(__dirname, 'src/styles/base.tailwind.css'),
 				'styles/components.css': resolve(__dirname, 'src/styles/components.tailwind.css'),
@@ -223,6 +224,7 @@ export default defineConfig({
 		rollupOptions: {
 			external: [
 				'vue',
+				'vue-final-modal',
 				`.${process.env.BASE_URL || '/'}assets/sprite.svg`,
 			],
 			output: {

@@ -1,4 +1,4 @@
-@layer theme, components, utilities;
+@layer base, theme, components, utilities;
 
 @import "tailwindcss/theme.css" layer(theme) prefix(fui);
 @import "./theme.tailwind.css";
@@ -11,6 +11,8 @@
 @import "../FLoader/style.tailwind.css" layer(components);
 @import "../FStack/style.tailwind.css" layer(components);
 @import "../FDropdown/style.tailwind.css" layer(components);
+@import "../FModal/style.tailwind.css" layer(components);
+@import "../FModal/layouts/style.tailwind.css" layer(components);
 @import "../FTooltip/style.tailwind.css" layer(components);
 @import "../forms/FCheckbox/style.tailwind.css" layer(components);
 @import "../forms/FControlLabel/style.tailwind.css" layer(components);

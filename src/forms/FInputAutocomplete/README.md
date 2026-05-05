@@ -4,11 +4,8 @@ An input with a searchable dropdown that loads options on demand. The component 
 decoupled from any data source - you supply two async functions, and the component handles the rest:
 loading states, pagination, request cancellation, and keyboard navigation.
 
-> **Requires [`@floating-ui/vue`](https://floating-ui.com/docs/vue) and
-> [`@vueuse/core`](https://vueuse.org/)** — install them alongside `futility-ui`:
-> ```sh
-> pnpm add @floating-ui/vue @vueuse/core
-> ```
+> **Requires [@floating-ui/vue](https://floating-ui.com/docs/vue) and
+> [@vueuse/core](https://vueuse.org/)**
 
 ### Key features
 
