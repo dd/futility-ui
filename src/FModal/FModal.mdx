@@ -46,7 +46,8 @@ The modal open state is synchronized through `v-model`.
 
 `useFModal` lets you create and open a modal programmatically, without
 `v-model` or a layout component in the template. Instead, define the layout, props, and slots in
-the constructor.
+the constructor. `FModal` is used as the transport wrapper automatically - you only specify the
+layout.
 
 ```js
 import { h } from 'vue';
