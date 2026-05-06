@@ -1,33 +1,33 @@
 import { Meta, Canvas, Controls } from '@storybook/addon-docs/blocks';
-import * as FTabContainerStories from './FTabContainer.stories';
+import * as FTabsContainerStories from './FTabsContainer.stories';
 
-<Meta of={FTabContainerStories} />
+<Meta of={FTabsContainerStories} />
 
 
-# FTabContainer
+# FTabsContainer
 
 Tab container component. Declare tabs via `FTab` components in the default slot.
 
 ```js
-import { FTabContainer, FTab } from 'futility-ui';
+import { FTabsContainer, FTab } from 'futility-ui';
 // or
-import FTabContainer from 'futility-ui/FTabs/FTabContainer';
+import FTabsContainer from 'futility-ui/FTabs/FTabsContainer';
 import FTab from 'futility-ui/FTabs/FTab';
 ```
 
 ```html
-<FTabContainer v-model:activeTab="currentTab">
+<FTabsContainer v-model:activeTab="currentTab">
 	<FTab name="Overview">Overview content</FTab>
 	<FTab name="Settings">Settings content</FTab>
-</FTabContainer>
+</FTabsContainer>
 ```
 
 Tabs render in declaration order. The first non-disabled tab activates by default.
 
-> `FTabContainer` has multiple root elements (`header`, `hr`, `div`) — no extra wrapper needed, but attributes cannot be passed directly to the root.
+> `FTabsContainer` has multiple root elements (`header`, `hr`, `div`) — no extra wrapper needed, but attributes cannot be passed directly to the root.
 
-<Canvas of={FTabContainerStories.Default} />
-<Controls of={FTabContainerStories.Default} />
+<Canvas of={FTabsContainerStories.Default} />
+<Controls of={FTabsContainerStories.Default} />
 
 
 ## Custom slugs
@@ -35,28 +35,28 @@ Tabs render in declaration order. The first non-disabled tab activates by defaul
 The slug is used as the active tab identifier in `v-model:activeTab`. It is auto-generated from `name` if omitted. Set `slug` explicitly to sync tabs with route params or control them programmatically.
 
 ```html
-<FTabContainer v-model:activeTab="route.query.tab">
+<FTabsContainer v-model:activeTab="route.query.tab">
 	<FTab name="General" slug="general">...</FTab>
 	<FTab name="Security" slug="security">...</FTab>
-</FTabContainer>
+</FTabsContainer>
 ```
 
-<Canvas of={FTabContainerStories.CustomSlugs} />
+<Canvas of={FTabsContainerStories.CustomSlugs} />
 
 
 ## Dynamic tabs
 
 Add or remove `FTab` components at runtime — the header updates automatically. When the active tab is removed, the first available tab activates.
 
-<Canvas of={FTabContainerStories.Dynamic} />
+<Canvas of={FTabsContainerStories.Dynamic} />
 
 
 ## Custom tab slot
 
-Tab buttons in the header can be customized via named slots on `FTabContainer` using the pattern `tab-{slug}`. The slot exposes `{ tab }` with `name`, `slug`, and `disabled` fields.
+Tab buttons in the header can be customized via named slots on `FTabsContainer` using the pattern `tab-{slug}`. The slot exposes `{ tab }` with `name`, `slug`, and `disabled` fields.
 
 ```html
-<FTabContainer v-model:activeTab="tab">
+<FTabsContainer v-model:activeTab="tab">
 	<template #tab-inbox="{ tab }">
 		{{ tab.name }}
 		<span class="badge">3</span>
@@ -64,7 +64,7 @@ Tab buttons in the header can be customized via named slots on `FTabContainer` u
 
 	<FTab name="Inbox" slug="inbox">...</FTab>
 	<FTab name="Sent" slug="sent">...</FTab>
-</FTabContainer>
+</FTabsContainer>
 ```
 
-<Canvas of={FTabContainerStories.CustomTabSlot} />
+<Canvas of={FTabsContainerStories.CustomTabSlot} />

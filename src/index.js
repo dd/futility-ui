@@ -21,7 +21,7 @@ import FTooltip from './FTooltip';
 import { vTooltip } from './FTooltip/directive';
 import FTextarea from './forms/FTextarea';
 import FGenericForm from './forms/FGenericForm';
-import FTabContainer from './FTabs/FTabContainer';
+import FTabsContainer from './FTabs/FTabsContainer';
 import FTab from './FTabs/FTab';
 
 
@@ -49,7 +49,7 @@ export {
 	FTooltip,
 	vTooltip,
 	FGenericForm,
-	FTabContainer,
+	FTabsContainer,
 	FTab,
 };
 
@@ -77,7 +77,7 @@ const components = {
 	FMLayoutDialog,
 	FTooltip,
 	FGenericForm,
-	FTabContainer,
+	FTabsContainer,
 	FTab,
 };
 

@@ -3,12 +3,12 @@ import { useArgs } from 'storybook/preview-api';
 
 import { makeUpdateArg } from '@/.storybook/utils.js';
 import FButton from '@/FButton';
-import FTabContainer from './FTabContainer';
+import FTabsContainer from './FTabsContainer';
 import FTab from './FTab';
 
 
 export default {
-	title: 'FTabs/FTabContainer',
+	title: 'FTabs/FTabsContainer',
 	parameters: {
 		layout: 'centered',
 	},
@@ -36,7 +36,7 @@ export default {
 
 
 const DEFAULT_TEMP = `<div style="min-width: 400px" >
-	<FTabContainer v-bind="args" >
+	<FTabsContainer v-bind="args" >
 		<FTab name="Overview">
 			<p>This is the overview content.</p>
 		</FTab>
@@ -46,7 +46,7 @@ const DEFAULT_TEMP = `<div style="min-width: 400px" >
 		<FTab name="Settings">
 			<p>Settings panel content.</p>
 		</FTab>
-	</FTabContainer>
+	</FTabsContainer>
 </div>`;
 
 
@@ -55,9 +55,9 @@ export const Default = {
 		const updateArgs = useArgs()[1];
 		const updateActiveTab = makeUpdateArg('activeTab', updateArgs)[2];
 		return {
-			name: 'FTabContainerDefaultStory',
+			name: 'FTabsContainerDefaultStory',
 			props: Object.keys(argTypes),
-			components: { FTabContainer, FTab },
+			components: { FTabsContainer, FTab },
 			setup() {
 				const newArgs = computed(() => ({
 					activeTab: args.activeTab,
@@ -72,7 +72,7 @@ export const Default = {
 
 
 const CUSTOM_SLUG_TEMP = `<div style="min-width: 400px" >
-	<FTabContainer v-bind="args" >
+	<FTabsContainer v-bind="args" >
 		<FTab name="First Tab" slug="first">
 			<p>Custom slug: "first"</p>
 		</FTab>
@@ -85,7 +85,7 @@ const CUSTOM_SLUG_TEMP = `<div style="min-width: 400px" >
 		<FTab name="Fourth Tab" slug="fourth">
 			<p>Custom slug: "fourth"</p>
 		</FTab>
-	</FTabContainer>
+	</FTabsContainer>
 </div>`;
 
 
@@ -97,9 +97,9 @@ export const CustomSlugs = {
 		const updateArgs = useArgs()[1];
 		const updateActiveTab = makeUpdateArg('activeTab', updateArgs)[2];
 		return {
-			name: 'FTabContainerCustomSlugsStory',
+			name: 'FTabsContainerCustomSlugsStory',
 			props: Object.keys(argTypes),
-			components: { FTabContainer, FTab },
+			components: { FTabsContainer, FTab },
 			setup() {
 				const newArgs = computed(() => ({
 					activeTab: args.activeTab,
@@ -118,7 +118,7 @@ const DYNAMIC_TEMP = `<div style="min-width: 400px">
 		<FButton @click="count++">Add tab</FButton>
 		<FButton @click="count = Math.max(0, count - 1)" style="margin-left: 8px">Remove tab</FButton>
 	</p>
-	<FTabContainer v-bind="args">
+	<FTabsContainer v-bind="args">
 		<FTab
 			v-for="i in count"
 			:key="i"
@@ -127,7 +127,7 @@ const DYNAMIC_TEMP = `<div style="min-width: 400px">
 		>
 			<p>Dynamic content for tab {{ i }}. Total tabs: {{ count }}.</p>
 		</FTab>
-	</FTabContainer>
+	</FTabsContainer>
 </div>`;
 
 
@@ -136,9 +136,9 @@ export const Dynamic = {
 		const updateArgs = useArgs()[1];
 		const updateActiveTab = makeUpdateArg('activeTab', updateArgs)[2];
 		return {
-			name: 'FTabContainerDynamicStory',
+			name: 'FTabsContainerDynamicStory',
 			props: Object.keys(argTypes),
-			components: { FTabContainer, FTab, FButton },
+			components: { FTabsContainer, FTab, FButton },
 			setup() {
 				const count = ref(3);
 				const newArgs = computed(() => ({
@@ -154,7 +154,7 @@ export const Dynamic = {
 
 
 const CUSTOM_TAB_TEMP = `<div style="min-width: 400px" >
-	<FTabContainer v-bind="args" >
+	<FTabsContainer v-bind="args" >
 		<template #tab-inbox="{ tab }">
 			{{ tab.name }} <span style="background: #ef4444; color: white; border-radius: 9999px; padding: 1px 6px; font-size: 11px; margin-left: 4px">3</span>
 		</template>
@@ -168,7 +168,7 @@ const CUSTOM_TAB_TEMP = `<div style="min-width: 400px" >
 		<FTab name="Drafts" slug="drafts">
 			<p>Your drafts.</p>
 		</FTab>
-	</FTabContainer>
+	</FTabsContainer>
 </div>`;
 
 
@@ -177,9 +177,9 @@ export const CustomTabSlot = {
 		const updateArgs = useArgs()[1];
 		const updateActiveTab = makeUpdateArg('activeTab', updateArgs)[2];
 		return {
-			name: 'FTabContainerCustomSlotStory',
+			name: 'FTabsContainerCustomSlotStory',
 			props: Object.keys(argTypes),
-			components: { FTabContainer, FTab },
+			components: { FTabsContainer, FTab },
 			setup() {
 				const newArgs = computed(() => ({
 					activeTab: args.activeTab,

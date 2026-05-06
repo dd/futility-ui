@@ -2,7 +2,7 @@ import { computed } from 'vue';
 import { useArgs } from 'storybook/preview-api';
 
 import { makeUpdateArg } from '@/.storybook/utils.js';
-import FTabContainer from './FTabContainer';
+import FTabsContainer from './FTabsContainer';
 import FTab from './FTab';
 
 
@@ -36,10 +36,10 @@ export default {
 
 
 const DEFAULT_TEMP = `<div style="min-width: 320px" >
-	<FTabContainer>
+	<FTabsContainer>
 		<FTab v-bind="args"><p>Content of "{{ args.name }}".</p></FTab>
 		<FTab name="Other tab"><p>Other tab content.</p></FTab>
-	</FTabContainer>
+	</FTabsContainer>
 </div>`;
 
 
@@ -47,7 +47,7 @@ export const Default = {
 	render: (args) => {
 		return {
 			name: 'FTabDefaultStory',
-			components: { FTabContainer, FTab },
+			components: { FTabsContainer, FTab },
 			setup: () => ({ args }),
 			template: DEFAULT_TEMP,
 		};
@@ -56,7 +56,7 @@ export const Default = {
 
 
 const WITH_TAG_TEMP = `<div style="min-width: 320px">
-	<FTabContainer>
+	<FTabsContainer>
 		<FTab name="With tag" tag="div">
 			<p>Этот таб обёрнут в <code>&lt;div&gt;</code>.</p>
 			<p>Удобно когда нужен единый корневой элемент — например для <code>&lt;Transition&gt;</code>.</p>
@@ -64,14 +64,14 @@ const WITH_TAG_TEMP = `<div style="min-width: 320px">
 		<FTab name="Without tag">
 			<p>Этот таб рендерится как фрагмент — без обёртки в DOM.</p>
 		</FTab>
-	</FTabContainer>
+	</FTabsContainer>
 </div>`;
 
 
 export const WithTag = {
 	render: () => ({
 		name: 'FTabWithTagStory',
-		components: { FTabContainer, FTab },
+		components: { FTabsContainer, FTab },
 		template: WITH_TAG_TEMP,
 	}),
 };
