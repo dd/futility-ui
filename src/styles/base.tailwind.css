@@ -4,6 +4,10 @@
 @import "./theme.tailwind.css";
 
 @layer base {
+	:root {
+		@apply fui:text-text;
+	}
+
 	h1,
 	h2,
 	h3,
@@ -11,6 +15,7 @@
 	h5,
 	h6 {
 		font-weight: 700;
+		@apply fui:text-header;
 	}
 
 	a {
