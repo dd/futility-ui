@@ -14,6 +14,7 @@
 @import "../FModal/style.tailwind.css" layer(components);
 @import "../FModal/layouts/style.tailwind.css" layer(components);
 @import "../FTooltip/style.tailwind.css" layer(components);
+@import "../FTabs/style.tailwind.css" layer(components);
 @import "../forms/FCheckbox/style.tailwind.css" layer(components);
 @import "../forms/FControlLabel/style.tailwind.css" layer(components);
 @import "../forms/FFormRow/style.tailwind.css" layer(components);

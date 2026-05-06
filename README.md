@@ -103,7 +103,7 @@ field immediately followed by a button.)
 * [x] Dropdown
 * [x] Textarea
 * [x] Modal
-* [ ] Tabs **`<- you are here`**
+* [x] Tabs **`<- you are here`**
 * [ ] MultiSelect
 * [ ] Tag Select
 * [ ] Tree Editor
@@ -112,6 +112,8 @@ field immediately followed by a button.)
 * [ ] Number picker
 * [ ] Paginator
 * [ ] Popover
+* [ ] [FGenericForm] number range (from - to, inputs)
+* [ ] [FGenericForm] date range
 * etc.
 
 ### Refactor
@@ -119,6 +121,7 @@ field immediately followed by a button.)
 * [x] Split styles into base styles and theme-specific styles
 * [ ] Add support for scaling icons inside buttons
 * [ ] Update button focus styles (especially for the dark theme)
+* [ ] Sizes for checkbox, radiobutton and switch
 
 ### Extended
 

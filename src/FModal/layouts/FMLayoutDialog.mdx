@@ -1,0 +1,46 @@
+import { Meta, Canvas, Controls } from '@storybook/addon-docs/blocks';
+import * as FMLayoutDialogStories from './FMLayoutDialog.stories';
+import * as useFModalDialogStories from './useFModalDialog.stories';
+
+<Meta of={FMLayoutDialogStories} />
+
+
+# FMLayoutDialog
+
+A layout for confirmations and notifications with a fixed width and centered content.
+
+<Canvas of={FMLayoutDialogStories.Default} />
+<Controls of={FMLayoutDialogStories.Default} />
+
+
+## Icons
+
+<Canvas of={FMLayoutDialogStories.Icons} />
+
+
+## useFModalDialog
+
+Shortcut composable for typical confirmation/alert dialogs.
+Wraps `useFModal` + `FMLayoutDialog` + action buttons into a single call.
+
+```js
+import { useFModalDialog } from 'futility-ui';
+
+const { open, close } = useFModalDialog({
+  icon: 'warning',
+  message: '<p>Are you sure you want to delete this item?</p>',
+  apply: 'Yes, delete',
+  cancel: 'No, cancel',
+  onApply: ({ close }) => { doDelete(); close(); },
+});
+
+open();
+```
+
+<Canvas of={useFModalDialogStories.Default} />
+<Controls of={useFModalDialogStories.Default} />
+
+
+### Icon variants
+
+<Canvas of={useFModalDialogStories.Icons} />
