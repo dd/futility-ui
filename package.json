@@ -98,6 +98,14 @@
       "require": "./dist/FModal/useFModalDialog.cjs.js",
       "import": "./dist/FModal/useFModalDialog.es.js"
     },
+    "./FTabs/FTabContainer": {
+      "require": "./dist/FTabs/FTabContainer.cjs.js",
+      "import": "./dist/FTabs/FTabContainer.es.js"
+    },
+    "./FTabs/FTab": {
+      "require": "./dist/FTabs/FTab.cjs.js",
+      "import": "./dist/FTabs/FTab.es.js"
+    },
     "./FTooltip": {
       "require": "./dist/FTooltip/index.cjs.js",
       "import": "./dist/FTooltip/index.es.js"

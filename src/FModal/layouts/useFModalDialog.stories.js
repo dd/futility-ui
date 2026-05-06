@@ -2,35 +2,14 @@ import { computed } from 'vue';
 
 import FButton from '@/FButton';
 
-import { ICON_TYPES } from './constants';
-import { useFModalDialog } from './useFModalDialog';
+import { ICON_TYPES } from '../constants';
+import { useFModalDialog } from '../useFModalDialog';
 
 
 export default {
-	title: 'FModal/useFModalDialog',
-	tags: [ 'autodocs' ],
+	title: 'FModal/Layouts/FMLayoutDialog/useFModalDialog',
 	parameters: {
 		layout: 'centered',
-		docs: {
-			description: {
-				component: `Shortcut composable for typical confirmation/alert dialogs.
-Wraps \`useFModal\` + \`FMLayoutDialog\` + action buttons into a single call.
-
-\`\`\`js
-import { useFModalDialog } from 'futility-ui';
-
-const { open, close } = useFModalDialog({
-  icon: 'warning',
-  message: '<p>Are you sure you want to delete this item?</p>',
-  apply: 'Yes, delete',
-  cancel: 'No, cancel',
-  onApply: ({ close }) => { doDelete(); close(); },
-});
-
-open();
-\`\`\``,
-			},
-		},
 	},
 	argTypes: {
 		message: {
@@ -118,7 +97,7 @@ export const Default = {
 	render: (args) => ({
 		components: { FButton },
 		setup() {
-			const { open, close } = useFModalDialog(computed(() => ({
+			const { open } = useFModalDialog(computed(() => ({
 				...args,
 				onApply: ({ close }) => { args.onApply(); close(); },
 				onCancel: ({ close }) => { args.onCancel(); close(); },

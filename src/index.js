@@ -21,6 +21,8 @@ import FTooltip from './FTooltip';
 import { vTooltip } from './FTooltip/directive';
 import FTextarea from './forms/FTextarea';
 import FGenericForm from './forms/FGenericForm';
+import FTabContainer from './FTabs/FTabContainer';
+import FTab from './FTabs/FTab';
 
 
 export {
@@ -47,6 +49,8 @@ export {
 	FTooltip,
 	vTooltip,
 	FGenericForm,
+	FTabContainer,
+	FTab,
 };
 
 export const version = __VERSION__;
@@ -73,6 +77,8 @@ const components = {
 	FMLayoutDialog,
 	FTooltip,
 	FGenericForm,
+	FTabContainer,
+	FTab,
 };
 
 export const install = (app) => {

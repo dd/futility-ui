@@ -9,16 +9,8 @@ import FMLayoutDialog from './FMLayoutDialog';
 export default {
 	title: 'FModal/Layouts/FMLayoutDialog',
 	component: FMLayoutDialog,
-	tags: [ 'autodocs' ],
 	parameters: {
 		layout: 'centered',
-		docs: {
-			description: {
-				component: `A layout for confirmations and notifications with a fixed width and centered content.
-
-For quick one-off dialogs without a template, use the [useFModalDialog](?path=/docs/fmodal-usefmodaldialog--docs) shortcut instead.`,
-			},
-		},
 	},
 	argTypes: {
 		// props
