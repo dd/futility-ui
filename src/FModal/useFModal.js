@@ -1,10 +1,11 @@
-import { h, markRaw } from 'vue';
+import { h, markRaw, reactive } from 'vue';
 import { useModal } from 'vue-final-modal';
 import FModal from './index.vue';
 
 
 /**
  * Programmatically open a modal with any layout component, without a template.
+ * Automatically uses FModal as the transport wrapper — you only specify the layout.
  *
  * @param {Component} LayoutComponent - FMLayoutDefault, FMLayoutDialog, FMLayoutForm, or custom.
  * @param {object} [options]
@@ -30,6 +31,8 @@ import FModal from './index.vue';
 export function useFModal(LayoutComponent, options = {}) {
 	const { props = {}, slots = {}, modal: modalProps = {} } = options;
 
+	const reactiveProps = reactive(props);
+
 	// Indirection so `close` in slot fns always calls the final instance.close
 	const closeRef = { fn: null };
 	const close = () => closeRef.fn?.();
@@ -46,7 +49,7 @@ export function useFModal(LayoutComponent, options = {}) {
 		setup() {
 			return () => h(
 				LayoutComponent,
-				{ ...props, onClose: close },
+				{ ...reactiveProps, onClose: close },
 				Object.keys(slotFns).length ? slotFns : undefined,
 			);
 		},
