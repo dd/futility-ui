@@ -97,6 +97,7 @@ field immediately followed by a button.)
 	- [ ] Custom dropdown for desktop screen and native for mobile [???]
 * [x] Tooltip
 * [x] Form row (A component that renders a form row with a label, widget, help text, and error text.)
+	- [ ] Add required mark
 * [x] Control label (A component that adds a label for widgets such as checkbox, radio button, etc.)
 * [x] Generic Form
 	- [ ] utils for make meta from DRF metadata
