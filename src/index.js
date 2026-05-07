@@ -23,6 +23,7 @@ import FTextarea from './forms/FTextarea';
 import FGenericForm from './forms/FGenericForm';
 import FTabsContainer from './FTabs/FTabsContainer';
 import FTab from './FTabs/FTab';
+import FFormRow from './forms/FFormRow';
 
 
 export {
@@ -51,6 +52,7 @@ export {
 	FGenericForm,
 	FTabsContainer,
 	FTab,
+	FFormRow,
 };
 
 export const version = __VERSION__;
@@ -79,6 +81,7 @@ const components = {
 	FGenericForm,
 	FTabsContainer,
 	FTab,
+	FFormRow,
 };
 
 export const install = (app) => {
