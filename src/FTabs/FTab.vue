@@ -5,7 +5,7 @@
 
 
 <script setup>
-import { computed, inject, onUnmounted, useAttrs, watch } from 'vue';
+import { computed, inject, onUnmounted, watch } from 'vue';
 
 
 defineOptions({ inheritAttrs: false });
@@ -27,8 +27,6 @@ const props = defineProps({
 	tag: String,
 });
 
-const attrs = useAttrs();
-
 const addTab = inject('fuiTabs:addTab');
 const updateTab = inject('fuiTabs:updateTab');
 const removeTab = inject('fuiTabs:removeTab');
@@ -42,7 +40,7 @@ const isActive = computed(() => activeTabID.value === ID);
 
 
 watch(
-	() => [ props.name, props.disabled, actualSlug.value, props.as, attrs ],
+	() => [ props.name, props.disabled, actualSlug.value, props.as ],
 	() => {
 		updateTab({
 			id: ID,
@@ -50,7 +48,6 @@ watch(
 			disabled: props.disabled,
 			slug: actualSlug.value,
 			as: props.as,
-			attrs: { ...attrs },
 		});
 	},
 	{ deep: true },
@@ -62,7 +59,6 @@ addTab({
 	disabled: props.disabled,
 	slug: actualSlug.value,
 	as: props.as,
-	attrs: { ...attrs },
 });
 
 onUnmounted(() => {

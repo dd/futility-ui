@@ -7,6 +7,7 @@
 			type="button"
 			:class="[
 				'fui-tabs-button',
+				`fui-tabs-button-${tab.slug}`,
 				{ 'is-active': tab.slug === activeTab },
 			]"
 			:disabled="tab.disabled"
@@ -16,7 +17,7 @@
 		</button>
 	</header>
 	<hr class="fui-tabs-divider" />
-	<div class="fui-tabs-body"><slot /></div>
+	<div :class="['fui-tabs-body', `fui-tabs-body-${activeTab}`]"><slot /></div>
 </template>
 
 
