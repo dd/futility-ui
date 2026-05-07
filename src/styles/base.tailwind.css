@@ -21,6 +21,6 @@
 	a {
 		text-decoration: underline;
 		text-underline-offset: 4px;
-		color: light-dark(var(--fui-color-primary-600), var(--fui-color-primary-500));
+		@apply fui:text-link;
 	}
 }
