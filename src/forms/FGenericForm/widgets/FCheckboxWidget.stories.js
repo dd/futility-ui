@@ -1,5 +1,4 @@
-import { makeFGFWidgetRenderer, makeFGFWidgetManyRenderer } from '@/.storybook/utils.js';
-import { WIDGET_BASE_ARG_TYPES } from '../constants.sb.js';
+import { WIDGET_BASE_ARG_TYPES, makeFGFWidgetRenderer, makeFGFWidgetManyRenderer } from '../sb.stuff.js';
 import { DEFAULT_WIDGETS } from '../constants.js';
 import FCheckboxWidgetComponent from './FCheckboxWidget.vue';
 import { getFormDefaults } from '../utils';

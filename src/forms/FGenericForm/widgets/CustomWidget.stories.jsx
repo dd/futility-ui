@@ -2,7 +2,7 @@ import { computed } from 'vue';
 import { useArgs } from 'storybook/preview-api';
 import React from 'react';
 
-import { makeUpdateArg } from '@/.storybook/utils.js';
+import { makeUpdateArg } from '@/sb.stuff.js';
 import DemoColorWidget from './DemoColorWidget';
 import DemoRangeWidget from './DemoRangeWidget';
 import FGenericForm from '..';

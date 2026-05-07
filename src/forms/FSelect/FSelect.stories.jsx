@@ -3,7 +3,7 @@ import { Title, Primary, Controls, Stories, Markdown, Subtitle, Description } fr
 import { computed, ref } from 'vue';
 import { useArgs } from 'storybook/preview-api';
 
-import { makeRenderer, makeUpdateArg } from '@/.storybook/utils.js';
+import { makeRenderer, makeUpdateArg } from '@/sb.stuff.js';
 import FSelect from '.';
 import { SIZE_CHOICES } from './constants';
 

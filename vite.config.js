@@ -96,7 +96,7 @@ function FixFIconSpriteImport() {
  * @param {string} dir - The root directory to start scanning from.
  * @returns {Object<string, string>} An object mapping relative entry names to absolute file paths.
  */
-function findVueEntries(dir) {
+function findBundleEntries(dir) {
 	const entries = {};
 
 	const items = readdirSync(dir, { withFileTypes: true });
@@ -104,7 +104,7 @@ function findVueEntries(dir) {
 		const fullPath = join(dir, item.name);
 
 		if (item.isDirectory()) {
-			const sub = findVueEntries(fullPath);
+			const sub = findBundleEntries(fullPath);
 			Object.assign(entries, sub);
 
 		} else if (item.isFile() && item.name === 'index.vue') {
@@ -120,6 +120,10 @@ function findVueEntries(dir) {
 			entries[rel] = resolve(fullPath);
 
 		} else if (item.isFile() && item.name === 'utils.js') {
+			const rel = relative('src', fullPath).replace(/\.js$/, '');
+			entries[rel] = resolve(fullPath);
+
+		} else if (item.isFile() && item.name === 'sb.stuff.js') {
 			const rel = relative('src', fullPath).replace(/\.js$/, '');
 			entries[rel] = resolve(fullPath);
 		}
@@ -209,7 +213,7 @@ export default defineConfig({
 			name: 'Futility UI',
 			entry: {
 				'index': resolve(__dirname, 'src/index.js'),
-				...findVueEntries(resolve('src')),
+				...findBundleEntries(resolve('src')),
 				'forms/FInput/ClearButton': resolve(__dirname, 'src/forms/FInput/ClearButton.vue'),
 				'forms/FInput/ShowPasswordButton': resolve(__dirname, 'src/forms/FInput/ShowPasswordButton.vue'),
 				'forms/FGenericForm/useWidget': resolve(__dirname, 'src/forms/FGenericForm/useWidget.js'),
@@ -256,7 +260,6 @@ export default defineConfig({
 	resolve: {
 		extensions: [ '.mjs', '.js', '.mts', '.ts', '.jsx', '.tsx', '.json', '.vue', '.mdx' ],
 		alias: {
-			'@/.storybook': fileURLToPath(new URL('./.storybook', import.meta.url)),
 			'@': fileURLToPath(new URL('./src', import.meta.url)),
 		},
 	},

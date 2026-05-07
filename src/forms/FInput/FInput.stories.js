@@ -1,7 +1,7 @@
 import { computed, ref } from 'vue';
 import { useArgs } from 'storybook/preview-api';
 
-import { makeUpdateArg } from '@/.storybook/utils.js';
+import { makeUpdateArg } from '@/sb.stuff.js';
 import FIcon from '@/FIcon';
 import Readme from './README.md?raw';
 import FInput from './index.vue';

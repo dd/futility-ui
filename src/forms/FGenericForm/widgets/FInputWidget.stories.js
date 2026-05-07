@@ -1,5 +1,4 @@
-import { makeFGFWidgetRenderer, makeFGFWidgetManyRenderer } from '@/.storybook/utils.js';
-import { WIDGET_BASE_ARG_TYPES } from '../constants.sb.js';
+import { WIDGET_BASE_ARG_TYPES, makeFGFWidgetRenderer, makeFGFWidgetManyRenderer } from '../sb.stuff.js';
 import FInputWidgetComponent from './FInputWidget.vue';
 import { getFormDefaults } from '../utils';
 import { INPUT_WIDGET_TYPES, DEFAULT_WIDGETS } from '../constants.js';
