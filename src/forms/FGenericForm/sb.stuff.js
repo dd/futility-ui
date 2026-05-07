@@ -144,7 +144,7 @@ export const META_BASIC = [
  * Use for Default / Errors stories where a single widget instance is shown
  * and the user can interact with the form via Storybook controls.
  */
-export const makeFGFWidgetRenderer = () => {
+export const makeFGFWidgetRenderer = (widgets) => {
 	return (args, { argTypes }) => {
 		const [ , updateArgs ] = useArgs();
 		const metaKeys = Object.keys(argTypes).filter((k) => {
@@ -165,13 +165,12 @@ export const makeFGFWidgetRenderer = () => {
 						'layout': args.layout,
 						'widgetSize': args.size,
 						'errors': args.fieldErrors,
-						'widgets': args.widgets,
 					};
 				});
 
-				return { formArgs };
+				return { formArgs, widgets };
 			},
-			template: '<FGenericForm v-bind="formArgs" />',
+			template: '<FGenericForm v-bind="formArgs" :widgets="widgets" />',
 		};
 	};
 };
@@ -191,7 +190,7 @@ export const makeFGFWidgetRenderer = () => {
  *
  * Use when showing multiple field variants side by side with fixed initial values.
  */
-export const makeFGFWidgetManyRenderer = () => {
+export const makeFGFWidgetManyRenderer = (widgets) => {
 	return (args) => ({
 		components: { FGenericForm },
 		setup() {
@@ -201,10 +200,9 @@ export const makeFGFWidgetManyRenderer = () => {
 				'layout': args.layout,
 				'widgetSize': args.size,
 				'errors': args.fieldErrors,
-				'widgets': args.widgets,
 			}));
-			return { modelValue, formArgs };
+			return { modelValue, formArgs, widgets };
 		},
-		template: '<FGenericForm v-model="modelValue" v-bind="formArgs" />',
+		template: '<FGenericForm v-model="modelValue" v-bind="formArgs" :widgets="widgets" />',
 	});
 };
