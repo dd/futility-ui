@@ -1,7 +1,7 @@
 import { computed } from 'vue';
 import { useArgs } from 'storybook/preview-api';
 
-import { makeUpdateArg } from '@/.storybook/utils.js';
+import { makeUpdateArg } from '@/sb.stuff.js';
 import FTabsContainer from './FTabsContainer';
 import FTab from './FTab';
 

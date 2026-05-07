@@ -198,6 +198,14 @@
       "require": "./dist/forms/FTextarea/constants.cjs.js",
       "import": "./dist/forms/FTextarea/constants.es.js"
     },
+    "./sb.stuff": {
+      "require": "./dist/sb.stuff.cjs.js",
+      "import": "./dist/sb.stuff.es.js"
+    },
+    "./forms/FGenericForm/sb.stuff": {
+      "require": "./dist/forms/FGenericForm/sb.stuff.cjs.js",
+      "import": "./dist/forms/FGenericForm/sb.stuff.es.js"
+    },
     "./styles/theme.tailwind.css": "./dist/styles/theme.tailwind.css",
     "./styles/components.css": "./dist/styles/components.css",
     "./styles/components.tailwind.css": "./dist/styles/components.tailwind.css",

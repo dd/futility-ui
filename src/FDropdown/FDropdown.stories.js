@@ -1,7 +1,7 @@
 import { computed, ref } from 'vue';
 import { useArgs } from 'storybook/preview-api';
 
-import { makeUpdateArg } from '@/.storybook/utils.js';
+import { makeUpdateArg } from '@/sb.stuff.js';
 import FButton from '@/FButton';
 import Readme from './README.md?raw';
 import FDropdown from './index.vue';

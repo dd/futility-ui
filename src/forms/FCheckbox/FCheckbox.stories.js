@@ -1,7 +1,7 @@
 import { useArgs } from 'storybook/preview-api';
 
 import FCheckbox from '.';
-import { makeRenderer, makeUpdateArg } from '@/.storybook/utils.js';
+import { makeRenderer, makeUpdateArg } from '@/sb.stuff.js';
 
 
 const usage = `

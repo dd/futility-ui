@@ -1,10 +1,10 @@
 import { computed } from 'vue';
 import { useArgs } from 'storybook/preview-api';
 
-import { makeRenderer, makeUpdateArg } from '@/.storybook/utils.js';
+import { makeRenderer, makeUpdateArg } from '@/sb.stuff.js';
 
 import Readme from './README.md?raw';
-import { META_BASIC } from './constants.sb.js';
+import { META_BASIC } from './sb.stuff.js';
 import FGenericForm from '.';
 import { getFormDefaults, getDiff, getDataForQuery } from './utils';
 import { DEFAULT_WIDGETS, LAYOUT_CHOICES, SIZE_CHOICES } from './constants.js';

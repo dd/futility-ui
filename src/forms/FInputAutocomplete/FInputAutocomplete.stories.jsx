@@ -4,7 +4,7 @@ import { computed, ref, watch } from 'vue';
 import { useArgs } from 'storybook/preview-api';
 import { fn } from 'storybook/test';
 
-import { makeUpdateArg } from '@/.storybook/utils.js';
+import { makeUpdateArg } from '@/sb.stuff.js';
 import FSwitch from '@/forms/FSwitch';
 import FControlLabel from '@/forms/FControlLabel';
 import Readme from './README.md?raw';
