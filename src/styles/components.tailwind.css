@@ -24,4 +24,5 @@
 @import "../forms/FRadioButton/style.tailwind.css" layer(components);
 @import "../forms/FSelect/style.tailwind.css" layer(components);
 @import "../forms/FSwitch/style.tailwind.css" layer(components);
+@import "../forms/FNumberPicker/style.tailwind.css" layer(components);
 @import "../forms/FTextarea/style.tailwind.css" layer(components);

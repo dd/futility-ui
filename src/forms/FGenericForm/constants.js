@@ -7,6 +7,7 @@ const FSwitchWidget = defineAsyncComponent(() => import('./widgets/FSwitchWidget
 const FSelectWidget = defineAsyncComponent(() => import('./widgets/FSelectWidget.vue'));
 const FAutocompleteWidget = defineAsyncComponent(() => import('./widgets/FAutocompleteWidget.vue'));
 const FTextareaWidget = defineAsyncComponent(() => import('./widgets/FTextareaWidget.vue'));
+const FNumberPickerWidget = defineAsyncComponent(() => import('./widgets/FNumberPickerWidget.vue'));
 
 
 export const LAYOUT_CHOICES = [
@@ -95,6 +96,13 @@ const TEXTAREA_WIDGETS = {
 	},
 };
 
+const NUMBER_PICKER_WIDGETS = {
+	number_picker: {
+		component: FNumberPickerWidget,
+		normalize: (value, field) => field?.allowNull ? (value ?? null) : (value ?? 0),
+	},
+};
+
 /**
  * Built-in widget registry.
  * type → { component, normalize? }
@@ -110,4 +118,5 @@ export const DEFAULT_WIDGETS = {
 	...SELECT_WIDGETS,
 	...AUTOCOMPLETE_WIDGETS,
 	...TEXTAREA_WIDGETS,
+	...NUMBER_PICKER_WIDGETS,
 };

@@ -1,0 +1,379 @@
+@theme {
+	--color-np-c: light-dark(var(--fui-color-gray-900), var(--fui-color-white));
+	--color-np-b: light-dark(var(--fui-color-gray-300), var(--fui-color-gray-600));
+	--color-np-i-bg: light-dark(var(--fui-color-gray-50), var(--fui-color-gray-700));
+	--color-np-btn-bg: light-dark(var(--fui-color-gray-100), var(--fui-color-gray-600));
+	--color-np-btn-bg-h: light-dark(var(--fui-color-gray-50), var(--fui-color-gray-500));
+	/* focus */
+	--color-np-bf: var(--fui-color-primary-600);
+	/* disabled */
+	--color-np-cd: light-dark(var(--fui-color-gray-400), var(--fui-color-gray-500));
+	--color-np-bd: light-dark(var(--fui-color-gray-200), var(--fui-color-gray-700));
+	--color-np-i-bgd: light-dark(var(--fui-color-gray-50), var(--fui-color-gray-800));
+	--color-np-btn-bgd: light-dark(var(--fui-color-gray-100), var(--fui-color-gray-800));
+	/* error */
+	--color-np-ce: light-dark(var(--fui-color-red-700), var(--fui-color-red-500));
+	--color-np-be: var(--fui-color-red-500);
+	--color-np-i-bge: light-dark(var(--fui-color-red-50), var(--fui-color-gray-800));
+	--color-np-btn-bge: light-dark(var(--fui-color-red-100), var(--fui-color-gray-700));
+	--color-np-btn-bge-h: light-dark(var(--fui-color-red-50), var(--fui-color-gray-600));
+	/* error + disabled */
+	--color-np-ced: light-dark(var(--fui-color-red-400), var(--fui-color-red-900));
+	--color-np-bed: light-dark(var(--fui-color-red-200), var(--fui-color-red-950));
+	--color-np-bged: light-dark(var(--fui-color-red-50), var(--fui-color-gray-900));
+}
+
+
+.fui-number-picker {
+	display: flex;
+	flex-wrap: nowrap;
+	flex-direction: row;
+	@apply fui:text-np-c;
+	@apply fui:rounded-lg;
+
+	/* Outline on whole widget — only for input focus */
+	@apply fui:outline-focus-prepear;
+	transition-property: outline-color;
+	transition-duration: var(--fui-transition-duration-default);
+	will-change: outline-color;
+
+	.fui-np-decrease,
+	.fui-np-increase {
+		flex-grow: 0;
+		flex-shrink: 0;
+		box-sizing: border-box;
+
+		@apply fui:rounded-lg;
+		border: 1px solid;
+		@apply fui:border-np-b;
+		color: inherit;
+		font-family: inherit;
+		font-size: inherit;
+		font-weight: inherit;
+		@apply fui:bg-np-btn-bg;
+
+		cursor: pointer;
+
+		/* Button has its own outline for button focus */
+		@apply fui:outline-focus-prepear;
+		transition-property: outline-color, border-color, background-color;
+		transition-duration: var(--fui-transition-duration-default);
+		will-change: outline-color, border-color, background-color;
+
+		&:not(:disabled):hover {
+			@apply fui:bg-np-btn-bg-h;
+		}
+
+		/* Button focus → highlight only this button */
+		&:focus-visible {
+			@apply fui:border-np-bf;
+			@apply fui:outline-focus;
+			z-index: 1;
+		}
+
+		&:disabled {
+			cursor: default;
+			@apply fui:text-np-cd;
+			@apply fui:bg-np-btn-bgd;
+		}
+	}
+
+	.fui-np-decrease {
+		border-top-right-radius: 0;
+		border-bottom-right-radius: 0;
+
+		&:disabled {
+			@apply fui:border-r-np-bd;
+		}
+	}
+
+	.fui-np-increase {
+		border-top-left-radius: 0;
+		border-bottom-left-radius: 0;
+
+		&:disabled {
+			@apply fui:border-l-np-bd;
+		}
+	}
+
+	.fui-np-icon {
+		display: block;
+	}
+
+	.fui-np-input {
+		margin: 0;
+		padding: 0;
+		flex-grow: 1;
+		flex-shrink: 1;
+		box-sizing: border-box;
+
+		border: 1px solid;
+		border-right: none;
+		border-left: none;
+		@apply fui:border-np-b;
+		color: inherit;
+		text-align: center;
+		font-family: inherit;
+		font-size: inherit;
+		font-weight: inherit;
+		@apply fui:bg-np-i-bg;
+
+		transition-property: border-color;
+		transition-duration: var(--fui-transition-duration-default);
+		will-change: border-color;
+
+		/* Firefox */
+		-moz-appearance: textfield;
+
+		/* Chrome, Safari, Edge, Opera */
+		&::-webkit-outer-spin-button,
+		&::-webkit-inner-spin-button {
+			-webkit-appearance: none;
+			margin: 0;
+		}
+
+		&:focus,
+		&:focus-visible {
+			outline: none;
+		}
+	}
+
+	/* Input focus → outline on whole widget + only outer borders highlighted */
+	&:has(.fui-np-input:focus) {
+		.fui-np-decrease {
+			@apply fui:border-l-np-bf;
+			@apply fui:border-t-np-bf;
+			@apply fui:border-b-np-bf;
+		}
+
+		.fui-np-input {
+			@apply fui:border-np-bf;
+		}
+
+		.fui-np-increase {
+			@apply fui:border-r-np-bf;
+			@apply fui:border-t-np-bf;
+			@apply fui:border-b-np-bf;
+		}
+	}
+
+	&:has(.fui-np-input:focus-visible) {
+		@apply fui:outline-focus;
+	}
+}
+
+
+/* Disabled *************************************/
+
+.fui-number-picker.is-disabled {
+	.fui-np-decrease,
+	.fui-np-increase {
+		@apply fui:border-np-bd;
+	}
+
+	.fui-np-input {
+		@apply fui:text-np-cd;
+		@apply fui:border-np-bd;
+		@apply fui:bg-np-i-bgd;
+	}
+}
+
+
+/* Error ****************************************/
+
+.fui-number-picker.has-error {
+	@apply fui:text-np-ce;
+
+	.fui-np-decrease,
+	.fui-np-increase {
+		@apply fui:border-np-be;
+		@apply fui:bg-np-btn-bge;
+
+		&:not(:disabled):hover {
+			@apply fui:bg-np-btn-bge-h;
+		}
+
+		/* Button focus + error → error outline on button */
+		&:focus-visible {
+			@apply fui:outline-focus-error;
+		}
+
+		&:disabled {
+			@apply fui:text-np-ced;
+			@apply fui:bg-np-bged;
+		}
+	}
+
+	.fui-np-decrease {
+		&:disabled {
+			@apply fui:border-r-np-bed;
+		}
+	}
+
+	.fui-np-increase {
+		&:disabled {
+			@apply fui:border-l-np-bed;
+		}
+	}
+
+	.fui-np-input {
+		@apply fui:border-np-be;
+		@apply fui:bg-np-i-bge;
+	}
+
+	/* Error + Input focus → outline only (no inner border changes) */
+	&:has(.fui-np-input:focus) {
+		.fui-np-decrease {
+			@apply fui:border-l-np-be;
+			@apply fui:border-t-np-be;
+			@apply fui:border-b-np-be;
+		}
+
+		.fui-np-input {
+			@apply fui:border-np-be;
+		}
+
+		.fui-np-increase {
+			@apply fui:border-r-np-be;
+			@apply fui:border-t-np-be;
+			@apply fui:border-b-np-be;
+		}
+	}
+
+	&:has(.fui-np-input:focus-visible) {
+		@apply fui:outline-focus-error;
+	}
+}
+
+
+/* Error + Disabled *****************************/
+
+.fui-number-picker.has-error.is-disabled {
+	.fui-np-decrease,
+	.fui-np-increase {
+		@apply fui:border-np-bed;
+	}
+
+	.fui-np-input {
+		@apply fui:text-np-ced;
+		@apply fui:border-np-bed;
+		@apply fui:bg-np-bged;
+	}
+}
+
+
+/* Sizes ****************************************/
+
+/* height: 20px */
+.fui-np-size-3xs {
+	--fui-icon-size: 12px;
+	font-size: theme(text.xs);
+	line-height: 150%;
+	@apply fui:rounded-md;
+
+	.fui-np-decrease,
+	.fui-np-increase {
+		padding: 3px;
+		@apply fui:rounded-md;
+	}
+
+	.fui-np-decrease {
+		border-top-right-radius: 0;
+		border-bottom-right-radius: 0;
+	}
+
+	.fui-np-increase {
+		border-top-left-radius: 0;
+		border-bottom-left-radius: 0;
+	}
+
+	.fui-np-input {
+		line-height: 18px;
+		min-width: 20px;
+	}
+}
+
+/* height: 28px */
+.fui-np-size-2xs {
+	--fui-icon-size: 14px;
+	font-size: theme(text.xs);
+	line-height: 150%;
+
+	.fui-np-decrease,
+	.fui-np-increase {
+		padding: 6px 6px;
+	}
+
+	.fui-np-input {
+		line-height: 26px;
+		min-width: 28px;
+	}
+}
+
+/* height: 34px */
+.fui-np-size-xs {
+	--fui-icon-size: 16px;
+	font-size: theme(text.sm);
+	line-height: 150%;
+
+	.fui-np-decrease,
+	.fui-np-increase {
+		padding: 8px 8px;
+	}
+
+	.fui-np-input {
+		line-height: 32px;
+		min-width: 34px;
+	}
+}
+
+/* height: 37px */
+.fui-np-size-s {
+	--fui-icon-size: 16px;
+	font-size: theme(text.sm);
+	line-height: 150%;
+
+	.fui-np-decrease,
+	.fui-np-increase {
+		padding: 7px 8px;
+	}
+
+	.fui-np-input {
+		line-height: 35px;
+		min-width: 37px;
+	}
+}
+
+/* height: 42px */
+.fui-np-size-m {
+	--fui-icon-size: 16px;
+	font-size: theme(text.sm);
+	line-height: 150%;
+
+	.fui-np-decrease,
+	.fui-np-increase {
+		padding: 10px 12px;
+	}
+
+	.fui-np-input {
+		line-height: 40px;
+		min-width: 42px;
+	}
+}
+
+/* height: 52px */
+.fui-np-size-xl {
+	--fui-icon-size: 20px;
+	font-size: theme(text.base);
+	line-height: 150%;
+
+	.fui-np-decrease,
+	.fui-np-increase {
+		padding: 15px 16px;
+	}
+
+	.fui-np-input {
+		line-height: 50px;
+		min-width: 52px;
+	}
+}
