@@ -10,16 +10,13 @@
 	flex-direction: row;
 	flex-wrap: nowrap;
 	justify-content: flex-start;
-	@apply fui:gap-8;
 
 	.fui-tabs-button {
 		position: relative;
-		@apply fui:mb-1;
+		/*@apply fui:mb-1;*/
 		padding: 0;
-		@apply fui:py-2;
 
 		@apply fui:font-sans;
-		@apply fui:text-sm;
 		font-weight: 500;
 		letter-spacing: 0.015em;
 		@apply fui:text-tabs-title;
@@ -29,6 +26,7 @@
 		appearance: none;
 		cursor: pointer;
 		user-select: none;
+		/*@apply fui:rounded-tl-lg;*/
 		@apply fui:rounded-lg;
 
 		@apply fui:outline-focus-prepear;
@@ -38,10 +36,8 @@
 		&::after {
 			content: '';
 			position: absolute;
-			@apply fui:-bottom-1;
-			left: 0;
-			right: 0;
-			height: 2px;
+			bottom: 0;
+			height: 1px;
 			background-color: transparent;
 			transition-property: background-color;
 			transition-duration: var(--fui-transition-duration-default);
@@ -70,11 +66,41 @@
 	}
 }
 
+.fui-tabs-size-s {
+	@apply fui:gap-6;
+
+	.fui-tabs-button {
+		@apply fui:p-1.5;
+		@apply fui:-mx-1.5;
+		@apply fui:text-xs;
+
+		&::after {
+			@apply fui:left-1.5;
+			@apply fui:right-1.5;
+		}
+	}
+}
+
+.fui-tabs-size-m {
+	@apply fui:gap-8;
+
+	.fui-tabs-button {
+		@apply fui:p-2;
+		@apply fui:-mx-2;
+		@apply fui:text-sm;
+
+		&::after {
+			@apply fui:left-2;
+			@apply fui:right-2;
+		}
+	}
+}
+
 .fui-tabs-divider {
 	margin: 0;
 	@apply fui:mb-4;
-	margin-top: -2px;
+	margin-top: -1px;
 	border: none;
-	border-bottom: 2px solid;
+	border-bottom: 1px solid;
 	@apply fui:border-tabs-divider;
 }
