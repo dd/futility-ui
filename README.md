@@ -104,13 +104,13 @@ field immediately followed by a button.)
 * [x] Dropdown
 * [x] Textarea
 * [x] Modal
-* [x] Tabs **`<- you are here`**
+* [x] Tabs
+* [x Number picker **`<- you are here`**
 * [ ] MultiSelect
 * [ ] Tag Select
 * [ ] Tree Editor
 * [ ] FileSelect
 * [ ] FileSelectArea
-* [ ] Number picker
 * [ ] Paginator
 * [ ] Popover
 * [ ] [FGenericForm] number range (from - to, inputs)

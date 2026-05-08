@@ -1,5 +1,5 @@
 <template>
-	<header class="fui-tabs-header">
+	<header :class="['fui-tabs-header', `fui-tabs-size-${size}`]">
 		<button
 			v-for="tab in state.tabs"
 			:key="tab.id"
@@ -23,6 +23,15 @@
 
 <script setup>
 import { computed, nextTick, provide, reactive, watch } from 'vue';
+
+defineProps({
+	/** Tab header size. */
+	size: {
+		type: String,
+		default: 'm',
+		// validator: size => [ 's', 'm' ].includes(size),
+	},
+});
 
 
 const state = reactive({

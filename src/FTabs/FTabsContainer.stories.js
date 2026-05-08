@@ -7,12 +7,25 @@ import FTabsContainer from './FTabsContainer';
 import FTab from './FTab';
 
 
+const SIZE_CHOICES = Object.freeze([ 's', 'm' ]);
+
+
 export default {
 	title: 'FTabs/FTabsContainer',
 	parameters: {
 		layout: 'centered',
 	},
 	argTypes: {
+		size: {
+			options: SIZE_CHOICES,
+			control: { type: 'select' },
+			description: 'Tab header size.',
+			table: {
+				category: 'props',
+				type: { summary: SIZE_CHOICES.join(' | ') },
+				defaultValue: { summary: 'm' },
+			},
+		},
 		activeTab: {
 			control: 'text',
 			description: 'Active tab slug (v-model).',
@@ -31,6 +44,9 @@ export default {
 				defaultValue: { summary: null },
 			},
 		},
+	},
+	args: {
+		size: 'm',
 	},
 };
 
@@ -60,6 +76,7 @@ export const Default = {
 			components: { FTabsContainer, FTab },
 			setup() {
 				const newArgs = computed(() => ({
+					size: args.size,
 					activeTab: args.activeTab,
 					'onUpdate:activeTab': updateActiveTab,
 				}));
@@ -71,6 +88,46 @@ export const Default = {
 };
 
 
+const SIZES_TEMP = `<div style="min-width: 400px; display: grid; gap: 24px" >
+	<div>
+		<FTabsContainer size="s" >
+			<FTab name="Small">
+				<p>Small tab header.</p>
+			</FTab>
+			<FTab name="Details">
+				<p>Compact details content.</p>
+			</FTab>
+			<FTab name="Settings">
+				<p>Compact settings content.</p>
+			</FTab>
+		</FTabsContainer>
+	</div>
+
+	<div>
+		<FTabsContainer size="m" >
+			<FTab name="Medium">
+				<p>Medium tab header.</p>
+			</FTab>
+			<FTab name="Details">
+				<p>Default details content.</p>
+			</FTab>
+			<FTab name="Settings">
+				<p>Default settings content.</p>
+			</FTab>
+		</FTabsContainer>
+	</div>
+</div>`;
+
+
+export const Sizes = {
+	render: () => ({
+		name: 'FTabsContainerSizesStory',
+		components: { FTabsContainer, FTab },
+		template: SIZES_TEMP,
+	}),
+};
+
+
 const CUSTOM_SLUG_TEMP = `<div style="min-width: 400px" >
 	<FTabsContainer v-bind="args" >
 		<FTab name="First Tab" slug="first">
@@ -79,7 +136,7 @@ const CUSTOM_SLUG_TEMP = `<div style="min-width: 400px" >
 		<FTab name="Second Tab" slug="second">
 			<p>Custom slug: "second"</p>
 		</FTab>
-		<FTab name="Disabled Tab" slug="disabled" disabled>
+		<FTab name="Disabled" slug="disabled" disabled>
 			<p>This tab is disabled and cannot be selected.</p>
 		</FTab>
 		<FTab name="Fourth Tab" slug="fourth">
@@ -102,6 +159,7 @@ export const CustomSlugs = {
 			components: { FTabsContainer, FTab },
 			setup() {
 				const newArgs = computed(() => ({
+					size: args.size,
 					activeTab: args.activeTab,
 					'onUpdate:activeTab': updateActiveTab,
 				}));
@@ -142,6 +200,7 @@ export const Dynamic = {
 			setup() {
 				const count = ref(3);
 				const newArgs = computed(() => ({
+					size: args.size,
 					activeTab: args.activeTab,
 					'onUpdate:activeTab': updateActiveTab,
 				}));
@@ -182,6 +241,7 @@ export const CustomTabSlot = {
 			components: { FTabsContainer, FTab },
 			setup() {
 				const newArgs = computed(() => ({
+					size: args.size,
 					activeTab: args.activeTab,
 					'onUpdate:activeTab': updateActiveTab,
 				}));
