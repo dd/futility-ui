@@ -6,6 +6,7 @@
 		:error-text="errorText"
 		:error-highlight="error"
 		:disabled="disabled"
+		:required="required"
 	>
 		<template v-if="meta.label" #label>{{ meta.label }}</template>
 		<FNumberPicker
@@ -40,7 +41,7 @@ const props = defineProps({ ...WIDGET_PROPS });
 defineEmits(WIDGET_EMITS);
 
 const { fields } = useWidget(model, props);
-const { id, name, value, attrs, disabled, error, errorText } = useWidgetField(
+const { id, name, value, attrs, disabled, required, error, errorText } = useWidgetField(
 	model, props, computed(() => fields.value[0])
 );
 </script>

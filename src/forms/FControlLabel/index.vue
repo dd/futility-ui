@@ -12,10 +12,20 @@
 	>
 		<span v-if="isLabelFirst" class="fui-cl-label" >
 			<slot name="label" >{{ label }}</slot>
+			<span
+				v-if="required"
+				class="fui-cl-required_mark"
+				aria-hidden="true"
+			>*</span>
 		</span>
 		<slot />
 		<span v-if="isLabelEnd" class="fui-cl-label" >
 			<slot name="label" >{{ label }}</slot>
+			<span
+				v-if="required"
+				class="fui-cl-required_mark"
+				aria-hidden="true"
+			>*</span>
 		</span>
 	</label>
 </template>
@@ -45,6 +55,12 @@ const props = defineProps({
 		default: false,
 	},
 
+	/** Marks the label with a required field indicator. */
+	required: {
+		type: Boolean,
+		default: false,
+	},
+
 	/** Disabled flag. */
 	disabled: {
 		type: Boolean,
@@ -61,11 +77,12 @@ const props = defineProps({
 
 const slots = useSlots();
 const labelSlotIsEmpty = useSlotUtils(slots.label).slotIsEmpty;
+const hasLabel = computed(() => !labelSlotIsEmpty.value || !!props.label);
 
 const isLabelFirst = computed(() => {
-	return props.layout === LAYOUT_LABEL_FIRST && (labelSlotIsEmpty || props.label);
+	return props.layout === LAYOUT_LABEL_FIRST && hasLabel.value;
 });
 const isLabelEnd = computed(() => {
-	return props.layout === LAYOUT_CONTROL_FIRST && (labelSlotIsEmpty || props.label);
+	return props.layout === LAYOUT_CONTROL_FIRST && hasLabel.value;
 });
 </script>

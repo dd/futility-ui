@@ -16,6 +16,11 @@
 		font-weight: 400;
 	}
 
+	.fui-fr-required_mark {
+		@apply fui:text-error;
+		margin-left: 2px;
+	}
+
 	.fui-fr-content {
 		display: flex;
 		flex-direction: column;

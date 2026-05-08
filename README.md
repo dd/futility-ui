@@ -97,7 +97,6 @@ field immediately followed by a button.)
 	- [ ] Custom dropdown for desktop screen and native for mobile [???]
 * [x] Tooltip
 * [x] Form row (A component that renders a form row with a label, widget, help text, and error text.)
-	- [ ] Add required mark
 * [x] Control label (A component that adds a label for widgets such as checkbox, radio button, etc.)
 * [x] Generic Form
 	- [ ] utils for make meta from DRF metadata
@@ -105,7 +104,7 @@ field immediately followed by a button.)
 * [x] Textarea
 * [x] Modal
 * [x] Tabs
-* [x Number picker **`<- you are here`**
+* [x] Number picker **`<- you are here`**
 * [ ] MultiSelect
 * [ ] Tag Select
 * [ ] Tree Editor
@@ -113,8 +112,8 @@ field immediately followed by a button.)
 * [ ] FileSelectArea
 * [ ] Paginator
 * [ ] Popover
-* [ ] [FGenericForm] number range (from - to, inputs)
-* [ ] [FGenericForm] date range
+* [ ] \[FGenericForm\] number range (from - to, inputs)
+* [ ] \[FGenericForm\] date range
 * etc.
 
 ### Refactor

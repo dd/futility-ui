@@ -6,6 +6,7 @@
 		:error-text="errorText"
 		:error-highlight="error"
 		:disabled="disabled"
+		:required="required"
 	>
 		<template v-if="meta.label" #label>{{ meta.label }}</template>
 		<FTextarea

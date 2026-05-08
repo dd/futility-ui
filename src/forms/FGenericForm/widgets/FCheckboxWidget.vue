@@ -6,6 +6,7 @@
 		:layout="layout"
 		:size="size"
 		:disabled="disabled"
+		:required="!meta.labelLayout && required"
 	>
 		<template v-if="!meta.labelLayout" #label>{{ meta.label }}</template>
 		<FControlLabel
@@ -15,6 +16,7 @@
 			:error="error"
 			:size="size"
 			:disabled="disabled"
+			:required="required"
 		>
 			<FCheckbox
 				v-model="value"

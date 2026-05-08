@@ -91,6 +91,7 @@ export default {
 		id: 'test-row',
 		layout: 'one_column',
 		size: 'm',
+		required: false,
 		errorHighlight: false,
 		disabled: false,
 		label: 'Label',
@@ -127,6 +128,15 @@ export const errorText = {
 	args: {
 		id: 'error-text-preview-row',
 		errorText: "Error text",
+	},
+};
+
+
+export const Required = {
+	args: {
+		id: 'required-preview-row',
+		required: true,
+		label: 'Required field',
 	},
 };
 

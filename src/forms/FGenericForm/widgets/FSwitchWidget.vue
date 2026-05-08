@@ -6,6 +6,7 @@
 		:layout="layout"
 		:size="size"
 		:disabled="disabled"
+		:required="!meta.labelLayout && required"
 	>
 		<template v-if="!meta.labelLayout" #label>{{ meta.label }}</template>
 		<FControlLabel
@@ -15,6 +16,7 @@
 			:error="error"
 			:size="size"
 			:disabled="disabled"
+			:required="required"
 		>
 			<FSwitch
 				v-model="value"
@@ -52,7 +54,7 @@ const props = defineProps({ ...WIDGET_PROPS });
 defineEmits(WIDGET_EMITS);
 
 const { fields, error } = useWidget(model, props);
-const { id, name, value, attrs, disabled, allowNull, errorText } = useWidgetField(
+const { id, name, value, attrs, disabled, required, allowNull, errorText } = useWidgetField(
 	model, props, computed(() => fields.value[0])
 );
 </script>

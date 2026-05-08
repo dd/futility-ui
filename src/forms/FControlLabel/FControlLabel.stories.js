@@ -61,6 +61,7 @@ export default {
 		size: 'm',
 		label: '',
 		layout: LAYOUT_CONTROL_FIRST,
+		required: false,
 		error: false,
 		disabled: false,
 		default: 'FCheckbox',
@@ -78,6 +79,15 @@ export default {
 
 
 export const Default = {};
+
+
+export const Required = {
+	args: {
+		label: 'Required option',
+		labelSlot: '',
+		required: true,
+	},
+};
 
 
 const LAYOUTS_TEMPLATE = `<div class="sbfui-preview-flex-y sbfui-fcontrollabel-layouts" >

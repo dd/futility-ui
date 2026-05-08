@@ -5,6 +5,7 @@
 		:layout="layout"
 		:size="size"
 		:disabled="disabled"
+		:required="required"
 	>
 		<template #label>{{ meta.label }}</template>
 		<div class="fui-gf-radio_widget">
