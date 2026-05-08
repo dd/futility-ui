@@ -136,7 +136,7 @@ const CUSTOM_SLUG_TEMP = `<div style="min-width: 400px" >
 		<FTab name="Second Tab" slug="second">
 			<p>Custom slug: "second"</p>
 		</FTab>
-		<FTab name="Disabled Tab" slug="disabled" disabled>
+		<FTab name="Disabled" slug="disabled" disabled>
 			<p>This tab is disabled and cannot be selected.</p>
 		</FTab>
 		<FTab name="Fourth Tab" slug="fourth">

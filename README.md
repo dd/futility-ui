@@ -105,7 +105,6 @@ field immediately followed by a button.)
 * [x] Textarea
 * [x] Modal
 * [x] Tabs
-	- [ ] Style disabled tab
 * [x Number picker **`<- you are here`**
 * [ ] MultiSelect
 * [ ] Tag Select
