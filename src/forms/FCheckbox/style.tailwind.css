@@ -1,0 +1,83 @@
+@theme {
+	/* false */
+	--color-checkbox-bgf: light-dark(var(--fui-color-gray-50), var(--fui-color-gray-700));
+	--color-checkbox-bf: light-dark(var(--fui-color-gray-200), var(--fui-color-gray-600));
+	/* true */
+	--color-checkbox-bgt: var(--fui-color-primary-700);
+	--color-checkbox-it: var(--fui-color-white);
+
+	/* disabled + false */
+	--color-checkbox-bgdf: light-dark(var(--fui-color-gray-100), var(--fui-color-gray-800));
+	--color-checkbox-bdf: light-dark(var(--fui-color-gray-100), var(--fui-color-gray-800));
+	/* disabled + true */
+	--color-checkbox-bgdt: light-dark(var(--fui-color-primary-200), var(--fui-color-primary-900));
+	--color-checkbox-idt: light-dark(var(--fui-color-white), var(--fui-color-gray-900));
+}
+
+
+/*
+widget_size:      16px
+border_size:       1px
+icon_size:        12px
+*/
+
+.fui-checkbox {
+	height: 16px;  /* widget_size */
+	width: 16px;  /* widget_size */
+
+	@apply fui:rounded;
+	@apply fui:bg-checkbox-bgf;
+	border: 1px solid;  /* border_size */
+	@apply fui:border-checkbox-bf;
+
+	appearance: none;
+	cursor: pointer;
+
+	@apply fui:outline-focus-prepear;
+	transition-property: background-color, border-color, outline-color;
+	transition-duration: .1s;
+	will-change: background-color, border-color, outline-color;
+
+	&:checked {
+		@apply fui:border-checkbox-bgt;
+		@apply fui:bg-checkbox-bgt;
+		print-color-adjust: exact;
+
+		&::after {
+			content: "";
+			@apply fui:bg-checkbox-it;
+			display: block;
+			/* (widget_size - icon_size) / 2 - border_size */
+			margin-left: calc((16px - 12px) / 2 - 1px);
+			margin-top: calc((16px - 12px) / 2 - 1px);
+			height: 12px;  /* icon_size */
+			width: 12px;  /* icon_size */
+			mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14 14'%3E%3Cpath fill='%23000000' d='M11.7,3.7c0.1,0.1,0.2,0.3,0.2,0.5c0,0.2-0.1,0.4-0.2,0.5l-5.6,5.6c-0.1,0.1-0.3,0.2-0.5,0.2 c-0.2,0-0.4-0.1-0.5-0.2L2.3,7.5C2.2,7.4,2.1,7.2,2.1,7c0-0.2,0.1-0.4,0.2-0.5c0.1-0.1,0.3-0.2,0.5-0.2c0.2,0,0.4,0.1,0.5,0.2 l2.3,2.3l5.1-5.1c0.1-0.1,0.3-0.2,0.5-0.2C11.4,3.5,11.6,3.6,11.7,3.7z'/%3E%3C/svg%3E%0A") no-repeat center;
+			mask-size: contain;
+			pointer-events: none;
+		}
+	}
+
+	&:disabled {
+		cursor: default;
+		@apply fui:bg-checkbox-bgdf;
+		@apply fui:border-checkbox-bdf;
+
+		&:checked {
+			@apply fui:bg-checkbox-bgdt;
+			@apply fui:border-checkbox-bgdt;
+
+			&::after {
+				@apply fui:bg-checkbox-idt;
+			}
+		}
+	}
+
+	&:focus-visible {
+		@apply fui:outline-focus;
+
+		&:not(:checked) {
+			@apply fui:border-checkbox-bgt;
+		}
+	}
+}

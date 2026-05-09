@@ -1,0 +1,21 @@
+import { Meta, Canvas, Controls } from '@storybook/addon-docs/blocks';
+import * as FTabStories from './FTab.stories';
+
+<Meta of={FTabStories} />
+
+
+# FTab
+
+Registers a tab and its content inside a `FTabsContainer`. Renders slot content only when the tab is active.
+
+> Must be used inside `FTabsContainer`, otherwise `inject` will return `undefined` and throw an error.
+
+<Canvas of={FTabStories.Default} />
+<Controls of={FTabStories.Default} />
+
+## The `tag` prop
+
+By default the active tab content renders as a fragment — no extra element in the DOM.
+Pass `tag` when a single root element is required, for example to wrap content in a `<Transition>`.
+
+<Canvas of={FTabStories.WithTag} />

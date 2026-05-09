@@ -1,0 +1,162 @@
+import { useArgs } from 'storybook/preview-api';
+
+import FCheckbox from '.';
+import { makeRenderer, makeUpdateArg } from '@/sb.stuff.js';
+
+
+const usage = `
+A standard checkbox component for selecting one or multiple options.
+
+
+### Usage
+
+Import the component:
+
+\`\`\`js
+import { FCheckbox } from 'futility-ui'
+// or
+import FCheckbox from 'futility-ui/forms/FCheckbox'
+\`\`\`
+
+Use it in your template:
+
+\`\`\`html
+<FCheckbox name="fcheckbox-1" />
+\`\`\`
+
+That's it!
+`;
+
+
+export default {
+	title: 'Forms/FCheckbox',
+	component: FCheckbox,
+	parameters: {
+		layout: 'centered',
+		docs: {
+			description: {
+				component: usage,
+			},
+		}
+	},
+	tags: [ 'autodocs' ],
+	argTypes: {
+		modelValue: {
+			description: 'Current checkbox value.',
+			table: {
+				category: 'props',
+				type: { summary: 'boolean | array' },
+			},
+		},
+		disabled: {
+			description: 'Whether the checkbox is disabled.',
+			control: 'boolean',
+			table: {
+				category: 'props',
+				type: { summary: 'boolean' },
+			},
+		},
+
+		// EVENTS
+		'update:modelValue': {
+			action: 'update:modelValue',
+			description: 'Emitted when the value changes.',
+			control: false,
+			table: {
+				category: 'events',
+				type: { summary: null },
+				defaultValue: { summary: null },
+			},
+		},
+	},
+	args: {
+		modelValue: false,
+		disabled: false,
+	},
+	render: makeRenderer([ 'modelValue' ]),
+};
+
+export const Default = {};
+
+export const CheckboxGroup = {
+	render: (args, { component }) => {
+		const [ , updateArgs ] = useArgs();
+		const updateValue = makeUpdateArg('modelValue', updateArgs);
+		return {
+			components: { [component.name]: component },
+			setup() {
+				const promisedArgs = { [updateValue[0]]: updateValue[1] };
+				return { args, promisedArgs };
+			},
+			template: `<div>
+		<FCheckbox v-bind="args" v-on="promisedArgs" name="test_group" value="checkbox-1" />
+		<FCheckbox v-bind="args" v-on="promisedArgs" name="test_group" value="checkbox-2" class="fui:ml-4" />
+		<FCheckbox v-bind="args" v-on="promisedArgs" name="test_group" value="checkbox-3" class="fui:ml-4" />
+	</div>`,
+		};
+	},
+	args: {
+		modelValue: [],
+	},
+};
+
+export const Scheme = {
+	name: 'Scheme (Light/Dark)',
+	parameters: { layout: 'fullscreen' },
+	render: (args, { argTypes }) => ({
+		name: 'FCheckboxSchemeStory',
+		props: Object.keys(argTypes),
+		components: { FCheckbox },
+		setup() { return { args }; },
+		template: `<div class="sbpst-scheme_preview sbpst-row" >
+	<div class="sbpst-light" >
+		<table class="sbfui-preview-table" ><tbody>
+			<tr>
+				<td>
+					<FCheckbox v-bind="args" :modelValue="false" :disabled="false" />
+				</td>
+				<td>
+					<FCheckbox v-bind="args" :modelValue="true" :disabled="false" />
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<FCheckbox v-bind="args" :modelValue="false" disabled />
+				</td>
+				<td>
+					<FCheckbox v-bind="args" :modelValue="true" disabled />
+				</td>
+			</tr>
+		</tbody></table>
+	</div>
+	<div class="sbpst-dark" >
+		<table class="sbfui-preview-table" ><tbody>
+			<tr>
+				<td>
+					<FCheckbox v-bind="args" :modelValue="false" :disabled="false" />
+				</td>
+				<td>
+					<FCheckbox v-bind="args" :modelValue="true" :disabled="false" />
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<FCheckbox v-bind="args" :modelValue="false" disabled />
+				</td>
+				<td>
+					<FCheckbox v-bind="args" :modelValue="true" disabled />
+				</td>
+			</tr>
+		</tbody></table>
+	</div>
+</div>`,
+	}),
+	argTypes: {
+		modelValue: { control: { type: null }},
+		disabled: { control: { type: null }},
+	},
+	args: {
+		modelValue: '<value>',
+		disabled: '<disabled>',
+	},
+};

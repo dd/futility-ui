@@ -1,0 +1,93 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+
+<Meta title="Usage" />
+
+# Usage
+
+Install the package, then pick a stylesheet that fits your setup.
+
+```bash
+pnpm add futility-ui
+```
+
+## Importing the styles
+
+You can import the stylesheet from JavaScript:
+
+```javascript
+import 'futility-ui/styles/components.tailwind.css'; // or styles/components.css
+```
+
+Or import it from your main CSS file:
+
+```css
+@import 'futility-ui/styles/components.tailwind.css'; /* or styles/components.css */
+```
+
+### Choosing a stylesheet
+
+The library provides several stylesheet options:
+
+- `styles/components.css` – Component styles
+- `styles/base.css` – Base design system styles (typography, page defaults, and everything not tied
+ to a specific component)
+
+A separate set of files is available for use with Tailwind CSS, allowing you to override styles:
+
+- `styles/theme.tailwind.css` – Theme
+- `styles/components.tailwind.css` – Styles for all components
+- `styles/base.tailwind.css` – Base styles, equivalent to `styles/base.css`
+
+
+## Configuring component styles
+
+You can customize the design tokens using standard Tailwind CSS techniques in your own stylesheets:
+
+```css
+@import 'futility-ui/styles/base.css';
+/* or */
+@import 'tailwindcss';
+@import 'futility-ui/styles/theme.tailwind.css';
+
+@theme {
+	--color-primary-50: var(--fui-color-red-50);
+	--color-primary-100: var(--fui-color-red-100);
+	--color-primary-200: var(--fui-color-red-200);
+	--color-primary-300: var(--fui-color-red-300);
+	--color-primary-400: var(--fui-color-red-400);
+	--color-primary-500: var(--fui-color-red-500);
+	--color-primary-600: var(--fui-color-red-600);
+	--color-primary-700: var(--fui-color-red-700);
+	--color-primary-800: var(--fui-color-red-800);
+	--color-primary-900: var(--fui-color-red-900);
+	--color-primary-950: var(--fui-color-red-950);
+
+	--spacing: 3px;
+}
+```
+
+
+## Using the components
+
+Install the whole library as a plugin:
+
+```javascript
+import { createApp } from 'vue';
+import FutilityUI from 'futility-ui';
+
+createApp(App)
+	.use(FutilityUI)
+	.mount('#app')
+;
+```
+
+Alternatively, import only the components you need:
+
+```javascript
+import { FButton, FInput } from 'futility-ui';
+// or
+import FButton from 'futility-ui/FButton';
+import FInput from 'futility-ui/FInput';
+```
+
+Tree-shaking is supported - only the components you import will be included in your bundle.

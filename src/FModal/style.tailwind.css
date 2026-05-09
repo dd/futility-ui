@@ -1,0 +1,30 @@
+@theme {
+	--color-modal-overlay: rgb(17 24 39 / 0.85);
+}
+
+/*
+ * Root .vfm element - acts as both the scrollable overlay and the flex centering container.
+ * justify-content: flex-start + margin: auto on the child = centered when content fits,
+ * scrollable from the top when the panel is taller than the viewport.
+ */
+.fui-modal-vfm {
+	overflow: auto;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: flex-start;
+	padding: calc(var(--fui-spacing) * 4);
+	/*background-color: var(--fui-color-modal-overlay);*/
+	@apply fui:bg-modal-overlay;
+}
+
+/* VFM's native overlay element is hidden - the root wrapper is the backdrop */
+.fui-modal-overlay {
+	display: none;
+}
+
+/* .vfm__content - margin: auto centers it in the flex column, width: 100% lets max-width on the panel take effect */
+.fui-modal-content {
+	margin: auto;
+	width: 100%;
+}

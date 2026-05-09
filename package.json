@@ -31,8 +31,8 @@
       "import": "./dist/index.es.js"
     },
     "./FLoader": {
-      "require": "./dist/FLoader.cjs.js",
-      "import": "./dist/FLoader.es.js"
+      "require": "./dist/FLoader/index.cjs.js",
+      "import": "./dist/FLoader/index.es.js"
     },
     "./FIcon": {
       "require": "./dist/FIcon/index.cjs.js",
@@ -62,6 +62,62 @@
       "require": "./dist/FStack/index.cjs.js",
       "import": "./dist/FStack/index.es.js"
     },
+    "./FDropdown": {
+      "require": "./dist/FDropdown/index.cjs.js",
+      "import": "./dist/FDropdown/index.es.js"
+    },
+    "./FDropdown/constants": {
+      "require": "./dist/FDropdown/constants.cjs.js",
+      "import": "./dist/FDropdown/constants.es.js"
+    },
+    "./FModal": {
+      "require": "./dist/FModal/index.cjs.js",
+      "import": "./dist/FModal/index.es.js"
+    },
+    "./FModal/constants": {
+      "require": "./dist/FModal/constants.cjs.js",
+      "import": "./dist/FModal/constants.es.js"
+    },
+    "./FModal/layouts/FMLayoutDefault": {
+      "require": "./dist/FModal/layouts/FMLayoutDefault/index.cjs.js",
+      "import": "./dist/FModal/layouts/FMLayoutDefault/index.es.js"
+    },
+    "./FModal/layouts/FMLayoutForm": {
+      "require": "./dist/FModal/layouts/FMLayoutForm/index.cjs.js",
+      "import": "./dist/FModal/layouts/FMLayoutForm/index.es.js"
+    },
+    "./FModal/layouts/FMLayoutDialog": {
+      "require": "./dist/FModal/layouts/FMLayoutDialog/index.cjs.js",
+      "import": "./dist/FModal/layouts/FMLayoutDialog/index.es.js"
+    },
+    "./FModal/useFModal": {
+      "require": "./dist/FModal/useFModal.cjs.js",
+      "import": "./dist/FModal/useFModal.es.js"
+    },
+    "./FModal/useFModalDialog": {
+      "require": "./dist/FModal/useFModalDialog.cjs.js",
+      "import": "./dist/FModal/useFModalDialog.es.js"
+    },
+    "./FTabs/FTabsContainer": {
+      "require": "./dist/FTabs/FTabsContainer.cjs.js",
+      "import": "./dist/FTabs/FTabsContainer.es.js"
+    },
+    "./FTabs/FTab": {
+      "require": "./dist/FTabs/FTab.cjs.js",
+      "import": "./dist/FTabs/FTab.es.js"
+    },
+    "./FTooltip": {
+      "require": "./dist/FTooltip/index.cjs.js",
+      "import": "./dist/FTooltip/index.es.js"
+    },
+    "./FTooltip/directive": {
+      "require": "./dist/FTooltip/directive.cjs.js",
+      "import": "./dist/FTooltip/directive.es.js"
+    },
+    "./FTooltip/constants": {
+      "require": "./dist/FTooltip/constants.cjs.js",
+      "import": "./dist/FTooltip/constants.es.js"
+    },
     "./forms/FSwitch": {
       "require": "./dist/forms/FSwitch/index.cjs.js",
       "import": "./dist/forms/FSwitch/index.es.js"
@@ -86,6 +142,22 @@
       "require": "./dist/forms/FInput/ShowPasswordButton.cjs.js",
       "import": "./dist/forms/FInput/ShowPasswordButton.es.js"
     },
+    "./forms/FInputAutocomplete": {
+      "require": "./dist/forms/FInputAutocomplete/index.cjs.js",
+      "import": "./dist/forms/FInputAutocomplete/index.es.js"
+    },
+    "./forms/FInputAutocomplete/constants": {
+      "require": "./dist/forms/FInputAutocomplete/constants.cjs.js",
+      "import": "./dist/forms/FInputAutocomplete/constants.es.js"
+    },
+    "./forms/FSelect": {
+      "require": "./dist/forms/FSelect/index.cjs.js",
+      "import": "./dist/forms/FSelect/index.es.js"
+    },
+    "./forms/FSelect/constants": {
+      "require": "./dist/forms/FSelect/constants.cjs.js",
+      "import": "./dist/forms/FSelect/constants.es.js"
+    },
     "./forms/FRadioButton": {
       "require": "./dist/forms/FRadioButton/index.cjs.js",
       "import": "./dist/forms/FRadioButton/index.es.js"
@@ -94,8 +166,51 @@
       "require": "./dist/forms/FControlLabel/index.cjs.js",
       "import": "./dist/forms/FControlLabel/index.es.js"
     },
-    "./styles.css": "./dist/styles/styles.css",
-    "./theme.css": "./dist/styles/theme.css",
+    "./forms/FFormRow": {
+      "require": "./dist/forms/FFormRow/index.cjs.js",
+      "import": "./dist/forms/FFormRow/index.es.js"
+    },
+    "./forms/FFormRow/constants": {
+      "require": "./dist/forms/FFormRow/constants.cjs.js",
+      "import": "./dist/forms/FFormRow/constants.es.js"
+    },
+    "./forms/FGenericForm": {
+      "require": "./dist/forms/FGenericForm/index.cjs.js",
+      "import": "./dist/forms/FGenericForm/index.es.js"
+    },
+    "./forms/FGenericForm/constants": {
+      "require": "./dist/forms/FGenericForm/constants.cjs.js",
+      "import": "./dist/forms/FGenericForm/constants.es.js"
+    },
+    "./forms/FGenericForm/utils": {
+      "require": "./dist/forms/FGenericForm/utils.cjs.js",
+      "import": "./dist/forms/FGenericForm/utils.es.js"
+    },
+    "./forms/FGenericForm/useWidget": {
+      "require": "./dist/forms/FGenericForm/useWidget.cjs.js",
+      "import": "./dist/forms/FGenericForm/useWidget.es.js"
+    },
+    "./forms/FTextarea": {
+      "require": "./dist/forms/FTextarea/index.cjs.js",
+      "import": "./dist/forms/FTextarea/index.es.js"
+    },
+    "./forms/FTextarea/constants": {
+      "require": "./dist/forms/FTextarea/constants.cjs.js",
+      "import": "./dist/forms/FTextarea/constants.es.js"
+    },
+    "./sb.stuff": {
+      "require": "./dist/sb.stuff.cjs.js",
+      "import": "./dist/sb.stuff.es.js"
+    },
+    "./forms/FGenericForm/sb.stuff": {
+      "require": "./dist/forms/FGenericForm/sb.stuff.cjs.js",
+      "import": "./dist/forms/FGenericForm/sb.stuff.es.js"
+    },
+    "./styles/theme.tailwind.css": "./dist/styles/theme.tailwind.css",
+    "./styles/components.css": "./dist/styles/components.css",
+    "./styles/components.tailwind.css": "./dist/styles/components.tailwind.css",
+    "./styles/base.css": "./dist/styles/base.css",
+    "./styles/base.tailwind.css": "./dist/styles/base.tailwind.css",
     "./assets/sprite.svg": "./dist/assets/sprite.svg"
   },
   "sideEffects": false,
@@ -112,39 +227,54 @@
     "build-storybook": "storybook build"
   },
   "devDependencies": {
-    "@chromatic-com/storybook": "^4.0.1",
-    "@spiriit/vite-plugin-svg-spritemap": "^4.1.0",
-    "@storybook/addon-a11y": "^9.0.15",
-    "@storybook/addon-docs": "^9.0.15",
-    "@storybook/addon-onboarding": "^9.0.15",
-    "@storybook/addon-vitest": "^9.0.15",
-    "@storybook/vue3-vite": "^9.0.15",
-    "@vitejs/plugin-vue": "^6.0.0",
-    "@vitest/browser": "^3.2.4",
-    "@vitest/coverage-v8": "^3.2.4",
-    "@vueuse/core": "^13.5.0",
-    "auto": "^11.3.0",
-    "lodash": "^4.17.21",
-    "playwright": "^1.53.2",
-    "sass": "^1.89.2",
-    "storybook": "^9.0.15",
-    "storybook-preview-scheme-toggler": "^1.0.3",
-    "svgo": "^4.0.0",
-    "vite": "^7.0.2",
-    "vitest": "^3.2.4",
-    "vue": "^3.5.17",
+    "@chromatic-com/storybook": "^5.1.2",
+    "@floating-ui/vue": "^1.1.11",
+    "@spiriit/vite-plugin-svg-spritemap": "^7.0.0",
+    "@storybook/addon-a11y": "^10.3.6",
+    "@storybook/addon-docs": "^10.3.6",
+    "@storybook/addon-onboarding": "^10.3.6",
+    "@storybook/vue3-vite": "^10.3.6",
+    "@tailwindcss/vite": "^4.2.4",
+    "@vitejs/plugin-vue": "^6.0.6",
+    "auto": "^11.3.6",
+    "autoprefixer": "^10.5.0",
+    "playwright": "^1.59.1",
+    "sass": "^1.99.0",
+    "storybook": "^10.3.6",
+    "storybook-preview-scheme-toggler": "2.0.0",
+    "svgo": "^4.0.1",
+    "tailwindcss": "^4.2.4",
+    "vite": "^8.0.10",
+    "vue": "^3.5.33",
     "vue-toastification": "2.0.0-rc.5"
   },
   "peerDependencies": {
-    "vue": "^3.5.13"
+    "@floating-ui/vue": "^1.1.11",
+    "tailwindcss": "^4.2.4",
+    "vue": "^3.5.13",
+    "vue-final-modal": "^4.5.5"
   },
   "peerDependenciesMeta": {
     "vue": {
       "optional": false
+    },
+    "tailwindcss": {
+      "optional": true
+    },
+    "@floating-ui/vue": {
+      "optional": true
+    },
+    "vue-final-modal": {
+      "optional": true
     }
   },
   "engines": {
     "node": ">=18",
     "pnpm": ">=10"
-  }
+  },
+  "dependencies": {
+    "@vueuse/core": "^14.3.0",
+    "lodash": "^4.18.1"
+  },
+  "packageManager": "pnpm@10.32.1+sha512.a706938f0e89ac1456b6563eab4edf1d1faf3368d1191fc5c59790e96dc918e4456ab2e67d613de1043d2e8c81f87303e6b40d4ffeca9df15ef1ad567348f2be"
 }

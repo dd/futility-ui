@@ -1,0 +1,42 @@
+@theme {
+	--loader-color: var(--fui-color-primary-700);
+	--loader-track: light-dark(var(--fui-color-gray-200), var(--fui-color-gray-600));
+}
+
+.fui-loader {
+	color: var(--fui-loader-color);
+}
+
+.fui-load-track {
+	stroke: var(--fui-loader-track);
+}
+
+
+/* Sizes */
+
+/* Small */
+.fui-loader-sm {
+	height: 25px;
+
+	.fui-load-track {
+		stroke-width: 6;
+	}
+}
+
+/* Medium */
+.fui-loader-md {
+	height: 50px;
+
+	.fui-load-track {
+		stroke-width: 8;
+	}
+}
+
+/* Large */
+.fui-loader-lg {
+	height: 75px;
+
+	.fui-load-track {
+		stroke-width: 8;
+	}
+}

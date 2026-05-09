@@ -1,0 +1,197 @@
+@theme {
+	/* Point */
+	--color-switch-pf: light-dark(var(--fui-color-white), var(--fui-color-gray-400));
+	--color-switch-pdf: light-dark(var(--fui-color-white), var(--fui-color-gray-900));
+	--color-switch-pt: var(--fui-color-white);
+	--color-switch-pdt: light-dark(var(--fui-color-white), var(--fui-color-gray-900));
+
+	/* Binary */
+	--color-binary_switch-bf: light-dark(var(--fui-color-gray-200), var(--fui-color-gray-600));
+	--color-binary_switch-bdf: light-dark(var(--fui-color-gray-100), var(--fui-color-gray-800));
+	--color-binary_switch-bt: var(--fui-color-primary-700);
+	--color-binary_switch-bdt: light-dark(var(--fui-color-primary-200), var(--fui-color-primary-900));
+
+	/* Ternary */
+	--color-ternary_switch-bf: var(--fui-color-red-700);
+	--color-ternary_switch-bdf: light-dark(var(--fui-color-red-200), var(--fui-color-red-900));
+	--color-ternary_switch-bn: light-dark(var(--fui-color-gray-200), var(--fui-color-gray-600));
+	--color-ternary_switch-bdn: light-dark(var(--fui-color-gray-100), var(--fui-color-gray-800));
+	--color-ternary_switch-bt: var(--fui-color-green-700);
+	--color-ternary_switch-bdt: light-dark(var(--fui-color-green-200), var(--fui-color-green-900));
+}
+
+
+/*
+widget_width:    40px
+widget_height:   20px
+border_size:      2px
+point_size:      16px (widget_height - border_size * 2)
+*/
+
+.fui-switch {
+	display: inline-block;
+	flex-grow: 0;
+	flex-shrink: 0;
+	margin: 0;
+}
+
+
+.fui-binary_switch,
+.fui-tsw-widget {
+	position: relative;
+	box-sizing: border-box;
+	width: 40px;  /* widget_width */
+	height: 20px;  /* widget_height */
+	padding: 0;
+
+	cursor: pointer;
+	border: none;
+	border-radius: 10px;  /* widget_height / 2 */
+	background-image: none;
+	appearance: none;
+
+	@apply fui:outline-focus-prepear;
+	transition-property: background-color, border-color, outline-color;
+	transition-duration: .1s;
+	will-change: background-color, border-color, outline-color;
+
+	&::after {
+		content: "";
+		position: absolute;
+		top: 2px;  /* border_size */
+		left: 2px;  /* border_size */
+
+		display: block;
+		width: 16px;  /* point_size */
+		height: 16px;  /* point_size */
+
+		@apply fui:bg-switch-pf;
+		border-radius: 50%;
+
+		transition: transform .2s ease, background-color .2s ease;
+		will-change: transform, background-color;
+	}
+
+	&:disabled {
+		cursor: default;
+	}
+
+	&:focus-visible {
+		@apply fui:outline-focus;
+	}
+}
+
+
+/* Binary */
+.fui-binary_switch {
+	flex-grow: 0;
+	flex-shrink: 0;
+	@apply fui:bg-binary_switch-bf;
+
+	&:checked {
+		@apply fui:bg-binary_switch-bt;
+
+		&::after {
+			@apply fui:bg-switch-pt;
+			/* pointer_zone = widget_width - border_size * 2 = 36px */
+			/* pointer_zone - point_size = 20px */
+			transform: translateX(20px);
+		}
+	}
+
+	/* Disabled */
+	&:disabled {
+		@apply fui:bg-binary_switch-bdf;
+
+		&::after {
+			@apply fui:bg-switch-pdf;
+		}
+
+		&:checked {
+			@apply fui:bg-binary_switch-bdt;
+
+			&::after {
+				@apply fui:bg-switch-pdt;
+			}
+		}
+	}
+}
+
+
+/* Ternary */
+.fui-tsw-select {
+	position: absolute;
+	top: 0;
+	left: 0;
+
+	display: block;
+	margin: 0;
+	width: 0;
+	height: 0;
+	padding: 0;
+
+	border: none;
+	background: none;
+/*	outline: none;*/
+	opacity: 0;
+}
+
+.fui-tsw-widget {
+	display: block;
+
+	&.fui-value-false {
+		@apply fui:bg-ternary_switch-bf;
+
+		&::after {
+			@apply fui:bg-switch-pt;
+		}
+	}
+
+	&.fui-value-null {
+		@apply fui:bg-ternary_switch-bn;
+
+		&::after {
+			/* pointer_zone = widget_width - border_size * 2 = 36px */
+			/* (pointer_zone - point_size) / 2 = 10px */
+			transform: translateX(10px);
+		}
+	}
+
+	&.fui-value-true {
+		@apply fui:bg-ternary_switch-bt;
+
+		&::after {
+			@apply fui:bg-switch-pt;
+			/* pointer_zone = widget_width - border_size * 2 = 36px */
+			/* pointer_zone - point_size = 20px */
+			transform: translateX(20px);
+		}
+	}
+
+	/* Disabled */
+	&:disabled {
+		&.fui-value-false {
+			@apply fui:bg-ternary_switch-bdf;
+
+			&::after {
+				@apply fui:bg-switch-pdt;
+			}
+		}
+
+		&.fui-value-null {
+			@apply fui:bg-ternary_switch-bdn;
+
+			&::after {
+				@apply fui:bg-switch-pdf;
+			}
+		}
+
+		&.fui-value-true {
+			@apply fui:bg-ternary_switch-bdt;
+
+			&::after {
+				@apply fui:bg-switch-pdt;
+			}
+		}
+	}
+}

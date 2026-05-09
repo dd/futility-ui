@@ -1,0 +1,26 @@
+@layer base, theme, components, utilities;
+
+@import "tailwindcss/theme.css" layer(theme) prefix(fui);
+@import "./theme.tailwind.css";
+
+@layer base {
+	:root {
+		@apply fui:text-text;
+	}
+
+	h1,
+	h2,
+	h3,
+	h4,
+	h5,
+	h6 {
+		font-weight: 700;
+		@apply fui:text-header;
+	}
+
+	a {
+		text-decoration: underline;
+		text-underline-offset: 4px;
+		@apply fui:text-link;
+	}
+}

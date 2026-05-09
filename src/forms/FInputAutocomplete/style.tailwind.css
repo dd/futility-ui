@@ -1,0 +1,357 @@
+@theme {
+	--iauto-dd-minheight: 40px;
+	--iauto-dd-maxheight: 197px;
+	--color-iauto-dd-empty: var(--fui-color-gray-400);
+}
+
+/* Input ****************************************/
+.fui-input-autocomplete {
+	position: relative;
+
+	display: block;
+	box-sizing: border-box;
+
+	border: 1px solid;
+	@apply fui:border-input-b;
+	@apply fui:rounded-lg;
+	@apply fui:bg-input-bg;
+
+	@apply fui:font-sans;
+	font-weight: 400;
+	letter-spacing: 0.015em;
+	@apply fui:text-input-p;
+	@apply fui:outline-focus-prepear;
+
+	transition-property: outline-color, border-color;
+	transition-duration: var(--fui-transition-duration-default);
+	will-change: outline-color, border-color;
+
+	&.has-value {
+		@apply fui:text-input-c;
+	}
+
+	/* Focus */
+	&:has(.fui-iauto-query_input:focus) {
+		@apply fui:border-input-bf;
+	}
+
+	&:has(.fui-iauto-query_input:focus-visible) {
+		@apply fui:outline-focus;
+	}
+
+	.fui-iauto-query_input {
+		box-sizing: border-box;
+		width: 100%;
+
+		border: none;
+		background: none;
+		box-shadow: none;
+
+		font-family: inherit;
+		font-weight: inherit;
+		letter-spacing: inherit;
+		line-height: inherit;
+		@apply fui:text-input-c;
+
+		transition-property: opacity;
+		transition-duration: var(--fui-transition-duration-default);
+		will-change: opacity;
+		opacity: 0;
+
+		&::placeholder {
+			@apply fui:text-input-p;
+		}
+
+		&:active,
+		&:focus,
+		&:focus-visible {
+			outline: none;
+		}
+
+		&:focus,
+		&:focus-visible {
+			opacity: 1;
+
+			+ .fui-iauto-label {
+				opacity: 0;
+
+				.fui-iauto-label_remove {
+					pointer-events: none;
+				}
+			}
+		}
+	}
+
+	.fui-iauto-label {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+
+		display: flex;
+		flex-direction: row;
+		flex-wrap: nowrap;
+		align-items: center;
+		gap: 10px;
+
+		padding: 0 16px;
+		box-sizing: border-box;
+		pointer-events: none;
+
+		font-family: inherit;
+		font-weight: inherit;
+		letter-spacing: inherit;
+		line-height: inherit;
+		color: inherit;
+
+		transition-property: opacity;
+		transition-duration: var(--fui-transition-duration-default);
+		will-change: opacity;
+	}
+
+	.fui-iauto-label_text {
+		flex-grow: 1;
+		flex-shrink: 1;
+		min-width: 0;
+
+		text-overflow: ellipsis;
+		white-space: nowrap;
+		overflow: hidden;
+
+		font-family: inherit;
+		font-weight: inherit;
+		letter-spacing: inherit;
+		line-height: inherit;
+		color: inherit;
+	}
+
+	.fui-iauto-label_remove {
+		border: none;
+		background: none;
+		padding: 0;
+		margin: 0;
+		aspect-ratio: 1 / 1;
+
+		font-family: inherit;
+		font-weight: inherit;
+		letter-spacing: inherit;
+		line-height: inherit;
+		color: inherit;
+
+		cursor: pointer;
+		pointer-events: auto;
+
+		@apply fui:outline-focus-prepear;
+		transition-property: outline-color;
+		transition-duration: .1s;
+		will-change: outline-color;
+
+		.fui-icon {
+			display: block;
+			transition: color .2s ease;
+			will-change: color;
+		}
+
+		&:focus-visible {
+			@apply fui:outline-input-eb-f;
+		}
+	}
+
+	/* States ***********************************/
+
+	/* Disabled */
+	&:has(.fui-iauto-input:disabled) {
+		@apply fui:text-input-pd;
+		@apply fui:border-input-bd;
+		@apply fui:bg-input-bgd;
+
+		&.has-value {
+			@apply fui:text-input-cd;
+		}
+
+		.fui-iauto-label_remove {
+			cursor: default;
+		}
+	}
+
+	/* Errors */
+	&.has-error {
+		@apply fui:text-input-pe;
+		@apply fui:border-input-be;
+		@apply fui:bg-input-bge;
+
+		&.has-value {
+			@apply fui:text-input-ce;
+		}
+
+		.fui-iauto-query_input::placeholder {
+			@apply fui:text-input-pe;
+		}
+
+		/* Error + Focus */
+		&:has(.fui-iauto-query_input:focus) {
+			@apply fui:border-input-be;
+		}
+
+		&:has(.fui-iauto-query_input:focus-visible) {
+			@apply fui:outline-focus-error;
+		}
+
+		.fui-iauto-label_remove:focus-visible {
+			@apply fui:outline-focus-error;
+		}
+	}
+
+	/* Error + Disabled */
+	&:has(.fui-iauto-input:disabled).has-error {
+		@apply fui:text-input-ped;
+		@apply fui:border-input-bed;
+		@apply fui:bg-input-bged;
+
+		&.has-value {
+			@apply fui:text-input-ced;
+		}
+	}
+}
+
+
+/* Drop Down ************************************/
+.fui-iauto-dropdown {
+	max-height: var(--fui-iauto-dd-maxheight);
+	min-height: var(--fui-iauto-dd-minheight);
+	overflow-y: auto;
+	gap: calc(var(--fui-spacing) * 2);
+
+	/* Loaders */
+
+	/* Loader next */
+	.fui-iauto-option-loader {
+		height: 30px;
+		text-align: center;
+		padding: 0;
+
+		.fui-loader {
+			display: inline;
+			height: 100%;
+		}
+	}
+
+	/* Loader options */
+	&.fui-iauto-options_loading {
+		min-height: 120px;
+
+		.fui-iauto-option-loader {
+			position: absolute;
+			top: calc(50% - 20px);
+			left: calc(50% - 20px);
+			height: 40px;
+		}
+
+		.fui-dropdown-select_option {
+			opacity: .5;
+			pointer-events: none;
+		}
+	}
+
+	/* Options */
+	.fui-dropdown-select_option {
+		padding: calc(var(--fui-spacing) * 1) calc(var(--fui-spacing) * 2);
+		flex-shrink: 0;
+	}
+
+	/* Empty text */
+	.fui-iauto-option-empty {
+		margin-top: calc(var(--fui-spacing) * 3);
+		margin-bottom: calc(var(--fui-spacing) * 3);
+
+		text-align: center;
+		@apply fui:text-sm;
+		line-height: 100%;
+		font-weight: normal;
+		letter-spacing: 0.015em;
+		@apply fui:text-iauto-dd-empty;
+	}
+}
+
+
+/* Sizes ****************************************/
+.fui-iauto-size-s {
+	--fui-icon-size: 20px;
+
+	.fui-iauto-query_input,
+	.fui-iauto-label_text {
+		font-size: theme(text.sm);
+		line-height: 150%;
+	}
+
+	.fui-iauto-query_input {
+		padding: 7px 16px;
+	}
+
+	.fui-iauto-label_text {
+		padding: 7px 0;
+	}
+
+	.fui-iauto-label_remove {
+		height: 35px;
+		padding: 7.5px;
+		margin: 0 -7.5px;
+		border-radius: 11px;
+		outline-offset: -7.5px;
+	}
+}
+
+
+.fui-iauto-size-m {
+	--fui-icon-size: 20px;
+
+	.fui-iauto-query_input,
+	.fui-iauto-label_text {
+		font-size: theme(text.sm);
+		line-height: 150%;
+	}
+
+	.fui-iauto-query_input {
+		padding: 9.5px 16px;
+	}
+
+	.fui-iauto-label_text {
+		padding: 9.5px 0;
+	}
+
+	.fui-iauto-label_remove {
+		height: 40px;
+		padding: 10px;
+		margin: 0 -10px;
+		border-radius: 13px;
+		outline-offset: -10px;
+	}
+}
+
+
+.fui-iauto-size-xl {
+	--fui-icon-size: 20px;
+
+	.fui-iauto-query_input,
+	.fui-iauto-label_text {
+		font-size: theme(text.sm);
+		line-height: 150%;
+	}
+
+	.fui-iauto-query_input {
+		padding: 13px 16px;
+	}
+
+	.fui-iauto-label_text {
+		padding: 13px 0;
+	}
+
+	.fui-iauto-label_remove {
+		height: 50px;
+		padding: 15px;
+		margin: 0 -15px;
+		border-radius: 18px;
+		outline-offset: -15px;
+	}
+}

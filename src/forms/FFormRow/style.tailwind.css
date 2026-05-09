@@ -1,0 +1,142 @@
+@theme {
+	--color-fr-help-d: light-dark(var(--fui-color-gray-300), var(--fui-color-gray-600));
+	--spacing-formrow-label: 150px;
+}
+
+.fui-form_row {
+	display: flex;
+	flex-wrap: nowrap;
+	align-content: flex-start;
+	justify-content: flex-start;
+	align-items: flex-start;
+	@apply fui:gap-2;
+
+	.fui-fr-label {
+		@apply fui:text-header;
+		font-weight: 400;
+	}
+
+	.fui-fr-content {
+		display: flex;
+		flex-direction: column;
+		align-items: flex-start;
+		@apply fui:gap-2;
+
+		flex-grow: 1;
+		flex-shrink: 1;
+	}
+
+	.fui-fr-input {
+		display: flex;
+		flex-direction: row;
+		align-items: flex-start;
+		@apply fui:gap-2;
+
+		flex-grow: 1;
+		flex-shrink: 1;
+	}
+
+	.fui-fr-error_icon {
+		@apply fui:text-error;
+	}
+
+	.fui-fr-help_text {
+		margin: 0;
+		@apply fui:text-xs;
+		@apply fui:text-text;
+		line-height: 125%;
+	}
+
+	/* Errors */
+	&.has-error {
+		.fui-fr-label {
+			@apply fui:text-error;
+		}
+	}
+
+	/* Disabled */
+	&.is-disabled {
+		.fui-fr-help_text {
+			@apply fui:text-fr-help-d;
+
+			a {
+				opacity: 0.4;
+			}
+		}
+	}
+
+	&.fui-fr-layout-one_column {
+		flex-direction: column;
+	}
+
+	&.fui-fr-layout-two_columns {
+		flex-direction: row;
+
+		.fui-fr-label {
+			@apply fui:w-formrow-label;
+		}
+	}
+
+	/* Sizes */
+	&.fui-fr-size-s {
+		&:where(.fui-fr-layout-two_columns) .fui-fr-label {
+			padding-top: 8px;
+			@apply fui:text-sm;
+			line-height: 150%;
+		}
+
+		.fui-fr-error_icon  {
+			margin-top: 6.5px;
+		}
+	}
+
+	&.fui-fr-size-m {
+		&:where(.fui-fr-layout-two_columns) .fui-fr-label {
+			padding-top: 10.5px;
+			@apply fui:text-sm;
+			line-height: 150%;
+		}
+
+		.fui-fr-error_icon  {
+			margin-top: 9px;
+		}
+	}
+
+	&.fui-fr-size-xl {
+		&:where(.fui-fr-layout-two_columns) .fui-fr-label {
+			padding-top: 14px;
+			@apply fui:text-base;
+			line-height: 150%;
+		}
+
+		.fui-fr-error_icon  {
+			margin-top: 14px;
+		}
+	}
+
+	/* Extra */
+	&:has(.fui-checkbox),
+	&:has(.fui-switch) {
+		.fui-fr-label {
+			padding-top: 0px;
+		}
+
+		.fui-cl-layout-label_first .fui-cl-label {
+			@apply fui:w-formrow-label;
+		}
+	}
+
+	&:has(.fui-checkbox) {
+		.fui-fr-error_icon  {
+			margin-top: -4px;
+			margin-bottom: -4px;
+		}
+	}
+
+	&:has(.fui-switch) {
+		.fui-fr-error_icon  {
+			margin-top: -2px;
+			margin-bottom: -2px;
+		}
+	}
+}

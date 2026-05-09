@@ -1,0 +1,315 @@
+@layer vendors, base, theme, components, utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
+@import 'vue-toastification/dist/index.css' layer(vendors);
+@import 'vue-final-modal/style.css' layer(vendors);
+@import 'tailwindcss';
+@import '@/styles/components.tailwind.css';
+@import '@/styles/base.tailwind.css';
+
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	font-weight: 700;
+
+	a svg {
+		display: inline;
+	}
+}
+
+h1 {
+	line-height: 1em;
+}
+
+/* Preview Scheme Toggler */
+:root {
+	--pst-dark-color: var(--fui-color-gray-400);
+	--pst-light-color: var(--fui-color-gray-600);
+	--pst-dark-bg: var(--fui-color-gray-900);
+	--pst-light-bg: var(--fui-color-white);
+}
+
+.sbpst-scheme_preview .sbpst-dark,
+.sbpst-scheme_preview .sbpst-light {
+	min-height: 150px;
+}
+
+.docs-story > :first-child {
+	min-height: 150px;
+	box-sizing: border-box;
+}
+/* End Of Preview Scheme Toggler */
+
+
+/* Readme */
+.readme-shields img {
+	display: inline;
+}
+
+
+/* Previews */
+.sbfui-preview-table {
+	td {
+		@apply fui:p-2;
+
+		&.sbfui-pt-label {
+			@apply fui:text-xs;
+			line-height: 150%;
+		}
+	}
+
+	th.sbfui-pt-min_label {
+		@apply fui:text-xs;
+		font-weight: normal;
+		line-height: 150%;
+	}
+}
+
+.sbfui-preview-flex-x {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: center;
+	align-items: center;
+	align-content: center;
+	@apply fui:gap-4;
+}
+
+.sbfui-preview-flex-y {
+	display: flex;
+	flex-direction: column;
+	flex-wrap: wrap;
+	justify-content: center;
+	align-items: center;
+	align-content: center;
+	@apply fui:gap-4;
+}
+/* End Of Previews */
+
+
+.sbfui-label {
+	@apply fui:font-sans;
+	@apply fui:text-xs;
+	font-weight: 600;
+	text-transform: uppercase;
+	letter-spacing: 0.06em;
+	@apply fui:text-text;
+}
+
+.sbfui-pre {
+	@apply fui:text-xs fui:font-mono;
+	@apply fui:bg-gray-100 fui:dark:bg-gray-800;
+	@apply fui:text-gray-700 fui:dark:text-gray-300;
+	padding: 10px 12px;
+	border-radius: 6px;
+	margin: 0;
+	white-space: pre;
+}
+
+
+/* Stories *************************************/
+
+/* FIcons */
+#story--ficon--default--primary,
+#story--ficon--default {
+	--fui-icon-color: light-dark(#000000, #ffffff);
+}
+
+.sbfui-icon_preview {
+	--fui-icon-color: light-dark(#000000, #ffffff);
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: center;
+	align-items: center;
+	align-content: center;
+	max-width: 500px;
+	@apply fui:gap-4;
+}
+
+.sbfui-icon_preview-wrapper {
+	flex-direction: column;
+}
+/* End Of FIcons */
+
+
+/* FLoader */
+.sbfui-loader_preview-table-wrapper {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: center;
+}
+
+.sbfui-loader_preview-table td {
+	text-align: center;
+	width: 100px;
+
+	svg {
+		display: inline;
+	}
+}
+
+.fui-loader-custom {
+	height: 100px;
+}
+/* End Of FLoader */
+
+
+
+/* FTooltip */
+.sbfui-ftooltip-placement-preview {
+	display: grid;
+	grid-template-columns: repeat(5, auto);
+	gap: 8px;
+	padding: 60px;
+}
+
+.sbfui-ftooltip-trigger_example {
+	@apply fui:py-2.5;
+	@apply fui:px-4;
+	border-radius: 8px;
+	@apply fui:bg-primary-700;
+	@apply fui:text-gray-500 fui:dark:text-white;
+	@apply fui:font-sans;
+	@apply fui:text-sm;
+	font-weight: 400;
+	text-align: center;
+	cursor: help;
+}
+
+.sbfui-ftooltip-vmodel {
+	display: flex;
+	flex-direction: column;
+	flex-wrap: wrap;
+	justify-content: center;
+	align-items: center;
+	align-content: center;
+	@apply fui:gap-4;
+	padding-top: 20px;
+}
+
+.sbfui-ftooltip-text_example {
+	text-decoration-line: underline;
+	text-decoration-style: wavy;
+	text-underline-offset: 2.5px;
+	cursor: pointer;
+}
+/* End of FSelect */
+
+
+
+/* Dropdown */
+.sbfui-dropdown-placement-preview {
+	display: grid;
+	grid-template-columns: repeat(3, auto);
+	gap: 8px;
+	padding: 60px;
+}
+
+.sbfui-dropdown-vmodel-preview {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	width: 300px;
+}
+/* End of Dropdown */
+
+
+
+/* Modals */
+.sbfui-layoutdialog-icons-preview {
+	display: grid;
+	grid-template-columns: repeat(4, auto);
+	gap: 8px;
+	padding: 60px;
+}
+/* End of Modals */
+
+
+/* FControlLabel */
+.sbfui-fcontrollabel-layouts {
+	width: 350px;
+	align-items: stretch;
+	align-content: stretch;
+}
+/* End of FControlLabel */
+
+
+/* FFormRow */
+.sbfui-fformrow {
+	--fui-spacing-formrow-label: 70px;
+	align-items: flex-start;
+}
+.sbfui-fformrow-size {
+	--fui-spacing-formrow-label: 80px;
+	align-items: flex-start;
+
+	.fui-input-input {
+		width: 220px;
+	}
+}
+/* End of FFormRow */
+
+
+/* FGenericForm */
+.sbfui-fgenericform-label {
+	@apply fui:font-sans;
+	@apply fui:text-xs;
+	font-weight: 600;
+	text-transform: uppercase;
+	letter-spacing: 0.06em;
+	@apply fui:text-text;
+	@apply fui:pb-4;
+}
+
+.sbfui-fgenericform-layouts {
+	display: flex;
+	flex-direction: row;
+	align-items: flex-start;
+	@apply fui:gap-10;
+}
+
+.sbfui-fgenericform-sizes {
+	align-items: flex-start;
+}
+
+.sbfui-fgenericform-utils {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	align-items: flex-start;
+	@apply fui:gap-10;
+
+	.sbfui-fgf-utils-label-second {
+		@apply fui:font-sans;
+		@apply fui:text-xs;
+		font-weight: 600;
+		letter-spacing: 0.06em;
+		@apply fui:text-text;
+		@apply fui:pt-4;
+		@apply fui:pb-1;
+	}
+}
+/* End of FGenericForm */
+
+
+/* Custom Widget story */
+.sbfui-color-swatch {
+	margin-top: 12px;
+	padding: 10px 14px;
+	border-radius: 8px;
+	@apply fui:font-sans;
+	@apply fui:text-sm;
+	font-weight: 500;
+}
+/* End of Custom Widget story */
+
+
+/* Multi-field range widget demo */
+/* End of Multi-field range widget demo */

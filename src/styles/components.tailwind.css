@@ -1,0 +1,28 @@
+@layer base, theme, components, utilities;
+
+@import "tailwindcss/theme.css" layer(theme) prefix(fui);
+@import "./theme.tailwind.css";
+
+@import "../FButton/style.tailwind.css" layer(components);
+@import "../FButton/theme.tailwind.css" layer(components);
+@import "../FButtonText/style.tailwind.css" layer(components);
+@import "../FButtonText/theme.tailwind.css" layer(components);
+@import "../FIcon/style.tailwind.css" layer(components);
+@import "../FLoader/style.tailwind.css" layer(components);
+@import "../FStack/style.tailwind.css" layer(components);
+@import "../FDropdown/style.tailwind.css" layer(components);
+@import "../FModal/style.tailwind.css" layer(components);
+@import "../FModal/layouts/style.tailwind.css" layer(components);
+@import "../FTooltip/style.tailwind.css" layer(components);
+@import "../FTabs/style.tailwind.css" layer(components);
+@import "../forms/FCheckbox/style.tailwind.css" layer(components);
+@import "../forms/FControlLabel/style.tailwind.css" layer(components);
+@import "../forms/FFormRow/style.tailwind.css" layer(components);
+@import "../forms/FGenericForm/style.tailwind.css" layer(components);
+@import "../forms/FInput/style.tailwind.css" layer(components);
+@import "../forms/FInputAutocomplete/style.tailwind.css" layer(components);
+@import "../forms/FRadioButton/style.tailwind.css" layer(components);
+@import "../forms/FSelect/style.tailwind.css" layer(components);
+@import "../forms/FSwitch/style.tailwind.css" layer(components);
+@import "../forms/FNumberPicker/style.tailwind.css" layer(components);
+@import "../forms/FTextarea/style.tailwind.css" layer(components);

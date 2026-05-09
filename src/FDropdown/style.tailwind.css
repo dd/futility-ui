@@ -1,0 +1,155 @@
+@theme {
+	--color-dd-i-h-bg: light-dark(var(--fui-color-gray-100), var(--fui-color-gray-600));
+	--color-dd-i-h-c: light-dark(var(--fui-color-gray-900), var(--fui-color-white));
+	--color-dd-i-d: light-dark(var(--fui-color-gray-300), var(--fui-color-gray-600));
+	--color-dd-so-c: light-dark(var(--fui-color-gray-500), var(--fui-color-gray-400));
+	--color-dd-so-c-c: light-dark(var(--fui-color-primary-700), var(--fui-color-primary-500));
+	/*--color-iauto-dd-empty: var(--fui-color-gray-400);*/
+}
+
+.fui-dropdown {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: max-content;
+	z-index: 1000;
+	@apply fui:dropdown-wrapper;
+	overflow: auto;
+}
+
+.fui-dd-appearance-select {
+	display: flex;
+	flex-direction: column;
+	flex-wrap: nowrap;
+	align-items: stretch;
+	padding: calc(var(--fui-spacing) * 2);
+}
+
+.fui-dd-appearance-menu {
+	display: flex;
+	flex-direction: column;
+	flex-wrap: nowrap;
+	align-items: stretch;
+	padding: var(--fui-spacing) 0;
+}
+
+
+/* DD items */
+
+.fui-dropdown-select_option {
+	box-sizing: border-box;
+	display: block;
+	padding: calc(var(--fui-spacing) * 2) calc(var(--fui-spacing) * 3);
+
+	border: none;
+	background-color: transparent;
+	@apply fui:rounded-sm;
+
+	@apply fui:text-sm;
+	font-weight: normal;
+	line-height: 100%;
+	letter-spacing: 0.015em;
+	text-align: left;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow: hidden;
+	@apply fui:text-dd-so-c;
+
+	@apply fui:outline-focus-prepear;
+	cursor: pointer;
+
+	/* Focus */
+	&:not(:disabled,.is-disabled):hover {
+		@apply fui:bg-dd-i-h-bg;
+
+		&:not(:checked,.is-current) {
+			@apply fui:text-dd-i-h-c;
+		}
+	}
+
+	&[aria-selected="true"],
+	&:focus-visible {
+		@apply fui:outline-focus;
+	}
+
+	/* Current  */
+	&:checked,
+	&.is-current {
+		@apply fui:text-dd-so-c-c;
+	}
+
+	/* Disabled option */
+	&:disabled,
+	&.is-disabled {
+		@apply fui:text-dd-i-d;
+		cursor: default;
+	}
+
+	&.compact {
+		padding: calc(var(--fui-spacing) * 1) calc(var(--fui-spacing) * 2);
+	}
+}
+
+.fui-dropdown-menu_item {
+	padding: calc(var(--fui-spacing) * 2) calc(var(--fui-spacing) * 4);
+
+	@apply fui:text-sm;
+	font-weight: normal;
+	line-height: 100%;
+	letter-spacing: 0.015em;
+	text-align: left;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow: hidden;
+	@apply fui:text-header;
+
+	background: none;
+	border: none;
+
+	@apply fui:outline-focus-prepear;
+	cursor: pointer;
+
+	&:not(:disabled,.is-disabled):hover {
+		@apply fui:bg-dd-i-h-bg;
+		@apply fui:text-dd-i-h-c;
+
+		&.is-danger {
+			@apply fui:text-error;
+		}
+	}
+
+	&:focus-visible {
+		@apply fui:outline-focus;
+	}
+
+	&:disabled,
+	&.is-disabled {
+		@apply fui:text-dd-i-d;
+		cursor: default;
+	}
+
+	&.is-danger {
+		@apply fui:text-error;
+	}
+}
+
+.fui-dropdown-divider {
+	margin: calc(var(--fui-spacing) * 1) 0;
+	border: none;
+	border-top: 1px solid;
+	@apply fui:border-dd-b;
+}
+
+
+
+/* Vue Transition */
+
+.fui-dropdown-enter-active,
+.fui-dropdown-leave-active {
+	transition: opacity 0.1s ease;
+}
+
+.fui-dropdown-enter-from,
+.fui-dropdown-leave-to {
+	opacity: 0;
+}

@@ -1,0 +1,74 @@
+@theme {
+	--color-primary-50: var(--fui-color-blue-50);
+	--color-primary-100: var(--fui-color-blue-100);
+	--color-primary-200: var(--fui-color-blue-200);
+	--color-primary-300: var(--fui-color-blue-300);
+	--color-primary-400: var(--fui-color-blue-400);
+	--color-primary-500: var(--fui-color-blue-500);
+	--color-primary-600: var(--fui-color-blue-600);
+	--color-primary-700: var(--fui-color-blue-700);
+	--color-primary-800: var(--fui-color-blue-800);
+	--color-primary-900: var(--fui-color-blue-900);
+	--color-primary-950: var(--fui-color-blue-950);
+
+	/* Text color */
+	--color-text: light-dark(
+		var(--fui-color-gray-500),
+		var(--fui-color-gray-400)
+	);
+	--color-header: light-dark(
+		var(--fui-color-gray-900),
+		var(--fui-color-white)
+	);
+	--color-link: light-dark(
+		var(--fui-color-primary-600),
+		var(--fui-color-primary-500)
+	);
+	--color-error: light-dark(
+		var(--fui-color-red-600),
+		var(--fui-color-red-500)
+	);
+
+	/* Focus */
+	--color-focus: light-dark(
+		var(--fui-color-primary-200),
+		var(--fui-color-primary-900)
+	);
+	--color-focus-error: light-dark(
+		var(--fui-color-red-200),
+		var(--fui-color-red-900)
+	);
+
+	/* Spacing */
+	--spacing: 4px;
+
+	--font-sans: Inter, Helvetica, Arial, sans-serif;
+	--radius-lg: 0.5rem;
+
+	--transition-duration-default: .2s;
+
+	--color-dd-bg: light-dark(var(--fui-color-white), var(--fui-color-gray-700));
+	--color-dd-b: light-dark(var(--fui-color-gray-200), var(--fui-color-gray-600));
+	--color-dd-bs1: #0000000d;
+	--color-dd-bs2: #0000001a;
+}
+
+/* Focus */
+@utility outline-focus-prepear {
+	outline-style: solid;
+	outline-width: 4px;
+	outline-offset: 0;
+	outline-color: transparent;
+}
+/* End of Focus */
+
+
+/* DropDown Wrapper */
+@utility dropdown-wrapper {
+	@apply fui:bg-dd-bg;
+	@apply fui:rounded-lg;
+	border: 1px solid;
+	@apply fui:border-dd-b;
+	box-shadow: 0px 2px 4px -2px var(--fui-color-dd-bs1), 0px 4px 6px -1px var(--fui-color-dd-bs2);
+}
+/* End of DropDown Wrapper */

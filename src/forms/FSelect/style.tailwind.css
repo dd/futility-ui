@@ -1,0 +1,163 @@
+@theme {
+	--color-select-c: light-dark(var(--fui-color-gray-900), var(--fui-color-white));
+	--color-select-b: light-dark(var(--fui-color-gray-300), var(--fui-color-gray-600));
+	--color-select-bg: light-dark(var(--fui-color-gray-50), var(--fui-color-gray-700));
+
+	/* focus */
+	--color-select-bf: var(--fui-color-primary-600);
+
+	/* disabled */
+	--color-select-cd: light-dark(var(--fui-color-gray-400), var(--fui-color-gray-500));
+	--color-select-bd: light-dark(var(--fui-color-gray-200), var(--fui-color-gray-700));
+	--color-select-bgd: light-dark(var(--fui-color-gray-50), var(--fui-color-gray-800));
+
+	/* error */
+	--color-select-ce: light-dark(var(--fui-color-red-700), var(--fui-color-red-500));
+	--color-select-be: var(--fui-color-red-500);
+	--color-select-bge: light-dark(var(--fui-color-red-50), var(--fui-color-gray-800));
+
+	/* error + disabled */
+	--color-select-ced: light-dark(var(--fui-color-red-400), var(--fui-color-red-900));
+	--color-select-bed: light-dark(var(--fui-color-red-200), var(--fui-color-red-950));
+	--color-select-bged: light-dark(var(--fui-color-red-50), var(--fui-color-gray-900));
+}
+
+
+.fui-select {
+	position: relative;
+	@apply fui:text-select-c;
+
+	.fui-select-select {
+		appearance: none;
+		box-sizing: border-box;
+
+		min-height: 100%;
+		height: 100%;
+		max-height: 100%;
+		min-width: 100%;
+		width: 100%;
+		max-width: 100%;
+
+		border: 1px solid;
+		@apply fui:border-select-b;
+		@apply fui:rounded-lg;
+		@apply fui:bg-select-bg;
+
+		@apply fui:font-sans;
+		font-weight: 400;
+		letter-spacing: 0.015em;
+		text-color: inherit;
+
+		@apply fui:outline-focus-prepear;
+		transition-property: outline-color, border-color;
+		transition-duration: var(--fui-transition-duration-default);
+		will-change: outline-color, border-color;
+	}
+
+	/* dropdown mark */
+	&::after {
+		content: '';
+		position: absolute;
+		top: 50%;
+		transform: translateY(-50%);
+		color: inherit;
+		background-color: currentColor;
+		mask: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 10 6'%3e %3cpath stroke='%23ffffff' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m1 1 4 4 4-4'/%3e %3c/svg%3e") no-repeat center;
+		mask-size: contain;
+		pointer-events: none;
+	}
+
+	/* Disabled */
+	&:has(.fui-select-select:disabled) {
+		@apply fui:text-select-cd;
+	}
+
+	.fui-select-select:disabled {
+		@apply fui:border-select-bd;
+		@apply fui:bg-select-bgd;
+	}
+
+	/* Error */
+	&.has-error {
+		@apply fui:text-select-ce;
+
+		.fui-select-select {
+			@apply fui:border-select-be;
+			@apply fui:bg-select-bge;
+		}
+
+		/* Error + Disabled */
+		&:has(.fui-select-select:disabled) {
+			@apply fui:text-select-ced;
+		}
+
+		.fui-select-select:disabled {
+			@apply fui:border-select-bed;
+			@apply fui:bg-select-bged;
+		}
+	}
+
+	/* Focus */
+	.fui-select-select:focus {
+		@apply fui:border-select-bf;
+	}
+	.fui-select-select:focus-visible {
+		@apply fui:outline-focus;
+	}
+
+	/* Focus + Error */
+	&.has-error .fui-select-select:focus {
+		@apply fui:border-select-be;
+	}
+	&.has-error .fui-select-select:focus-visible {
+		@apply fui:outline-focus-error;
+	}
+}
+
+
+/* Sizes ****************************************/
+
+.fui-select-size-s {
+	.fui-select-select {
+		font-size: theme(text.sm);
+		padding: 7px 16px;
+		padding-right: 41px;
+		line-height: 150%;
+	}
+
+	&::after {
+		right: 16px;
+		width: 9px;
+		height: 9px;
+	}
+}
+
+.fui-select-size-m {
+	.fui-select-select {
+		font-size: theme(text.sm);
+		padding: 9.5px 16px;
+		padding-right: 41px;
+		line-height: 150%;
+	}
+
+	&::after {
+		right: 16px;
+		width: 9px;
+		height: 9px;
+	}
+}
+
+.fui-select-size-xl {
+	.fui-select-select {
+		font-size: theme(text.base);
+		padding: 13px 16px;
+		padding-right: 43px;
+		line-height: 150%;
+	}
+
+	&::after {
+		right: 16px;
+		width: 11px;
+		height: 11px;
+	}
+}

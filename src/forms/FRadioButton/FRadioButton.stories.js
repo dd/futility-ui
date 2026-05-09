@@ -1,0 +1,171 @@
+import { useArgs } from 'storybook/preview-api';
+
+import FRadioButton from '.';
+import { makeRenderer, makeUpdateArg } from '@/sb.stuff.js';
+
+
+const usage = `
+A radio button component for selecting a single option from a group.
+
+
+### Usage
+
+Import the component:
+
+\`\`\`js
+import { FRadioButton } from 'futility-ui'
+// or
+import FRadioButton from 'futility-ui/forms/FRadioButton'
+\`\`\`
+
+Use it in your template:
+
+\`\`\`html
+<FRadioButton name="fradiobutton-1" />
+\`\`\`
+
+That's it!
+`;
+
+
+export default {
+	title: 'Forms/FRadioButton',
+	component: FRadioButton,
+	parameters: {
+		layout: 'centered',
+		docs: {
+			description: {
+				component: usage,
+			},
+		}
+	},
+	tags: [ 'autodocs' ],
+	argTypes: {
+		modelValue: {
+			description: 'Current value of the radio group.',
+			type: 'string',
+			table: {
+				category: 'props',
+				type: { summary: 'text | number' },
+			},
+		},
+		disabled: {
+			description: 'Whether the radio button is disabled.',
+			control: 'boolean',
+			table: {
+				category: 'props',
+				type: { summary: 'boolean' },
+			},
+		},
+		error: {
+			table: { disable: true },
+			control: false,
+		},
+
+		// EVENTS
+		'update:modelValue': {
+			action: 'update:modelValue',
+			description: 'Emitted when the selected value changes.',
+			control: false,
+			table: {
+				category: 'events',
+				type: { summary: null },
+				defaultValue: { summary: null },
+			},
+		},
+	},
+	args: {
+		disabled: false,
+		// error: false,
+	},
+	render: makeRenderer([ 'modelValue' ]),
+};
+
+export const Default = {};
+
+
+export const RadioButtonGroup = {
+	render: (args, { component }) => {
+		const [ , updateArgs ] = useArgs();
+		const updateValue = makeUpdateArg('modelValue', updateArgs);
+		return {
+			components: { [component.name]: component },
+			setup() {
+				const promisedArgs = { [updateValue[0]]: updateValue[1] };
+				return { args, promisedArgs };
+			},
+			template: `<div>
+		<FRadioButton v-bind="args" v-on="promisedArgs" name="test_group" value="variant-1" />
+		<FRadioButton v-bind="args" v-on="promisedArgs" name="test_group" value="variant-2" class="fui:ml-4" />
+		<FRadioButton v-bind="args" v-on="promisedArgs" name="test_group" value="variant-3" class="fui:ml-4" />
+	</div>`,
+		};
+	},
+	args: {
+		modelValue: 'variant-1',
+	},
+};
+
+
+export const Scheme = {
+	name: 'Scheme (Light/Dark)',
+	parameters: { layout: 'fullscreen' },
+	render: (args, { argTypes, component }) => {
+		return {
+			name: 'FRadioButtonSchemeStory',
+			props: Object.keys(argTypes),
+			components: { FRadioButton },
+			setup() { return { args }; },
+			template: `<div class="sbpst-scheme_preview sbpst-row" >
+		<div class="sbpst-light" >
+			<table class="sbfui-preview-table" ><tbody>
+				<tr>
+					<td>
+						<FRadioButton v-bind="args" value=1 :disabled="false" />
+					</td>
+					<td>
+						<FRadioButton v-bind="args" value=2 :disabled="false" />
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<FRadioButton v-bind="args" value=1 disabled />
+					</td>
+					<td>
+						<FRadioButton v-bind="args" value=2 disabled />
+					</td>
+				</tr>
+			</tbody></table>
+		</div>
+		<div class="sbpst-dark" >
+			<table class="sbfui-preview-table" ><tbody>
+				<tr>
+					<td>
+						<FRadioButton v-bind="args" value=1 :disabled="false" />
+					</td>
+					<td>
+						<FRadioButton v-bind="args" value=2 :disabled="false" />
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<FRadioButton v-bind="args" value=1 disabled />
+					</td>
+					<td>
+						<FRadioButton v-bind="args" value=2 disabled />
+					</td>
+				</tr>
+			</tbody></table>
+		</div>
+	</div>`,
+		};
+	},
+	argTypes: {
+		modelValue: { control: { type: null }},
+		disabled: { control: { type: null }},
+	},
+	args: {
+		modelValue: 1,
+		disabled: '<disabled>',
+	},
+};

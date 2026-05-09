@@ -1,9 +1,13 @@
 import vue from '@vitejs/plugin-vue';
 import { defineConfig } from 'vite';
 import { fileURLToPath, URL } from 'node:url';
-import { resolve } from 'path';
+import { resolve, join, relative } from 'path';
 import VitePluginSvgSpritemap from '@spiriit/vite-plugin-svg-spritemap';
 import { version } from './package.json';
+import { readdirSync } from 'node:fs';
+import tailwindcss from "@tailwindcss/vite";
+import fs from 'node:fs';
+import { basename } from 'node:path';
 
 
 /**
@@ -12,25 +16,27 @@ import { version } from './package.json';
  * In development mode, it provides a virtual empty module for `./__spritemap`
  * so that Vite doesn't throw an error due to the missing file.
  *
- * In build mode, it rewrites legacy import paths like './components/FIcon/assets/sprite.svg'
+ * In build mode, it rewrites legacy import paths like './FIcon/assets/sprite.svg'
  * (left over from the source structure) to the final path './assets/sprite.svg',
  * which should match the one declared in package.json exports.
+ *
+ * Maybe wrong, but works.
  */
 function FixFIconSpriteImport() {
 	const RAW_ID = './__spritemap';
 	const VIRTUAL_ID = '\0virtual:__spritemap';
-	let baseUrl;
+
+	// Массив замен: [что заменить, на что заменить]
+	const replacements = [
+		['./assets/sprite.svg', '../assets/sprite.svg'],
+		['FIcon/assets/sprite.svg', 'assets/sprite.svg'],
+	];
 
 	return {
 		name: 'fix-sprite-import',
 
-		configResolved(resolvedConfig) {
-			baseUrl = resolvedConfig.base;
-		},
-
 		resolveId(source) {
 			if (source === RAW_ID) {
-				// Treat './__spritemap' as a virtual module to prevent Vite from trying to resolve it from disk
 				return VIRTUAL_ID;
 			}
 			return null;
@@ -38,19 +44,140 @@ function FixFIconSpriteImport() {
 
 		load(id) {
 			if (id === VIRTUAL_ID) {
-				// Provide an empty module export during dev mode
 				return 'export default "";';
 			}
 			return null;
 		},
 
 		generateBundle(_, bundle) {
-			const path = `./components/FIcon${baseUrl}assets/sprite.svg`;
 			for (const chunk of Object.values(bundle)) {
-				if (chunk.type === 'chunk' && chunk.code.includes(path)) {
-					// Replace the legacy path left from the original source structure
-					chunk.code = chunk.code.replaceAll(path, './assets/sprite.svg');
+				if (chunk.type !== 'chunk') continue;
+
+				let updated = chunk.code;
+
+				for (const [from, to] of replacements) {
+					if (updated.includes(from)) {
+						updated = updated.replaceAll(from, to);
+					}
 				}
+
+				if (updated !== chunk.code) {
+					chunk.code = updated;
+				}
+			}
+		},
+	};
+}
+
+
+/**
+ * Recursively scans a directory tree to discover Vue component entry points and constants modules.
+ *
+ * This function is typically used to build the `entry` option of Vite's library mode.
+ * It walks through all subdirectories under the given `dir`, and for each directory:
+ *
+ * - If a file named `index.vue` is found, it is considered the main entry point of the component.
+ * - If a file named `constants.js` is found, it is considered an auxiliary entry point (e.g., exporting named constants).
+ *
+ * For each matching file, the function adds an entry to the returned object where:
+ *   - The key is the relative path from the `src` directory to the file, *without extension*.
+ *   - The value is the absolute resolved path to the file.
+ *
+ * For example, if you have:
+ *   src/FButton/index.vue
+ *   src/FButton/constants.js
+ *
+ * The result will be:
+ *   {
+ *     "FButton/index": "/absolute/path/to/src/FButton/index.vue",
+ *     "FButton/constants": "/absolute/path/to/src/FButton/constants.js"
+ *   }
+ *
+ * @param {string} dir - The root directory to start scanning from.
+ * @returns {Object<string, string>} An object mapping relative entry names to absolute file paths.
+ */
+function findBundleEntries(dir) {
+	const entries = {};
+
+	const items = readdirSync(dir, { withFileTypes: true });
+	for (const item of items) {
+		const fullPath = join(dir, item.name);
+
+		if (item.isDirectory()) {
+			const sub = findBundleEntries(fullPath);
+			Object.assign(entries, sub);
+
+		} else if (item.isFile() && item.name === 'index.vue') {
+			const rel = relative('src', fullPath).replace(/\.vue$/, '');
+			entries[rel] = resolve(fullPath);
+
+		} else if (item.isFile() && item.name === 'constants.js') {
+			const rel = relative('src', fullPath).replace(/\.js$/, '');
+			entries[rel] = resolve(fullPath);
+
+		} else if (item.isFile() && item.name === 'directive.js') {
+			const rel = relative('src', fullPath).replace(/\.js$/, '');
+			entries[rel] = resolve(fullPath);
+
+		} else if (item.isFile() && item.name === 'utils.js') {
+			const rel = relative('src', fullPath).replace(/\.js$/, '');
+			entries[rel] = resolve(fullPath);
+
+		} else if (item.isFile() && item.name === 'sb.stuff.js') {
+			const rel = relative('src', fullPath).replace(/\.js$/, '');
+			entries[rel] = resolve(fullPath);
+		}
+	}
+
+	return entries;
+}
+
+
+/**
+ * Vite plugin that copies all `*.tailwind.css` files found under `src/` into the `dist/` directory,
+ * preserving their relative paths.
+ *
+ * Scans `src/` recursively for files matching the `*.tailwind.css` pattern and, after the bundle
+ * is written, copies each one to the corresponding path under `dist/`. The destination directory
+ * is created automatically if it does not exist.
+ *
+ * For example:
+ *   src/styles/theme.tailwind.css  →  dist/styles/theme.tailwind.css
+ *   src/forms/FButton/style.tailwind.css  →  dist/forms/FButton/style.tailwind.css
+ */
+function copyTailwindPlugin() {
+	const srcDir = resolve(__dirname, 'src');
+	const distDir = resolve(__dirname, 'dist');
+
+	function findTailwindFiles(dir) {
+		const results = [];
+		for (const item of readdirSync(dir, { withFileTypes: true })) {
+			const fullPath = join(dir, item.name);
+			if (item.isDirectory()) {
+				results.push(...findTailwindFiles(fullPath));
+			} else if (item.isFile() && item.name.endsWith('.tailwind.css')) {
+				results.push(fullPath);
+			}
+		}
+		return results;
+	}
+
+	return {
+		name: 'copy-tailwind-css',
+
+		writeBundle() {
+			const files = findTailwindFiles(srcDir);
+
+			for (const src of files) {
+				const rel = relative(srcDir, src);
+				const dest = join(distDir, rel);
+
+				fs.mkdirSync(resolve(dest, '..'), { recursive: true });
+				fs.copyFileSync(src, dest);
+
+				const size = fs.statSync(dest).size / 1024;
+
+				this.info(`${rel} → dist/${rel} ${size.toFixed(2)} kB`);
 			}
 		},
 	};
@@ -61,8 +188,9 @@ export default defineConfig({
 	base: process.env.BASE_URL || '/',
 	plugins: [
 		vue(),
+		tailwindcss(),
 		VitePluginSvgSpritemap(
-			'./src/components/FIcon/icons/*.svg',
+			'./src/FIcon/icons/*.svg',
 			{
 				output: {
 					name: 'sprite.svg',
@@ -74,33 +202,25 @@ export default defineConfig({
 			},
 		),
 		FixFIconSpriteImport(),
+		copyTailwindPlugin(),
 	],
 	define: {
 		__VERSION__: JSON.stringify(version),
 	},
 	build: {
+		cssTarget: ['chrome123', 'firefox120', 'safari17.5'],
 		lib: {
 			name: 'Futility UI',
 			entry: {
-				index: resolve(__dirname, 'src/index.js'),
-				FLoader: resolve(__dirname, 'src/components/FLoader/index.vue'),
-				'FIcon/index': resolve(__dirname, 'src/components/FIcon/index.vue'),
-				'FIcon/constants': resolve(__dirname, 'src/components/FIcon/constants.js'),
-				'FButton/index': resolve(__dirname, 'src/components/FButton/index.vue'),
-				'FButton/constants': resolve(__dirname, 'src/components/FButton/constants.js'),
-				'FButtonText/index': resolve(__dirname, 'src/components/FButtonText/index.vue'),
-				'FButtonText/constants': resolve(__dirname, 'src/components/FButtonText/constants.js'),
-				'FStack/index': resolve(__dirname, 'src/components/FStack/index.vue'),
-				'forms/FSwitch/index': resolve(__dirname, 'src/components/forms/FSwitch/index.vue'),
-				'forms/FCheckbox/index': resolve(__dirname, 'src/components/forms/FCheckbox/index.vue'),
-				'forms/FInput/index': resolve(__dirname, 'src/components/forms/FInput/index.vue'),
-				'forms/FInput/constants': resolve(__dirname, 'src/components/forms/FInput/constants.js'),
-				'forms/FInput/ClearButton': resolve(__dirname, 'src/components/forms/FInput/ClearButton.vue'),
-				'forms/FInput/ShowPasswordButton': resolve(__dirname, 'src/components/forms/FInput/ShowPasswordButton.vue'),
-				'forms/FRadioButton/index': resolve(__dirname, 'src/components/forms/FRadioButton/index.vue'),
-				'forms/FControlLabel/index': resolve(__dirname, 'src/components/forms/FControlLabel/index.vue'),
-				styles: resolve(__dirname, 'src/styles.sass'),
-				theme: resolve(__dirname, 'src/theme.sass'),
+				'index': resolve(__dirname, 'src/index.js'),
+				...findBundleEntries(resolve('src')),
+				'forms/FInput/ClearButton': resolve(__dirname, 'src/forms/FInput/ClearButton.vue'),
+				'forms/FInput/ShowPasswordButton': resolve(__dirname, 'src/forms/FInput/ShowPasswordButton.vue'),
+				'forms/FGenericForm/useWidget': resolve(__dirname, 'src/forms/FGenericForm/useWidget.js'),
+				'FModal/useFModal': resolve(__dirname, 'src/FModal/useFModal.js'),
+				'forms/FGenericForm/widgets/FInputWidget': resolve(__dirname, 'src/forms/FGenericForm/widgets/FInputWidget.vue'),
+				'styles/base.css': resolve(__dirname, 'src/styles/base.tailwind.css'),
+				'styles/components.css': resolve(__dirname, 'src/styles/components.tailwind.css'),
 			},
 			fileName: (format, entryName) =>`${entryName}.${format}.js`,
 			formats: [ 'es', 'cjs' ],
@@ -108,6 +228,7 @@ export default defineConfig({
 		rollupOptions: {
 			external: [
 				'vue',
+				'vue-final-modal',
 				`.${process.env.BASE_URL || '/'}assets/sprite.svg`,
 			],
 			output: {
@@ -115,8 +236,13 @@ export default defineConfig({
 					vue: 'Vue',
 				},
 				assetFileNames: (assetInfo) => {
-					if (assetInfo.name.endsWith('.css')) {
-						return 'styles/[name][extname]';
+					const name = assetInfo.name
+						?? assetInfo.names?.[0]
+						?? assetInfo.originalFileNames?.[0]
+						?? '';
+
+					if (name.endsWith('.css')) {
+						return '[name][extname]';
 					}
 
 					return 'assets/[name][extname]';
@@ -132,7 +258,7 @@ export default defineConfig({
 		},
 	},
 	resolve: {
-		extensions: ['.mjs', '.js', '.mts', '.ts', '.jsx', '.tsx', '.json', '.vue', '.mdx', '.less', '.scss', '.sass' ],
+		extensions: [ '.mjs', '.js', '.mts', '.ts', '.jsx', '.tsx', '.json', '.vue', '.mdx' ],
 		alias: {
 			'@': fileURLToPath(new URL('./src', import.meta.url)),
 		},

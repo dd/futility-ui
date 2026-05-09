@@ -1,0 +1,58 @@
+.fui-button-text {
+	display: inline-block;
+	appearance: none;
+	@apply fui:rounded-sm;
+	font-family: inherit;
+	font-size: inherit;
+	font-weight: inherit;
+	text-decoration: none;
+	letter-spacing: inherit;
+	line-height: inherit;
+	border: none;
+	background: none;
+	margin: 0;
+	padding: 0;
+
+	cursor: pointer;
+
+	@apply fui:outline-focus-prepear;
+	transition-property: opacity, color, outline-color;
+	transition-duration: .1s;
+	will-change: opacity, color, outline-color;
+
+	&.fui-bt-disabled {
+		pointer-events: none;
+	}
+
+	&.fui-bt-disabled,
+	&:disabled {
+		cursor: text;
+		opacity: 0.5;
+	}
+}
+
+
+/* Icon ****************************************/
+
+.fui-button-text {
+	.fui-icon {
+		height: 1.2em;
+		vertical-align: text-bottom;
+	}
+}
+
+
+/* Colors ***************************************/
+
+.fui-button-text {
+	color: var(--fui-bt-textcolor);
+
+	&:hover:not(.fui-bt-disabled) {
+		color: var(--fui-bt-textcolor-active);
+	}
+
+	&:focus-visible {
+		color: var(--fui-bt-textcolor-active);
+		outline-color: var(--fui-bt-focus-color);
+	}
+}

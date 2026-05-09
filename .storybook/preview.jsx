@@ -1,16 +1,14 @@
 import React from 'react';
 import { setup } from '@storybook/vue3-vite';
 import Toast, { TYPE } from 'vue-toastification';
+import { createVfm, ModalsContainer } from 'vue-final-modal';
 import { Title, Primary, Controls, Stories, Description, Subtitle } from '@storybook/addon-docs/blocks';
 
-import 'vue-toastification/dist/index.css';
-import './styles.sass';
-
-import '@/styles.sass';
-import '@/theme.sass';
+import './styles.css';
 
 
 setup((app) => {
+	app.use(createVfm());
 	app.use(Toast, {
 		position: 'bottom-left',
 		newestOnTop: false,
@@ -27,24 +25,55 @@ setup((app) => {
 
 /** @type { import('@storybook/vue3-vite').Preview } */
 const preview = {
+	decorators: [
+		(story) => ({
+			components: { story, ModalsContainer },
+			template: '<story /><ModalsContainer />',
+		}),
+	],
 	parameters: {
-		backgrounds: { disable: true },
+		backgrounds: { disabled: true },
 		previewSchemeToggler: {
-			darkColor: 'var(--fui-color-gray-400)',
-			lightColor: 'var(--fui-color-gray-600)',
-			darkBackground: 'var(--fui-color-gray-900)',
-			lightBackground: 'var(--fui-color-white)',
+			darkColor: 'var(--pst-dark-color)',
+			lightColor: 'var(--pst-light-color)',
+			darkBackground: 'var(--pst-dark-bg)',
+			lightBackground: 'var(--pst-light-bg)',
 		},
 		options: {
 			storySort: {
 				order: [
 					'Introduction',
+					'Contributing',
 					'*',
+					'FModal',
+					[
+						'Docs',
+						'Default',
+						'useFModal',
+						'Layouts',
+						[
+							'FMLayoutDefault',
+							'FMLayoutForm',
+							'FMLayoutDialog',
+						],
+					],
+					'FTabs',
+					[
+						'FTabContainer',
+						'FTab',
+					],
+					'Forms',
+					[
+						'*',
+						'FControlLabel',
+						'FFormRow',
+						'FGenericForm',
+					],
 				],
 			},
 		},
 		docs: {
-			toc: true,
+			toc: { headingSelector: 'h2, h3' },
 			page: () => (
 				<>
 					<Title />

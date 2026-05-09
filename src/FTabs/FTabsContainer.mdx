@@ -1,0 +1,77 @@
+import { Meta, Canvas, Controls } from '@storybook/addon-docs/blocks';
+import * as FTabsContainerStories from './FTabsContainer.stories';
+
+<Meta of={FTabsContainerStories} />
+
+
+# FTabsContainer
+
+Tab container component. Declare tabs via `FTab` components in the default slot.
+
+```js
+import { FTabsContainer, FTab } from 'futility-ui';
+// or
+import FTabsContainer from 'futility-ui/FTabs/FTabsContainer';
+import FTab from 'futility-ui/FTabs/FTab';
+```
+
+```html
+<FTabsContainer v-model:activeTab="currentTab">
+	<FTab name="Overview">Overview content</FTab>
+	<FTab name="Settings">Settings content</FTab>
+</FTabsContainer>
+```
+
+Tabs render in declaration order. The first non-disabled tab activates by default.
+
+> `FTabsContainer` has multiple root elements (`header`, `hr`, `div`) — no extra wrapper needed, but attributes cannot be passed directly to the root.
+
+<Canvas of={FTabsContainerStories.Default} />
+<Controls of={FTabsContainerStories.Default} />
+
+
+## Sizes
+
+Use `size="s"` for compact tab headers. The default size is `m`.
+
+<Canvas of={FTabsContainerStories.Sizes} />
+
+
+## Custom slugs
+
+The slug is used as the active tab identifier in `v-model:activeTab`. It is auto-generated from `name` if omitted. Set `slug` explicitly to sync tabs with route params or control them programmatically.
+
+```html
+<FTabsContainer v-model:activeTab="route.query.tab">
+	<FTab name="General" slug="general">...</FTab>
+	<FTab name="Security" slug="security">...</FTab>
+</FTabsContainer>
+```
+
+<Canvas of={FTabsContainerStories.CustomSlugs} />
+
+
+## Dynamic tabs
+
+Add or remove `FTab` components at runtime — the header updates automatically. When the active tab is removed, the first available tab activates.
+
+<Canvas of={FTabsContainerStories.Dynamic} />
+
+
+## Custom tab slot
+
+Tab buttons in the header can be customized via named slots on `FTabsContainer` using the pattern `tab-{slug}`. The slot exposes `{ tab }` with `name`, `slug`, and `disabled` fields.
+
+```html
+<FTabsContainer v-model:activeTab="tab">
+	<template #tab-inbox="{ tab }">
+		{{ tab.name }}
+		<span class="badge">3</span>
+	</template>
+
+	<FTab name="Inbox" slug="inbox">...</FTab>
+	<FTab name="Sent" slug="sent">...</FTab>
+</FTabsContainer>
+```
+
+<Canvas of={FTabsContainerStories.CustomTabSlot} />
