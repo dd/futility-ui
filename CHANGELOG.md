@@ -1,3 +1,15 @@
+# v0.7.1 (Sat May 09 2026)
+
+#### 🐛 Bug Fix
+
+- ✨ (FBooleanFlag): Add FBooleanFlag [#65](https://github.com/dd/futility-ui/pull/65) ([@dd](https://github.com/dd))
+
+#### Authors: 1
+
+- Dmitry Dobrynin ([@dd](https://github.com/dd))
+
+---
+
 # v0.7.0 (Sat May 09 2026)
 
 #### 🚀 Enhancement
