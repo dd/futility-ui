@@ -25,6 +25,7 @@ import FTabsContainer from './FTabs/FTabsContainer';
 import FTab from './FTabs/FTab';
 import FNumberPicker from './forms/FNumberPicker';
 import FFormRow from './forms/FFormRow';
+import FBooleanFlag from './FBooleanFlag';
 
 
 export {
@@ -55,6 +56,7 @@ export {
 	FTabsContainer,
 	FTab,
 	FFormRow,
+	FBooleanFlag,
 };
 
 export const version = __VERSION__;
@@ -85,6 +87,7 @@ const components = {
 	FTabsContainer,
 	FTab,
 	FFormRow,
+	FBooleanFlag,
 };
 
 export const install = (app) => {

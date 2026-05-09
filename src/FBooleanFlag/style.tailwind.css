@@ -1,0 +1,17 @@
+@theme {
+	--boolean-flag-ok: light-dark(var(--fui-color-green-600), var(--fui-color-green-500));
+	--boolean-flag-not-ok: light-dark(var(--fui-color-red-600), var(--fui-color-red-500));
+}
+
+.fui-boolean-flag-ok,
+.fui-boolean-flag-not-ok {
+	height: 1em;
+}
+
+.fui-boolean-flag-ok {
+	color: var(--fui-boolean-flag-ok);
+}
+
+.fui-boolean-flag-not-ok {
+	color: var(--fui-boolean-flag-not-ok);
+}
