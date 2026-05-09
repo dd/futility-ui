@@ -1,3 +1,44 @@
+# v0.7.0 (Sat May 09 2026)
+
+#### 🚀 Enhancement
+
+- ✨ (FFormRow): Add FFormRow component [#43](https://github.com/dd/futility-ui/pull/43) ([@dd](https://github.com/dd))
+- ✨ (FSelect): Add FSelect component [#42](https://github.com/dd/futility-ui/pull/42) ([@dd](https://github.com/dd))
+- ✨ (FInputAutocomplete): Add FInputAutocomplete component [#40](https://github.com/dd/futility-ui/pull/40) ([@dd](https://github.com/dd))
+
+#### 🐛 Bug Fix
+
+- Dev [#63](https://github.com/dd/futility-ui/pull/63) ([@dd](https://github.com/dd))
+- 🩹 (FGenericForm): Update storybook utils [#62](https://github.com/dd/futility-ui/pull/62) ([@dd](https://github.com/dd))
+- 🩹 (FGenericForm): Update storybook utils [#61](https://github.com/dd/futility-ui/pull/61) ([@dd](https://github.com/dd))
+- 🧑‍💻 (storybook): Add storybook stuff to build [#60](https://github.com/dd/futility-ui/pull/60) ([@dd](https://github.com/dd))
+- Dev [#59](https://github.com/dd/futility-ui/pull/59) ([@dd](https://github.com/dd))
+- 🩹 (FFormRow): Add FFormRow to index [#58](https://github.com/dd/futility-ui/pull/58) ([@dd](https://github.com/dd))
+- ✨ (Styles): Update base styles [#57](https://github.com/dd/futility-ui/pull/57) ([@dd](https://github.com/dd))
+- ♻️ (FTabs): Rename FTabContainer -> FTabsContainer [#56](https://github.com/dd/futility-ui/pull/56) ([@dd](https://github.com/dd))
+- 🧑‍💻 (FModal): Make pros reactive in useFModal [#55](https://github.com/dd/futility-ui/pull/55) ([@dd](https://github.com/dd))
+- ✨ (FTabs): Add tabs components [#54](https://github.com/dd/futility-ui/pull/54) ([@dd](https://github.com/dd))
+- ✨ (FModal) Add FModal [#53](https://github.com/dd/futility-ui/pull/53) ([@dd](https://github.com/dd))
+- ✨ (FTextarea): Add FTextarea [#52](https://github.com/dd/futility-ui/pull/52) ([@dd](https://github.com/dd))
+- ✨ (FInputAutocomplete): Add dd class [#51](https://github.com/dd/futility-ui/pull/51) ([@dd](https://github.com/dd))
+- Fixes and updates [#50](https://github.com/dd/futility-ui/pull/50) ([@dd](https://github.com/dd))
+- 🩹 (build): Change target browser to fix polyfill for light-dark() [#49](https://github.com/dd/futility-ui/pull/49) ([@dd](https://github.com/dd))
+- ✨ Add FDropdown [#48](https://github.com/dd/futility-ui/pull/48) ([@dd](https://github.com/dd))
+- Feat/tailwind [#47](https://github.com/dd/futility-ui/pull/47) ([@dd](https://github.com/dd))
+- ✨ (FGenericForm): Add FAutocompleteWidget [#46](https://github.com/dd/futility-ui/pull/46) ([@dd](https://github.com/dd))
+- 💚 (CI): Fix pnpm versions [#45](https://github.com/dd/futility-ui/pull/45) ([@dd](https://github.com/dd))
+- Improve FGenericForm [#44](https://github.com/dd/futility-ui/pull/44) ([@dd](https://github.com/dd))
+- 🩹 (build): Fix build with new component [#41](https://github.com/dd/futility-ui/pull/41) ([@dd](https://github.com/dd))
+- 🩹 (styles): Fix styles [#39](https://github.com/dd/futility-ui/pull/39) ([@dd](https://github.com/dd))
+- Feat/tailwind [#38](https://github.com/dd/futility-ui/pull/38) ([@dd](https://github.com/dd))
+- Add usage docs [#37](https://github.com/dd/futility-ui/pull/37) ([@dd](https://github.com/dd))
+
+#### Authors: 1
+
+- Dmitry Dobrynin ([@dd](https://github.com/dd))
+
+---
+
 # v0.6.6 (Wed Jul 09 2025)
 
 #### 🐛 Bug Fix
