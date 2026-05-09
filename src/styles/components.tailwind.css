@@ -8,6 +8,7 @@
 @import "../FButtonText/style.tailwind.css" layer(components);
 @import "../FButtonText/theme.tailwind.css" layer(components);
 @import "../FIcon/style.tailwind.css" layer(components);
+@import "../FBooleanFlag/style.tailwind.css" layer(components);
 @import "../FLoader/style.tailwind.css" layer(components);
 @import "../FStack/style.tailwind.css" layer(components);
 @import "../FDropdown/style.tailwind.css" layer(components);

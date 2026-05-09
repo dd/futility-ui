@@ -5,6 +5,7 @@
 		:size="size"
 		:error-text="rowErrorText"
 		:error-highlight="error"
+		:required="rowRequired"
 	>
 		<template v-if="meta.label" #label>{{ meta.label }}</template>
 
@@ -48,6 +49,7 @@ const { fields, error } = useWidget(model, props);
 const from = useWidgetField(model, props, computed(() => fields.value[0]));
 const to = useWidgetField(model, props, computed(() => fields.value[1]));
 const rowErrorText = computed(() => from.errorText.value ?? to.errorText.value ?? null);
+const rowRequired = computed(() => from.required.value || to.required.value);
 </script>
 
 <style>

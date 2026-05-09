@@ -26,6 +26,11 @@
 		margin: 0;
 	}
 
+	.fui-cl-required_mark {
+		@apply fui:text-error;
+		margin-left: 2px;
+	}
+
 	&.has-error {
 		@apply fui:text-cl-e;
 	}

@@ -16,6 +16,11 @@
 			:for="id"
 		>
 			<slot name="label" />
+			<span
+				v-if="required"
+				class="fui-fr-required_mark"
+				aria-hidden="true"
+			>*</span>
 		</label>
 		<div class="fui-fr-content" >
 			<div class="fui-fr-input" >
@@ -66,6 +71,9 @@ defineProps({
 
 	/** Error message shown as a tooltip on an icon next to the input. */
 	errorText: String,
+
+	/** Marks the row label with a required field indicator. */
+	required: Boolean,
 
 	/** When `true`, highlights the label text in the error color. */
 	errorHighlight: Boolean,

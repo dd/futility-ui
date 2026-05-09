@@ -6,6 +6,7 @@
 		:layout="layout"
 		:size="size"
 		:disabled="disabled"
+		:required="required"
 	>
 		<template #label>{{ meta.label }}</template>
 		<FSelect

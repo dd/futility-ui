@@ -5,6 +5,7 @@
 		:size="size"
 		:error-text="errorText"
 		:error-highlight="error"
+		:required="required"
 	>
 		<template v-if="meta.label" #label>{{ meta.label }}</template>
 		<input
