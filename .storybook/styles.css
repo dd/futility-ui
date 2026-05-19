@@ -115,13 +115,25 @@ h1 {
 /* Stories *************************************/
 
 /* FIcons */
+/*
+	Tailwind v4/Lightning CSS currently serializes light-dark(#000, #fff) into invalid CSS here.
+	`--fui-icon-color: light-dark(#000000, #ffffff);` -> `--fui-icon-color:var(--lightningcss-light,#000)var(--lightningcss-dark,#fff);`
+	This is why we use `@media (prefers-color-scheme: dark)` here.
+*/
 #story--ficon--default--primary,
 #story--ficon--default {
-	--fui-icon-color: light-dark(#000000, #ffffff);
+	--fui-icon-color: #000000;
+}
+
+@media (prefers-color-scheme: dark) {
+	#story--ficon--default--primary,
+	#story--ficon--default {
+		--fui-icon-color: #ffffff;
+	}
 }
 
 .sbfui-icon_preview {
-	--fui-icon-color: light-dark(#000000, #ffffff);
+	--fui-icon-color: #000000;
 	display: flex;
 	flex-direction: row;
 	flex-wrap: wrap;
@@ -130,6 +142,20 @@ h1 {
 	align-content: center;
 	max-width: 500px;
 	@apply fui:gap-4;
+}
+
+@media (prefers-color-scheme: dark) {
+	.sbfui-icon_preview {
+		--fui-icon-color: #ffffff;
+	}
+}
+
+.sbpst-light .sbfui-icon_preview {
+	--fui-icon-color: #000000;
+}
+
+.sbpst-dark .sbfui-icon_preview {
+	--fui-icon-color: #ffffff;
 }
 
 .sbfui-icon_preview-wrapper {
