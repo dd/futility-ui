@@ -1,0 +1,129 @@
+import { Meta, Canvas, Controls } from '@storybook/addon-docs/blocks';
+import * as FHeaderNavStories from './FHeaderNav.stories';
+
+<Meta of={FHeaderNavStories} />
+
+
+# FHeaderNav
+
+`FHeaderNav` renders navigation from a plain item tree and adapts to its `FHeader` region:
+
+* on the desktop bar it renders a horizontal list and opens children in dropdowns;
+* on the mobile bar it renders nothing (declare it again in the header's `#menu` slot);
+* inside the mobile menu it renders a vertical accordion;
+* outside `FHeader` it works as a standalone horizontal menu.
+
+```js
+import FHeaderNav from 'futility-ui/FHeader/FHeaderNav';
+```
+
+<Canvas of={FHeaderNavStories.Default} />
+<Controls of={FHeaderNavStories.Default} />
+
+
+## Item schema
+
+The horizontal bar shows `label` and the dropdown chevron. Full item content such as `icon`,
+`description`, and dividers appears in vertical lists: dropdowns, overflow, and the mobile menu.
+
+```js
+const items = [
+	{ label: 'Docs', url: '/docs' },
+	{
+		label: 'Company',
+		children: [
+			{
+				label: 'About',
+				icon: 'info_circle_solid',
+				description: 'Who we are',
+				url: '/about',
+			},
+			{ divider: true },
+			{ label: 'Contact', icon: 'profile_card_solid', url: '/contact' },
+		],
+	},
+	{ itemComponent: CustomNavItem, itemArgs: { tone: 'accent' } },
+];
+```
+
+Fields by item kind:
+
+* **Any item:** `label`; `url` makes it a link, while no `url` makes it a button; `active`,
+  `disabled`, and `attrs` control its state and additional attributes. State classes and
+  disabled attributes are applied to the clickable element itself.
+* **Vertical-list item:** may add `icon`, `description`, and `closeOnSelect: false`.
+* **Submenu:** `children`, or `childComponent` / `childArgs` for a custom panel. A submenu
+  trigger is always a button, so its own `url` is ignored.
+* **Divider:** `{ divider: true }`; it is skipped in the horizontal bar.
+* **Custom item:** `itemComponent` / `itemArgs` replaces the built-in item renderer.
+
+Items need no identifiers; keys and accordion state are derived from their position.
+
+Open the **Menu** dropdown below to see all built-in fields in their vertical form.
+
+<Canvas of={FHeaderNavStories.ItemKinds} />
+
+
+## Custom items
+
+`itemComponent` receives `itemArgs` merged with `{ item, mode, depth }`. `childComponent`
+replaces the complete dropdown panel and receives `childArgs` merged with
+`{ item, items, close, mode, depth }`; call `close()` after handling a selection.
+
+<Canvas of={FHeaderNavStories.CustomItems} />
+
+
+## Overflow
+
+The nav measures its container and moves items that do not fit behind the `...` button.
+Nested children remain available as an inline accordion inside the overflow dropdown.
+
+<Canvas of={FHeaderNavStories.Overflow} />
+
+
+## Standalone
+
+Outside `FHeader`, the component falls back to a regular horizontal navigation bar. This is
+the only story on this page that intentionally renders without the header context.
+
+<Canvas of={FHeaderNavStories.Standalone} />
+
+
+## Links
+
+Internal links use a globally registered `NuxtLink` or `RouterLink` when available, otherwise
+they fall back to `<a>`. External URLs (`https:`, `//`, `mailto:`, `tel:`, `#hash`, or
+`external: true`) always render as anchors. Pass `linkComponent`, or `'a'` to force anchors.
+
+
+## Translations
+
+`useTranslatedNavigation` adapts a source item tree to any translation function such as
+vue-i18n's `t`, while keeping `FHeaderNav` independent from the i18n library.
+
+```js
+import { useI18n } from 'vue-i18n';
+import { useTranslatedNavigation } from 'futility-ui';
+
+const sourceItems = [
+	{ label: 'navigation.docs', url: '/docs' },
+	{
+		label: 'navigation.company',
+		children: [
+			{
+				label: 'navigation.about',
+				description: 'navigation.aboutDescription',
+				url: '/about',
+			},
+		],
+	},
+];
+
+const { t } = useI18n();
+const items = useTranslatedNavigation(sourceItems, t);
+```
+
+`labelParams` and `descriptionParams` are passed to `t`; `translate: false` preserves text
+that is already display-ready. Changing the locale recomputes the labels and remeasures overflow.
+
+<Canvas of={FHeaderNavStories.TranslatedNavigation} />

@@ -45,6 +45,11 @@ const preview = {
 					'Introduction',
 					'Contributing',
 					'*',
+					'FHeader',
+					[
+						'FHeaderNav',
+						'Mobile Menu',
+					],
 					'FModal',
 					[
 						'Docs',

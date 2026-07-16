@@ -37,6 +37,7 @@ const config = {
 		const { config: origConfig } = await loadConfigFromFile({}, viteConfigPath);
 
 		config.build = {
+			...config.build,
 			'cssTarget': origConfig.build.cssTarget,
 			'cssCodeSplit': origConfig.build.cssCodeSplit,
 			'treeShaking': origConfig.build.treeShaking,

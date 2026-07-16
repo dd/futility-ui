@@ -70,6 +70,26 @@
       "require": "./dist/FDropdown/constants.cjs.js",
       "import": "./dist/FDropdown/constants.es.js"
     },
+    "./FHeader": {
+      "require": "./dist/FHeader/index.cjs.js",
+      "import": "./dist/FHeader/index.es.js"
+    },
+    "./FHeader/constants": {
+      "require": "./dist/FHeader/constants.cjs.js",
+      "import": "./dist/FHeader/constants.es.js"
+    },
+    "./FHeader/FHeaderNav": {
+      "require": "./dist/FHeader/FHeaderNav.cjs.js",
+      "import": "./dist/FHeader/FHeaderNav.es.js"
+    },
+    "./FHeader/FHeaderBurger": {
+      "require": "./dist/FHeader/FHeaderBurger.cjs.js",
+      "import": "./dist/FHeader/FHeaderBurger.es.js"
+    },
+    "./FHeader/useTranslatedNavigation": {
+      "require": "./dist/FHeader/useTranslatedNavigation.cjs.js",
+      "import": "./dist/FHeader/useTranslatedNavigation.es.js"
+    },
     "./FModal": {
       "require": "./dist/FModal/index.cjs.js",
       "import": "./dist/FModal/index.es.js"

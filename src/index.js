@@ -11,6 +11,10 @@ import FSelect from './forms/FSelect';
 import FRadioButton from './forms/FRadioButton';
 import FControlLabel from './forms/FControlLabel';
 import FDropdown from './FDropdown';
+import FHeader from './FHeader';
+import FHeaderNav from './FHeader/FHeaderNav.vue';
+import FHeaderBurger from './FHeader/FHeaderBurger.vue';
+import { useTranslatedNavigation } from './FHeader/useTranslatedNavigation';
 import FModal from './FModal';
 import { useFModal } from './FModal/useFModal';
 import { useFModalDialog } from './FModal/useFModalDialog';
@@ -43,6 +47,10 @@ export {
 	FControlLabel,
 	FTextarea,
 	FDropdown,
+	FHeader,
+	FHeaderNav,
+	FHeaderBurger,
+	useTranslatedNavigation,
 	FModal,
 	useFModal,
 	useFModalDialog,
@@ -77,6 +85,9 @@ const components = {
 	FControlLabel,
 	FTextarea,
 	FDropdown,
+	FHeader,
+	FHeaderNav,
+	FHeaderBurger,
 	FModal,
 	FMLayoutDefault,
 	FMLayoutForm,
