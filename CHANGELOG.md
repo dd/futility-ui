@@ -1,3 +1,15 @@
+# v0.7.2 (Sun Jul 26 2026)
+
+#### 🐛 Bug Fix
+
+- ✨ (FHeader): Add FHeader component [#66](https://github.com/dd/futility-ui/pull/66) ([@dd](https://github.com/dd))
+
+#### Authors: 1
+
+- Dmitry Dobrynin ([@dd](https://github.com/dd))
+
+---
+
 # v0.7.1 (Sat May 09 2026)
 
 #### 🐛 Bug Fix
