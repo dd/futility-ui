@@ -1,0 +1,59 @@
+import { Meta, Canvas, Controls } from '@storybook/addon-docs/blocks';
+import * as MobileMenuStories from './FHeaderMobileMenu.stories';
+
+<Meta of={MobileMenuStories} />
+
+
+# Mobile menu
+
+`FHeaderBurger` is the mobile-menu toggle. Place it in any bar slot; it renders nothing on
+desktop or when no `#menu` / `#menu-bottom` content is declared. Its default `bars` / `close`
+icons can be replaced through the default slot.
+
+```js
+import FHeaderBurger from 'futility-ui/FHeader/FHeaderBurger';
+```
+
+When the header crosses `breakpoint`:
+
+* `FHeaderBurger` appears and reflects `v-model:menuOpen`;
+* `FHeaderNav` hides from the bar automatically;
+* custom bar content stays visible unless it uses the scoped `isMobile` value;
+* menu content comes explicitly from `#menu` and `#menu-bottom`.
+
+```html
+<FHeader>
+	<template #left><Logo /></template>
+
+	<template #right="{ isMobile }">
+		<UserActions v-if="!isMobile" />
+		<FHeaderBurger />
+	</template>
+
+	<template #menu>
+		<FHeaderNav :items="navItems" />
+	</template>
+
+	<template #menu-bottom>
+		<UserActions />
+	</template>
+</FHeader>
+```
+
+The fullscreen layer opens **below the header bar**, so the logo and toggle remain visible.
+The page scroll is locked while it is open; `Escape` and a leaf navigation selection close it.
+The `#menu` area scrolls while `#menu-bottom` stays pinned.
+
+The story constrains both the header and its teleported layer to the same mobile-preview width;
+in an application the layer still fills the real viewport as designed.
+
+<Canvas of={MobileMenuStories.Default} />
+<Controls of={MobileMenuStories.Default} />
+
+
+## Burger placement
+
+The toggle has no fixed position within the bar. Put it before the logo when the design calls
+for a left-aligned burger.
+
+<Canvas of={MobileMenuStories.BurgerLeft} />

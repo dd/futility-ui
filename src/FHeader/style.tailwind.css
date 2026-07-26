@@ -1,0 +1,647 @@
+@theme {
+	/* Public component sizing tokens (compiled with the `--fui-` prefix). */
+	--header-px: calc(var(--fui-spacing) * 6);
+	--header-content-max-width: none;
+	--header-nav-gap: calc(var(--fui-spacing) * 4);
+	--header-item-height: 40px;
+	--header-item-font-size: 16px;
+	--header-icon-size: 18px;
+	--header-child-item-height: 40px;
+	--header-menu-item-height: 56px;
+
+	/* Internal visual tokens. */
+	--header-menu-z: 990;
+	--header-shadow: 0 18px 40px rgb(15 23 42 / 0.14);
+	--color-header-text: light-dark(var(--fui-color-gray-900), var(--fui-color-white));
+	--color-header-bg: light-dark(var(--fui-color-white), var(--fui-color-gray-800));
+	--color-header-border: light-dark(var(--fui-color-gray-200), var(--fui-color-gray-700));
+	--color-header-active: light-dark(var(--fui-color-primary-600), var(--fui-color-primary-500));
+	--color-header-hover-bg: light-dark(var(--fui-color-gray-100), var(--fui-color-gray-700));
+	--color-header-panel-bg: light-dark(var(--fui-color-white), var(--fui-color-gray-800));
+	--color-header-panel-alt-bg: light-dark(var(--fui-color-gray-50), var(--fui-color-gray-700));
+	--color-header-muted: light-dark(var(--fui-color-gray-500), var(--fui-color-gray-400));
+	--color-header-backdrop: rgb(17 24 39 / 0.42);
+}
+
+.fui-header {
+	position: relative;
+	box-sizing: border-box;
+	width: 100%;
+	@apply fui:font-sans;
+	@apply fui:text-header-text;
+	@apply fui:bg-header-bg;
+}
+
+.fui-header *,
+.fui-header-menu-layer *,
+.fui-header-dropdown-panel * {
+	box-sizing: border-box;
+}
+
+.fui-header-content {
+	display: flex;
+	align-items: center;
+	width: 100%;
+	max-width: var(--fui-header-content-max-width);
+	min-width: 0;
+	margin-right: auto;
+	margin-left: auto;
+}
+
+
+/* --- appearances ---- */
+
+/*
+ * `light`/`dark` pin the color scheme of the subtree, so every light-dark()
+ * token above resolves to the pinned side. `auto` needs no rules - the tokens
+ * follow the page color scheme.
+ */
+
+.fui-header-appearance-light,
+.fui-header-dropdown-appearance-light {
+	color-scheme: light;
+}
+
+.fui-header-appearance-dark,
+.fui-header-dropdown-appearance-dark {
+	color-scheme: dark;
+	--fui-header-shadow: 0 18px 40px rgb(0 0 0 / 0.32);
+}
+
+
+/* --- bar -------------------------------------------------------------------------------------- */
+
+.fui-header-bar {
+	border-bottom: 1px solid;
+	@apply fui:border-header-border;
+
+	&:not(:has(.fui-header-section:not(:empty))) {
+		display: none;
+	}
+}
+
+.fui-header-bar-content {
+	@apply fui:gap-7;
+	@apply fui:py-3;
+	padding-right: var(--fui-header-px);
+	padding-left: var(--fui-header-px);
+}
+
+.fui-header-section {
+	display: flex;
+	flex: 0 0 auto;
+	align-items: center;
+	@apply fui:gap-4;
+	min-width: 0;
+
+	&:empty {
+		display: none;
+	}
+
+	&.is-left {
+		justify-content: flex-start;
+	}
+
+	&.is-center {
+		flex: 1 1 auto;
+		justify-content: center;
+	}
+
+	&.is-right {
+		justify-content: flex-end;
+		margin-left: auto;
+	}
+
+	/*
+	 * A section hosting the navigation becomes the flexible one, so FHeaderNav
+	 * gets squeezed first and can move items behind the overflow button.
+	 */
+	&:has(.fui-header-nav) {
+		flex: 1 1 auto;
+		min-width: 0;
+	}
+}
+
+/*
+ * balanced: the side sections share the free space equally, which puts the
+ * center section at the exact center of the bar. Explicit grid columns keep
+ * sections in place when some slots are not rendered.
+ */
+.fui-header.is-balanced {
+	.fui-header-bar-content {
+		display: grid;
+		grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+	}
+
+	.fui-header-section {
+		&.is-left {
+			grid-column: 1;
+		}
+
+		&.is-center {
+			grid-column: 2;
+		}
+
+		&.is-right {
+			grid-column: 3;
+		}
+	}
+}
+
+
+/* --- rows ------------------------------------------------------------------------------------- */
+
+.fui-header-row {
+	border-bottom: 1px solid;
+	@apply fui:border-header-border;
+}
+
+.fui-header-row-content {
+	@apply fui:gap-6;
+	@apply fui:py-2;
+	padding-right: var(--fui-header-px);
+	padding-left: var(--fui-header-px);
+	font-size: 14px;
+}
+
+
+/* --- nav -------------------------------------------------------------------------------------- */
+
+.fui-header-nav {
+	min-width: 0;
+
+	&.is-bar {
+		position: relative;
+		display: flex;
+		align-items: center;
+		flex: 1 1 auto;
+		width: 100%;
+	}
+}
+
+.fui-header-section {
+	&.is-left .fui-header-nav.is-bar {
+		justify-content: flex-start;
+	}
+
+	&.is-center .fui-header-nav.is-bar {
+		justify-content: center;
+	}
+
+	&.is-right .fui-header-nav.is-bar {
+		justify-content: flex-end;
+	}
+}
+
+
+/* --- horizontal items --- */
+
+.fui-header-nav-list {
+	display: flex;
+	align-items: center;
+	flex: 0 1 auto;
+	gap: var(--fui-header-nav-gap);
+	min-width: 0;
+	padding: 0;
+	margin: 0;
+	list-style: none;
+
+	/*
+	 * Until measureItems() settles (first render, items change, SSR markup
+	 * before hydration) the list renders in full - shrink and clip the spill
+	 * instead of pushing the neighbor sections. `clip` + margin instead of
+	 * `hidden`, so focus outlines at the edges survive (the margin falls back
+	 * to 0 where overflow-clip-margin is unsupported - same look as `hidden`).
+	 */
+	overflow: clip;
+	overflow-clip-margin: 4px;
+}
+
+.fui-header-item {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	@apply fui:gap-1.5;
+
+	min-height: var(--fui-header-item-height);
+	@apply fui:px-2;
+
+	background: transparent;
+	border: none;
+	@apply fui:rounded-md;
+	font-size: var(--fui-header-item-font-size);
+	font-weight: 500;
+	line-height: 1.2;
+	letter-spacing: 0;
+	@apply fui:text-header-text;
+	white-space: nowrap;
+	text-decoration: none;
+
+	appearance: none;
+	cursor: pointer;
+	@apply fui:outline-focus-prepear;
+	transition: color 0.12s ease, background-color 0.12s ease, outline-color 0.12s ease;
+
+	&:first-child {
+		@apply fui:-ml-2;
+	}
+
+	&:not(:disabled, .is-disabled):hover,
+	&.is-active,
+	&.is-open {
+		@apply fui:text-header-active;
+	}
+
+	&:focus-visible {
+		@apply fui:outline-focus;
+	}
+
+	&:disabled,
+	&.is-disabled {
+		cursor: default;
+		opacity: 0.5;
+	}
+
+	.fui-header-item-arrow {
+		width: var(--fui-header-icon-size);
+		height: var(--fui-header-icon-size);
+		flex: 0 0 auto;
+	}
+}
+
+
+/* --- hide overflow --- */
+
+/* gap must match .fui-header-nav-list (shared variable) - measureItems() reads it for width math */
+.fui-header-nav-measure {
+	position: absolute;
+	top: -10000px;
+	left: -10000px;
+	z-index: -1;
+	display: flex;
+	align-items: center;
+	gap: var(--fui-header-nav-gap);
+	width: max-content;
+	visibility: hidden;
+	pointer-events: none;
+}
+
+.fui-header-nav-measure-node {
+	flex: 0 0 auto;
+}
+
+.fui-header-more-button {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+
+	flex: 0 0 auto;
+	width: var(--fui-header-item-height);
+	height: var(--fui-header-item-height);
+
+	border: none;
+	@apply fui:rounded-md;
+	background: transparent;
+	@apply fui:text-header-text;
+	text-decoration: none;
+	letter-spacing: 0;
+	appearance: none;
+	cursor: pointer;
+	@apply fui:outline-focus-prepear;
+	transition: color 0.12s ease, background-color 0.12s ease, outline-color 0.12s ease;
+
+	&:hover,
+	&[aria-expanded="true"] {
+		@apply fui:text-header-active;
+		@apply fui:bg-header-hover-bg;
+	}
+
+	&:focus-visible {
+		@apply fui:outline-focus;
+	}
+
+	.fui-icon {
+		width: var(--fui-header-icon-size);
+		height: var(--fui-header-icon-size);
+		flex: 0 0 auto;
+	}
+}
+
+
+/* --- dropdown --- */
+
+.fui-header-dropdown-panel {
+	min-width: 220px;
+	max-width: min(92vw, 760px);
+	/* the base .fui-dropdown scrolls (overflow: auto), which would clip flyout submenus */
+	overflow: visible;
+	@apply fui:text-header-text;
+	@apply fui:bg-header-panel-bg;
+	@apply fui:border-header-border;
+	box-shadow: var(--fui-header-shadow);
+}
+
+/* --- child list (dropdown flyout + accordion) --- */
+
+.fui-header-child-list {
+	display: flex;
+	flex-direction: column;
+	@apply fui:gap-1;
+	min-width: 220px;
+	@apply fui:p-2;
+	margin: 0;
+	list-style: none;
+
+	/* dropdown variant: nested children fly out to the side */
+
+	&.is-dropdown .fui-header-child-submenu {
+		display: none;
+		position: absolute;
+		top: 0;
+		left: calc(100% + var(--fui-spacing) * 2);
+		min-width: 220px;
+		@apply fui:text-header-text;
+		@apply fui:bg-header-panel-bg;
+		border: 1px solid;
+		@apply fui:border-header-border;
+		@apply fui:rounded-lg;
+		box-shadow: var(--fui-header-shadow);
+	}
+
+	&.is-dropdown .fui-header-child-node:has(> .fui-header-child-item:not(:disabled, .is-disabled)):hover > .fui-header-child-submenu,
+	&.is-dropdown .fui-header-child-node:has(> .fui-header-child-item:not(:disabled, .is-disabled)):focus-within > .fui-header-child-submenu {
+		display: block;
+	}
+
+	/* accordion variant: nested children expand inline */
+
+	&.is-accordion .fui-header-child-submenu {
+		display: none;
+		/*@apply fui:bg-header-panel-alt-bg;*/
+		@apply fui:rounded-md;
+	}
+
+	&.is-accordion .fui-header-child-submenu.is-open {
+		display: block;
+	}
+
+	&.is-accordion & {
+		@apply fui:p-1;
+		@apply fui:pb-2;
+	}
+
+	&.is-accordion & .fui-header-child-item {
+		@apply fui:pl-6;
+	}
+}
+
+.fui-header-child-node {
+	position: relative;
+}
+
+.fui-header-child-divider {
+	width: 100%;
+	@apply fui:my-1;
+	border: none;
+	border-bottom: 1px solid;
+	@apply fui:border-header-border;
+}
+
+.fui-header-child-item {
+	display: flex;
+	align-items: center;
+	@apply fui:gap-2.5;
+	width: 100%;
+	min-height: var(--fui-header-child-item-height);
+	@apply fui:px-3;
+	@apply fui:py-2;
+	border: none;
+	@apply fui:rounded-md;
+	background: transparent;
+	@apply fui:text-header-text;
+	text-align: left;
+	text-decoration: none;
+	letter-spacing: 0;
+	appearance: none;
+	cursor: pointer;
+	@apply fui:outline-focus-prepear;
+	transition: color 0.12s ease, background-color 0.12s ease, outline-color 0.12s ease;
+
+	&:hover:not(:disabled, .is-disabled),
+	&.is-active,
+	.fui-header-child-list.is-dropdown .fui-header-child-node:focus-within > &:not(:disabled, .is-disabled) {
+		@apply fui:text-header-active;
+		@apply fui:bg-header-hover-bg;
+	}
+
+	&:focus-visible {
+		@apply fui:outline-focus;
+	}
+
+	&.is-disabled,
+	&:disabled {
+		cursor: default;
+		opacity: 0.5;
+	}
+}
+
+
+/* the icon box is 2px larger than the icon itself - breathing room for alignment */
+.fui-header-child-icon {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	flex: 0 0 auto;
+	width: calc(var(--fui-header-icon-size) + 2px);
+	height: calc(var(--fui-header-icon-size) + 2px);
+	color: currentColor;
+
+	.fui-icon {
+		width: var(--fui-header-icon-size);
+		height: var(--fui-header-icon-size);
+	}
+}
+
+.fui-header-child-arrow {
+	flex: 0 0 auto;
+	margin-left: auto;
+	width: var(--fui-header-icon-size);
+	height: var(--fui-header-icon-size);
+	color: currentColor;
+}
+
+.fui-header-child-copy {
+	display: grid;
+	@apply fui:gap-0.5;
+	min-width: 0;
+}
+
+.fui-header-child-label {
+	font-size: 14px;
+	font-weight: 500;
+	line-height: 1.35;
+	color: inherit;
+}
+
+.fui-header-child-description {
+	font-size: 13px;
+	font-weight: 400;
+	line-height: 1.35;
+	@apply fui:text-header-muted;
+}
+
+
+/* --- burger button ---------------------------------------------------------------------------- */
+
+.fui-header-burger {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+
+	flex: 0 0 auto;
+	width: var(--fui-header-item-height);
+	height: var(--fui-header-item-height);
+
+	border: none;
+	@apply fui:rounded-md;
+	background: transparent;
+	@apply fui:text-header-text;
+	text-decoration: none;
+	letter-spacing: 0;
+	appearance: none;
+	cursor: pointer;
+	@apply fui:outline-focus-prepear;
+	transition: color 0.12s ease, background-color 0.12s ease, outline-color 0.12s ease;
+
+	&:hover,
+	&[aria-expanded="true"] {
+		@apply fui:text-header-active;
+		@apply fui:bg-header-hover-bg;
+	}
+
+	&:focus-visible {
+		@apply fui:outline-focus;
+	}
+
+	.fui-icon {
+		width: var(--fui-header-icon-size);
+		height: var(--fui-header-icon-size);
+		flex: 0 0 auto;
+	}
+}
+
+/* --- mobile menu layer ------------------------------------------------------------------------ */
+
+.fui-header-menu-layer {
+	position: fixed;
+	top: var(--fui-header-menu-top, 0px);
+	right: 0;
+	bottom: 0;
+	left: 0;
+	z-index: var(--fui-header-menu-z);
+	display: flex;
+	@apply fui:bg-header-backdrop;
+}
+
+.fui-header-menu {
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	max-height: 100%;
+	overflow: hidden;
+	@apply fui:text-header-text;
+	@apply fui:bg-header-bg;
+	border-bottom: 1px solid;
+	@apply fui:border-header-border;
+	box-shadow: var(--fui-header-shadow);
+	outline: none;
+
+	/* menu region: accordion list stretches and gets larger touch targets */
+
+	.fui-header-nav {
+		width: 100%;
+	}
+
+	.fui-header-child-list {
+		&.is-root {
+			gap: 0;
+			min-width: 0;
+			padding: 0;
+
+			> .fui-header-child-node {
+				border-bottom: 1px solid;
+				@apply fui:border-header-border;
+
+				&:last-child {
+					border-bottom: none;
+				}
+			}
+		}
+
+		.fui-header-child-item {
+			font-size: 16px;
+		}
+	}
+
+	.fui-header-child-item {
+		min-height: var(--fui-header-menu-item-height);
+		border-radius: 0;
+	}
+
+	.fui-header-child-label {
+		font-size: 16px;
+	}
+
+	.fui-header-child-description {
+		font-size: 14px;
+	}
+}
+
+.fui-header-menu-body {
+	display: flex;
+	flex-direction: column;
+	@apply fui:gap-4;
+	flex: 1 1 auto;
+	min-height: 0;
+	@apply fui:px-5;
+	@apply fui:py-4;
+	overflow-y: auto;
+}
+
+.fui-header-menu-bottom {
+	display: flex;
+	align-items: center;
+	@apply fui:gap-4;
+	flex: 0 0 auto;
+	@apply fui:px-5;
+	@apply fui:py-4;
+	border-bottom: 1px solid;
+	@apply fui:border-header-border;
+}
+
+
+/* --- transitions --- */
+
+.fui-header-menu-enter-active,
+.fui-header-menu-leave-active {
+	transition: opacity 0.16s ease;
+
+	.fui-header-menu  {
+		transition: transform 0.16s ease;
+	}
+}
+
+.fui-header-menu-enter-from,
+.fui-header-menu-leave-to {
+	opacity: 0;
+
+	.fui-header-menu {
+		transform: translateY(-8px);
+	}
+}
+
+@media (max-width: 480px) {
+	.fui-header-content {
+		@apply fui:px-4;
+	}
+}

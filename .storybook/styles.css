@@ -115,6 +115,11 @@ h1 {
 /* Stories *************************************/
 
 /* FIcons */
+/*
+	Tailwind v4/Lightning CSS currently serializes light-dark(#000, #fff) into invalid CSS here.
+	`--fui-icon-color: light-dark(#000000, #ffffff);` -> `--fui-icon-color:var(--lightningcss-light,#000)var(--lightningcss-dark,#fff);`
+	This is why we use `@media (prefers-color-scheme: dark)` here.
+*/
 #story--ficon--default--primary,
 #story--ficon--default {
 	--fui-icon-color: light-dark(#000000, #ffffff);
@@ -313,3 +318,221 @@ h1 {
 
 /* Multi-field range widget demo */
 /* End of Multi-field range widget demo */
+
+
+/* FHeader */
+
+.sb-show-main.sb-main-centered #storybook-root:has(.sbfui-fheader-canvas) {
+	width: 100%;
+	padding-left: 0;
+	padding-right: 0;
+}
+
+.docs-story:has(.sbfui-fheader-canvas) {
+	padding-left: 0;
+	padding-right: 0;
+
+	> div {
+		width: 100%;
+	}
+
+	.innerZoomElementWrapper > div {
+		border-left-width: 0 !important;
+		border-right-width: 0 !important;
+	}
+}
+
+/*
+ * The base canvas is full-bleed. The width modifiers are for the stories
+ * that demonstrate the narrow-container behavior (mobile mode, overflow) -
+ * they render as a centered fixed-width block instead.
+ */
+.sbfui-fheader-canvas.is-mobile,
+.sbfui-fheader-canvas.is-tight,
+.sbfui-fheader-canvas.is-medium {
+	width: min(var(--sbfui-fheader-canvas-width, 1120px), 100%);
+	margin: 0 auto;
+}
+
+.sbfui-fheader-canvas.is-mobile {
+	--sbfui-fheader-canvas-width: 390px;
+}
+
+.sbfui-fheader-canvas.is-tight {
+	--sbfui-fheader-canvas-width: 720px;
+}
+
+.sbfui-fheader-canvas.is-medium {
+	--sbfui-fheader-canvas-width: 900px;
+}
+
+.sbfui-fheader-stack {
+	display: flex;
+	flex-direction: column;
+	gap: 32px;
+}
+
+/* Keep the teleported menu aligned with the narrow mobile story canvas. */
+body:has(.sbfui-fheader-mobile-preview) > .fui-header-menu-layer {
+	right: auto;
+	left: 50%;
+	width: min(390px, 100%);
+	transform: translateX(-50%);
+}
+
+.sbfui-fheader-logo {
+	display: inline-flex;
+	align-items: center;
+	gap: 10px;
+	color: inherit;
+	font-size: 22px;
+	font-weight: 700;
+	line-height: 1;
+	text-decoration: none;
+}
+
+.sbfui-fheader-logo-icon {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: 32px;
+	height: 32px;
+	border-radius: 50%;
+	@apply fui:bg-primary-600;
+	color: #fff;
+
+	.fui-icon {
+		width: 20px;
+		height: 20px;
+	}
+}
+
+.sbfui-fheader-actions {
+	display: flex;
+	align-items: center;
+	gap: 12px;
+	@apply fui:font-sans;
+	@apply fui:text-sm;
+}
+
+.sbfui-fheader-actions-link {
+	color: inherit;
+	font-weight: 500;
+	text-decoration: none;
+}
+
+.sbfui-fheader-actions-button {
+	display: inline-flex;
+	align-items: center;
+	min-height: 40px;
+	padding: 0 18px;
+	border-radius: 8px;
+	@apply fui:bg-primary-600;
+	color: #fff;
+	font-weight: 600;
+	text-decoration: none;
+}
+
+.sbfui-fheader-lang {
+	display: inline-flex;
+	align-items: center;
+	gap: 6px;
+	min-height: 40px;
+	padding: 0 12px;
+	border: 0;
+	border-radius: 6px;
+	background: transparent;
+	color: inherit;
+	@apply fui:font-sans;
+	@apply fui:text-sm;
+	font-weight: 500;
+	cursor: pointer;
+}
+
+.sbfui-fheader-lang-switcher {
+	justify-content: center;
+	min-width: 44px;
+	border: 1px solid currentColor;
+}
+
+/* Custom item / child renderers for the "Custom items" story */
+.sbfui-fheader-promo {
+	display: inline-flex;
+	align-items: center;
+	gap: 8px;
+	min-height: 40px;
+	padding: 0 14px;
+	border-radius: 999px;
+	@apply fui:bg-primary-600;
+	color: #fff;
+	@apply fui:font-sans;
+	@apply fui:text-sm;
+	font-weight: 600;
+	text-decoration: none;
+
+	.fui-icon {
+		width: 16px;
+		height: 16px;
+	}
+}
+
+.sbfui-fheader-promo-badge {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	min-width: 20px;
+	height: 20px;
+	padding: 0 6px;
+	border-radius: 999px;
+	background: rgb(255 255 255 / 0.25);
+	font-size: 12px;
+}
+
+.sbfui-fheader-mega {
+	display: grid;
+	grid-template-columns: repeat(3, minmax(140px, 1fr));
+	gap: 24px;
+	padding: 20px;
+}
+
+.sbfui-fheader-mega-column {
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+}
+
+.sbfui-fheader-mega-title {
+	@apply fui:font-sans;
+	@apply fui:text-xs;
+	font-weight: 600;
+	text-transform: uppercase;
+	letter-spacing: 0.06em;
+	color: var(--fui-header-muted);
+}
+
+.sbfui-fheader-mega-link {
+	@apply fui:font-sans;
+	@apply fui:text-sm;
+	color: var(--fui-header-text);
+	font-weight: 500;
+	text-decoration: none;
+
+	&:hover {
+		color: var(--fui-header-active);
+	}
+}
+
+.sbfui-fheader-meta {
+	color: var(--fui-header-muted);
+	white-space: nowrap;
+
+	b {
+		color: var(--fui-header-active);
+		font-weight: 500;
+	}
+
+	&.is-end {
+		margin-left: auto;
+	}
+}
+/* End of FHeader */

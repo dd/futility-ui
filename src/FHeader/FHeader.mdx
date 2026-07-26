@@ -1,0 +1,166 @@
+import { Meta, Canvas, Controls } from '@storybook/addon-docs/blocks';
+import * as FHeaderStories from './FHeader.stories';
+
+<Meta of={FHeaderStories} />
+
+
+# FHeader
+
+Site header shell with explicit placement. The header knows nothing about logos or menus:
+it renders three bar sections and optional `#top` / `#bottom` rows, while the developer
+decides what goes where by placing content into slots.
+
+The adaptive navigation and the fullscreen menu have their own focused documentation pages:
+`FHeaderNav` and `Mobile menu` in the `FHeader` section of the sidebar.
+
+
+## Basic usage
+
+```js
+import { FHeader, FHeaderNav, FHeaderBurger } from 'futility-ui';
+// Or import from individual entry points:
+import FHeader from 'futility-ui/FHeader';
+import FHeaderNav from 'futility-ui/FHeader/FHeaderNav';
+import FHeaderBurger from 'futility-ui/FHeader/FHeaderBurger';
+```
+
+```html
+<FHeader :breakpoint="768">
+	<template #left><a href="/">Brand</a></template>
+
+	<template #center>
+		<FHeaderNav :items="navItems" @item-click="onNav" />
+	</template>
+
+	<template #right="{ isMobile }">
+		<LangSwitcher v-if="!isMobile" />
+		<FHeaderBurger />
+	</template>
+
+	<template #menu>
+		<FHeaderNav :items="navItems" @item-click="onNav" />
+	</template>
+
+	<template #menu-bottom>
+		<LangSwitcher />
+	</template>
+</FHeader>
+```
+
+The core mechanics:
+
+* **Placement is controlled by markup.** The bar slots `#left` / `#center` / `#right` render
+  on desktop and mobile; there are no placement props.
+* **Mobile mode follows the header's own width.** Below `breakpoint` (measured with
+  `ResizeObserver`) the smart children adapt: the nav hides from the bar and the burger appears.
+* **All slots are scoped** with `{ region, isMobile, menuOpen, openMenu, closeMenu, toggleMenu }`,
+  so custom content can react to the current mode.
+
+<Canvas of={FHeaderStories.Default} />
+<Controls of={FHeaderStories.Default} />
+
+
+## Exact centering
+
+By default the sections are sized by their content, so `#center` is centered only within the
+leftover space. The `balanced` prop gives the side sections equal width, which puts `#center`
+content at the exact center of the bar. The trade-off is less room for navigation in a side
+section, so overflow begins earlier.
+
+<Canvas of={FHeaderStories.LogoCenter} />
+
+
+## Multiple rows
+
+Multi-row headers are built with the `#top` and `#bottom` slots. Each row is a plain flex line;
+lay the content out yourself (`margin-left: auto` works as a spacer). The rows share the header
+context with the main bar: one `breakpoint`, one `appearance`, and one mobile menu.
+
+A row renders only when its slot produces content. There is no automatic mobile behavior for
+custom row content, so use the scoped `isMobile` value when a row should disappear.
+
+```html
+<FHeader>
+	<template #top="{ isMobile }">
+		<template v-if="!isMobile">
+			<span>ETH Gas: 60 Gwei</span>
+			<LangSwitcher style="margin-left: auto" />
+		</template>
+	</template>
+
+	<template #left><a href="/">Brand</a></template>
+	<template #right><FHeaderBurger /></template>
+
+	<template #bottom="{ isMobile }">
+		<FHeaderNav v-if="!isMobile" :items="navItems" />
+	</template>
+
+	<template #menu><FHeaderNav :items="navItems" /></template>
+</FHeader>
+```
+
+<Canvas of={FHeaderStories.MultiRow} />
+
+The main bar is independent from the extra rows. When `#left`, `#center`, and `#right` render no
+DOM content, the bar collapses together with its padding and border. The example below is the
+same multi-row header without any main-bar content:
+
+<Canvas of={FHeaderStories.EmptyBar} />
+
+
+## Content width
+
+The bar and optional rows remain full-width surfaces, while their content is rendered inside a
+centered container. Set `--fui-header-content-max-width` on the header to constrain all three
+content areas without shortening their backgrounds or bottom borders:
+
+```html
+<FHeader style="--fui-header-content-max-width: 1600px">
+	<!-- slots -->
+</FHeader>
+```
+
+The default value is `none`.
+
+
+## Sizing
+
+Sizes are driven by CSS variables with defaults on `:root`, so a denser or a larger header
+does not require overriding internal selectors. Override them globally on `:root`, or per
+header on the element (inline style or a class):
+
+```html
+<FHeader style="--fui-header-item-height: 48px; --fui-header-item-font-size: 18px">
+	<!-- slots -->
+</FHeader>
+```
+
+* `--fui-header-item-height` - bar item height. The burger and the `...` overflow button are
+  squares of the same size, so the whole bar scales as one piece. Default `40px`.
+* `--fui-header-item-font-size` - bar item font size. Default `16px`.
+* `--fui-header-nav-gap` - gap between bar items. The overflow measuring reads the same
+  variable, so the width math never diverges from the visible list. Default `--fui-spacing * 4`.
+* `--fui-header-icon-size` - icons: dropdown chevrons, the burger, the `...` button and icons
+  in vertical lists. Default `18px`.
+* `--fui-header-child-item-height` - items in vertical lists: dropdown panels and the
+  overflow panel. Default `40px`.
+* `--fui-header-menu-item-height` - items in the mobile menu (larger touch targets).
+  Default `56px`.
+* `--fui-header-px` - horizontal padding of the bar and rows. Default `--fui-spacing * 6`.
+
+One caveat: dropdown panels and the mobile menu teleport to `body`, so a per-header override
+set on the header element does not reach them - they fall back to the `:root` values. When
+panel sizes must change, override on `:root` (all headers) or scope the override to
+`.fui-header-dropdown-panel` / `.fui-header-menu-layer`.
+
+
+## Appearance
+
+The `appearance` prop sets the color scheme of the header:
+
+* `auto` follows the page color scheme;
+* `light` / `dark` pin the scheme regardless of the page theme.
+
+The scheme also propagates to teleported dropdown panels and the mobile menu.
+
+<Canvas of={FHeaderStories.Appearance} />

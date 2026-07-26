@@ -104,7 +104,8 @@ field immediately followed by a button.)
 * [x] Textarea
 * [x] Modal
 * [x] Tabs
-* [x] Number picker **`<- you are here`**
+* [x] Number picker
+* [x] Header pannel **`<- you are here`**
 * [ ] MultiSelect
 * [ ] Tag Select
 * [ ] Tree Editor
