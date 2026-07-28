@@ -27,207 +27,211 @@
   "type": "module",
   "exports": {
     ".": {
-      "require": "./dist/index.cjs.js",
+      "require": "./dist/index.cjs",
       "import": "./dist/index.es.js"
     },
     "./FLoader": {
-      "require": "./dist/FLoader/index.cjs.js",
+      "require": "./dist/FLoader/index.cjs",
       "import": "./dist/FLoader/index.es.js"
     },
     "./FIcon": {
-      "require": "./dist/FIcon/index.cjs.js",
+      "require": "./dist/FIcon/index.cjs",
       "import": "./dist/FIcon/index.es.js"
     },
     "./FIcon/constants": {
-      "require": "./dist/FIcon/constants.cjs.js",
+      "require": "./dist/FIcon/constants.cjs",
       "import": "./dist/FIcon/constants.es.js"
     },
     "./FButton": {
-      "require": "./dist/FButton/index.cjs.js",
+      "require": "./dist/FButton/index.cjs",
       "import": "./dist/FButton/index.es.js"
     },
     "./FButton/constants": {
-      "require": "./dist/FButton/constants.cjs.js",
+      "require": "./dist/FButton/constants.cjs",
       "import": "./dist/FButton/constants.es.js"
     },
     "./FButtonText": {
-      "require": "./dist/FButtonText/index.cjs.js",
+      "require": "./dist/FButtonText/index.cjs",
       "import": "./dist/FButtonText/index.es.js"
     },
     "./FButtonText/constants": {
-      "require": "./dist/FButtonText/constants.cjs.js",
+      "require": "./dist/FButtonText/constants.cjs",
       "import": "./dist/FButtonText/constants.es.js"
     },
     "./FStack": {
-      "require": "./dist/FStack/index.cjs.js",
+      "require": "./dist/FStack/index.cjs",
       "import": "./dist/FStack/index.es.js"
     },
     "./FDropdown": {
-      "require": "./dist/FDropdown/index.cjs.js",
+      "require": "./dist/FDropdown/index.cjs",
       "import": "./dist/FDropdown/index.es.js"
     },
     "./FDropdown/constants": {
-      "require": "./dist/FDropdown/constants.cjs.js",
+      "require": "./dist/FDropdown/constants.cjs",
       "import": "./dist/FDropdown/constants.es.js"
     },
     "./FHeader": {
-      "require": "./dist/FHeader/index.cjs.js",
+      "require": "./dist/FHeader/index.cjs",
       "import": "./dist/FHeader/index.es.js"
     },
     "./FHeader/constants": {
-      "require": "./dist/FHeader/constants.cjs.js",
+      "require": "./dist/FHeader/constants.cjs",
       "import": "./dist/FHeader/constants.es.js"
     },
     "./FHeader/FHeaderNav": {
-      "require": "./dist/FHeader/FHeaderNav.cjs.js",
+      "require": "./dist/FHeader/FHeaderNav.cjs",
       "import": "./dist/FHeader/FHeaderNav.es.js"
     },
     "./FHeader/FHeaderBurger": {
-      "require": "./dist/FHeader/FHeaderBurger.cjs.js",
+      "require": "./dist/FHeader/FHeaderBurger.cjs",
       "import": "./dist/FHeader/FHeaderBurger.es.js"
     },
     "./FHeader/useTranslatedNavigation": {
-      "require": "./dist/FHeader/useTranslatedNavigation.cjs.js",
+      "require": "./dist/FHeader/useTranslatedNavigation.cjs",
       "import": "./dist/FHeader/useTranslatedNavigation.es.js"
     },
     "./FModal": {
-      "require": "./dist/FModal/index.cjs.js",
+      "require": "./dist/FModal/index.cjs",
       "import": "./dist/FModal/index.es.js"
     },
     "./FModal/constants": {
-      "require": "./dist/FModal/constants.cjs.js",
+      "require": "./dist/FModal/constants.cjs",
       "import": "./dist/FModal/constants.es.js"
     },
     "./FModal/layouts/FMLayoutDefault": {
-      "require": "./dist/FModal/layouts/FMLayoutDefault/index.cjs.js",
+      "require": "./dist/FModal/layouts/FMLayoutDefault/index.cjs",
       "import": "./dist/FModal/layouts/FMLayoutDefault/index.es.js"
     },
     "./FModal/layouts/FMLayoutForm": {
-      "require": "./dist/FModal/layouts/FMLayoutForm/index.cjs.js",
+      "require": "./dist/FModal/layouts/FMLayoutForm/index.cjs",
       "import": "./dist/FModal/layouts/FMLayoutForm/index.es.js"
     },
     "./FModal/layouts/FMLayoutDialog": {
-      "require": "./dist/FModal/layouts/FMLayoutDialog/index.cjs.js",
+      "require": "./dist/FModal/layouts/FMLayoutDialog/index.cjs",
       "import": "./dist/FModal/layouts/FMLayoutDialog/index.es.js"
     },
     "./FModal/useFModal": {
-      "require": "./dist/FModal/useFModal.cjs.js",
+      "require": "./dist/FModal/useFModal.cjs",
       "import": "./dist/FModal/useFModal.es.js"
     },
     "./FModal/useFModalDialog": {
-      "require": "./dist/FModal/useFModalDialog.cjs.js",
+      "require": "./dist/FModal/useFModalDialog.cjs",
       "import": "./dist/FModal/useFModalDialog.es.js"
     },
     "./FTabs/FTabsContainer": {
-      "require": "./dist/FTabs/FTabsContainer.cjs.js",
+      "require": "./dist/FTabs/FTabsContainer.cjs",
       "import": "./dist/FTabs/FTabsContainer.es.js"
     },
     "./FTabs/FTab": {
-      "require": "./dist/FTabs/FTab.cjs.js",
+      "require": "./dist/FTabs/FTab.cjs",
       "import": "./dist/FTabs/FTab.es.js"
     },
     "./FTooltip": {
-      "require": "./dist/FTooltip/index.cjs.js",
+      "require": "./dist/FTooltip/index.cjs",
       "import": "./dist/FTooltip/index.es.js"
     },
     "./FTooltip/directive": {
-      "require": "./dist/FTooltip/directive.cjs.js",
+      "require": "./dist/FTooltip/directive.cjs",
       "import": "./dist/FTooltip/directive.es.js"
     },
     "./FTooltip/constants": {
-      "require": "./dist/FTooltip/constants.cjs.js",
+      "require": "./dist/FTooltip/constants.cjs",
       "import": "./dist/FTooltip/constants.es.js"
     },
     "./forms/FSwitch": {
-      "require": "./dist/forms/FSwitch/index.cjs.js",
+      "require": "./dist/forms/FSwitch/index.cjs",
       "import": "./dist/forms/FSwitch/index.es.js"
     },
     "./forms/FCheckbox": {
-      "require": "./dist/forms/FCheckbox/index.cjs.js",
+      "require": "./dist/forms/FCheckbox/index.cjs",
       "import": "./dist/forms/FCheckbox/index.es.js"
     },
     "./forms/FInput": {
-      "require": "./dist/forms/FInput/index.cjs.js",
+      "require": "./dist/forms/FInput/index.cjs",
       "import": "./dist/forms/FInput/index.es.js"
     },
     "./forms/FInput/constants": {
-      "require": "./dist/forms/FInput/constants.cjs.js",
+      "require": "./dist/forms/FInput/constants.cjs",
       "import": "./dist/forms/FInput/constants.es.js"
     },
     "./forms/FInput/ClearButton": {
-      "require": "./dist/forms/FInput/ClearButton.cjs.js",
+      "require": "./dist/forms/FInput/ClearButton.cjs",
       "import": "./dist/forms/FInput/ClearButton.es.js"
     },
     "./forms/FInput/ShowPasswordButton": {
-      "require": "./dist/forms/FInput/ShowPasswordButton.cjs.js",
+      "require": "./dist/forms/FInput/ShowPasswordButton.cjs",
       "import": "./dist/forms/FInput/ShowPasswordButton.es.js"
     },
     "./forms/FInputAutocomplete": {
-      "require": "./dist/forms/FInputAutocomplete/index.cjs.js",
+      "require": "./dist/forms/FInputAutocomplete/index.cjs",
       "import": "./dist/forms/FInputAutocomplete/index.es.js"
     },
     "./forms/FInputAutocomplete/constants": {
-      "require": "./dist/forms/FInputAutocomplete/constants.cjs.js",
+      "require": "./dist/forms/FInputAutocomplete/constants.cjs",
       "import": "./dist/forms/FInputAutocomplete/constants.es.js"
     },
     "./forms/FInputAutocomplete/requestHandlers": {
       "require": "./dist/forms/FInputAutocomplete/requestHandlers.cjs",
       "import": "./dist/forms/FInputAutocomplete/requestHandlers.es.js"
     },
+    "./forms/FMultiSelect": {
+      "require": "./dist/forms/FMultiSelect/index.cjs",
+      "import": "./dist/forms/FMultiSelect/index.es.js"
+    },
     "./forms/FSelect": {
-      "require": "./dist/forms/FSelect/index.cjs.js",
+      "require": "./dist/forms/FSelect/index.cjs",
       "import": "./dist/forms/FSelect/index.es.js"
     },
     "./forms/FSelect/constants": {
-      "require": "./dist/forms/FSelect/constants.cjs.js",
+      "require": "./dist/forms/FSelect/constants.cjs",
       "import": "./dist/forms/FSelect/constants.es.js"
     },
     "./forms/FRadioButton": {
-      "require": "./dist/forms/FRadioButton/index.cjs.js",
+      "require": "./dist/forms/FRadioButton/index.cjs",
       "import": "./dist/forms/FRadioButton/index.es.js"
     },
     "./forms/FControlLabel": {
-      "require": "./dist/forms/FControlLabel/index.cjs.js",
+      "require": "./dist/forms/FControlLabel/index.cjs",
       "import": "./dist/forms/FControlLabel/index.es.js"
     },
     "./forms/FFormRow": {
-      "require": "./dist/forms/FFormRow/index.cjs.js",
+      "require": "./dist/forms/FFormRow/index.cjs",
       "import": "./dist/forms/FFormRow/index.es.js"
     },
     "./forms/FFormRow/constants": {
-      "require": "./dist/forms/FFormRow/constants.cjs.js",
+      "require": "./dist/forms/FFormRow/constants.cjs",
       "import": "./dist/forms/FFormRow/constants.es.js"
     },
     "./forms/FGenericForm": {
-      "require": "./dist/forms/FGenericForm/index.cjs.js",
+      "require": "./dist/forms/FGenericForm/index.cjs",
       "import": "./dist/forms/FGenericForm/index.es.js"
     },
     "./forms/FGenericForm/constants": {
-      "require": "./dist/forms/FGenericForm/constants.cjs.js",
+      "require": "./dist/forms/FGenericForm/constants.cjs",
       "import": "./dist/forms/FGenericForm/constants.es.js"
     },
     "./forms/FGenericForm/utils": {
-      "require": "./dist/forms/FGenericForm/utils.cjs.js",
+      "require": "./dist/forms/FGenericForm/utils.cjs",
       "import": "./dist/forms/FGenericForm/utils.es.js"
     },
     "./forms/FGenericForm/useWidget": {
-      "require": "./dist/forms/FGenericForm/useWidget.cjs.js",
+      "require": "./dist/forms/FGenericForm/useWidget.cjs",
       "import": "./dist/forms/FGenericForm/useWidget.es.js"
     },
     "./forms/FTextarea": {
-      "require": "./dist/forms/FTextarea/index.cjs.js",
+      "require": "./dist/forms/FTextarea/index.cjs",
       "import": "./dist/forms/FTextarea/index.es.js"
     },
     "./forms/FTextarea/constants": {
-      "require": "./dist/forms/FTextarea/constants.cjs.js",
+      "require": "./dist/forms/FTextarea/constants.cjs",
       "import": "./dist/forms/FTextarea/constants.es.js"
     },
     "./sb.stuff": {
-      "require": "./dist/sb.stuff.cjs.js",
+      "require": "./dist/sb.stuff.cjs",
       "import": "./dist/sb.stuff.es.js"
     },
     "./forms/FGenericForm/sb.stuff": {
-      "require": "./dist/forms/FGenericForm/sb.stuff.cjs.js",
+      "require": "./dist/forms/FGenericForm/sb.stuff.cjs",
       "import": "./dist/forms/FGenericForm/sb.stuff.es.js"
     },
     "./styles/theme.tailwind.css": "./dist/styles/theme.tailwind.css",

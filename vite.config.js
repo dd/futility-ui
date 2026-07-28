@@ -229,17 +229,11 @@ export default defineConfig({
 				'styles/base.css': resolve(__dirname, 'src/styles/base.tailwind.css'),
 				'styles/components.css': resolve(__dirname, 'src/styles/components.tailwind.css'),
 			},
-			fileName: (format, entryName) => {
-				// This entry is exposed through a `require` condition. Under `type: module`,
-				// it needs a real `.cjs` extension to be loaded as CommonJS by Node.
-				if (
-					format === 'cjs'
-					&& entryName === 'forms/FInputAutocomplete/requestHandlers'
-				) {
-					return `${entryName}.cjs`;
-				}
-				return `${entryName}.${format}.js`;
-			},
+			// Under `type: module`, CommonJS entries need a real `.cjs` extension
+			// to be loaded correctly by Node.
+			fileName: (format, entryName) => format === 'cjs'
+				? `${entryName}.cjs`
+				: `${entryName}.${format}.js`,
 			formats: [ 'es', 'cjs' ],
 		},
 		rollupOptions: {
