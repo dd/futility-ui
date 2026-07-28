@@ -170,6 +170,10 @@
       "require": "./dist/forms/FInputAutocomplete/constants.cjs.js",
       "import": "./dist/forms/FInputAutocomplete/constants.es.js"
     },
+    "./forms/FInputAutocomplete/requestHandlers": {
+      "require": "./dist/forms/FInputAutocomplete/requestHandlers.cjs",
+      "import": "./dist/forms/FInputAutocomplete/requestHandlers.es.js"
+    },
     "./forms/FSelect": {
       "require": "./dist/forms/FSelect/index.cjs.js",
       "import": "./dist/forms/FSelect/index.es.js"

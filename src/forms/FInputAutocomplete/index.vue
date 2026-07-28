@@ -74,13 +74,17 @@
 				ref="optionListRefs"
 				type="button"
 				role="option"
-				:aria-selected="index === highlightedIndex"
 				tabindex="-1"
 				:class="[
 					'fui-dropdown-select_option',
-					{ 'is-current': option.value === model },
+					{
+						'is-current': option.value === model,
+						'is-active': index === highlightedIndex,
+					},
 				]"
 				:disabled="option.disabled || false"
+				:aria-disabled="option.disabled ? 'true' : undefined"
+				:aria-selected="option.value === model"
 				@click="selectOption(option)"
 			>
 				<slot

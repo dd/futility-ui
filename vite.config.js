@@ -216,6 +216,10 @@ export default defineConfig({
 				...findBundleEntries(resolve('src')),
 				'forms/FInput/ClearButton': resolve(__dirname, 'src/forms/FInput/ClearButton.vue'),
 				'forms/FInput/ShowPasswordButton': resolve(__dirname, 'src/forms/FInput/ShowPasswordButton.vue'),
+				'forms/FInputAutocomplete/requestHandlers': resolve(
+					__dirname,
+					'src/forms/FInputAutocomplete/requestHandlers.js',
+				),
 				'forms/FGenericForm/useWidget': resolve(__dirname, 'src/forms/FGenericForm/useWidget.js'),
 				'FModal/useFModal': resolve(__dirname, 'src/FModal/useFModal.js'),
 				'FHeader/FHeaderNav': resolve(__dirname, 'src/FHeader/FHeaderNav.vue'),
@@ -225,7 +229,17 @@ export default defineConfig({
 				'styles/base.css': resolve(__dirname, 'src/styles/base.tailwind.css'),
 				'styles/components.css': resolve(__dirname, 'src/styles/components.tailwind.css'),
 			},
-			fileName: (format, entryName) =>`${entryName}.${format}.js`,
+			fileName: (format, entryName) => {
+				// This entry is exposed through a `require` condition. Under `type: module`,
+				// it needs a real `.cjs` extension to be loaded as CommonJS by Node.
+				if (
+					format === 'cjs'
+					&& entryName === 'forms/FInputAutocomplete/requestHandlers'
+				) {
+					return `${entryName}.cjs`;
+				}
+				return `${entryName}.${format}.js`;
+			},
 			formats: [ 'es', 'cjs' ],
 		},
 		rollupOptions: {

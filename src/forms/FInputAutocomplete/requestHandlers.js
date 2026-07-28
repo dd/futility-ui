@@ -91,3 +91,62 @@ export function createRestHandlers({
 
 	return { requestHandler, requestCurrentHandler };
 }
+
+
+/**
+ * Creates `requestHandler` and `requestCurrentHandler` for `FInputAutocomplete`
+ * from an existing local options list.
+ *
+ * By default, options are filtered by a case-insensitive substring match against
+ * their `label`. Pass `filterOption` to implement custom matching.
+ *
+ * `options` can be a plain array or a getter. A getter is useful when the list can
+ * change after the handlers have been created.
+ *
+ * @example
+ * const { requestHandler, requestCurrentHandler } = createLocalHandlers({
+ *   options: () => cities.value,
+ * });
+ *
+ * @param {object} options
+ * @param {Array|Function} options.options       - Local `{ value, label, disabled? }` options
+ *                                                 or a function returning them.
+ * @param {Function} [options.getSearchText]     - Returns the text searched by the default filter.
+ *                                                 Defaults to `option.label`.
+ * @param {Function} [options.filterOption]      - Custom `(option, query) => boolean` filter.
+ *
+ * @returns {{ requestHandler: Function, requestCurrentHandler: Function }}
+ */
+export function createLocalHandlers({
+	options,
+	getSearchText = (option) => option.label,
+	filterOption = null,
+}) {
+	const getOptions = () => typeof options === 'function' ? options() : options;
+	const defaultFilterOption = (option, query) => String(getSearchText(option) ?? '')
+		.toLocaleLowerCase()
+		.includes(query.toLocaleLowerCase());
+
+	const requestHandler = async (query) => {
+		const optionList = getOptions();
+		const normalizedQuery = String(query ?? '').trim();
+
+		return {
+			options: normalizedQuery
+				? optionList.filter((option) => (
+					filterOption
+						? filterOption(option, normalizedQuery)
+						: defaultFilterOption(option, normalizedQuery)
+				))
+				: optionList,
+			hasNext: false,
+		};
+	};
+
+	const requestCurrentHandler = async (value) => (
+		getOptions().find((option) => option.value === value)
+		?? { value, label: String(value) }
+	);
+
+	return { requestHandler, requestCurrentHandler };
+}

@@ -56,3 +56,31 @@ async function fetchCityById(value) {
 	return res.json(); // { value, label }
 }
 ```
+
+### Local options
+
+Use `createLocalHandlers` when the options already exist on the client:
+
+```js
+import { createLocalHandlers } from 'futility-ui/forms/FInputAutocomplete/requestHandlers';
+
+const cities = [
+	{ value: 1, label: 'Amsterdam' },
+	{ value: 2, label: 'Berlin' },
+];
+
+const { requestHandler, requestCurrentHandler } = createLocalHandlers({
+	options: cities,
+});
+```
+
+The default filter performs a case-insensitive substring search against `option.label`.
+Pass a getter when the list can change, or `filterOption` for custom matching:
+
+```js
+const handlers = createLocalHandlers({
+	options: () => cities.value,
+	filterOption: (option, query) =>
+		option.label.toLocaleLowerCase().startsWith(query.toLocaleLowerCase()),
+});
+```
