@@ -15,6 +15,16 @@
 	z-index: 1000;
 	@apply fui:dropdown-wrapper;
 	overflow: auto;
+
+	/* Both variables are set by FDropdown from the floating-ui `size` middleware.
+	   Custom max-height should stay within the viewport:
+	   `max-height: min(320px, var(--fui-dropdown-available-height, 100vh));` */
+	max-height: var(--fui-dropdown-available-height, none);
+
+	&.is-match-trigger-width {
+		width: var(--fui-dropdown-trigger-width, max-content);
+		max-width: calc(100vw - 16px);
+	}
 }
 
 .fui-dd-appearance-select {
@@ -31,6 +41,12 @@
 	flex-wrap: nowrap;
 	align-items: stretch;
 	padding: var(--fui-spacing) 0;
+}
+
+/* Panel height is limited (max-height), so items keep their size and the panel scrolls */
+.fui-dd-appearance-select > *,
+.fui-dd-appearance-menu > * {
+	flex-shrink: 0;
 }
 
 

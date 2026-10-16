@@ -4,7 +4,12 @@
 		ref="triggerWrapperRef"
 		style="display: contents;"
 	>
-		<slot name="trigger" :open="isOpen" :toggle="toggle" />
+		<slot
+			name="trigger"
+			:open="isOpen"
+			:toggle="toggle"
+			:trigger-attrs="triggerAttrs"
+		/>
 	</span>
 
 	<Teleport :to="teleportTo">
@@ -13,14 +18,19 @@
 				v-if="isOpen"
 				ref="floatingRef"
 				v-bind="$attrs"
+				:id="floatingId"
 				:class="[
 					'fui-dropdown',
-					{ [`fui-dd-appearance-${appearance}`]: appearance },
+					{
+						[`fui-dd-appearance-${appearance}`]: appearance,
+						'is-match-trigger-width': matchTriggerWidth,
+					},
 				]"
 				:data-placement="currentPlacement"
-				:style="resolvedFloatingStyles"
+				:style="floatingStyles"
 				@mouseenter="onFloatingMouseEnter"
 				@mouseleave="onFloatingMouseLeave"
+				@focusout="onFocusOut"
 			>
 				<slot :close="close" :open="open" />
 			</div>
@@ -29,20 +39,24 @@
 </template>
 
 <script setup>
-import { ref, computed, watch, onMounted, onUnmounted } from 'vue';
+import { ref, computed, watch, onMounted, onUnmounted, isRef, useAttrs, useId } from 'vue';
 import {
 	useFloating,
 	flip,
 	shift,
+	size,
 	offset as middlewareOffset,
 	autoUpdate,
 } from '@floating-ui/vue';
-import { onClickOutside, useElementSize } from '@vueuse/core';
+import { onClickOutside } from '@vueuse/core';
 
-import { PLACEMENT_CHOICES, TRIGGER_CHOICES } from './constants';
+import { PLACEMENT_CHOICES, OPEN_ON_CHOICES } from './constants';
 
 
 defineOptions({ name: 'FDropdown', inheritAttrs: false });
+
+/** Minimal gap between the floating panel and the viewport edges. */
+const VIEWPORT_PADDING = 8;
 
 const isOpen = defineModel('open', { type: Boolean, default: false });
 const props = defineProps({
@@ -54,15 +68,22 @@ const props = defineProps({
 	},
 
 	/**
-	 * What triggers the dropdown.
+	 * What opens the dropdown.
 	 * - `click` - toggles on click
-	 * - `hover` - opens on mouseenter, closes on mouseleave
+	 * - `hover` - opens on mouseenter or focus, closes on mouseleave or focus loss
 	 * - `manual` - controlled exclusively via `v-model:open`
 	 */
-	trigger: {
+	openOn: {
 		type: String,
 		default: 'click',
-		validator: (trigger) => TRIGGER_CHOICES.includes(trigger),
+		validator: (openOn) => OPEN_ON_CHOICES.includes(openOn),
+	},
+
+	/** @deprecated Renamed to `openOn`. */
+	trigger: {
+		type: String,
+		default: undefined,
+		validator: (trigger) => OPEN_ON_CHOICES.includes(trigger),
 	},
 
 	/**
@@ -119,8 +140,8 @@ const props = defineProps({
 	/**
 	 * Whether clicking outside closes the dropdown.
 	 *
-	 * By default this is enabled for click/hover triggers and disabled for a
-	 * manual trigger for backwards compatibility. Pass an explicit boolean to
+	 * By default this is enabled for `click`/`hover` and disabled for `manual`
+	 * `openOn` for backwards compatibility. Pass an explicit boolean to
 	 * override that behavior.
 	 */
 	closeOnOutside: {
@@ -130,14 +151,27 @@ const props = defineProps({
 });
 const emit = defineEmits([ 'show', 'hide' ]);
 
+// TODO: remove `trigger` together with the deprecation warning
+const openOn = computed(() => props.trigger ?? props.openOn);
+
+let warnedAboutTrigger = false;
+
+watch(() => props.trigger, (trigger) => {
+	if (trigger === undefined || warnedAboutTrigger) return;
+
+	warnedAboutTrigger = true;
+	console.warn(
+		'[futility-ui] FDropdown `trigger` prop is deprecated, use `open-on` instead.',
+	);
+}, { immediate: true });
+
 const triggerWrapperRef = ref(null);
 const floatingRef = ref(null);
 
 const resolveEl = (value) => {
-	if (!value) return null;
-	if (value.$el) return value.$el; // component instance
-	if ('value' in value) return value.value?.$el ?? value.value; // template ref
-	return value; // raw HTMLElement
+	const target = isRef(value) ? value.value : value; // template ref object
+	if (!target) return null;
+	return target.$el ?? target; // component instance or raw HTMLElement
 };
 
 const triggerEl = computed(() =>
@@ -158,7 +192,10 @@ const focusTrigger = () => {
 			'button, input, select, textarea, a[href], [tabindex]:not([tabindex="-1"])',
 		);
 
+	// Returning focus must not reopen a hover dropdown via `focusin`
+	isRestoringFocus = true;
 	focusTarget?.focus();
+	isRestoringFocus = false;
 };
 
 const { floatingStyles, placement: currentPlacement } = useFloating(
@@ -169,42 +206,56 @@ const { floatingStyles, placement: currentPlacement } = useFloating(
 		placement: computed(() => props.placement),
 		middleware: computed(() => [
 			middlewareOffset(props.offset),
-			flip(),
-			shift({ padding: 8 }),
+			flip({ padding: VIEWPORT_PADDING }),
+			shift({ padding: VIEWPORT_PADDING }),
+			// Exposes geometry as CSS variables, styles decide how to use them:
+			// `max-height` and `.is-match-trigger-width` in style.tailwind.css.
+			size({
+				padding: VIEWPORT_PADDING,
+				apply({ availableHeight, rects, elements }) {
+					const { style } = elements.floating;
+					style.setProperty('--fui-dropdown-available-height', `${Math.max(0, availableHeight)}px`);
+					style.setProperty('--fui-dropdown-trigger-width', `${rects.reference.width}px`);
+				},
+			}),
 		]),
 		whileElementsMounted: autoUpdate,
 	},
 );
 
-const { width: triggerWidth } = useElementSize(triggerEl);
 
-const resolvedFloatingStyles = computed(() => ({
-	...floatingStyles.value,
-	...(props.matchTriggerWidth && triggerWidth.value
-		? {
-			width: `${triggerWidth.value}px`,
-			minWidth: `${triggerWidth.value}px`,
-			maxWidth: 'calc(100vw - 16px)',
-		}
-		: {}
-	),
+// Accessibility: panel id + attributes for the trigger element
+const attrs = useAttrs();
+const autoId = useId();
+const floatingId = computed(() => attrs.id ?? `fui-dropdown-${autoId}`);
+
+const triggerAttrs = computed(() => ({
+	'aria-expanded': String(isOpen.value),
+	'aria-controls': isOpen.value ? floatingId.value : undefined,
 }));
 
 const shouldCloseOnOutside = computed(() =>
-	props.closeOnOutside ?? props.trigger !== 'manual'
+	props.closeOnOutside ?? openOn.value !== 'manual'
 );
 
 
 const open = () => {
 	if (props.disabled) return;
+	cancelHide();
 	isOpen.value = true;
-	emit('show');
 };
 
 const close = () => {
+	cancelHide();
 	isOpen.value = false;
-	emit('hide');
 };
+
+// Emitted from the state itself, so `v-model:open` changes from outside are covered too.
+watch(isOpen, (value) => emit(value ? 'show' : 'hide'));
+
+watch(() => props.disabled, (disabled) => {
+	if (disabled) close();
+});
 
 const toggle = () => {
 	if (isOpen.value) {
@@ -228,15 +279,30 @@ const cancelHide = () => {
 };
 
 const onFloatingMouseEnter = () => {
-	if (props.trigger === 'hover') {
+	if (openOn.value === 'hover') {
 		cancelHide();
 	}
 };
 
 const onFloatingMouseLeave = () => {
-	if (props.trigger === 'hover') {
+	if (openOn.value === 'hover') {
 		scheduleHide();
 	}
+};
+
+// Hover trigger, keyboard: open on focus, hide when focus leaves trigger and panel
+let isRestoringFocus = false;
+
+const onTriggerFocusIn = () => {
+	if (!isRestoringFocus) open();
+};
+
+const onFocusOut = (event) => {
+	if (openOn.value !== 'hover') return;
+
+	const next = event.relatedTarget;
+	if (next && (triggerEl.value?.contains(next) || floatingRef.value?.contains(next))) return;
+	scheduleHide();
 };
 
 
@@ -244,11 +310,13 @@ const onFloatingMouseLeave = () => {
 const setupTriggers = (el) => {
 	if (!el) return;
 
-	if (props.trigger === 'click') {
+	if (openOn.value === 'click') {
 		el.addEventListener('click', toggle);
-	} else if (props.trigger === 'hover') {
+	} else if (openOn.value === 'hover') {
 		el.addEventListener('mouseenter', open);
 		el.addEventListener('mouseleave', scheduleHide);
+		el.addEventListener('focusin', onTriggerFocusIn);
+		el.addEventListener('focusout', onFocusOut);
 	}
 };
 
@@ -257,13 +325,15 @@ const cleanupTriggers = (el) => {
 	el.removeEventListener('click', toggle);
 	el.removeEventListener('mouseenter', open);
 	el.removeEventListener('mouseleave', scheduleHide);
+	el.removeEventListener('focusin', onTriggerFocusIn);
+	el.removeEventListener('focusout', onFocusOut);
 };
 
 watch(
 	triggerEl,
 	(newEl, oldEl) => {
 		cleanupTriggers(oldEl);
-		if (props.trigger !== 'manual') {
+		if (openOn.value !== 'manual') {
 			setupTriggers(newEl);
 		}
 	},
@@ -271,15 +341,15 @@ watch(
 );
 
 watch(
-	() => props.trigger,
-	(newTrigger, oldTrigger) => {
-		if (oldTrigger !== 'manual') cleanupTriggers(triggerEl.value);
-		if (newTrigger !== 'manual') setupTriggers(triggerEl.value);
+	openOn,
+	(newOpenOn, oldOpenOn) => {
+		if (oldOpenOn !== 'manual') cleanupTriggers(triggerEl.value);
+		if (newOpenOn !== 'manual') setupTriggers(triggerEl.value);
 	},
 );
 
 
-// Close on click outside when enabled for the selected trigger mode.
+// Close on click outside when enabled for the selected `openOn` mode.
 onMounted(() => {
 	onClickOutside(
 		floatingRef,
