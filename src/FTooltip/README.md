@@ -23,7 +23,7 @@ import FTooltip from 'futility-ui/FTooltip';
 ### Component (rich content)
 
 ```html
-<FTooltip theme="dropdown" trigger="click" >
+<FTooltip theme="dropdown" open-on="click" >
 	<FButton>Open menu</FButton>
 	<template #content>
 		<div>Any <strong>rich</strong> content here</div>

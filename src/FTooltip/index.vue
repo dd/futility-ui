@@ -47,7 +47,7 @@ import {
 	autoUpdate,
 } from '@floating-ui/vue';
 
-import { PLACEMENT_CHOICES, TRIGGER_CHOICES } from './constants';
+import { PLACEMENT_CHOICES, OPEN_ON_CHOICES } from './constants';
 
 
 defineOptions({ name: 'FTooltip', inheritAttrs: false });
@@ -56,10 +56,10 @@ defineOptions({ name: 'FTooltip', inheritAttrs: false });
  * v-model:open - open/closed state of the tooltip.
  *
  * Works bidirectionally:
- * - triggers (hover, click, focus) update the parent value
+ * - `openOn` interactions (hover, click, focus) update the parent value
  * - parent can close/open programmatically by setting the value
  *
- * With `trigger="manual"` the tooltip is controlled exclusively via v-model:open.
+ * With `open-on="manual"` the tooltip is controlled exclusively via v-model:open.
  */
 const isOpen = defineModel('open', { type: Boolean, default: false });
 
@@ -93,17 +93,24 @@ const props = defineProps({
 	},
 
 	/**
-	 * What triggers the tooltip.
+	 * What opens the tooltip.
 	 * - `hover` - mouseenter/mouseleave + focus/blur
 	 * - `click` - toggles on click
 	 * - `hover&click` - shows on hover, click pins it open so it stays visible after the cursor leaves
 	 * - `focus` - focus/blur only
 	 * - `manual` - controlled exclusively via v-model:open
 	 */
-	trigger: {
+	openOn: {
 		type: String,
 		default: 'hover',
-		validator: (trigger) => TRIGGER_CHOICES.includes(trigger),
+		validator: (openOn) => OPEN_ON_CHOICES.includes(openOn),
+	},
+
+	/** @deprecated Renamed to `openOn`. */
+	trigger: {
+		type: String,
+		default: undefined,
+		validator: (trigger) => OPEN_ON_CHOICES.includes(trigger),
 	},
 
 	/** Make tooltip not interactive. */
@@ -134,6 +141,20 @@ const props = defineProps({
 });
 
 const emit = defineEmits([ 'show', 'hide' ]);
+
+// TODO: remove `trigger` together with the deprecation warning
+const openOn = computed(() => props.trigger ?? props.openOn);
+
+let warnedAboutTrigger = false;
+
+watch(() => props.trigger, (trigger) => {
+	if (trigger === undefined || warnedAboutTrigger) return;
+
+	warnedAboutTrigger = true;
+	console.warn(
+		'[futility-ui] FTooltip `trigger` prop is deprecated, use `open-on` instead.',
+	);
+}, { immediate: true });
 
 // DOM refs
 const triggerWrapperRef = ref(null);
@@ -229,23 +250,23 @@ const pinToggle = () => {
 const setupTriggers = (el) => {
 	if (!el) return;
 
-	if (props.trigger === 'hover') {
+	if (openOn.value === 'hover') {
 		el.addEventListener('mouseenter', scheduleShow);
 		el.addEventListener('mouseleave', scheduleHide);
 		el.addEventListener('focus', scheduleShow);
 		el.addEventListener('blur', scheduleHide);
 
-	} else if (props.trigger === 'click') {
+	} else if (openOn.value === 'click') {
 		el.addEventListener('click', toggle);
 
-	} else if (props.trigger === 'hover&click') {
+	} else if (openOn.value === 'hover&click') {
 		el.addEventListener('mouseenter', scheduleShow);
 		el.addEventListener('mouseleave', scheduleHide);
 		el.addEventListener('focus', scheduleShow);
 		el.addEventListener('blur', scheduleHide);
 		el.addEventListener('click', pinToggle);
 
-	} else if (props.trigger === 'focus') {
+	} else if (openOn.value === 'focus') {
 		el.addEventListener('focus', scheduleShow);
 		el.addEventListener('blur', scheduleHide);
 	}
@@ -267,7 +288,7 @@ watch(
 	(newEl, oldEl) => {
 		cleanupTriggers(oldEl);
 
-		if (props.trigger !== 'manual') {
+		if (openOn.value !== 'manual') {
 			setupTriggers(newEl);
 		}
 	},
@@ -275,10 +296,10 @@ watch(
 );
 
 watch(
-	() => props.trigger,
-	(newTrigger, oldTrigger) => {
-		if (oldTrigger !== 'manual') cleanupTriggers(triggerEl.value);
-		if (newTrigger !== 'manual') setupTriggers(triggerEl.value);
+	openOn,
+	(newOpenOn, oldOpenOn) => {
+		if (oldOpenOn !== 'manual') cleanupTriggers(triggerEl.value);
+		if (newOpenOn !== 'manual') setupTriggers(triggerEl.value);
 	},
 );
 

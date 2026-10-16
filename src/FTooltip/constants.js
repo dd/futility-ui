@@ -5,13 +5,13 @@ export const PLACEMENT_CHOICES = Object.freeze([
 	'right', 'right-start', 'right-end',
 ]);
 
-export const TRIGGER_CHOICES = [
+export const OPEN_ON_CHOICES = Object.freeze([
 	'hover',
 	'click',
 	'hover&click',
 	'focus',
 	'manual',
-];
+]);
 
 export const THEME_CHOICES = [
 	'tooltip',

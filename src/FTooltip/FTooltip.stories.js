@@ -7,7 +7,7 @@ import FButton from '@/FButton';
 import Readme from './README.md?raw';
 import FTooltip from './index.vue';
 import { vTooltip } from './directive';
-import { PLACEMENT_CHOICES, TRIGGER_CHOICES, THEME_CHOICES } from './constants';
+import { PLACEMENT_CHOICES, OPEN_ON_CHOICES, THEME_CHOICES } from './constants';
 
 
 const DEFAULT_TEMPLATE = `<FTooltip v-bind="args" >
@@ -48,9 +48,14 @@ export default {
 				type: { summary: 'number | [number, number]' },
 			},
 		},
-		trigger: {
-			options: TRIGGER_CHOICES,
+		openOn: {
+			options: OPEN_ON_CHOICES,
 			control: 'select',
+		},
+		trigger: {
+			control: { type: null },
+			description: '**Deprecated**, use `open-on`.',
+			table: { category: 'props', type: { summary: 'string' } },
 		},
 		dirrectiveElement: { control: { type: null }},
 		// Slots
@@ -112,7 +117,7 @@ export default {
 		placement: 'top',
 		theme: 'tooltip',
 		delay: 0,
-		trigger: 'hover',
+		openOn: 'hover',
 	},
 };
 
@@ -337,7 +342,7 @@ export const NonInteractive = {
 
 
 const TRIGGERS_DESC = `
-| Trigger | Behaviour |
+| \`open-on\` | Behaviour |
 |---|---|
 | \`hover\` | Shows on mouseenter and focus |
 | \`click\` | Toggles on click |
@@ -349,13 +354,13 @@ const TRIGGERS_DESC = `
 
 const TRIGGERS_TEMP = `<div class="sbfui-preview-flex-x">
 	<FTooltip
-		v-for="trigger, i in TRIGGER_CHOICES"
+		v-for="openOn, i in OPEN_ON_CHOICES"
 		:key="i"
 		v-bind="args"
-		:trigger="trigger"
+		:open-on="openOn"
 		:text="LABELS[i]"
 	>
-		<FButton>{{ trigger }}</FButton>
+		<FButton>{{ openOn }}</FButton>
 	</FTooltip>
 </div>`;
 
@@ -371,7 +376,7 @@ export const Triggers = {
 		setup() {
 			const newArgs = computed(() => {
 				const result = { ...args };
-				delete result['trigger'];
+				delete result['openOn'];
 				delete result['text'];
 				delete result['open'];
 				delete result['update:open'];
@@ -383,7 +388,7 @@ export const Triggers = {
 			});
 			return {
 				args: newArgs,
-				TRIGGER_CHOICES: TRIGGER_CHOICES.filter(t => t !== 'manual'),
+				OPEN_ON_CHOICES: OPEN_ON_CHOICES.filter(t => t !== 'manual'),
 				LABELS: [
 					'Hover trigger',
 					'Click trigger',
@@ -395,12 +400,12 @@ export const Triggers = {
 		template: TRIGGERS_TEMP,
 	}),
 	argTypes: {
-		trigger: { control: { type: null } },
+		openOn: { control: { type: null } },
 		text: { control: { type: null } },
 		open: { control: { type: null } },
 	},
 	args: {
-		trigger: '<trigger>',
+		openOn: '<open-on>',
 		text: '<text>',
 		open: '<bool>',
 	},
@@ -409,13 +414,13 @@ export const Triggers = {
 
 const VMODEL_DESC = `\`v-model:open\` syncs the open/closed state bidirectionally.
 
-Triggers (hover, click, focus) update the bound value in the parent.
+Interactions from \`open-on\` (hover, click, focus) update the bound value in the parent.
 The parent can also open or close the tooltip programmatically by setting the value.
 
-With \`trigger="manual"\` the tooltip is controlled **exclusively** via \`v-model:open\`.
+With \`open-on="manual"\` the tooltip is controlled **exclusively** via \`v-model:open\`.
 
 \`\`\`html
-<FTooltip v-model:open="isOpen" trigger="manual" text="Controlled">
+<FTooltip v-model:open="isOpen" open-on="manual" text="Controlled">
 	<FButton>Reference</FButton>
 </FTooltip>
 \`\`\`
@@ -428,7 +433,7 @@ const VMODEL_TEMPLATE = `<div class="sbfui-ftooltip-vmodel" >
 	<FTooltip
 		v-model:open="isOpen"
 		v-bind="args"
-		trigger="manual"
+		open-on="manual"
 		text="Controlled via v-model:open"
 	>
 		<FIcon name="bell_ring_outline" />
