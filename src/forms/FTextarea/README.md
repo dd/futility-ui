@@ -2,6 +2,7 @@
 
 `FTextarea` is a textarea component with built-in styling, validation states, and size variants.
 
+
 ### Usage
 
 Import the component:

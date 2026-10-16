@@ -1,7 +1,7 @@
 # FButton
 
-A button component for form actions and general UI interactions. It supports multiple sizes,
-visual variants, and states for common interface patterns.
+A button component for form actions and general UI interactions. It supports multiple sizes, visual variants, and states for common interface patterns.
+
 
 ### Usage
 

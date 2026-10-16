@@ -6,9 +6,7 @@ import * as MobileMenuStories from './FHeaderMobileMenu.stories';
 
 # Mobile menu
 
-`FHeaderBurger` is the mobile-menu toggle. Place it in any bar slot; it renders nothing on
-desktop or when no `#menu` / `#menu-bottom` content is declared. Its default `bars` / `close`
-icons can be replaced through the default slot.
+`FHeaderBurger` is the mobile-menu toggle. Place it in any bar slot; it renders nothing on desktop or when no `#menu` / `#menu-bottom` content is declared. Its default `bars` / `close` icons can be replaced through the default slot.
 
 ```js
 import FHeaderBurger from 'futility-ui/FHeader/FHeaderBurger';
@@ -40,12 +38,9 @@ When the header crosses `breakpoint`:
 </FHeader>
 ```
 
-The fullscreen layer opens **below the header bar**, so the logo and toggle remain visible.
-The page scroll is locked while it is open; `Escape` and a leaf navigation selection close it.
-The `#menu` area scrolls while `#menu-bottom` stays pinned.
+The fullscreen layer opens **below the header bar**, so the logo and toggle remain visible. The page scroll is locked while it is open; `Escape` and a leaf navigation selection close it. The `#menu` area scrolls while `#menu-bottom` stays pinned.
 
-The story constrains both the header and its teleported layer to the same mobile-preview width;
-in an application the layer still fills the real viewport as designed.
+The story constrains both the header and its teleported layer to the same mobile-preview width; in an application the layer still fills the real viewport as designed.
 
 <Canvas of={MobileMenuStories.Default} />
 <Controls of={MobileMenuStories.Default} />
@@ -53,7 +48,6 @@ in an application the layer still fills the real viewport as designed.
 
 ## Burger placement
 
-The toggle has no fixed position within the bar. Put it before the logo when the design calls
-for a left-aligned burger.
+The toggle has no fixed position within the bar. Put it before the logo when the design calls for a left-aligned burger.
 
 <Canvas of={MobileMenuStories.BurgerLeft} />

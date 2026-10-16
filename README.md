@@ -9,9 +9,7 @@
 	</a>
 </p>
 
-Futility UI is a Vue 3 component library inspired by the [Flowbite](https://flowbite.com/) design
-language. It focuses on practical, ready-to-use UI building blocks with a consistent visual style
-and straightforward integration.
+Futility UI is a Vue 3 component library inspired by the [Flowbite](https://flowbite.com/) design language. It focuses on practical, ready-to-use UI building blocks with a consistent visual style and straightforward integration.
 
 [Live Demo](https://dd.github.io/futility-ui/)
 
@@ -75,8 +73,7 @@ Or import only the components you need:
 import { FButton, FInput } from 'futility-ui';
 ```
 
-For more details about stylesheet selection and integration options, see the
-[Usage page](https://dd.github.io/futility-ui/?path=/docs/usage--docs) in the documentation.
+For more details about stylesheet selection and integration options, see the [Usage page](https://dd.github.io/futility-ui/?path=/docs/usage--docs) in the documentation.
 
 
 ## Roadmap
@@ -95,6 +92,7 @@ field immediately followed by a button.)
 	- [ ] Ability to group options when needed
 * [x] Select
 	- [ ] Custom dropdown for desktop screen and native for mobile [???]
+	- [ ] Multiple select ability [???]
 * [x] Tooltip
 * [x] Form row (A component that renders a form row with a label, widget, help text, and error text.)
 * [x] Control label (A component that adds a label for widgets such as checkbox, radio button, etc.)
@@ -144,17 +142,11 @@ field immediately followed by a button.)
 
 ## Oh great, another UI library.
 
-You might be wondering: why the heck do we need yet another UI library? The short answer is:
-just because.
+You might be wondering: why the heck do we need yet another UI library? The short answer is: just because.
 
-This library isn\`t necessarily better than others. It has a much smaller community, it evolves
-more slowly, and it doesn\`t really have any unique killer feature. It exists simply because none of
-the existing options fully work for me. Either there aren\`t enough components, or they\`re
-incredibly complicated, or not truly native to Vue, or they\`re paid, or… they just look ugly. So,
-I decided to build my own.
+This library isn\`t necessarily better than others. It has a much smaller community, it evolves more slowly, and it doesn\`t really have any unique killer feature. It exists simply because none of the existing options fully work for me. Either there aren\`t enough components, or they\`re incredibly complicated, or not truly native to Vue, or they\`re paid, or… they just look ugly. So, I decided to build my own.
 
-This library grew out of components I use at work. And my colleagues are probably asking themselves:
-why bother extracting the UI into a separate repo? Here are a few reasons:
+This library grew out of components I use at work. And my colleagues are probably asking themselves: why bother extracting the UI into a separate repo? Here are a few reasons:
 
 - I don\`t like monorepos.
 

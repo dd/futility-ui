@@ -6,12 +6,9 @@ import * as FHeaderStories from './FHeader.stories';
 
 # FHeader
 
-Site header shell with explicit placement. The header knows nothing about logos or menus:
-it renders three bar sections and optional `#top` / `#bottom` rows, while the developer
-decides what goes where by placing content into slots.
+Site header shell with explicit placement. The header knows nothing about logos or menus: it renders three bar sections and optional `#top` / `#bottom` rows, while the developer decides what goes where by placing content into slots.
 
-The adaptive navigation and the fullscreen menu have their own focused documentation pages:
-`FHeaderNav` and `Mobile menu` in the `FHeader` section of the sidebar.
+The adaptive navigation and the fullscreen menu have their own focused documentation pages: `FHeaderNav` and `Mobile menu` in the `FHeader` section of the sidebar.
 
 
 ## Basic usage
@@ -62,22 +59,16 @@ The core mechanics:
 
 ## Exact centering
 
-By default the sections are sized by their content, so `#center` is centered only within the
-leftover space. The `balanced` prop gives the side sections equal width, which puts `#center`
-content at the exact center of the bar. The trade-off is less room for navigation in a side
-section, so overflow begins earlier.
+By default the sections are sized by their content, so `#center` is centered only within the leftover space. The `balanced` prop gives the side sections equal width, which puts `#center` content at the exact center of the bar. The trade-off is less room for navigation in a side section, so overflow begins earlier.
 
 <Canvas of={FHeaderStories.LogoCenter} />
 
 
 ## Multiple rows
 
-Multi-row headers are built with the `#top` and `#bottom` slots. Each row is a plain flex line;
-lay the content out yourself (`margin-left: auto` works as a spacer). The rows share the header
-context with the main bar: one `breakpoint`, one `appearance`, and one mobile menu.
+Multi-row headers are built with the `#top` and `#bottom` slots. Each row is a plain flex line; lay the content out yourself (`margin-left: auto` works as a spacer). The rows share the header context with the main bar: one `breakpoint`, one `appearance`, and one mobile menu.
 
-A row renders only when its slot produces content. There is no automatic mobile behavior for
-custom row content, so use the scoped `isMobile` value when a row should disappear.
+A row renders only when its slot produces content. There is no automatic mobile behavior for custom row content, so use the scoped `isMobile` value when a row should disappear.
 
 ```html
 <FHeader>
@@ -101,18 +92,14 @@ custom row content, so use the scoped `isMobile` value when a row should disappe
 
 <Canvas of={FHeaderStories.MultiRow} />
 
-The main bar is independent from the extra rows. When `#left`, `#center`, and `#right` render no
-DOM content, the bar collapses together with its padding and border. The example below is the
-same multi-row header without any main-bar content:
+The main bar is independent from the extra rows. When `#left`, `#center`, and `#right` render no DOM content, the bar collapses together with its padding and border. The example below is the same multi-row header without any main-bar content:
 
 <Canvas of={FHeaderStories.EmptyBar} />
 
 
 ## Content width
 
-The bar and optional rows remain full-width surfaces, while their content is rendered inside a
-centered container. Set `--fui-header-content-max-width` on the header to constrain all three
-content areas without shortening their backgrounds or bottom borders:
+The bar and optional rows remain full-width surfaces, while their content is rendered inside a centered container. Set `--fui-header-content-max-width` on the header to constrain all three content areas without shortening their backgrounds or bottom borders:
 
 ```html
 <FHeader style="--fui-header-content-max-width: 1600px">
@@ -125,9 +112,7 @@ The default value is `none`.
 
 ## Sizing
 
-Sizes are driven by CSS variables with defaults on `:root`, so a denser or a larger header
-does not require overriding internal selectors. Override them globally on `:root`, or per
-header on the element (inline style or a class):
+Sizes are driven by CSS variables with defaults on `:root`, so a denser or a larger header does not require overriding internal selectors. Override them globally on `:root`, or per header on the element (inline style or a class):
 
 ```html
 <FHeader style="--fui-header-item-height: 48px; --fui-header-item-font-size: 18px">
@@ -148,10 +133,7 @@ header on the element (inline style or a class):
   Default `56px`.
 * `--fui-header-px` - horizontal padding of the bar and rows. Default `--fui-spacing * 6`.
 
-One caveat: dropdown panels and the mobile menu teleport to `body`, so a per-header override
-set on the header element does not reach them - they fall back to the `:root` values. When
-panel sizes must change, override on `:root` (all headers) or scope the override to
-`.fui-header-dropdown-panel` / `.fui-header-menu-layer`.
+One caveat: dropdown panels and the mobile menu teleport to `body`, so a per-header override set on the header element does not reach them - they fall back to the `:root` values. When panel sizes must change, override on `:root` (all headers) or scope the override to `.fui-header-dropdown-panel` / `.fui-header-menu-layer`.
 
 
 ## Appearance

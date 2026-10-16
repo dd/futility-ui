@@ -1,5 +1,6 @@
 # Contributing
 
+
 ## Development Setup
 
 Clone the repository and install dependencies:
@@ -36,8 +37,7 @@ The library supports multiple style outputs:
 * `styles.base.css` – Base stylesheet containing only the core component styles from the library.
 * `styles.tailwind.css` – Extended stylesheet that includes both the component styles and all Tailwind CSS styles.
 
-To support this setup, styles from Vue `.vue` files are extracted into separate CSS files and
-centrally imported in `src/styles.css`.
+To support this setup, styles from Vue `.vue` files are extracted into separate CSS files and centrally imported in `src/styles.css`.
 
 
 ## Tailwind CSS Guidelines

@@ -1,7 +1,6 @@
 # FGenericForm
 
-`FGenericForm` renders a form from a metadata array, reducing the amount of repetitive template
-code needed for standard forms.
+`FGenericForm` renders a form from a metadata array, reducing the amount of repetitive template code needed for standard forms.
 
 > **Requires [@vueuse/core](https://vueuse.org/)** - used for responsive layout detection.
 
@@ -69,5 +68,4 @@ At minimum, each item in `meta` should define:
 
 This means `allowNull` affects the starting value of a field only when no explicit `default` is provided.
 
-Some widgets also accept additional fields. For example, select-like widgets need an option list.
-Check each widget's individual story for the full list of supported field parameters.
+Some widgets also accept additional fields. For example, select-like widgets need an option list. Check each widget's individual story for the full list of supported field parameters.

@@ -1,11 +1,10 @@
 # FInputAutocomplete
 
-An input with a searchable dropdown that loads options on demand. The component is intentionally
-decoupled from any data source - you supply two async functions, and the component handles the rest:
-loading states, pagination, request cancellation, and keyboard navigation.
+An input with a searchable dropdown that loads options on demand. The component is intentionally decoupled from any data source - you supply two async functions, and the component handles the rest: loading states, pagination, request cancellation, and keyboard navigation.
 
 > **Requires [@floating-ui/vue](https://floating-ui.com/docs/vue) and
 > [@vueuse/core](https://vueuse.org/)**
+
 
 ### Key features
 
@@ -19,6 +18,7 @@ loading states, pagination, request cancellation, and keyboard navigation.
 	`requestCurrentHandler` is called to fetch the matching label
 - **Deselect on re-click** - clicking the already-selected option clears the value (unless
 	`required` is set)
+
 
 ### Usage
 
@@ -57,6 +57,7 @@ async function fetchCityById(value) {
 }
 ```
 
+
 ### Local options
 
 Use `createLocalHandlers` when the options already exist on the client:
@@ -74,8 +75,7 @@ const { requestHandler, requestCurrentHandler } = createLocalHandlers({
 });
 ```
 
-The default filter performs a case-insensitive substring search against `option.label`.
-Pass a getter when the list can change, or `filterOption` for custom matching:
+The default filter performs a case-insensitive substring search against `option.label`. Pass a getter when the list can change, or `filterOption` for custom matching:
 
 ```js
 const handlers = createLocalHandlers({

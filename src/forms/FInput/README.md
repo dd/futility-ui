@@ -1,7 +1,7 @@
 # FInput
 
-`FInput` is a versatile input component with built-in styling, validation states, and slot support
-for icons and actions.
+`FInput` is a versatile input component with built-in styling, validation states, and slot support for icons and actions.
+
 
 ### Usage
 

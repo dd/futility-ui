@@ -1,8 +1,6 @@
 # FTooltip
 
-`FTooltip` wraps a trigger element and shows a floating tooltip on interaction.
-Positioning is handled by [@floating-ui](https://floating-ui.com/); it automatically
-flips and shifts to stay within the viewport.
+`FTooltip` wraps a trigger element and shows a floating tooltip on interaction. Positioning is handled by [@floating-ui](https://floating-ui.com/); it automatically flips and shifts to stay within the viewport.
 
 > **Requires [@floating-ui/vue](https://floating-ui.com/docs/vue)**
 

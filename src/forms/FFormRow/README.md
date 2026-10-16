@@ -1,7 +1,6 @@
 # FFormRow
 
-`FFormRow` is a layout wrapper that pairs a label with one or more form fields.
-It handles label alignment, help text, and error states in a consistent way across the form.
+`FFormRow` is a layout wrapper that pairs a label with one or more form fields. It handles label alignment, help text, and error states in a consistent way across the form.
 
 
 ### Usage

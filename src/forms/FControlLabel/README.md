@@ -1,8 +1,6 @@
 # FControlLabel
 
-The `FControlLabel` component wraps form controls such as
-[FCheckbox](?path=/docs/forms-fcheckbox--docs), [FSwitch](?path=/docs/forms-fswitch--docs),
-[FRadioButton](?path=/docs/forms-fradiobutton--docs), or similar, and renders a label alongside them.
+The `FControlLabel` component wraps form controls such as [FCheckbox](?path=/docs/forms-fcheckbox--docs), [FSwitch](?path=/docs/forms-fswitch--docs), [FRadioButton](?path=/docs/forms-fradiobutton--docs), or similar, and renders a label alongside them.
 
 
 ### Usage

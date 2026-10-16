@@ -84,6 +84,12 @@ export const Default = {
 
 export const BurgerLeft = {
 	name: 'Burger on the left',
+	parameters: {
+		docs: {
+			/* Same isolated iframe as `Default` - see the note there. */
+			story: { inline: false, iframeHeight: 620 },
+		},
+	},
 	render: renderHeader(`<div class="sbfui-fheader-canvas is-mobile sbfui-fheader-mobile-preview">
 	<FHeader v-bind="headerArgs">
 		<template #left>
