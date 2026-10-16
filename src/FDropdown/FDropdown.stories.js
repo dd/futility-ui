@@ -52,6 +52,14 @@ export default {
 		disabled: {
 			control: 'boolean',
 		},
+		matchTriggerWidth: {
+			control: 'boolean',
+			description: 'Match the floating panel width to the trigger width.',
+		},
+		closeOnOutside: {
+			control: 'boolean',
+			description: 'Explicitly enables or disables outside-click closing.',
+		},
 		// Slots
 		default: {
 			control: { type: null },
@@ -111,6 +119,8 @@ export default {
 		trigger: 'click',
 		offset: 8,
 		disabled: false,
+		matchTriggerWidth: false,
+		closeOnOutside: undefined,
 		appearance: 'default',
 	},
 };

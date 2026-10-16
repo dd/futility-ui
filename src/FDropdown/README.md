@@ -1,8 +1,8 @@
 # FDropdown
 
 `FDropdown` wraps a trigger element and shows a floating dropdown panel on interaction.
-Positioning is handled by [@floating-ui](https://floating-ui.com/); it automatically
-flips and shifts to stay within the viewport.
+
+For select-like controls, `match-trigger-width` can keep the panel aligned with the trigger. `close-on-outside` overrides the default outside-click behavior independently of the trigger mode; this is useful for manually controlled autocomplete popups. Positioning is handled by [@floating-ui](https://floating-ui.com/); it automatically flips and shifts to stay within the viewport.
 
 > **Requires [@floating-ui/vue](https://floating-ui.com/docs/vue) and
 > [@vueuse/core](https://vueuse.org/)**

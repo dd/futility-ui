@@ -18,7 +18,7 @@
 					{ [`fui-dd-appearance-${appearance}`]: appearance },
 				]"
 				:data-placement="currentPlacement"
-				:style="floatingStyles"
+				:style="resolvedFloatingStyles"
 				@mouseenter="onFloatingMouseEnter"
 				@mouseleave="onFloatingMouseLeave"
 			>
@@ -37,7 +37,7 @@ import {
 	offset as middlewareOffset,
 	autoUpdate,
 } from '@floating-ui/vue';
-import { onClickOutside } from '@vueuse/core';
+import { onClickOutside, useElementSize } from '@vueuse/core';
 
 import { PLACEMENT_CHOICES, TRIGGER_CHOICES } from './constants';
 
@@ -109,6 +109,24 @@ const props = defineProps({
 		type: Object,
 		default: null,
 	},
+
+	/** Makes the floating panel match the trigger width. */
+	matchTriggerWidth: {
+		type: Boolean,
+		default: false,
+	},
+
+	/**
+	 * Whether clicking outside closes the dropdown.
+	 *
+	 * By default this is enabled for click/hover triggers and disabled for a
+	 * manual trigger for backwards compatibility. Pass an explicit boolean to
+	 * override that behavior.
+	 */
+	closeOnOutside: {
+		type: Boolean,
+		default: null,
+	},
 });
 const emit = defineEmits([ 'show', 'hide' ]);
 
@@ -128,6 +146,21 @@ const triggerEl = computed(() =>
 		: (triggerWrapperRef.value?.firstElementChild ?? null),
 );
 
+const focusTrigger = () => {
+	const element = triggerEl.value;
+	if (!element) return;
+
+	const focusTarget = element.matches?.(
+		'button, input, select, textarea, a[href], [tabindex]:not([tabindex="-1"])',
+	)
+		? element
+		: element.querySelector?.(
+			'button, input, select, textarea, a[href], [tabindex]:not([tabindex="-1"])',
+		);
+
+	focusTarget?.focus();
+};
+
 const { floatingStyles, placement: currentPlacement } = useFloating(
 	triggerEl,
 	floatingRef,
@@ -141,6 +174,24 @@ const { floatingStyles, placement: currentPlacement } = useFloating(
 		]),
 		whileElementsMounted: autoUpdate,
 	},
+);
+
+const { width: triggerWidth } = useElementSize(triggerEl);
+
+const resolvedFloatingStyles = computed(() => ({
+	...floatingStyles.value,
+	...(props.matchTriggerWidth && triggerWidth.value
+		? {
+			width: `${triggerWidth.value}px`,
+			minWidth: `${triggerWidth.value}px`,
+			maxWidth: 'calc(100vw - 16px)',
+		}
+		: {}
+	),
+}));
+
+const shouldCloseOnOutside = computed(() =>
+	props.closeOnOutside ?? props.trigger !== 'manual'
 );
 
 
@@ -228,12 +279,12 @@ watch(
 );
 
 
-// Close on click outside (not for manual trigger - caller controls open/close)
+// Close on click outside when enabled for the selected trigger mode.
 onMounted(() => {
 	onClickOutside(
 		floatingRef,
 		(event) => {
-			if (props.trigger === 'manual') return;
+			if (!shouldCloseOnOutside.value) return;
 			if (triggerEl.value?.contains(event.target)) return;
 			close();
 		},
@@ -244,6 +295,7 @@ onMounted(() => {
 const handleKeydown = (event) => {
 	if (event.key === 'Escape' && isOpen.value) {
 		close();
+		focusTrigger();
 	}
 };
 

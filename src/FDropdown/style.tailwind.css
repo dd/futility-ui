@@ -67,7 +67,7 @@
 		}
 	}
 
-	&[aria-selected="true"],
+	&.is-active,
 	&:focus-visible {
 		@apply fui:outline-focus;
 	}
